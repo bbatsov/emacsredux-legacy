@@ -32,4 +32,4 @@ Position the cursor at its beginning, according to the current mode."
 ```
 
 Evaluate the code (or restart Emacs) and you'll be able to use
-`M-x insert-empty-line` or `Shift+Enter` (aka `S-return`).
+`M-x smart-open-line` or `Shift+Enter` (aka `S-return`).
