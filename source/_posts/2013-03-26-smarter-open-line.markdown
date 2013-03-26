@@ -24,9 +24,7 @@ whatever):
 Position the cursor at its beginning, according to the current mode."
   (interactive)
   (move-end-of-line nil)
-  (open-line 1)
-  (forward-line 1)
-  (indent-according-to-mode))
+  (newline-and-indent))
 
 (global-set-key [(shift return)] 'smart-open-line)
 ```
