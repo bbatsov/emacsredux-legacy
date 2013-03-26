@@ -19,7 +19,7 @@ Emacs Lisp. Just add this snippet to your `.emacs` (or `.emacs.d/init.el` or
 whatever):
 
 ``` cl
-(defun insert-empty-line ()
+(defun smart-open-line ()
   "Insert an empty line after the current line.
 Position the cursor at its beginning, according to the current mode."
   (interactive)
@@ -28,7 +28,7 @@ Position the cursor at its beginning, according to the current mode."
   (forward-line 1)
   (indent-according-to-mode))
 
-(global-set-key [(shift return)] 'insert-empty-line)
+(global-set-key [(shift return)] 'smart-open-line)
 ```
 
 Evaluate the code (or restart Emacs) and you'll be able to use
