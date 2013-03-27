@@ -31,3 +31,7 @@ Position the cursor at its beginning, according to the current mode."
 
 Evaluate the code (or restart Emacs) and you'll be able to use
 `M-x smart-open-line` or `Shift+Enter` (aka `S-return`).
+
+This command is part of
+[Prelude](https://github.com/bbatsov/prelude)(it's named
+`prelude-smart-open-line` there).
