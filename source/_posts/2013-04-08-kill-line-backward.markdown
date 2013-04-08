@@ -4,7 +4,7 @@ title: "Kill line backward"
 date: 2013-04-08 18:33
 comments: true
 categories:
--Editing
+- Editing
 ---
 
 Emacs does not have a command `backward-kill-line`(which would kill
