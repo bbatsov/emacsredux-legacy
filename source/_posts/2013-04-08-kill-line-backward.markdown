@@ -30,5 +30,18 @@ favor rebinding `C-Backspace`.
                                         (kill-line 0)))
 ```
 
+This command can be further improved if killing backward factors the
+current indentation level:
+
+``` cl
+(global-set-key (kbd "C-<backspace>") (lambda ()
+                                        (interactive)
+                                        (kill-line 0)
+                                        (indent-according-to-mode)))
+```
+
+Thanks to [Steve Purcell](https://twitter.com/sanityinc) for
+suggesting a similar command in the comments.
+
 The `C-Backspace` keybinding is available out-of-the-box in
 [Prelude](https://github.com/bbatsov/prelude).
