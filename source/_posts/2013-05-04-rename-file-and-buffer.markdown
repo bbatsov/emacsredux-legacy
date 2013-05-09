@@ -37,9 +37,7 @@ create a simple wrapper around it to get the job done:
          ((vc-backend filename) (vc-rename-file filename new-name))
          (t
           (rename-file filename new-name t)
-          (rename-buffer new-name)
-          (set-visited-file-name new-name)
-          (set-buffer-modified-p nil)))))))
+          (set-visited-file-name new-name t t)))))))
 ```
 
 The wrapper is extra smart and will work on files that are not under
