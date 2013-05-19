@@ -31,6 +31,6 @@ keybinding like this one:
 
 Personally, of the two commands I find `just-one-space` the more useful.
 
-In [Prelude](https://github.com/bbatsov/prelude) `just-on-space` is
+In [Prelude](https://github.com/bbatsov/prelude) `just-one-space` is
 additionally bound to the `kk`
 [keychord](/blog/2013/04/28/execute-commands-ninja-style-with-key-chord-mode/).
