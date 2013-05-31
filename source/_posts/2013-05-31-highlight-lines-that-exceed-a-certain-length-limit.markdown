@@ -23,7 +23,7 @@ a bit more that that. Here's the magic config:
 ``` cl
 (require 'whitespace)
 (setq whitespace-line-column 80) ;; limit line length
-(setq whitespace-style '(lines-tail))
+(setq whitespace-style '(face lines-tail))
 
 (add-hook 'prog-mode-hook 'whitespace-mode)
 ```
@@ -36,9 +36,16 @@ you might want to do this instead:
 (global-whitespace-mode +1)
 ```
 
+`whitespace-line-count` determines that maximum line length; feel free
+to set this to whatever value suits you. `whitespace-style` determines
+what kind of stuff `whitespace-mode` is going to highlight. At this
+example we want to highlight only the part of lines exceeding the line
+length limit. Take a look at `whitespace-style`'s documentation for
+more details(`C-h v RET whitespace-style`).
+
 Here's the result:
 
 {% img /images/articles/long-lines.png %}
 
 It will probably come as no surprise that this functionality is
-enabled out-of-the-box in [Prelude](https://github.com/bbatsov/prelude)
+enabled out-of-the-box in [Prelude](https://github.com/bbatsov/prelude).
