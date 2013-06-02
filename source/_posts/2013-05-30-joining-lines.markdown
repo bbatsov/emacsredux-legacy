@@ -24,7 +24,7 @@ some_method(arg1, arg2, arg3)
 ```
 
 Doing so is extremely easy. Just go to the last line in the first code
-block and press 3 times `C-^` or `M-^` (`delete-indentation`, aliased
+block and press 3 times `M-^` (`delete-indentation`, aliased
 also to `join-line`).
 
 If you're like me and like to join lines from top to bottom - go to
@@ -41,15 +41,15 @@ kind of hard to press `C-u M-^` repeatedly, compared to just
 
 Isn't this a top way to join lines or what?
 
-Since `delete-indentation` is bound both to `M-^` and `C-^` it makes
-sense to use one of them for the new command:
+Since `delete-indentation` is bound both to `M-^` it makes
+sense to use something like `C-^` for the new command:
 
 ``` cl
-(global-set-key (kbd "M-^") 'top-join-line)
+(global-set-key (kbd "C-^") 'top-join-line)
 ```
 
 That's mostly a personal preference I guess - feel free to use any other keycombo.
 
 This command is part of
 [Prelude](https://github.com/bbatsov/prelude)(it's named
-`prelude-top-join-line` there) and it's bound to `M-^` there.
+`prelude-top-join-line` there) and it's bound to `C-^` there.
