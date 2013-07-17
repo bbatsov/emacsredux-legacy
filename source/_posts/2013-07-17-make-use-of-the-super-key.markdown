@@ -29,7 +29,6 @@ global keybindings that use the `Super` key.
 (define-key global-map [?\s-e] 'er/expand-region)
 (define-key global-map [?\s-f] 'projectile-find-file)
 (define-key global-map [?\s-g] 'projectile-grep)
-(define-key global-map [?\s-h] 'projectile-helm)
 (define-key global-map [?\s-j] 'prelude-top-join-line)
 (define-key global-map [?\s-k] 'prelude-kill-whole-line)
 (define-key global-map [?\s-l] 'goto-line)
