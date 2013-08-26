@@ -31,7 +31,7 @@ This command will display the query results in your default browser.
 I'd suggest binding the command to `C-c y` if you plan to use it regularly.
 
 ``` cl
-(global-set-key (kbd "C-c y") 'google)
+(global-set-key (kbd "C-c y") 'youtube)
 ```
 
 `youtube` is available in
