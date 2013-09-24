@@ -15,7 +15,7 @@ More often than not you'll probably want `dired` to display the directory of fil
 (require 'dired-x)
 ```
 
-You can run the command with `C-x C-j`. No prompts, no wasted time. You're instantly teleported to the currently edited file's position in a `dired` buffer.
+You can run the command with `C-x C-j` (`M-x dired-jump`). No prompts, no wasted time. You're instantly teleported to the currently edited file's position in a `dired` buffer.
 
 This command works out-of-the-box in
 [Prelude](https://github.com/bbatsov/prelude).
