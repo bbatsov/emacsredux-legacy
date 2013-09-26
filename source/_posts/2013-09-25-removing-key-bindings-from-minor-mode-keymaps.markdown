@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Removing key bindings from minor mode keymaps"
+title: "Removing/Altering key bindings from minor mode keymaps"
 date: 2013-09-25 12:26
 comments: true
 categories:
@@ -34,7 +34,21 @@ minor (or major) mode is loaded:
   '(define-key minor-mode-map (kbd "C-c c") nil))
 ```
 
-I'm not sure if one can have a minor mode having different keymaps in
-different major modes. I can certainly imagine situations when this
-would be useful. If someone knows how this could be done - please,
-share this knowledge in the comments.
+Making a minor mode have different keymaps in different major modes is
+tricky, but possible. Here's an example that disables some keybindings
+in the minor `prelude-mode`, that are conflicting with the major
+`org-mode`:
+
+``` cl
+(defun my-org-mode-hook ()
+  (let ((oldmap (cdr (assoc 'prelude-mode minor-mode-map-alist)))
+        (newmap (make-sparse-keymap)))
+    (set-keymap-parent newmap oldmap)
+    (define-key newmap (kbd "C-c +") nil)
+    (define-key newmap (kbd "C-c -") nil)
+    (make-local-variable 'minor-mode-overriding-map-alist)
+    (push `(prelude-mode . ,newmap) minor-mode-overriding-map-alist))
+)
+
+(add-hook 'org-mode-hook 'my-org-mode-hook)
+```
