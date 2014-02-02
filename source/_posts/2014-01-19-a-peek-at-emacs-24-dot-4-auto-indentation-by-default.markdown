@@ -56,3 +56,9 @@ Note that `electric-indent-local-mode` was introduced in Emacs 24.4.
 If you want to make a major mode electric-indent aware, have a look at
 the documentation of `electric-indent-functions` and
 `electric-indent-chars`.
+
+**P.S.**
+
+Dmitry Gutov recently wrote
+[more on the topic](http://dgutov.github.io/blog/2014/01/20/electric-indentation-in-ruby-in-emacs-24-dot-4/)
+in the context of `ruby-mode` in Emacs 24.4.
