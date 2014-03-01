@@ -12,7 +12,7 @@ I happen to maintain a few Emacs related projects:
 
 * [Prelude](https://github.com/bbatsov/prelude) - An Emacs distribution built on top of GNU Emacs 24
 * [Projectile](https://github.com/bbatsov/projectile) - Project Interaction Library for Emacs, that stays out of your way
-* [guru-mode](https://github.com/bbatsov/projectile) - An annoying companion on your journey to Emacs mastery
+* [guru-mode](https://github.com/bbatsov/guru-mode) - An annoying companion on your journey to Emacs mastery
 * [rubocop-emacs](https://github.com/bbatsov/projectile) - Emacs integration for [RuboCop](https://github.com/bbatsov/rubocop)
 * [zenburn-emacs](https://github.com/bbatsov/zenburn-emacs) - The Zenburn color theme, ported to Emacs
 * [solarized-emacs](https://github.com/bbatsov/solarized-emacs) - The Solarized color theme, ported to Emacs
