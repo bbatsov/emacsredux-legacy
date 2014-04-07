@@ -35,6 +35,15 @@ so like this:
 (add-to-list 'which-func-modes 'emacs-lisp-mode)
 ```
 
+By default `???` will be displayed when `which-function-mode` cannot
+determine the name (perhaps because you're not actually in a
+definition or due to implementation limitations). You can change this
+to something else like this:
+
+``` cl
+(setq which-func-unknown "n/a")
+```
+
 And what if you don't like to have the definition name displayed in
 the mode-line? There's a solution for you as well (suggested by
 [Sebastian Wiesner](http://www.lunaryorn.com/)). Use the following bit
