@@ -37,7 +37,7 @@ so like this:
 
 And what if you don't like to have the definition name displayed in
 the mode-line? There's a solution for you as well (suggested by
-[Sebastian Wiesner](http://www.lunaryorn.com/). Use the following bit
+[Sebastian Wiesner](http://www.lunaryorn.com/)). Use the following bit
 of code:
 
 
@@ -56,4 +56,4 @@ And you'll get the following result:
 
 {% img /images/articles/which-func-header.png %}
 
-That's all for today, folks! Hack Emacs Lisp & proper!
+That's all for today, folks! Hack Emacs Lisp & prosper!
