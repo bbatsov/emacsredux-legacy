@@ -34,7 +34,7 @@ in someone else's config a while back):
 Let's bind that to `C-c e`:
 
 ``` cl
-(global-set-key (kbd "C-c e") 'eval-end-replace)
+(global-set-key (kbd "C-c e") 'eval-and-replace)
 ```
 
 Now in the buffer I'm currently editing I can type `(/ 1984 16)` and
