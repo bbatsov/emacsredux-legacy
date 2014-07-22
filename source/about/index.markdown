@@ -19,6 +19,7 @@ I happen to maintain a few Emacs related projects:
 * [zenburn-emacs](https://github.com/bbatsov/zenburn-emacs) - The Zenburn color theme, ported to Emacs
 * [solarized-emacs](https://github.com/bbatsov/solarized-emacs) - The Solarized color theme, ported to Emacs
 * [puppet-mode](https://github.com/lunaryorn/puppet-mode) - A mode for editing Puppet 3 manifests
+* [swift-mode](https://github.com/chrisbarrett/swift-mode) - A mode for editing Swift code
 
 I was also the original maintainer of [WikEmacs](http://wikemacs.org) - a community documentation portal for Emacs.
 

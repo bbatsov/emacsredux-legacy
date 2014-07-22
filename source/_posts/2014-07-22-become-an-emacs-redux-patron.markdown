@@ -31,7 +31,7 @@ So, if you like Emacs Redux and the Emacs projects in which I'm involved like:
 * [zenburn-emacs](https://github.com/bbatsov/zenburn-emacs) - The Zenburn color theme, ported to Emacs
 * [solarized-emacs](https://github.com/bbatsov/solarized-emacs) - The Solarized color theme, ported to Emacs
 * [puppet-mode](https://github.com/lunaryorn/puppet-mode) - A mode for editing Puppet 3 manifests
-* [swift-mode](https://github.com/chrisbarrett/swift-mode) - A mode for editing Puppet 3 manifests
+* [swift-mode](https://github.com/chrisbarrett/swift-mode) - A mode for editing Swift code
 
 consider supporting my work via gittip.
 
