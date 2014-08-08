@@ -36,3 +36,9 @@ So, if you like Emacs Redux and the Emacs projects in which I'm involved like:
 consider supporting my work via gittip.
 
 [![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/bbatsov)
+
+**P.S.**
+
+Alternatively you can use PayPal.
+
+[![Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3J4QE5QBJU84Q)
