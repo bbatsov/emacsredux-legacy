@@ -64,4 +64,4 @@ By the way, sky is the limit for symbol prettification. One fairly extreme examp
 vim's plugin [haskell-conceal+](https://github.com/enomsg/vim-haskellConcealPlus) that goes to great
 lengths to bring proper mathematical notation to Haskell code. We can achieve more or less the same effect
 with `prettify-symbols-mode`, but one have to ask themselves where should we draw the border between
-tasteful and distasteful pretiffications.
+tasteful and distasteful prettifications.
