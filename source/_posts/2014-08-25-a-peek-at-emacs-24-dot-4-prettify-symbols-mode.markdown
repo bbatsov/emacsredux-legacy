@@ -32,7 +32,7 @@ You can, of course, add more mappings for different major modes:
 ``` cl
 (add-hook 'emacs-lisp-mode-hook
             (lambda ()
-              (push '("<=" . ?≤) prettify-symbols-alist)))
+              (push '(">=" . ?≥) prettify-symbols-alist)))
 ```
 
 Let's see the mode in action. Consider this bit of Emacs Lisp code:
