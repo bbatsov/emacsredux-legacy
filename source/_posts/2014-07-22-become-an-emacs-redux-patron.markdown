@@ -14,7 +14,7 @@ wildly successful crowdfunding campaign, that's unlikely to ever
 happen.
 
 That said, I recently discovered an interesting alternative to one-off
-crowdfunding campaigns called [gittip](http://gittip.com).
+crowdfunding campaigns called [gratipay](http://gratipay.com).
 Self-described as `sustainable crowdfunding` (meaning people will get
 microdonations (say half a buck) from their patrons each week) it seems like a
 reasonable way to raise a modest sum of money so you could work on
@@ -33,9 +33,9 @@ So, if you like Emacs Redux and the Emacs projects in which I'm involved like:
 * [puppet-mode](https://github.com/lunaryorn/puppet-mode) - A mode for editing Puppet 3 manifests
 * [swift-mode](https://github.com/chrisbarrett/swift-mode) - A mode for editing Swift code
 
-consider supporting my work via gittip.
+consider supporting my work via Gratipay.
 
-[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/bbatsov)
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png)](https://gratipay.com/bbatsov)
 
 **P.S.**
 

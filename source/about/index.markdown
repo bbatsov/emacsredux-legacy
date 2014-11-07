@@ -23,9 +23,9 @@ I happen to maintain a few Emacs related projects:
 
 I was also the original maintainer of [WikEmacs](http://wikemacs.org) - a community documentation portal for Emacs.
 
-If you like my projects you can support their development via [gittip](https://www.gittip.com/bbatsov) or PayPal.
+If you like my projects you can support their development via [gratipay](https://www.gratipay.com/bbatsov) or PayPal.
 
-[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/bbatsov)
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png)](https://gratipay.com/bbatsov)
 
 [![Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3J4QE5QBJU84Q)
 
