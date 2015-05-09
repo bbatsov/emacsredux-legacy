@@ -4,7 +4,7 @@
   <title><![CDATA[Category: osx | Emacs Redux]]></title>
   <link href="http://bbatsov.github.com/emacsredux/blog/categories/osx/atom.xml" rel="self"/>
   <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T14:34:29+03:00</updated>
+  <updated>2015-05-09T23:52:01+03:00</updated>
   <id>http://bbatsov.github.com/emacsredux/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -36,7 +36,7 @@ I recommend you to use the
 <p>I always run the latest development version and I use homebrew to install it:</p>
 
 <p><code>bash
-$ brew install emacs --HEAD --cocoa
+$ brew install emacs --HEAD --with-cocoa
 </code></p>
 
 <p>Keep in mind there's an ancient Emacs 22 that ships with OS X.  You
