@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Editing | Emacs Redux]]></title>
+  <link href="http://bbatsov.github.com/emacsredux/blog/categories/editing/atom.xml" rel="self"/>
+  <link href="http://bbatsov.github.com/emacsredux/"/>
+  <updated>2015-05-09T14:28:00+03:00</updated>
+  <id>http://bbatsov.github.com/emacsredux/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Highlight matching delimiters with smartparens]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2013/11/01/highlight-matching-delimiters-with-smartparens/"/>
+    <updated>2013-11-01T16:32:00+02:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2013/11/01/highlight-matching-delimiters-with-smartparens</id>
+    <content type="html"><![CDATA[<p>Some time ago I wrote about
+<a href="http://emacsredux.com/blog/2013/04/01/highlight-matching-parentheses/">highlighting matching parentheses</a>
+with <code>show-paren-mode</code>. This is definitely useful, but it's kind of
+restrictive, since parentheses are just a specific kind of paired
+delimiter. Single and double quotes are also paired delimiters (at
+least in most programmming languages). In the Ruby programmming
+language, for instance, <code>do</code> and <code>end</code> also constitute paired
+delimiter.</p>
+
+<p><a href="https://github.com/Fuco1/smartparens">smartparens</a> offers
+extremely customizable handling of paired delimiters and comes with an
+extra minor mode called <code>show-smartparens-mode</code> to highlight
+them. This mode totally replaces <code>show-paren-mode</code> and language
+specific modes like <code>hirb</code> (which highlights Ruby blocks).</p>
+
+<p>Assuming you're already using <code>smartparens</code>, enabling <code>show-smartparens-mode</code> is trivial:</p>
+
+<p><code>cl
+(show-smartparens-global-mode +1)
+</code></p>
+
+<p>Here's a glimpse of it in action:</p>
+
+<p><img src="/images/articles/show-smartparens-mode.gif"></p>
+
+<p>In <a href="https://github.com/bbatsov/prelude">Prelude</a> <code>show-paren-mode</code> was
+replaced by <code>show-smartparens-mode</code> some time ago.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Open line above]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2013/06/15/open-line-above/"/>
+    <updated>2013-06-15T09:04:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2013/06/15/open-line-above</id>
+    <content type="html"><![CDATA[<p>This post continues a topic that was introduced in
+<a href="/blog/2013/03/26/smarter-open-line/">smarter open-line</a> few months
+back.</p>
+
+<p>Often when editing code one wishes to open a line just above the
+current one, which is properly indented relative to the existing code,
+and position the cursor at its beginning.  Such a feature is present
+in most IDEs, such as IntelliJ IDEA, Eclipse and NetBeans. It’s
+sometimes bound to <code>Control+Shift+Enter</code>. Last time I showed you how
+to implement a similar function called <code>smart-open-line</code>, this time
+will implement <code>smart-open-line-above</code>. Just add this snippet to your
+<code>.emacs</code> (or <code>.emacs.d/init.el</code> or whatever):</p>
+
+<p>``` cl
+(defun smart-open-line-above ()
+  "Insert an empty line above the current line.
+Position the cursor at it's beginning, according to the current mode."
+  (interactive)
+  (move-beginning-of-line nil)
+  (newline-and-indent)
+  (forward-line -1)
+  (indent-according-to-mode))</p>
+
+<p>(global-set-key [(control shift return)] 'smart-open-line-above)
+```</p>
+
+<p>Evaluate the code (or restart Emacs) and you'll be able to use
+<code>M-x smart-open-line-above</code> or <code>Control+Shift+Enter</code> (aka <code>C-S-return</code>).</p>
+
+<p>Admittedly this keybinding kind of sucks, so here's another option for
+you - <code>M-o</code> (used by default as the prefix for some font setting
+commands nobody ever uses) for <code>smart-open-line</code> and <code>M-O</code> for
+<code>smart-open-line-above</code>.</p>
+
+<p><code>cl
+(global-set-key (kbd "M-o") 'smart-open-line)
+(global-set-key (kbd "M-O") 'smart-open-line-above)
+</code></p>
+
+<p>Another good option would be to fold the two commands into one and use a
+prefix argument to trigger the opening a new line above the current
+one.</p>
+
+<p>This command is part of
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(it's named
+<code>prelude-smart-open-line-above</code> there).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Continue a comment on the next line]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2013/06/05/continue-a-comment-on-the-next-line/"/>
+    <updated>2013-06-05T16:12:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2013/06/05/continue-a-comment-on-the-next-line</id>
+    <content type="html"><![CDATA[<p>When writing code from time to time we have to write comments as
+well. Most of the time programmers are using single-line comments,
+denoted by some special starting character(s), like <code>#</code>, <code>//</code>,
+etc. When you want to write a few lines of comments in Emacs you have two
+options:</p>
+
+<h4>Option A</h4>
+
+<ul>
+<li>Write the first line of the comment.</li>
+<li>Go to the next line.</li>
+<li>Insert the comment delimiter.</li>
+<li>Continue writing the comment.</li>
+</ul>
+
+
+<h4>Option B (editor's choice)</h4>
+
+<ul>
+<li>White the first line of the comment.</li>
+<li>Press <code>M-j</code> (<code>indent-new-comment-line</code>).</li>
+<li>Continue writing the comment on the second line.</li>
+</ul>
+
+
+<p>The command breaks the line at point and indents the following line,
+continuing the comment if invoked within one. The indentation on the
+second line matches the indentation on the first line.</p>
+
+<p>``` ruby</p>
+
+<h1>first line</h1>
+
+<h1>indented line|(we press <code>M-j</code> here)</h1>
+
+<h1>|(we get here after pressing <code>M-j</code>)</h1>
+
+<p>```</p>
+
+<p>This command is intended for styles where you write a comment per
+line, starting a new comment (and terminating it if necessary) on each
+line.  If you want to continue one comment of the type <code>/* */</code> across
+several lines, use <code>C-j</code> (<code>newline-and-indent</code>).</p>
+
+<p>Outside of comments <code>M-j</code> behaves pretty much the same way as <code>C-j</code>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Joining lines]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2013/05/30/joining-lines/"/>
+    <updated>2013-05-30T16:27:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2013/05/30/joining-lines</id>
+    <content type="html"><![CDATA[<p>Often, while editing, you'll want to compress a few lines into
+one. Here's a simple example to illustrate the problem at hand. We
+want to convert this bit of Ruby code:</p>
+
+<p>``` ruby
+some_method(arg1,</p>
+
+<pre><code>        arg2,
+        arg3)
+</code></pre>
+
+<p>```</p>
+
+<p>into:</p>
+
+<p><code>ruby
+some_method(arg1, arg2, arg3)
+</code></p>
+
+<p>Doing so is extremely easy. Just go to the last line in the first code
+block and press 3 times <code>M-^</code> (<code>delete-indentation</code>, aliased
+also to <code>join-line</code>).</p>
+
+<p>If you're like me and like to join lines from top to bottom - go to
+the first line and press <code>C-u M-^</code> three times. This works, but it is
+kind of hard to press <code>C-u M-^</code> repeatedly, compared to just
+<code>M-^</code>. Let's simplify this a bit:</p>
+
+<p><code>cl
+(defun top-join-line ()
+  "Join the current line with the line beneath it."
+  (interactive)
+  (delete-indentation 1))
+</code></p>
+
+<p>Isn't this a top way to join lines or what?</p>
+
+<p>Since <code>delete-indentation</code> is bound both to <code>M-^</code> it makes
+sense to use something like <code>C-^</code> for the new command:</p>
+
+<p><code>cl
+(global-set-key (kbd "C-^") 'top-join-line)
+</code></p>
+
+<p>That's mostly a personal preference I guess - feel free to use any other keycombo.</p>
+
+<p>This command is part of
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(it's named
+<code>prelude-top-join-line</code> there) and it's bound to <code>C-^</code> there.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Smarter navigation to the beginning of a line]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/"/>
+    <updated>2013-05-22T17:48:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line</id>
+    <content type="html"><![CDATA[<p>In Emacs there are two essential commands when you have to go the
+beginning of a line - <code>move-beginning-of-line</code>(bound to <code>C-a</code>) and
+<code>back-to-indentation</code>(bound to <code>M-m</code>). The first takes you to the
+first column of a line and the latter takes you the first non-whitespace
+character on a line.</p>
+
+<p>Generally, I find <code>back-to-indentation</code> more useful, but occasionally
+it makes sense to go to the real beginning of a line as well. What
+doesn't make sense is to have to think all the time what command is
+the most appropriate in a particular situation. Wouldn't it be great
+if <code>C-a</code> initially took you to the first non-whitespace char(as
+<code>back-to-indentation</code> does) on a line, and if pressed again took
+you to the actual beginning of the line? It would be! Let's get it
+done:</p>
+
+<p>``` cl
+(defun smarter-move-beginning-of-line (arg)
+  "Move point back to indentation of beginning of line.</p>
+
+<p>Move point to the first non-whitespace character on this line.
+If point is already there, move to the beginning of the line.
+Effectively toggle between the first non-whitespace character and
+the beginning of the line.</p>
+
+<p>If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+point reaches the beginning or end of the buffer, stop there."
+  (interactive "<sup>p")</sup>
+  (setq arg (or arg 1))</p>
+
+<p>  ;; Move lines first
+  (when (/= arg 1)</p>
+
+<pre><code>(let ((line-move-visual nil))
+  (forward-line (1- arg))))
+</code></pre>
+
+<p>  (let ((orig-point (point)))</p>
+
+<pre><code>(back-to-indentation)
+(when (= orig-point (point))
+  (move-beginning-of-line 1))))
+</code></pre>
+
+<p>;; remap C-a to `smarter-move-beginning-of-line'
+(global-set-key [remap move-beginning-of-line]</p>
+
+<pre><code>            'smarter-move-beginning-of-line)
+</code></pre>
+
+<p>```</p>
+
+<p>The command will keep toggling between the first non-whitespace char
+and the beginning of the line when invoked.</p>
+
+<p>Here's a visual example(<code>|</code> is the cursor):</p>
+
+<p>``` bash
+This is a short example</p>
+
+<pre><code>text|
+# pressing C-a once
+</code></pre>
+
+<p>   |text</p>
+
+<pre><code># pressing C-a again
+</code></pre>
+
+<p>|   text</p>
+
+<pre><code># pressing C-a again
+</code></pre>
+
+<p>   |text
+```</p>
+
+<p>This functionality could also be implemented with <code>defadvice</code>, but I tend to avoid their use.</p>
+
+<p><code>smarter-move-beginning-of-line</code> is part of <a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+
+<p><strong>P.S.</strong> The credit for this tip goes to <a href="https://github.com/lunaryorn">Sebastian Wiesner</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

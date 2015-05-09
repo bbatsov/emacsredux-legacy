@@ -1,0 +1,951 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Emacs Redux</title>
+  <meta name="author" content="Bozhidar Batsov">
+
+  
+  <meta name="description" content="If you&#8217;re into programming highlighting the matching parentheses in
+your code is probably something you find rather desirable. Emacs
+doesn&# &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://bbatsov.github.com/emacsredux/blog/page/9">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39624961-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Emacs Redux</a></h1>
+  
+    <h2>Return to the Essence of Text Editing</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:bbatsov.github.com/emacsredux" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/bbatsov/prelude">Prelude</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/01/highlight-matching-parentheses/">Highlight Matching Parentheses</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-01T14:40:00+03:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/01/highlight-matching-parentheses/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you&#8217;re into programming highlighting the matching parentheses in
+your code is probably something you find rather desirable. Emacs
+doesn&#8217;t do so by default, but the global minor mode <code>show-paren-mode</code>,
+that comes bundled with Emacs, does.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;paren</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">show-paren-style</span> <span class="ss">&#39;parenthesis</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">show-paren-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Valid styles are <code>parenthesis</code> (meaning highlight the matching
+parentheses), <code>expression</code> (meaning show the entire expression
+enclosed by the parentheses) and <code>mixed</code> (meaning show the matching
+parentheses if both are visible, and the expression otherwise).</p>
+
+<p>Personally I find <code>parenthesis</code> as the least distracting option and
+therefore I favor it.</p>
+
+<p>If you&#8217;d like to change the faces used for matching and mismatched
+parentheses you&#8217;d have to alter <code>show-paren-mismatch</code> and
+<code>show-paren-match</code>. Most decent color themes do this out the box.</p>
+
+<p><code>show-paren-mode</code> is enabled out-of-the-box in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/01/playing-with-font-sizes/">Playing With Font Sizes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-01T14:22:00+03:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/01/playing-with-font-sizes/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Adjusting interactively the font size is Emacs is pretty easy. Three
+keybindings refer to the mighty <code>text-scale-adjust</code> command - <code>C-x
+C-+</code>(increase font size), <code>C-x C--</code>(decrease font size) and <code>C-x
+C-0</code>(reset font size to default). After using any of the keybindings
+you can proceed to adjust the font size further just by pressing <code>+</code>,
+<code>-</code> or <code>0</code> respectively.  <code>text-scale-adjust</code> is mostly a wrapper
+around <code>text-scale-increase</code> and <code>text-scale-decrease</code>.</p>
+
+<p>You might want to bind them <code>C-+</code> and <code>C--</code>(generally a bad idea since
+you won&#8217;t be able to type stuff like <code>C-- some-command</code> anymore) to
+get more common keybindings for the operations.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-+&quot;</span><span class="p">)</span> <span class="ss">&#39;text-scale-increase</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C--&quot;</span><span class="p">)</span> <span class="ss">&#39;text-scale-decrease</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/30/go-back-to-previous-window/">Go Back to Previous Window</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-30T18:11:00+02:00" pubdate data-updated="true">Mar 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/30/go-back-to-previous-window/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Every Emacs user knows what <code>C-x o</code>(<code>other-window</code>) does - it moves
+your cursor to the next window. When you&#8217;re out of windows - the
+command will take you back to the first one.</p>
+
+<p>Relatively few people are aware that the command takes a prefix
+argument which allows you to move several windows forward or
+backward. That&#8217;s obviously pretty useful when you&#8217;re a heavy window user
+and like to split your frames into many windows.</p>
+
+<p>To move 3 windows forward you&#8217;d do <code>C-u 3 C-x o</code>. To move 2 windows
+backwards you&#8217;d do <code>C-u -2 C-x o</code>.</p>
+
+<p>If you&#8217;re mostly working with only two windows you probably don&#8217;t need
+to know that much about <code>other-window</code> - after all invoking the
+command one time will take you to the other window and invoking it a
+second time will take you back to the window you were originally
+in. I, however, often employ 3 or windows (blessed be the people who
+made huge LCD displays so cheap) and I really dislike having to type
+<code>C-u -1 C-x o</code> (or <code>C-- C-x o</code>, <code>M--1 C-x o</code> or <code>M-- C-x o</code> for that
+matter) to go back to the previous window. To alleviate that
+particular nuisance I utilize the following little trick:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-x O&quot;</span><span class="p">)</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+</span><span class='line'>                                <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>                                <span class="p">(</span><span class="nv">other-window</span> <span class="mi">-1</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now pressing <code>C-x O</code> (that&#8217;s not a zero, it&#8217;s a capital <code>o</code>) will
+always take me to the previous window, no matter how many windows are
+currently present.</p>
+
+<p>The <code>C-x O</code> keybinding is available out-of-the-box in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/30/kill-other-buffers/">Kill Other Buffers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-30T15:50:00+02:00" pubdate data-updated="true">Mar 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/30/kill-other-buffers/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Many text editors and IDEs offer the ability to close all open files
+with the exception of the one you&#8217;re currently in. Emacs does not.  At
+least it doesn&#8217;t until you add a snippet such as this one to your
+Emacs setup:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">kill-other-buffers</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Kill all buffers but the current one.</span>
+</span><span class='line'><span class="s">Don&#39;t mess with special buffers.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">buffer</span> <span class="p">(</span><span class="nv">buffer-list</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nb">eql</span> <span class="nv">buffer</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">))</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nv">buffer-file-name</span> <span class="nv">buffer</span><span class="p">)))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">kill-buffer</span> <span class="nv">buffer</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that the command takes care not to kill <em>special</em> buffers(buffers
+that do not correspond to files).</p>
+
+<p>I&#8217;d suggest binding <code>kill-other-buffers</code> to <code>C-c k</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c k&quot;</span><span class="p">)</span> <span class="ss">&#39;kill-other-buffers</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The command can be implemented in a more elegant manner if one chooses to
+leverage either the built-in <code>cl.el</code> library or the newer
+<a href="https://github.com/magnars/dash.el">dash.el</a>. Here&#8217;s the version of
+the same command from <a href="https://github.com/bbatsov/prelude">Prelude</a>,
+using <code>dash.el</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;dash</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">prelude-kill-other-buffers</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Kill all buffers but the current one.</span>
+</span><span class='line'><span class="s">Doesn&#39;t mess with special buffers.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">-each</span>
+</span><span class='line'>   <span class="p">(</span><span class="nv">-&gt;&gt;</span> <span class="p">(</span><span class="nv">buffer-list</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">(</span><span class="nv">-filter</span> <span class="nf">#&#39;</span><span class="nv">buffer-file-name</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">(</span><span class="nv">--remove</span> <span class="p">(</span><span class="nb">eql</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">)</span> <span class="nv">it</span><span class="p">)))</span>
+</span><span class='line'>   <span class="nf">#&#39;</span><span class="nv">kill-buffer</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>According to your personal preference on functional programming the
+second version might seem either much more elegant, ghastly or just the
+same of the original.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/29/terminal-at-your-fingertips/">Terminal at Your Fingertips</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-29T15:38:00+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/29/terminal-at-your-fingertips/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Most of you probably know that you can run a terminal emulator(or
+simply a shell for that matter) inside Emacs(<code>M-x ansi-term</code>).  This
+is pretty neat on its own, but what I think is even better is to have
+a quick way to jump to a particular terminal buffer reserved for the
+occasional command invocation or two. I achieve this goal with the
+following simple command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">visit-term-buffer</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Create or visit a terminal buffer.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nv">get-buffer</span> <span class="s">&quot;*ansi-term*&quot;</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="k">progn</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">split-window-sensibly</span> <span class="p">(</span><span class="nv">selected-window</span><span class="p">))</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">other-window</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">ansi-term</span> <span class="p">(</span><span class="nv">getenv</span> <span class="s">&quot;SHELL&quot;</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">switch-to-buffer-other-window</span> <span class="s">&quot;*ansi-term*&quot;</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first time you run the command it will create a new terminal
+buffer based on your <code>SHELL</code> environment variable and display it in a
+window adjacent to the one you&#8217;re working in(in other words - it won&#8217;t
+clobber the window you are currently in). On successive invocations
+the command will simply take you to that existing buffer (it will
+still be displayed in a separate window).</p>
+
+<p>Personally, I find this command extremely useful and therefore I bind
+it to <code>C-c t</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c t&quot;</span><span class="p">)</span> <span class="ss">&#39;visit-term-buffer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>visit-term-buffer</code> is available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
+prefix).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/29/automatic-electric-character-pairing/">Automatic(electric) Character Pairing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-29T12:38:00+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/29/automatic-electric-character-pairing/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When editing text (and source code in particular) we often have to
+deal with characters that are usually paired (like <code>()</code>, <code>[]</code>, <code>{}</code>,
+etc). By default Emacs doesn&#8217;t treat such characters in any special
+manner and that kind of sucks, since it&#8217;s quite easy to misplace a
+closing parenthesis for instance.</p>
+
+<p>While there are several modes that target that particular problem, in
+this post I&#8217;ll showcase just one of them - the built-in(since
+Emacs 24.1) global minor mode <code>electric-pair-mode</code>. Enabling it is trivial:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">electric-pair-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At this point typing an open parenthesis automatically inserts the
+corresponding closing parenthesis. (Likewise for brackets, etc.)  As
+an added bonus, consider the following scenario(the bar(<code>|</code>)
+represents your cursor):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">some_fun</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="o">|</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Typing a closing parenthesis a this point will not insert a second
+parenthesis, but will simple move the cursor over the existing one,
+keeping the expression correct.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">some_fun</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">)</span><span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Simple, but effective. A little bit down the road we might take a
+looks at some of the (more powerful) alternatives to
+<code>electric-pair-mode</code>.</p>
+
+<p><code>electric-pair-mode</code> is enabled by default in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/29/automatic-electric-indentation/">Automatic(electric) Indentation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-29T12:09:00+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/29/automatic-electric-indentation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Many newcomers dislike Emacs&#8217;s default behavior of not indenting
+automatically new lines in programming major modes. Usually one has to
+press <code>Return</code>, followed by <code>Tab</code> to open a new line and indent it
+according to its context.</p>
+
+<p>Of course Emacs has a command named <code>newline-and-indent</code>, that&#8217;s bound
+to <code>C-j</code> and many people are into the habit of using it instead of the
+pressing <code>Return+Tab</code>. Some even rebind <code>Return</code> to
+<code>newline-and-indent</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;RET&quot;</span><span class="p">)</span> <span class="ss">&#39;newline-and-indent</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What&#8217;s little known is that Emacs 24.1 introduced a new global minor
+mode called <code>electric-indent-mode</code>.  When enabled, typing certain
+characters(like newlines) triggers reindentation. So you can simply
+add this line to your Emacs config to get to enjoy
+<code>electric-ident-mode</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">electric-indent-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/28/network-utilities/">Network Utilities</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-28T18:56:00+02:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/28/network-utilities/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A little known feature of Emacs is that it provides basic wrappers
+from various command-line network utilities. Here&#8217;s a few Emacs
+commands for you to try out:</p>
+
+<ul>
+<li><code>M-x ping</code></li>
+<li><code>M-x telnet</code></li>
+<li><code>M-x dig</code></li>
+<li><code>M-x ifconfig</code></li>
+</ul>
+
+
+<p>Try to find as many related commands as you can!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/28/google/">Google</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-28T14:32:00+02:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/28/google/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Wouldn&#8217;t it be cool to be able to invoke a Google search from the
+comfort of your beloved text editor? Here&#8217;s a couple of use-cases. You
+may wish to Google the selected region or to be prompted to enter a
+query manually. Apart from cool it&#8217;s also pretty simple to add such a
+feature to Emacs.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">google</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Google the selected region if any, display a query prompt otherwise.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">browse-url</span>
+</span><span class='line'>   <span class="p">(</span><span class="nv">concat</span>
+</span><span class='line'>    <span class="s">&quot;http://www.google.com/search?ie=utf-8&amp;oe=utf-8&amp;q=&quot;</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="p">(</span><span class="k">if</span> <span class="nv">mark-active</span>
+</span><span class='line'>         <span class="p">(</span><span class="nv">buffer-substring</span> <span class="p">(</span><span class="nv">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nv">region-end</span><span class="p">))</span>
+</span><span class='line'>       <span class="p">(</span><span class="nv">read-string</span> <span class="s">&quot;Google: &quot;</span><span class="p">))))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This command will display the query results in your default browser.</p>
+
+<p>I&#8217;d suggest binding the command to <code>C-c g</code> if you plan to use it regularly.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c g&quot;</span><span class="p">)</span> <span class="ss">&#39;google</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>google</code> is available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
+prefix).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/28/indent-defun/">Indent Defun</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-28T12:23:00+02:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/28/indent-defun/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As a continuation of our previous topic of
+<a href="/blog/2013/03/27/indent-region-or-buffer">indenting a buffer or a region</a>,
+this time around I&#8217;ll show you how to indent a single <strong>defun</strong>(Emacs
+slang/terminology for a function/procedure/method definition, originating
+from the way functions are defined in Emacs Lisp(and a few other Lisp
+dialects)). So here&#8217;s the magic bit of code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">indent-defun</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Indent the current defun.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">save-excursion</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">mark-defun</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">indent-region</span> <span class="p">(</span><span class="nv">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nv">region-end</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This function should work in all properly written major programming modes.</p>
+
+<p>Why would you want to use <code>indent-defun</code> instead of
+<code>indent-region-or-buffer</code>? Pretty simple - indenting huge buffers can
+take quite a while and you might want to save a bit of time if you
+know that a buffer&#8217;s indentation is correct pretty much everywhere
+else.</p>
+
+<p>I&#8217;d suggest binding the command to <code>C-M-z</code> (since it kind of resembles
+the keybinding for function evaluation in major modes for dynamic
+programming languages <code>C-M-x</code>).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-M-z&quot;</span><span class="p">)</span> <span class="ss">&#39;indent-defun</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Special thanks to <code>Fuco</code> (who I assume is Matus Goljer, of
+<a href="https://github.com/Fuco1/smartparens">smartparens</a> fame) who
+suggested that command in the previous post.</p>
+
+<p><code>indent-defun</code> is available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
+prefix).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/10/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/8/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Emacs Redux</h1>
+  <p>Emacs Redux&#8217;s mission is to hone your Emacs skills and increase your appreciation for Emacs&#8217;s might and magic.
+  You can show your love for Emacs Redux via Gratipay:</p>
+  <a href="https://www.gratipay.com/bbatsov"><img src="https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png"></img></a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/lossage/">Lossage</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/uptime/">Uptime</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+     <h1>Twitter</h1>
+     <!-- PASTE THE WIDGET CODE HERE -->
+     <a class="twitter-timeline" href="https://twitter.com/bbatsov" data-widget-id="382536919663386624">Tweets by @bbatsov</a>
+     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ </section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/bbatsov">@bbatsov</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'bbatsov',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Bozhidar Batsov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'emacsredux';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

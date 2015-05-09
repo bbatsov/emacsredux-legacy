@@ -1,0 +1,1208 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Emacs Redux</title>
+  <meta name="author" content="Bozhidar Batsov">
+
+  
+  <meta name="description" content="Prelude This is a slightly refreshed version of an article originally published on my personal blog. If there is something that people love as much &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://bbatsov.github.com/emacsredux/blog/page/5">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39624961-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Emacs Redux</a></h1>
+  
+    <h2>Return to the Essence of Text Editing</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:bbatsov.github.com/emacsredux" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/bbatsov/prelude">Prelude</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/21/color-themes-redux/">Color Themes: Redux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-21T12:36:00+03:00" pubdate data-updated="true">Aug 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/21/color-themes-redux/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Prelude</h2>
+
+<p><em>This is a slightly refreshed version of an
+ <a href="http://batsov.com/articles/2012/02/19/color-theming-in-emacs-reloaded/">article originally published on my personal blog</a></em>.</p>
+
+<p>If there is something that people love as much as tweaking their
+editing configurations it&#8217;s probably the selection of color themes. A
+good color theme can make your work much more pleasant and a bad one
+that literally impair your vision. It&#8217;s a fact of life that I&#8217;m a firm
+supporter of low-contrast color themes with dark backgrounds - I find
+them easy on the eyes and I feel that they don&#8217;t strain the eyes as
+much as most themes. I&#8217;ve even ported a couple of popular themes to
+Emacs - <a href="https://github.com/bbatsov/zenburn-emacs">Zenburn</a> and
+<a href="https://github.com/bbatsov/solarized-emacs">Solarized</a>.</p>
+
+<p>In this short article we&#8217;ll see how color theming has changed in Emacs
+24 and I&#8217;ll share with you a few tips on theme creation and
+distribution.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/21/color-themes-redux/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/25/increment-and-decrement-integer-at-point/">Increment and Decrement Integer at Point</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-25T18:49:00+03:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/25/increment-and-decrement-integer-at-point/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While editing you often have to increment or decrement some number
+(usually an integer) by some step. Obviously this is trivial when the
+number is something like <code>10</code>, but not pretty pleasant when the number
+is <code>2343566</code> and you want to increment it by <code>943</code>. Most of the time,
+however, you&#8217;ll probably be incrementing or decrementing by 1.</p>
+
+<p>A long time ago I found a bit of code by
+<a href="https://github.com/DarwinAwardWinner">Ryan Thompson</a> to help us deal
+with such tasks. Here&#8217;s a slightly modified version of the original code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;thingatpt</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">thing-at-point-goto-end-of-integer</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Go to end of integer at point.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">inhibit-changing-match-data</span> <span class="no">t</span><span class="p">))</span>
+</span><span class='line'>    <span class="c1">;; Skip over optional sign</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">looking-at</span> <span class="s">&quot;[+-]&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">forward-char</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>    <span class="c1">;; Skip over digits</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">skip-chars-forward</span> <span class="s">&quot;[[:digit:]]&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1">;; Check for at least one digit</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">looking-back</span> <span class="s">&quot;[[:digit:]]&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">error</span> <span class="s">&quot;No integer here&quot;</span><span class="p">))))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">put</span> <span class="ss">&#39;integer</span> <span class="ss">&#39;beginning-op</span> <span class="ss">&#39;thing-at-point-goto-end-of-integer</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">thing-at-point-goto-beginning-of-integer</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Go to end of integer at point.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">inhibit-changing-match-data</span> <span class="no">t</span><span class="p">))</span>
+</span><span class='line'>    <span class="c1">;; Skip backward over digits</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">skip-chars-backward</span> <span class="s">&quot;[[:digit:]]&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1">;; Check for digits and optional sign</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">looking-at</span> <span class="s">&quot;[+-]?[[:digit:]]&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">error</span> <span class="s">&quot;No integer here&quot;</span><span class="p">))</span>
+</span><span class='line'>    <span class="c1">;; Skip backward over optional sign</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">looking-back</span> <span class="s">&quot;[+-]&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">backward-char</span> <span class="mi">1</span><span class="p">))))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">put</span> <span class="ss">&#39;integer</span> <span class="ss">&#39;beginning-op</span> <span class="ss">&#39;thing-at-point-goto-beginning-of-integer</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">thing-at-point-bounds-of-integer-at-point</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Get boundaries of integer at point.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">save-excursion</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">let</span> <span class="p">(</span><span class="nv">beg</span> <span class="nv">end</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">thing-at-point-goto-beginning-of-integer</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="k">setq</span> <span class="nv">beg</span> <span class="p">(</span><span class="nv">point</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">thing-at-point-goto-end-of-integer</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="k">setq</span> <span class="nv">end</span> <span class="p">(</span><span class="nv">point</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">cons</span> <span class="nv">beg</span> <span class="nv">end</span><span class="p">))))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">put</span> <span class="ss">&#39;integer</span> <span class="ss">&#39;bounds-of-thing-at-point</span> <span class="ss">&#39;thing-at-point-bounds-of-integer-at-point</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">thing-at-point-integer-at-point</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Get integer at point.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">bounds</span> <span class="p">(</span><span class="nv">bounds-of-thing-at-point</span> <span class="ss">&#39;integer</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">string-to-number</span> <span class="p">(</span><span class="nv">buffer-substring</span> <span class="p">(</span><span class="nb">car</span> <span class="nv">bounds</span><span class="p">)</span> <span class="p">(</span><span class="nb">cdr</span> <span class="nv">bounds</span><span class="p">)))))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">put</span> <span class="ss">&#39;integer</span> <span class="ss">&#39;thing-at-point</span> <span class="ss">&#39;thing-at-point-integer-at-point</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">increment-integer-at-point</span> <span class="p">(</span><span class="k">&amp;optional</span> <span class="nv">inc</span><span class="p">)</span>
+</span><span class='line'>  <span class="s">&quot;Increment integer at point by one.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">With numeric prefix arg INC, increment the integer by INC amount.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;p&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">inc</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">inc</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">n</span> <span class="p">(</span><span class="nv">thing-at-point</span> <span class="ss">&#39;integer</span><span class="p">))</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">bounds</span> <span class="p">(</span><span class="nv">bounds-of-thing-at-point</span> <span class="ss">&#39;integer</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">delete-region</span> <span class="p">(</span><span class="nb">car</span> <span class="nv">bounds</span><span class="p">)</span> <span class="p">(</span><span class="nb">cdr</span> <span class="nv">bounds</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nv">int-to-string</span> <span class="p">(</span><span class="nb">+</span> <span class="nv">n</span> <span class="nv">inc</span><span class="p">)))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">decrement-integer-at-point</span> <span class="p">(</span><span class="k">&amp;optional</span> <span class="nv">dec</span><span class="p">)</span>
+</span><span class='line'>  <span class="s">&quot;Decrement integer at point by one.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">With numeric prefix arg DEC, decrement the integer by DEC amount.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;p&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">increment-integer-at-point</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">dec</span> <span class="mi">1</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The code is based on the popular built-in library <code>thing-at-point</code> and
+extends it to make it aware of integer numbers.  The commands
+<code>increment-integer-at-point</code> and <code>decrement-integer-at-point</code> operate
+with a step of 1 by default, but with a prefix argument you can select
+any step you desire. Unlike other similar commands floating in the
+Internet, these two handle correctly numbers like <code>-3434</code> and
+<code>+343</code>.</p>
+
+<p>I&#8217;d suggest binding these commands to <code>C-c +</code> and <code>C-c -</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c +&quot;</span><span class="p">)</span> <span class="ss">&#39;increment-integer-at-point</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c -&quot;</span><span class="p">)</span> <span class="ss">&#39;decrement-integer-at-point</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Both commands are available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
+prefix).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/24/highlight-comment-annotations/">Highlight Comment Annotations</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-24T16:15:00+03:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/24/highlight-comment-annotations/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Programming code is often filled with comment annotations indicating stuff that should be done in the future.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># REFACTOR: Decouple and clean up this crap.</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># crappy code omitted</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Normally Emacs doesn&#8217;t highlight such comment annotations, unless
+you&#8217;re using some minor mode like
+<a href="https://github.com/lewang/fic-mode/blob/master/fic-mode.el">fic-mode</a>. I find such mode overkill given the fact we can cook a pretty decent solution in just about 5 lines of code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">font-lock-comment-annotations</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Highlight a bunch of well known comment annotations.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">This functions should be added to the hooks of major modes for programming.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">font-lock-add-keywords</span>
+</span><span class='line'>   <span class="no">nil</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;\\&lt;\\(FIX\\(ME\\)?\\|TODO\\|OPTIMIZE\\|HACK\\|REFACTOR\\):&quot;</span>
+</span><span class='line'>          <span class="mi">1</span> <span class="nv">font-lock-warning-face</span> <span class="no">t</span><span class="p">))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;font-lock-comment-annotations</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And that&#8217;s all there is to it. This code is not perfect, since it
+would highlight <code>FIXME:</code> everywhere in the source code (as opposed to
+only in comments), but it&#8217;s extremely highly unlikely that it&#8217;ll
+appear outside of the source comments anyways.</p>
+
+<p>As usual <a href="https://github.com/bbatsov/prelude">Prelude</a> users get this
+functionally for free out-of-the-box.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/17/make-use-of-the-super-key/">Make Use of the Super Key</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-17T16:16:00+03:00" pubdate data-updated="true">Jul 17<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/17/make-use-of-the-super-key/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs users have a lot of power at their disposal, but in one
+department they are always short - the number of available
+non-complex keybindings that they can leverage.</p>
+
+<p>Obviously nobody likes pressing keybindings like <code>C-p C-v k</code> (or
+something like that). One way to get your hands on some extra
+keybindings is to utilize the <code>Super</code> key (it&#8217;s the <code>Windows</code> key on
+Win keyboards and the <code>Command</code> key on Mac keyboards (although most
+people remap <code>Command</code> to <code>Meta</code> and <code>Option</code> to <code>Super</code>)). One great
+thing about <code>Super</code> is that you generally have two of them, which
+makes them touch-typing friend. Since almost no packages use those
+keys you&#8217;re left with plenty of options.</p>
+
+<p><a href="https://github.com/bbatsov/prelude">Prelude</a> defines a bunch of
+global keybindings that use the <code>Super</code> key.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; make some use of the Super key</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-d]</span> <span class="ss">&#39;projectile-find-dir</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-e]</span> <span class="ss">&#39;er/expand-region</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-f]</span> <span class="ss">&#39;projectile-find-file</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-g]</span> <span class="ss">&#39;projectile-grep</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-j]</span> <span class="ss">&#39;prelude-top-join-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-k]</span> <span class="ss">&#39;prelude-kill-whole-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-l]</span> <span class="ss">&#39;goto-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-m]</span> <span class="ss">&#39;magit-status</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-o]</span> <span class="ss">&#39;prelude-open-line-above</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-w]</span> <span class="ss">&#39;delete-frame</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-x]</span> <span class="ss">&#39;exchange-point-and-mark</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-p]</span> <span class="ss">&#39;projectile-switch-project</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you find pressing <code>Super</code> comfortable obviously you have the
+potential to add quite a lot more keybindings to this list.</p>
+
+<p><strong>P.S.</strong> Some keyboards (notably laptop ones) have a <code>Fn</code> key as well
+  that&#8217;s also usable in Emacs keybindings. Somewhat funny that key is
+  known in Emacs as <code>Hyper</code> (<code>Star Wars</code> fans are undoubtedly adding a
+  <strong>Hyper-Space</strong> keybinding to their setups right about now).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/17/advise-multiple-commands-in-the-same-manner/">Advise Multiple Commands in the Same Manner</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-17T16:15:00+03:00" pubdate data-updated="true">Jul 17<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/17/advise-multiple-commands-in-the-same-manner/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of the well known features of
+<a href="https://github.com/bbatsov/prelude">Prelude</a> is that it saves buffers
+with changes in them automatically when you jump between
+windows. This is achieved with several simple <code>defadvice</code>s and without
+going into many details the advice code for that feature might look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; automatically save buffers associated with files on buffer switch</span>
+</span><span class='line'><span class="c1">;; and on windows switch</span>
+</span><span class='line'><span class="p">(</span><span class="nv">defadvice</span> <span class="nv">switch-to-buffer</span> <span class="p">(</span><span class="nv">before</span> <span class="nv">switch-to-buffer-auto-save</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">defadvice</span> <span class="nv">other-window</span> <span class="p">(</span><span class="nv">before</span> <span class="nv">other-window-auto-save</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">defadvice</span> <span class="nv">windmove-up</span> <span class="p">(</span><span class="nv">before</span> <span class="nv">other-window-auto-save</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">defadvice</span> <span class="nv">windmove-down</span> <span class="p">(</span><span class="nv">before</span> <span class="nv">other-window-auto-save</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">defadvice</span> <span class="nv">windmove-left</span> <span class="p">(</span><span class="nv">before</span> <span class="nv">other-window-auto-save</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">defadvice</span> <span class="nv">windmove-right</span> <span class="p">(</span><span class="nv">before</span> <span class="nv">other-window-auto-save</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ouch - that a lot of redundant code! Luckily we can take care of the
+redundancy by introducing a macro to generate multiple advices with
+the same body:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defmacro</span> <span class="nv">advise-commands</span> <span class="p">(</span><span class="nv">advice-name</span> <span class="nv">commands</span> <span class="k">&amp;rest</span> <span class="nv">body</span><span class="p">)</span>
+</span><span class='line'>  <span class="s">&quot;Apply advice named ADVICE-NAME to multiple COMMANDS.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">The body of the advice is in BODY.&quot;</span>
+</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">progn</span>
+</span><span class='line'>     <span class="o">,@</span><span class="p">(</span><span class="nb">mapcar</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">command</span><span class="p">)</span>
+</span><span class='line'>                 <span class="o">`</span><span class="p">(</span><span class="nv">defadvice</span> <span class="o">,</span><span class="nv">command</span> <span class="p">(</span><span class="nv">before</span> <span class="o">,</span><span class="p">(</span><span class="nb">intern</span> <span class="p">(</span><span class="nv">concat</span> <span class="p">(</span><span class="nb">symbol-name</span> <span class="nv">command</span><span class="p">)</span> <span class="s">&quot;-&quot;</span> <span class="nv">advice-name</span><span class="p">))</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>                    <span class="o">,@</span><span class="nv">body</span><span class="p">))</span>
+</span><span class='line'>               <span class="nv">commands</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Looks a bit scary, doesn&#8217;t it? But it allows us to reduce the original code down to:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; advise all window switching functions</span>
+</span><span class='line'><span class="p">(</span><span class="nv">advise-commands</span> <span class="s">&quot;auto-save&quot;</span>
+</span><span class='line'>                 <span class="p">(</span><span class="nv">switch-to-buffer</span> <span class="nv">other-window</span> <span class="nv">windmove-up</span> <span class="nv">windmove-down</span> <span class="nv">windmove-left</span> <span class="nv">windmove-right</span><span class="p">)</span>
+</span><span class='line'>                 <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>macroexpand</code> can show us how the macro gets expanded:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">macroexpand</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">advise-commands</span> <span class="s">&quot;auto-save&quot;</span>
+</span><span class='line'>                 <span class="p">(</span><span class="nv">switch-to-buffer</span> <span class="nv">other-window</span> <span class="nv">windmove-up</span> <span class="nv">windmove-down</span> <span class="nv">windmove-left</span> <span class="nv">windmove-right</span><span class="p">)</span>
+</span><span class='line'>                 <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">progn</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">defadvice</span> <span class="nv">switch-to-buffer</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">before</span> <span class="nv">switch-to-buffer-auto-save</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">defadvice</span> <span class="nv">other-window</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">before</span> <span class="nv">other-window-auto-save</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">defadvice</span> <span class="nv">windmove-up</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">before</span> <span class="nv">windmove-up-auto-save</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">defadvice</span> <span class="nv">windmove-down</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">before</span> <span class="nv">windmove-down-auto-save</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">defadvice</span> <span class="nv">windmove-left</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">before</span> <span class="nv">windmove-left-auto-save</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">defadvice</span> <span class="nv">windmove-right</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">before</span> <span class="nv">windmove-right-auto-save</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">prelude-auto-save</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously if we want the macro to be truly universal we should factor
+out the hardcoded <code>before</code> and <code>activate</code> <code>defadvice</code> params, but
+that&#8217;s beside the point. The point is that when you need to generate
+some code Emacs Lisp&#8217;s macros have your back.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/09/go-to-column/">Go to Column</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-09T16:30:00+03:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/09/go-to-column/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Almost every Emacs user knows that <code>M-g M-g</code> and <code>M-g g</code> (both bound to
+<code>go-to-line</code>) will take him to the line of his choosing (provided he
+knows the number of the target line, of course).</p>
+
+<p>Surprisingly few Emacs users know that there is a similar way to jump
+to a column by its number - <code>M-g TAB</code> (bound to
+<code>move-to-column</code>). Interactively you cannot jump past the end of the
+line you&#8217;re currently on, but you can always cook your own version of
+the command to get around that limitation:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">go-to-column</span> <span class="p">(</span><span class="nv">column</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;nColumn: &quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">move-to-column</span> <span class="nv">column</span> <span class="no">t</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s bind that to some keycombo:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-g M-c&quot;</span><span class="p">)</span> <span class="ss">&#39;go-to-column</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/05/locate/">Locate</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-05T18:58:00+03:00" pubdate data-updated="true">Jul 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/05/locate/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><code>locate</code> is one extremely popular Unix command that allows you to
+search for files in a pre-built database.</p>
+
+<p>One little know fact is that Emacs provides a wrapper around the
+command you can invoke with <code>M-x locate</code>. You&#8217;ll be prompted to enter
+a search string and you&#8217;ll be presented with a list of matching
+filenames from <code>locate</code>&#8217;s database. Many of <code>dired</code> keybindings are
+available in the results buffer (which will be using <code>locate-mode</code> major mode).</p>
+
+<p>If you&#8217;d like you may change the command invoked by Emacs to supply the
+results by altering the <code>locate-command</code> variable. Here&#8217;s how you can
+start using OSX&#8217;s <code>mdfind</code> (the command-line interface to <code>Spotlight</code>)
+instead of <code>locate</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">locate-command</span> <span class="s">&quot;mdfind&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously any command that takes a string argument and returns a list
+of files would do here. In all likelihood you&#8217;ll never want to use
+anything other than the default <code>locate</code> command, though.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/25/boost-performance-by-leveraging-byte-compilation/">Boost Performance by Leveraging Byte-compilation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-25T12:49:00+03:00" pubdate data-updated="true">Jun 25<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/25/boost-performance-by-leveraging-byte-compilation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs&#8217;s Lisp interpreter is able to interpret two kinds of code:
+humanly readable code (stored in files with <code>.el</code> extension) and
+machine optimized code (called <code>byte-compiled code</code>), which is not
+humanly readable. Byte-compiled code runs faster than humanly readable
+code. Java or .NET developers should already be familiar with the
+concept of byte-code, since it&#8217;s pretty central on those platforms.</p>
+
+<p>You can transform humanly readable code into byte-compiled code by
+running one of the compile commands such as <code>byte-compile-file</code>. The
+resulting byte-code is stored into <code>.elc</code> files. One can also
+byte-compile Emacs Lisp source files using Emacs in batch mode.</p>
+
+<p>Here&#8217;s how you can compile everything in your <code>.emacs.d</code> folder:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>emacs -batch -f batch-byte-compile ~/.emacs.d/**/*.el</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Of course we can easily create an Emacs command that does the same thing:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">byte-compile-init-dir</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Byte-compile all your dotfiles.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">byte-recompile-directory</span> <span class="nv">user-emacs-directory</span> <span class="mi">0</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>user-emacs-directory</code> is an Emacs variable that points to your init
+dir (usually <code>~/.emacs.d</code> on UNIX systems). This command will
+recompile even files that were already compiled before (meaning a file
+with the same name and the <code>.elc</code> extension instead of <code>.el</code>
+existed). You can try the new command with <code>M-x
+byte-compile-init-dir</code>.</p>
+
+<p>You have to keep in mind that Emacs will load code from the <code>.elc</code>
+files if present alongside the <code>.el</code> files, so you&#8217;ll have to take
+steps to ensure you don&#8217;t have stale <code>.elc</code> files lying around. I&#8217;d
+suggest the following solution:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">remove-elc-on-save</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;If you&#39;re saving an elisp file, likely the .elc is no longer valid.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;after-save-hook</span>
+</span><span class='line'>            <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+</span><span class='line'>              <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">file-exists-p</span> <span class="p">(</span><span class="nv">concat</span> <span class="nv">buffer-file-name</span> <span class="s">&quot;c&quot;</span><span class="p">))</span>
+</span><span class='line'>                  <span class="p">(</span><span class="nb">delete-file</span> <span class="p">(</span><span class="nv">concat</span> <span class="nv">buffer-file-name</span> <span class="s">&quot;c&quot;</span><span class="p">))))</span>
+</span><span class='line'>            <span class="no">nil</span>
+</span><span class='line'>            <span class="no">t</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-lisp-mode-hook</span> <span class="ss">&#39;remove-elc-on-save</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This code will make Emacs delete the <code>some_file.elc</code> file, every time the
+<code>some_file.el</code> file in the same folder is saved.</p>
+
+<p>A couple of closing notes:</p>
+
+<ul>
+<li><p>If you don&#8217;t have any custom computationally
+intensive <code>defuns</code> in your init directory - it probably doesn&#8217;t make sense
+to byte-compile it.</p></li>
+<li><p>Packages installed via <code>package.el</code> will be automatically byte-compiled during the installation process.</p></li>
+</ul>
+
+
+<p>The code presented here is part of
+<a href="https://github.com/bbatsov/prelude">Prelude</a>. As a matter of fact
+Prelude will byte-compile itself during the installation process (if
+you used the installed script, that is). Prelude will also recompile
+itself when <code>M-x prelude-update</code> is invoked.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/21/eval-and-replace/">Eval and Replace</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-21T12:35:00+03:00" pubdate data-updated="true">Jun 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/21/eval-and-replace/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sometimes people tend to overlook how well Emacs and Emacs Lisp are
+integrated. Basically there is no limit to the places where you can
+evaluate a bit of Emacs Lisp and reap the associated benefits. From
+time to time I find myself editing something and thinking - &#8220;Hey, it&#8217;d
+be really great of I could just insert the result of some Emacs Lisp
+expression at point!&#8221; (my thoughts are pretty crazy, right?). Here&#8217;s a
+contrived example - I might have to enter somewhere the result of
+<code>1984 / 16</code>. I can calculate that manually or I can fire up <code>M-x calc</code>
+and get the result, or I can play extra smart and devise the following
+command (which I did not actually devise - I&#8217;m pretty sure I saw it
+in someone else&#8217;s config a while back):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">eval-and-replace</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Replace the preceding sexp with its value.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">backward-kill-sexp</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">condition-case</span> <span class="no">nil</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">prin1</span> <span class="p">(</span><span class="nb">eval</span> <span class="p">(</span><span class="nb">read</span> <span class="p">(</span><span class="nv">current-kill</span> <span class="mi">0</span><span class="p">)))</span>
+</span><span class='line'>             <span class="p">(</span><span class="nv">current-buffer</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">error</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Invalid expression&quot;</span><span class="p">)</span>
+</span><span class='line'>           <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nv">current-kill</span> <span class="mi">0</span><span class="p">)))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s bind that to <code>C-c e</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c e&quot;</span><span class="p">)</span> <span class="ss">&#39;eval-and-replace</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now in the buffer I&#8217;m currently editing I can type <code>(/ 1984 16)</code> and
+press <code>C-c e</code> afterwards getting the result <code>124</code> replace the original
+expression. Pretty neat!</p>
+
+<p>I&#8217;ll leave it up to you to think of more creative applications of the command.</p>
+
+<p>This command is part of
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(it&#8217;s named
+<code>prelude-eval-and-replace</code> there).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/15/deleting-windows/">Deleting Windows</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-15T10:28:00+03:00" pubdate data-updated="true">Jun 15<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/15/deleting-windows/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Every Emacs user knows that he can split the current window
+horizontally (with <code>C-x 2</code>) and vertically (with <code>C-x 3</code>) as much as
+he desires to. However, some Emacs users don&#8217;t know what to do with
+the extra windows they&#8217;ve created when they do not them.</p>
+
+<p>To delete the selected window, type <code>C-x 0</code> (<code>delete-window</code>).
+Once a window is deleted, the space that it occupied
+is given to an adjacent window (but not the minibuffer window, even if
+that is the active window at the time). Deleting the window has no effect on the
+buffer it used to display; the buffer continues to exist, and you can
+still switch to with <code>C-x b</code> or any other buffer navigation command.</p>
+
+<p><code>C-x 4 0</code> (<code>kill-buffer-and-window</code>) is a stronger (and fairly
+unknown) command; it kills the current buffer and then deletes the
+selected window (basically it combines <code>C-x k</code> and <code>C-x 0</code>). Obviously
+it&#8217;s a good idea to use it on windows displaying buffers you&#8217;re no
+longer needing.</p>
+
+<p><code>C-x 1</code> (<code>delete-other-windows</code>) deletes all the windows, <em>except</em> the
+selected one; the selected window expands to use the whole frame.
+(This command cannot be used while the minibuffer window is active;
+attempting to do so signals an error.) In the era of narrow screens I
+used that command fairly often when I needed to focus on a particular
+task. Now I keep my screen split in half vertically 99% of the time,
+but I still use <code>C-x 1</code> from time to time when I&#8217;m about to resplit my
+screen in some uncommon way.</p>
+
+<p>Windows displaying help buffers (generally created with commands like
+<code>C-h ...</code>) warrant a special mention. They can be deleted with a
+single keystroke - <code>q</code>. That would delete the help window altogether
+if it was created by the help command, or restore its original
+content if the window existing beforehand and was reused by the help command.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/6/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/4/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Emacs Redux</h1>
+  <p>Emacs Redux&#8217;s mission is to hone your Emacs skills and increase your appreciation for Emacs&#8217;s might and magic.
+  You can show your love for Emacs Redux via Gratipay:</p>
+  <a href="https://www.gratipay.com/bbatsov"><img src="https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png"></img></a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/lossage/">Lossage</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/uptime/">Uptime</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+     <h1>Twitter</h1>
+     <!-- PASTE THE WIDGET CODE HERE -->
+     <a class="twitter-timeline" href="https://twitter.com/bbatsov" data-widget-id="382536919663386624">Tweets by @bbatsov</a>
+     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ </section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/bbatsov">@bbatsov</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'bbatsov',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Bozhidar Batsov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'emacsredux';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

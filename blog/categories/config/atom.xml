@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: config | Emacs Redux]]></title>
+  <link href="http://bbatsov.github.com/emacsredux/blog/categories/config/atom.xml" rel="self"/>
+  <link href="http://bbatsov.github.com/emacsredux/"/>
+  <updated>2015-05-09T14:28:00+03:00</updated>
+  <id>http://bbatsov.github.com/emacsredux/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Opening Large Files]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/05/16/opening-large-files/"/>
+    <updated>2014-05-16T12:37:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/05/16/opening-large-files</id>
+    <content type="html"><![CDATA[<p>I guess everyone has seen the following warning (at some point or
+another) when trying to open a relatively large file in Emacs:</p>
+
+<p><code>
+File foo.bar is large (XX.XM), really open?
+</code></p>
+
+<p>By default Emacs will display this warning for every file bigger than
+10MB, which is quite annoying (conservative), especially given the
+fact that on any modern computer even much bigger files will be loaded
+almost instantaneously and won't slow down Emacs significantly.</p>
+
+<p>You can adjust this behavior by altering the value of the
+<code>large-file-warning-threshold</code> variable. I'd suggest setting it to
+something like 100MB:</p>
+
+<p><code>cl
+;; warn when opening files bigger than 100MB
+(setq large-file-warning-threshold 100000000)
+</code></p>
+
+<p>Alternative, you can set it to <code>nil</code>, which will suppress the
+warning permanently, regardless of the size of the file you're trying to open.</p>
+
+<p><strong>P.S.</strong> By the way, it's not particularly wise to edit <strong>huge</strong> files
+(say bigger than 1GB) in Emacs directly.  If you need to do something
+like this I'd suggest taking a look at the excellent
+<a href="https://github.com/m00natic/vlfi">vlfi</a> package.</p>
+]]></content>
+  </entry>
+  
+</feed>

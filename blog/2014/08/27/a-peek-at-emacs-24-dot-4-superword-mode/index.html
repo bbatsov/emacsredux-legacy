@@ -1,0 +1,438 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A peek at Emacs 24.4: superword-mode - Emacs Redux</title>
+  <meta name="author" content="Bozhidar Batsov">
+
+  
+  <meta name="description" content="In a previous post I wrote about
+camel-case aware editing with subword-mode. Emacs
+24.4 adds a complementary minor mode called superword-mode, which &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://bbatsov.github.com/emacsredux/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39624961-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Emacs Redux</a></h1>
+  
+    <h2>Return to the Essence of Text Editing</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:bbatsov.github.com/emacsredux" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/bbatsov/prelude">Prelude</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">A Peek at Emacs 24.4: Superword-mode</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-27T18:24:00+03:00" pubdate data-updated="true">Aug 27<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In a previous post I wrote about
+<a href="http://emacsredux.com/blog/2013/04/21/camelcase-aware-editing/">camel-case aware editing with subword-mode</a>. Emacs
+24.4 adds a complementary minor mode called <code>superword-mode</code>, which
+also alters the behavior of word-based commands when enabled.</p>
+
+<p>Normally Emacs would consider underscores and dashes word separators
+(<code>snake_case</code> and <code>lisp-case</code> anyone?). This affects all <code>word</code>
+commands - <code>forward-word</code>, <code>backward-word</code>, <code>kill-word</code>, etc. Let&#8217;s
+see a couple of examples (<code>|</code> denotes the cursor position):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;; word with dash
+</span><span class='line'>|some-word
+</span><span class='line'>
+</span><span class='line'>;; press M-f (forward-word) once
+</span><span class='line'>some|-word
+</span><span class='line'>
+</span><span class='line'>;; press M-f again
+</span><span class='line'>some-word|
+</span><span class='line'>
+</span><span class='line'>;; press M-b (backward-word) once
+</span><span class='line'>some-|word
+</span><span class='line'>
+</span><span class='line'>;; word with underscore
+</span><span class='line'>|some_word
+</span><span class='line'>
+</span><span class='line'>;; press M-f once
+</span><span class='line'>some|_word
+</span><span class='line'>
+</span><span class='line'>;; press M-f again
+</span><span class='line'>some_word|
+</span><span class='line'>
+</span><span class='line'>;; press M-b once
+</span><span class='line'>some_|word
+</span><span class='line'>
+</span><span class='line'>;; word in camelCase (assuming subword-mode is not enabled)
+</span><span class='line'>|someWord
+</span><span class='line'>
+</span><span class='line'>;; press M-f once
+</span><span class='line'>someWord|
+</span><span class='line'>
+</span><span class='line'>;; word in camelCase (assuming subword-mode is enabled)
+</span><span class='line'>|someWord
+</span><span class='line'>
+</span><span class='line'>;; press M-f once
+</span><span class='line'>some|Word</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Personally I find the default behavior combined with <code>subword-mode</code>
+great. I do a lot of Ruby and Lisp programming and it also makes a lot
+of sense to me to be able to navigate the portions of a complex word,
+but I guess not everyone feels this way. Enter <code>superword-mode</code> - when
+it&#8217;s enabled all &#8220;complex/compound&#8221; words are treated as a single word:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;; word with dash
+</span><span class='line'>|some-word
+</span><span class='line'>
+</span><span class='line'>;; press M-f once
+</span><span class='line'>some-word|
+</span><span class='line'>
+</span><span class='line'>;; word with underscore
+</span><span class='line'>|some_word
+</span><span class='line'>
+</span><span class='line'>;; press M-f once
+</span><span class='line'>some_word|
+</span><span class='line'>
+</span><span class='line'>;; word in camelCase
+</span><span class='line'>|someWord
+</span><span class='line'>
+</span><span class='line'>;; press M-f once
+</span><span class='line'>someWord|</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that you cannot have <code>subword-mode</code> and <code>superword-mode</code> enabled
+at the same time. Turning one of them on will disable the other.</p>
+
+<p>Personally, I don&#8217;t see much value in <code>superword-mode</code> as a mode
+that&#8217;s enabled all the time, but I can imagine some useful
+scenarios in which I&#8217;d enable it briefly to do some focused editing.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Bozhidar Batsov</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-27T18:24:00+03:00" pubdate data-updated="true">Aug 27<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/emacs24-dot-4/'>Emacs24.4</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bbatsov.github.com/emacsredux/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/" data-via="bbatsov" data-counturl="http://bbatsov.github.com/emacsredux/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/" title="Previous Post: A peek at Emacs 24.4: prettify-symbols-mode">&laquo; A peek at Emacs 24.4: prettify-symbols-mode</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/09/04/emacs-lisp-style-guide/" title="Next Post: Emacs Lisp Style Guide">Emacs Lisp Style Guide &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Emacs Redux</h1>
+  <p>Emacs Redux's mission is to hone your Emacs skills and increase your appreciation for Emacs's might and magic.
+  You can show your love for Emacs Redux via Gratipay:</p>
+  <a href="https://www.gratipay.com/bbatsov"><img src="https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png"></img></a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/lossage/">Lossage</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/uptime/">Uptime</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+     <h1>Twitter</h1>
+     <!-- PASTE THE WIDGET CODE HERE -->
+     <a class="twitter-timeline" href="https://twitter.com/bbatsov" data-widget-id="382536919663386624">Tweets by @bbatsov</a>
+     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ </section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/bbatsov">@bbatsov</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'bbatsov',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Bozhidar Batsov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'emacsredux';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bbatsov.github.com/emacsredux/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/';
+        var disqus_url = 'http://bbatsov.github.com/emacsredux/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

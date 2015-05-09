@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Quickly find Emacs Lisp sources - Emacs Redux</title>
+  <meta name="author" content="Bozhidar Batsov">
+
+  
+  <meta name="description" content="One thing Emacs users deal all the time is looking for the source of
+various libraries and function or variable definitions. Typically this
+involves &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://bbatsov.github.com/emacsredux/blog/2014/06/18/quickly-find-emacs-lisp-sources">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39624961-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Emacs Redux</a></h1>
+  
+    <h2>Return to the Essence of Text Editing</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:bbatsov.github.com/emacsredux" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/bbatsov/prelude">Prelude</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Quickly Find Emacs Lisp Sources</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-18T16:26:00+03:00" pubdate data-updated="true">Jun 18<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>One thing Emacs users deal all the time is looking for the source of
+various libraries and function or variable definitions.  Typically this
+involves the use of commands like <code>C-h f</code> (<code>describe-function</code>), <code>C-h v</code>
+(<code>describe-variable</code>) and <code>C-h k</code> (<code>describe-key</code>) and jumping to the source from the help buffer those commands produce.
+Let&#8217;s see if we can improve upon this workflow.</p>
+
+<h3>find-func</h3>
+
+<p>Enter the built-in Emacs library <code>find-func</code>. It provides a myriad of useful commands to help us quickly locate sources.
+Let&#8217;s take a brief look at some of them.</p>
+
+<ul>
+<li>You can find the source of a library with <code>M-x find-library</code>. If you want to find the source of <code>ido</code> you can do so like this:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>M-x find-library RET ido RET</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&#8217;d suggest binding the command to <code>C-h C-l</code> for quick access:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-l&quot;</span><span class="p">)</span> <span class="ss">&#39;find-library</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>You can find the source of a function definition with <code>M-x find-function</code>. Here&#8217;s an example:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="nv">M-x</span> <span class="nv">find-function</span> <span class="nv">RET</span> <span class="nv">find-function</span> <span class="nv">RET</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&#8217;d suggest binding the command to <code>C-h C-f</code> for quick access:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-f&quot;</span><span class="p">)</span> <span class="ss">&#39;find-function</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can actually do one better - we can directly jump to a command
+definition using a keybinding of the command with <code>M-x
+find-function-on-key</code>. Here&#8217;s how we can find the source the command
+bound to <code>C-a</code> (<code>beginning-of-line</code>):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="nv">M-x</span> <span class="nv">find-function-on-key</span> <span class="nv">RET</span> <span class="nv">C-a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&#8217;d suggest binding the command to <code>C-h C-k</code> for quick access:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-k&quot;</span><span class="p">)</span> <span class="ss">&#39;find-function-on-key</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>You can find the source of a variable definition with <code>M-x find-variable</code>. Here&#8217;s an example:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="nv">M-x</span> <span class="nv">find-variable</span> <span class="nv">RET</span> <span class="nv">large-file-warning-threshold</span> <span class="nv">RET</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&#8217;d suggest binding the command to <code>C-h C-v</code> for quick access:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-v&quot;</span><span class="p">)</span> <span class="ss">&#39;find-variable</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>The library provides other useful commands as well - like
+<code>find-function-at-point</code> and <code>find-variable-at-point</code>.</p>
+
+<p>If you don&#8217;t like the keybindings I suggested you can use
+<code>find-function-setup-keys</code> instead.  This will give you keybindings
+like <code>C-x F</code>, <code>C-x V</code>, <code>C-f K</code> (plus a few extra for commands like
+<code>find-funtion-other-window</code>).</p>
+
+<h3>elisp-slime-nav</h3>
+
+<p>Another really cool way to browse Elisp sources (and documentation) is the third-party package
+<a href="https://github.com/purcell/elisp-slime-nav">elisp-slime-nav</a>. Assuming you&#8217;ve installed it already you can
+enabled it like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;elisp-slime-nav</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">hook</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">emacs-lisp-mode-hook</span> <span class="nv">ielm-mode-hook</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="nv">hook</span> <span class="ss">&#39;elisp-slime-nav-mode</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once this is done you&#8217;ll be able to jump to the source of the Emacs
+Lisp object at point (function or variable) with <code>M-.</code> (as in SLIME
+and CIDER for Common Lisp and Clojure respectively) and jump back with
+<code>M-,</code>. You can also see the description of the object at point using
+<code>C-c C-d</code> (or <code>C-c C-d d</code>).</p>
+
+<p>That&#8217;s all for today, folks!</p>
+
+<p><strong>P.S.</strong></p>
+
+<p>All the suggested keybindings are present out-of-the-box in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>. <code>elisp-slime-nav</code> is also
+enabled out-of-the box in Prelude.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Bozhidar Batsov</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-18T16:26:00+03:00" pubdate data-updated="true">Jun 18<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/misc/'>misc</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bbatsov.github.com/emacsredux/blog/2014/06/18/quickly-find-emacs-lisp-sources/" data-via="bbatsov" data-counturl="http://bbatsov.github.com/emacsredux/blog/2014/06/18/quickly-find-emacs-lisp-sources/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/05/16/melpa-stable/" title="Previous Post: MELPA Stable">&laquo; MELPA Stable</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/07/22/new-emacs-blogs/" title="Next Post: New Emacs blogs">New Emacs blogs &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Emacs Redux</h1>
+  <p>Emacs Redux's mission is to hone your Emacs skills and increase your appreciation for Emacs's might and magic.
+  You can show your love for Emacs Redux via Gratipay:</p>
+  <a href="https://www.gratipay.com/bbatsov"><img src="https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png"></img></a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/lossage/">Lossage</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/uptime/">Uptime</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+     <h1>Twitter</h1>
+     <!-- PASTE THE WIDGET CODE HERE -->
+     <a class="twitter-timeline" href="https://twitter.com/bbatsov" data-widget-id="382536919663386624">Tweets by @bbatsov</a>
+     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ </section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/bbatsov">@bbatsov</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'bbatsov',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Bozhidar Batsov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'emacsredux';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bbatsov.github.com/emacsredux/blog/2014/06/18/quickly-find-emacs-lisp-sources/';
+        var disqus_url = 'http://bbatsov.github.com/emacsredux/blog/2014/06/18/quickly-find-emacs-lisp-sources/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

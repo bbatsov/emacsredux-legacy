@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Emacs24.4 | Emacs Redux]]></title>
+  <link href="http://bbatsov.github.com/emacsredux/blog/categories/emacs24-dot-4/atom.xml" rel="self"/>
+  <link href="http://bbatsov.github.com/emacsredux/"/>
+  <updated>2015-05-09T14:28:00+03:00</updated>
+  <id>http://bbatsov.github.com/emacsredux/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A peek at Emacs 24.4: superword-mode]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/"/>
+    <updated>2014-08-27T18:24:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode</id>
+    <content type="html"><![CDATA[<p>In a previous post I wrote about
+<a href="http://emacsredux.com/blog/2013/04/21/camelcase-aware-editing/">camel-case aware editing with subword-mode</a>. Emacs
+24.4 adds a complementary minor mode called <code>superword-mode</code>, which
+also alters the behavior of word-based commands when enabled.</p>
+
+<p>Normally Emacs would consider underscores and dashes word separators
+(<code>snake_case</code> and <code>lisp-case</code> anyone?). This affects all <code>word</code>
+commands - <code>forward-word</code>, <code>backward-word</code>, <code>kill-word</code>, etc. Let's
+see a couple of examples (<code>|</code> denotes the cursor position):</p>
+
+<p>```
+;; word with dash
+|some-word</p>
+
+<p>;; press M-f (forward-word) once
+some|-word</p>
+
+<p>;; press M-f again
+some-word|</p>
+
+<p>;; press M-b (backward-word) once
+some-|word</p>
+
+<p>;; word with underscore
+|some_word</p>
+
+<p>;; press M-f once
+some|_word</p>
+
+<p>;; press M-f again
+some_word|</p>
+
+<p>;; press M-b once
+some_|word</p>
+
+<p>;; word in camelCase (assuming subword-mode is not enabled)
+|someWord</p>
+
+<p>;; press M-f once
+someWord|</p>
+
+<p>;; word in camelCase (assuming subword-mode is enabled)
+|someWord</p>
+
+<p>;; press M-f once
+some|Word
+```</p>
+
+<p>Personally I find the default behavior combined with <code>subword-mode</code>
+great. I do a lot of Ruby and Lisp programming and it also makes a lot
+of sense to me to be able to navigate the portions of a complex word,
+but I guess not everyone feels this way. Enter <code>superword-mode</code> - when
+it's enabled all "complex/compound" words are treated as a single word:</p>
+
+<p>```
+;; word with dash
+|some-word</p>
+
+<p>;; press M-f once
+some-word|</p>
+
+<p>;; word with underscore
+|some_word</p>
+
+<p>;; press M-f once
+some_word|</p>
+
+<p>;; word in camelCase
+|someWord</p>
+
+<p>;; press M-f once
+someWord|
+```</p>
+
+<p>Note that you cannot have <code>subword-mode</code> and <code>superword-mode</code> enabled
+at the same time. Turning one of them on will disable the other.</p>
+
+<p>Personally, I don't see much value in <code>superword-mode</code> as a mode
+that's enabled all the time, but I can imagine some useful
+scenarios in which I'd enable it briefly to do some focused editing.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A peek at Emacs 24.4: prettify-symbols-mode]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/"/>
+    <updated>2014-08-25T16:30:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode</id>
+    <content type="html"><![CDATA[<p>Emacs 24.4 ships with a new minor mode called
+<code>prettify-symbols-mode</code>. Its purpose is to replace the standard text
+representation of various identifiers/symbols with a (arguably) more
+aesthetically pleasing representation (often a single unicode
+character would replace several ascii characters).</p>
+
+<p>A classic example would be <code>lambda</code> from various Lisp dialects that many people
+prefer to replace with the greek letter <code>λ</code> (small lambda). <code>prettify-symbols-mode</code> allows you
+to achieve this by relying on a simple mapping expressed in the form of an <code>alist</code> that
+each major mode must initialize (<code>prettify-symbols-alist</code>).
+Simply put - major modes have to provide the configuration for <code>prettify-symbols-mode</code>.</p>
+
+<p>Lisp modes do this via <code>lisp--prettify-symbols-alist</code>:</p>
+
+<p><code>cl
+(defconst lisp--prettify-symbols-alist
+  '(("lambda"  . ?λ)))
+</code></p>
+
+<p>This means that out of the box only <code>lambda</code> will get replaced.
+You can, of course, add more mappings for different major modes:</p>
+
+<p>``` cl
+(add-hook 'emacs-lisp-mode-hook</p>
+
+<pre><code>        (lambda ()
+          (push '("&gt;=" . ?≥) prettify-symbols-alist)))
+</code></pre>
+
+<p>```</p>
+
+<p>Let's see the mode in action. Consider this bit of Emacs Lisp code:</p>
+
+<p>``` cl
+(lambda (x y)
+  (if (>= x y)</p>
+
+<pre><code>  (something)
+  (something-else)))
+</code></pre>
+
+<p>```</p>
+
+<p>After you do <code>M-x prettify-symbols-mode</code> you'll end up with:</p>
+
+<p>``` cl
+(λ (x y)
+  (if (≥ x y)</p>
+
+<pre><code>  (something)
+(something-else)))
+</code></pre>
+
+<p>```</p>
+
+<p>To enable this for a particular mode use <code>(add-hook 'some-mode-hook 'prettify-symbols-mode)</code>.
+If you'd like to enable it globally just add the following to your config:</p>
+
+<p><code>cl
+(global-prettify-symbols-mode +1)
+</code></p>
+
+<p>By the way, sky is the limit for symbol prettification. One fairly extreme example would be
+vim's plugin <a href="https://github.com/enomsg/vim-haskellConcealPlus">haskell-conceal+</a> that goes to great
+lengths to bring proper mathematical notation to Haskell code. We can achieve more or less the same effect
+with <code>prettify-symbols-mode</code>, but one have to ask themselves where should we draw the border between
+tasteful and distasteful prettifications.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A peek at Emacs 24.4: Variadic Numeric Comparison Functions]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/03/22/a-peek-at-emacs-24-dot-4-variadic-comparison-functions/"/>
+    <updated>2014-03-22T16:48:00+02:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/03/22/a-peek-at-emacs-24-dot-4-variadic-comparison-functions</id>
+    <content type="html"><![CDATA[<p>In most Lisps numeric comparison functions like <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>
+and <code>&gt;=</code> are variadic - meaning they accept variable number of arguments (as do functions like <code>+</code>, <code>-</code>, <code>*</code>, etc).
+Here's an example:</p>
+
+<p><code>cl
+;; let's assume that all those are numeric variables
+(= x y z)
+(&lt; a b c d)
+</code></p>
+
+<p>This is pretty cool and save you from writing code like:</p>
+
+<p><code>cl
+(and (= x y) (= y z))
+(and (&lt; a b) (&lt; b c) (&lt; c d))
+</code></p>
+
+<p>Prefix function position for the win!</p>
+
+<p>In Emacs Lisp, however, all these comparison functions (unlike <code>+</code>, <code>-</code>, etc)
+accept just two arguments, which is somewhat unlispy. Luckily this is
+one of the things that's going to change with Emacs 24.4.
+Emacs Lisp takes another small step to becoming a good Lisp dialect!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A peek at Emacs 24.4: Focus Hooks]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/"/>
+    <updated>2014-03-22T16:05:00+02:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks</id>
+    <content type="html"><![CDATA[<p>A couple of years ago I
+<a href="http://batsov.com/articles/2012/03/08/emacs-tip-number-5-save-buffers-automatically-on-buffer-or-window-switch/">lamented over the lack of frame focus hooks in Emacs</a>. This
+prohibited us from implemented a feature like IntelliJ IDEA's "auto-save on
+focus lost", which was kind of frustrating as we're generally assuming that everything is doable in Emacs!</p>
+
+<p>All this changes in Emacs 24.4 with the introduction of two new hooks - <code>focus-in-hook</code> and <code>focus-out-hook</code>.
+The first is triggered when the current frame gains focus and the second when the frame loses focus.
+So, if we want to save our active buffer when the Emacs frame loses focus we can simply do it like this:</p>
+
+<p><code>cl
+(add-hook 'focus-out-hook 'save-buffer)
+</code></p>
+
+<p>Or you can go a step further and save all the buffers:</p>
+
+<p><code>cl
+(add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
+</code></p>
+
+<p>I pretty sure you'll find other creative ways to apply those new hooks to good use!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A peek at Emacs 24.4: delete-duplicate-lines]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/03/01/a-peek-at-emacs-24-dot-4-delete-duplicate-lines/"/>
+    <updated>2014-03-01T17:33:00+02:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/03/01/a-peek-at-emacs-24-dot-4-delete-duplicate-lines</id>
+    <content type="html"><![CDATA[<p>Emacs 24.4 introduces the command <code>delete-duplicate-lines</code>.</p>
+
+<p>By default <code>M-x delete-duplicate-lines</code> will delete all but one copy
+of any identical lines in the region. So assuming this is the region:</p>
+
+<p><code>
+test
+dup
+dup
+one
+two
+one
+three
+one
+test
+five
+</code></p>
+
+<p>it will be reduced to this:</p>
+
+<p><code>
+test
+dup
+one
+two
+three
+five
+</code></p>
+
+<p>When the command is invoked with a <code>C-u</code> prefix, it searches backwards
+and keeps the last instance of each repeated line. So this:</p>
+
+<p><code>
+test
+dup
+dup
+one
+two
+one
+three
+one
+test
+five
+</code></p>
+
+<p>will become:</p>
+
+<p><code>
+dup
+two
+three
+one
+test
+five
+</code></p>
+
+<p>Identical lines need not be adjacent, unless you've invoked the
+command with a <code>C-u C-u</code> prefix.  When the command is invoked with a
+<code>C-u C-u C-u</code> prefix, it retains repeated blank lines.</p>
+]]></content>
+  </entry>
+  
+</feed>

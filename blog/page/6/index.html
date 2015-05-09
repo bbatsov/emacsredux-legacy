@@ -1,0 +1,1108 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Emacs Redux</title>
+  <meta name="author" content="Bozhidar Batsov">
+
+  
+  <meta name="description" content="This post continues a topic that was introduced in
+smarter open-line few months
+back. Often when editing code one wishes to open a line just above &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://bbatsov.github.com/emacsredux/blog/page/6">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39624961-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Emacs Redux</a></h1>
+  
+    <h2>Return to the Essence of Text Editing</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:bbatsov.github.com/emacsredux" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/bbatsov/prelude">Prelude</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/15/open-line-above/">Open Line Above</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-15T09:04:00+03:00" pubdate data-updated="true">Jun 15<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/15/open-line-above/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This post continues a topic that was introduced in
+<a href="/blog/2013/03/26/smarter-open-line/">smarter open-line</a> few months
+back.</p>
+
+<p>Often when editing code one wishes to open a line just above the
+current one, which is properly indented relative to the existing code,
+and position the cursor at its beginning.  Such a feature is present
+in most IDEs, such as IntelliJ IDEA, Eclipse and NetBeans. It’s
+sometimes bound to <code>Control+Shift+Enter</code>. Last time I showed you how
+to implement a similar function called <code>smart-open-line</code>, this time
+will implement <code>smart-open-line-above</code>. Just add this snippet to your
+<code>.emacs</code> (or <code>.emacs.d/init.el</code> or whatever):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">smart-open-line-above</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Insert an empty line above the current line.</span>
+</span><span class='line'><span class="s">Position the cursor at it&#39;s beginning, according to the current mode.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">move-beginning-of-line</span> <span class="no">nil</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">newline-and-indent</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">forward-line</span> <span class="mi">-1</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">indent-according-to-mode</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">control</span> <span class="nv">shift</span> <span class="nb">return</span><span class="p">)</span><span class="nv">]</span> <span class="ss">&#39;smart-open-line-above</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Evaluate the code (or restart Emacs) and you&#8217;ll be able to use
+<code>M-x smart-open-line-above</code> or <code>Control+Shift+Enter</code> (aka <code>C-S-return</code>).</p>
+
+<p>Admittedly this keybinding kind of sucks, so here&#8217;s another option for
+you - <code>M-o</code> (used by default as the prefix for some font setting
+commands nobody ever uses) for <code>smart-open-line</code> and <code>M-O</code> for
+<code>smart-open-line-above</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-o&quot;</span><span class="p">)</span> <span class="ss">&#39;smart-open-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-O&quot;</span><span class="p">)</span> <span class="ss">&#39;smart-open-line-above</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Another good option would be to fold the two commands into one and use a
+prefix argument to trigger the opening a new line above the current
+one.</p>
+
+<p>This command is part of
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(it&#8217;s named
+<code>prelude-smart-open-line-above</code> there).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/13/using-emacs-as-a-database-client/">Using Emacs as a Database Client</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-13T15:15:00+03:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/13/using-emacs-as-a-database-client/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Most people that use Emacs are programmers - that&#8217;s a fact!
+Most programmers have to deal with relational databases - that&#8217;s also a fact!</p>
+
+<p>Programmers often interact with the database they have to use via some
+dedicated client - be it a console or a GUI one. One fairly little
+known fact about Emacs is that it features a mode that wraps around
+terminal database clients, called <code>SQLi</code>. The mode allows you to
+interact with a relational database from the comfort of Emacs. Sure,
+you can run a terminal client like <code>psql</code> directly from <code>ansi-term</code>
+(for instance) as well - but if you&#8217;re using a client with no
+<code>readline</code> support (like the default clients for Oracle and DB2)
+you&#8217;ll certainly appreciate <code>SQLi</code>.</p>
+
+<p>Let&#8217;s play a bit with <code>SQLi</code>. To create a PostgreSQL connection start
+by running <code>M-x sql-postgres</code>. You&#8217;ll be prompted for username, database,
+password and host and then you&#8217;ll be dropped in a buffer dedicated to the
+connection you&#8217;ve specified. Apart from being able to run all sorts of
+SQL in that buffer you&#8217;ll also be able to send to it SQL from <code>.sql</code>
+files you&#8217;re editing in Emacs.</p>
+
+<p>Let&#8217;s see how you can do that in a bit more detail.  First you have to
+associated an SQL file with a connection. While in some <code>.sql</code> file
+execute <code>M-x sql-set-product</code> and type <code>postgres</code>. Afterwards do <code>M-x
+sql-set-sqli-buffer</code> and select the name of the connection buffer you
+want to use (it&#8217;s probably called <code>*SQL*</code> if you have only one
+connection buffer).  Now you&#8217;ll be able to use commands like
+<code>sql-send-region</code> (<code>C-c C-r</code>) from the <code>.sql</code> buffer and the code from
+the region will be executed in the associated connection buffer.</p>
+
+<p>Have a look at the documentation of <code>sql-mode</code> for further details.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/05/continue-a-comment-on-the-next-line/">Continue a Comment on the Next Line</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-05T16:12:00+03:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/05/continue-a-comment-on-the-next-line/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When writing code from time to time we have to write comments as
+well. Most of the time programmers are using single-line comments,
+denoted by some special starting character(s), like <code>#</code>, <code>//</code>,
+etc. When you want to write a few lines of comments in Emacs you have two
+options:</p>
+
+<h4>Option A</h4>
+
+<ul>
+<li>Write the first line of the comment.</li>
+<li>Go to the next line.</li>
+<li>Insert the comment delimiter.</li>
+<li>Continue writing the comment.</li>
+</ul>
+
+
+<h4>Option B (editor&#8217;s choice)</h4>
+
+<ul>
+<li>White the first line of the comment.</li>
+<li>Press <code>M-j</code> (<code>indent-new-comment-line</code>).</li>
+<li>Continue writing the comment on the second line.</li>
+</ul>
+
+
+<p>The command breaks the line at point and indents the following line,
+continuing the comment if invoked within one. The indentation on the
+second line matches the indentation on the first line.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># first line</span>
+</span><span class='line'><span class="c1">#     indented line|(we press `M-j` here)</span>
+</span><span class='line'><span class="c1">#     |(we get here after pressing `M-j`)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This command is intended for styles where you write a comment per
+line, starting a new comment (and terminating it if necessary) on each
+line.  If you want to continue one comment of the type <code>/* */</code> across
+several lines, use <code>C-j</code> (<code>newline-and-indent</code>).</p>
+
+<p>Outside of comments <code>M-j</code> behaves pretty much the same way as <code>C-j</code>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/">Highlight Lines That Exceed a Certain Length Limit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-31T15:18:00+03:00" pubdate data-updated="true">May 31<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When you&#8217;re writing code you usually have to take into account the
+programming language&#8217;s convention for maximum line length. Most
+programming languages urge hackers to keep line length under 80
+characters(although in recent years it has often been argued that such
+rules should be relaxed to 100-120 characters, given the state of
+current computer displays).</p>
+
+<p>There are many ways to highlight lines that exceed a certain length in
+Emacs, but I find one to be particularly elegant - the use of the
+built-in <code>whitespace-mode</code>. Most people use <code>whitespace-mode</code> to
+visualize spaces, tabs and trailing whitespace, but it can actually do
+a bit more that that. Here&#8217;s the magic config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;whitespace</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">whitespace-line-column</span> <span class="mi">80</span><span class="p">)</span> <span class="c1">;; limit line length</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">whitespace-style</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">face</span> <span class="nv">lines-tail</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;whitespace-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above snippet will enable <code>whitespace-mode</code> only in major modes
+for programming. If you want to enable <code>whitespace-mode</code> everywhere
+you might want to do this instead:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-whitespace-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>whitespace-line-count</code> determines that maximum line length; feel free
+to set this to whatever value suits you. <code>whitespace-style</code> determines
+what kind of stuff <code>whitespace-mode</code> is going to highlight. At this
+example we want to highlight only the part of lines exceeding the line
+length limit. Take a look at <code>whitespace-style</code>&#8217;s documentation for
+more details(<code>C-h v RET whitespace-style</code>).</p>
+
+<p>Here&#8217;s the result:</p>
+
+<p><img src="/images/articles/long-lines.png"></p>
+
+<p>It will probably come as no surprise that this functionality is
+enabled out-of-the-box in <a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/30/joining-lines/">Joining Lines</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-30T16:27:00+03:00" pubdate data-updated="true">May 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/30/joining-lines/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Often, while editing, you&#8217;ll want to compress a few lines into
+one. Here&#8217;s a simple example to illustrate the problem at hand. We
+want to convert this bit of Ruby code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">some_method</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">arg2</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">arg3</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>into:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">some_method</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">arg3</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Doing so is extremely easy. Just go to the last line in the first code
+block and press 3 times <code>M-^</code> (<code>delete-indentation</code>, aliased
+also to <code>join-line</code>).</p>
+
+<p>If you&#8217;re like me and like to join lines from top to bottom - go to
+the first line and press <code>C-u M-^</code> three times. This works, but it is
+kind of hard to press <code>C-u M-^</code> repeatedly, compared to just
+<code>M-^</code>. Let&#8217;s simplify this a bit:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">top-join-line</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Join the current line with the line beneath it.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">delete-indentation</span> <span class="mi">1</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Isn&#8217;t this a top way to join lines or what?</p>
+
+<p>Since <code>delete-indentation</code> is bound both to <code>M-^</code> it makes
+sense to use something like <code>C-^</code> for the new command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-^&quot;</span><span class="p">)</span> <span class="ss">&#39;top-join-line</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s mostly a personal preference I guess - feel free to use any other keycombo.</p>
+
+<p>This command is part of
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(it&#8217;s named
+<code>prelude-top-join-line</code> there) and it&#8217;s bound to <code>C-^</code> there.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/">Smarter Navigation to the Beginning of a Line</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-22T17:48:00+03:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In Emacs there are two essential commands when you have to go the
+beginning of a line - <code>move-beginning-of-line</code>(bound to <code>C-a</code>) and
+<code>back-to-indentation</code>(bound to <code>M-m</code>). The first takes you to the
+first column of a line and the latter takes you the first non-whitespace
+character on a line.</p>
+
+<p>Generally, I find <code>back-to-indentation</code> more useful, but occasionally
+it makes sense to go to the real beginning of a line as well. What
+doesn&#8217;t make sense is to have to think all the time what command is
+the most appropriate in a particular situation. Wouldn&#8217;t it be great
+if <code>C-a</code> initially took you to the first non-whitespace char(as
+<code>back-to-indentation</code> does) on a line, and if pressed again took
+you to the actual beginning of the line? It would be! Let&#8217;s get it
+done:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">smarter-move-beginning-of-line</span> <span class="p">(</span><span class="nv">arg</span><span class="p">)</span>
+</span><span class='line'>  <span class="s">&quot;Move point back to indentation of beginning of line.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">Move point to the first non-whitespace character on this line.</span>
+</span><span class='line'><span class="s">If point is already there, move to the beginning of the line.</span>
+</span><span class='line'><span class="s">Effectively toggle between the first non-whitespace character and</span>
+</span><span class='line'><span class="s">the beginning of the line.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">If ARG is not nil or 1, move forward ARG - 1 lines first.  If</span>
+</span><span class='line'><span class="s">point reaches the beginning or end of the buffer, stop there.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;^p&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">setq</span> <span class="nv">arg</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">arg</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">;; Move lines first</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">/=</span> <span class="nv">arg</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">line-move-visual</span> <span class="no">nil</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">forward-line</span> <span class="p">(</span><span class="nb">1-</span> <span class="nv">arg</span><span class="p">))))</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">orig-point</span> <span class="p">(</span><span class="nv">point</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">back-to-indentation</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">=</span> <span class="nv">orig-point</span> <span class="p">(</span><span class="nv">point</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">move-beginning-of-line</span> <span class="mi">1</span><span class="p">))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; remap C-a to `smarter-move-beginning-of-line&#39;</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">move-beginning-of-line]</span>
+</span><span class='line'>                <span class="ss">&#39;smarter-move-beginning-of-line</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The command will keep toggling between the first non-whitespace char
+and the beginning of the line when invoked.</p>
+
+<p>Here&#8217;s a visual example(<code>|</code> is the cursor):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>This is a short example
+</span><span class='line'>    text|
+</span><span class='line'>    <span class="c"># pressing C-a once</span>
+</span><span class='line'>   |text
+</span><span class='line'>    <span class="c"># pressing C-a again</span>
+</span><span class='line'>|   text
+</span><span class='line'>    <span class="c"># pressing C-a again</span>
+</span><span class='line'>   |text
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This functionality could also be implemented with <code>defadvice</code>, but I tend to avoid their use.</p>
+
+<p><code>smarter-move-beginning-of-line</code> is part of <a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+
+<p><strong>P.S.</strong> The credit for this tip goes to <a href="https://github.com/lunaryorn">Sebastian Wiesner</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/19/delete-whitespace-around-point/">Delete Whitespace Around Point</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-19T12:08:00+03:00" pubdate data-updated="true">May 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/19/delete-whitespace-around-point/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One task that often pops when editing text or code is the need to
+remove some extra whitespace around the point(the cursor). Emacs has your back!</p>
+
+<p>First, we have the command <code>delete-horizontal-space</code>(bound to <code>M-\</code>) -
+it deletes all spaces and tabs around the point. With a prefix
+argument(<code>C-u M-\</code>) the command deletes only the whitespace before the point.</p>
+
+<p>One similar, although a bit less known, command is
+<code>just-one-space</code>(bound to <code>M-SPC</code>) - it deletes all spaces and tabs
+around the point, leaving just one space (or <code>N</code> spaces if you supply <code>N</code> as a
+prefix argument like <code>C-4 M-SPC</code>). If <code>N</code> is negative, the command
+deletes newlines as well, leaving <code>-N</code> spaces.</p>
+
+<p>One minor snafu with <code>just-one-space</code> is that <code>M-SPC</code> is a no-go on
+OSX since just about everyone uses it for quick access to Spotlight or
+switching between languages. You might want to use a different
+keybinding like this one:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c j&quot;</span><span class="p">)</span> <span class="ss">&#39;just-one-space</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Personally, of the two commands I find <code>just-one-space</code> the more useful.</p>
+
+<p>In <a href="https://github.com/bbatsov/prelude">Prelude</a> <code>just-one-space</code> is
+additionally bound to the <code>kk</code>
+<a href="/blog/2013/04/28/execute-commands-ninja-style-with-key-chord-mode/">keychord</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/18/instant-access-to-init-dot-el/">Instant Access to init.el</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T19:00:00+03:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/18/instant-access-to-init-dot-el/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of the files Emacs users often edit is <code>init.el</code>(especially if they
+are having all of their configuration inside of it). It might be
+sensible then to develop a faster way to access <code>init.el</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">find-user-init-file</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Edit the `user-init-file&#39;, in another window.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">find-file-other-window</span> <span class="nv">user-init-file</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>user-init-file</code> holds the path to your <code>init.el</code>. For mine its value
+is <code>/Users/bozhidar/.emacs.d/init.el</code>. <code>find-file-other-window</code> will
+open the file in a window adjacent to the one you&#8217;re currently in.</p>
+
+<p>Short and sweet! You might want to bind it to some keycombo:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c I&quot;</span><span class="p">)</span> <span class="ss">&#39;find-user-init-file</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>P.S.</strong> Thanks to <a href="https://github.com/lunaryorn">Sebastian Wiesner</a> for
+bringing this tip to my attention!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/16/whitespace-cleanup/">Whitespace Cleanup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-16T17:30:00+03:00" pubdate data-updated="true">May 16<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/16/whitespace-cleanup/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Good developers are very careful about the proper use of
+whitespace in their files - there should be no empty lines at the
+beginning of a file, no empty lines at the end of a file, no trailing
+whitespace, no mixture of tabs and spaces, etc.</p>
+
+<p>Emacs, naturally, wants to help with every problem possible and
+provides a very nice solution in the form of the <code>whitespace-cleanup</code>
+command. It&#8217;s a much more powerful alternative to the older
+<code>delete-trailing-whitespace</code> command, that simply deletes trailing
+whitespace, and it&#8217;s aware of the <code>whitespace-style</code> variable, used by <code>whitespace-mode</code>.</p>
+
+<p>It usually applies to the whole buffer, but in <code>transient-mark-mode</code>
+when the mark is active, it applies to the region.  It also
+applies to the region when it is not in transient mark mode, the
+mark is active and <code>C-u</code> was pressed just before
+calling <code>whitespace-cleanup</code> interactively. There is also a similar
+command called <code>whitespace-cleanup-region</code>.</p>
+
+<p>The problems cleaned up are (borrowed from the official documentation):</p>
+
+<ol>
+<li><p>Empty lines at beginning of buffer.</p></li>
+<li><p>Empty lines at end of buffer.
+If <code>whitespace-style</code> includes the value <code>empty</code>, remove all
+empty lines at beginning and/or end of buffer.</p></li>
+<li><p>8 or more SPACEs at beginning of line.
+If <code>whitespace-style</code> includes the value <code>indentation</code>:
+replace 8 or more SPACEs at beginning of line by TABs, if
+<code>indent-tabs-mode</code> is non-nil; otherwise, replace TABs by
+SPACEs.
+If <code>whitespace-style</code> includes the value <code>indentation::tab</code>,
+replace 8 or more SPACEs at beginning of line by TABs.
+If <code>whitespace-style</code> includes the value <code>indentation::space</code>,
+replace TABs by SPACEs.</p></li>
+<li><p>SPACEs before TAB.
+If <code>whitespace-style</code> includes the value <code>space-before-tab</code>:
+replace SPACEs by TABs, if <code>indent-tabs-mode</code> is non-nil;
+otherwise, replace TABs by SPACEs.
+If <code>whitespace-style</code> includes the value
+<code>space-before-tab::tab</code>, replace SPACEs by TABs.
+If <code>whitespace-style</code> includes the value
+<code>space-before-tab::space</code>, replace TABs by SPACEs.</p></li>
+<li><p>SPACEs or TABs at end of line.
+If <code>whitespace-style</code> includes the value <code>trailing</code>, remove
+all SPACEs or TABs at end of line.</p></li>
+<li><p>8 or more SPACEs after TAB.
+If <code>whitespace-style</code> includes the value <code>space-after-tab</code>:
+replace SPACEs by TABs, if <code>indent-tabs-mode</code> is non-nil;
+otherwise, replace TABs by SPACEs.
+If <code>whitespace-style</code> includes the value
+<code>space-after-tab::tab</code>, replace SPACEs by TABs.
+If <code>whitespace-style</code> includes the value
+<code>space-after-tab::space</code>, replace TABs by SPACEs.</p></li>
+</ol>
+
+
+<p>It might be a good idea to add <code>whitespace-cleanup</code> to your
+<code>before-save-hook</code> so that every buffer would be cleaned up before it&#8217;s saved:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;before-save-hook</span> <span class="ss">&#39;whitespace-cleanup</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For programming languages that rely on tabs being tabs you should
+enable <code>indent-tabs-mode</code> (as noted above). Here&#8217;s an example for
+<code>makefile-mode</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;makefile-mode-hook</span> <span class="ss">&#39;indent-tabs-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/bbatsov/prelude">Prelude</a> adds
+<code>whitespace-cleanup</code> to <code>before-save-hook</code> by default.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/">Keep Backup and Auto-save Files Out of the Way</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T16:51:00+03:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs has two helpful features, called <code>auto-backup</code> and
+<code>auto-save</code>(or at least I call them this way).</p>
+
+<p>Auto-backup is triggered when you save a file - it will keep the old
+version of the file around, adding a <code>~</code> to its name. So if you saved the
+file <code>foo</code>, you&#8217;d get <code>foo~</code> as well.</p>
+
+<p><code>auto-save-mode</code> auto-saves a file every few seconds or every few
+characters(both settings are configurable - <code>auto-save-interval</code> is
+set to 300 characters by default and <code>auto-save-timeout</code> is set to 30
+seconds). The auto-save files have names like <code>#foo#</code> and are deleted
+automatically when you manually save a file.</p>
+
+<p>Although the modes are definitely useful, many Emacs users find the
+extra files they create quite annoying(especially since they rarely
+resort to using them) and disable both feature to get rid of the pesky unwanted files:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; disable auto-save and auto-backup</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">auto-save-default</span> <span class="no">nil</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">make-backup-files</span> <span class="no">nil</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Even though I&#8217;ve never actually had any use of those backups, I still
+think it&#8217;s a bad idea to disable them(most backups are eventually
+useful). I find it much more prudent to simply get them out of sight
+by storing them in the OS&#8217;s <code>tmp</code> directory instead.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; store all backup and autosave files in the tmp dir</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">backup-directory-alist</span>
+</span><span class='line'>      <span class="o">`</span><span class="p">((</span><span class="s">&quot;.*&quot;</span> <span class="o">.</span> <span class="o">,</span><span class="nv">temporary-file-directory</span><span class="p">)))</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">auto-save-file-name-transforms</span>
+</span><span class='line'>      <span class="o">`</span><span class="p">((</span><span class="s">&quot;.*&quot;</span> <span class="o">,</span><span class="nv">temporary-file-directory</span> <span class="no">t</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now they won&#8217;t annoy you constantly, but they will still be around if
+you need them. Some OSes delete everything in their <code>tmp</code> directories
+on restart, so if this worries you - consider using another directory.</p>
+
+<p><a href="http://github.com/bbatsov/prelude">Prelude</a> keeps auto-backup and
+auto-save files in <code>tmp</code> by default.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/7/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/5/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Emacs Redux</h1>
+  <p>Emacs Redux&#8217;s mission is to hone your Emacs skills and increase your appreciation for Emacs&#8217;s might and magic.
+  You can show your love for Emacs Redux via Gratipay:</p>
+  <a href="https://www.gratipay.com/bbatsov"><img src="https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png"></img></a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/lossage/">Lossage</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/uptime/">Uptime</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+     <h1>Twitter</h1>
+     <!-- PASTE THE WIDGET CODE HERE -->
+     <a class="twitter-timeline" href="https://twitter.com/bbatsov" data-widget-id="382536919663386624">Tweets by @bbatsov</a>
+     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ </section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/bbatsov">@bbatsov</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'bbatsov',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Bozhidar Batsov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'emacsredux';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

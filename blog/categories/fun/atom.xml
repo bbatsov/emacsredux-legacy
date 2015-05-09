@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Fun | Emacs Redux]]></title>
+  <link href="http://bbatsov.github.com/emacsredux/blog/categories/fun/atom.xml" rel="self"/>
+  <link href="http://bbatsov.github.com/emacsredux/"/>
+  <updated>2015-05-09T14:28:00+03:00</updated>
+  <id>http://bbatsov.github.com/emacsredux/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Easter eggs]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2013/04/03/easter-eggs/"/>
+    <updated>2013-04-03T12:39:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2013/04/03/easter-eggs</id>
+    <content type="html"><![CDATA[<p>Emacs is packed with an insane amount of cool stuff. With Easter fast
+approaching (I'm an Orthodox Christian and ours is in the beginning of
+May this year) I cannot help but think of <strong>easter eggs</strong>("secret"
+commands, inside jokes, etc). Let's see if we can find some in Emacs!</p>
+
+<h4>Snake</h4>
+
+<p><code>M-x snake</code></p>
+
+<h4>Tetris</h4>
+
+<p><code>M-x tetris</code></p>
+
+<h4>Zone</h4>
+
+<p><code>M-x zone</code>
+<code>M-x zone-mode</code></p>
+
+<h4>Doctor</h4>
+
+<p><code>M-x doctor</code></p>
+
+<h4>Butterfly Mode</h4>
+
+<p><code>M-x butterfly</code> (refer to <a href="http://xkcd.com/378/">this xkcd comics</a> if
+you have no idea what this is)</p>
+
+<h4>Final Words</h4>
+
+<p>This was a short post(and not particularly instructive I guess), but I
+hope you've enjoyed it. Share in the comments section any Emacs easter
+eggs you know of, that I haven't mentioned.</p>
+]]></content>
+  </entry>
+  
+</feed>

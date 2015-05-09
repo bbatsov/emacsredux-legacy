@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: UI | Emacs Redux]]></title>
+  <link href="http://bbatsov.github.com/emacsredux/blog/categories/ui/atom.xml" rel="self"/>
+  <link href="http://bbatsov.github.com/emacsredux/"/>
+  <updated>2015-05-09T14:28:00+03:00</updated>
+  <id>http://bbatsov.github.com/emacsredux/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Color Themes: Redux]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2013/08/21/color-themes-redux/"/>
+    <updated>2013-08-21T12:36:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2013/08/21/color-themes-redux</id>
+    <content type="html"><![CDATA[<h2>Prelude</h2>
+
+<p><em>This is a slightly refreshed version of an
+ <a href="http://batsov.com/articles/2012/02/19/color-theming-in-emacs-reloaded/">article originally published on my personal blog</a></em>.</p>
+
+<p>If there is something that people love as much as tweaking their
+editing configurations it's probably the selection of color themes. A
+good color theme can make your work much more pleasant and a bad one
+that literally impair your vision. It's a fact of life that I'm a firm
+supporter of low-contrast color themes with dark backgrounds - I find
+them easy on the eyes and I feel that they don't strain the eyes as
+much as most themes. I've even ported a couple of popular themes to
+Emacs - <a href="https://github.com/bbatsov/zenburn-emacs">Zenburn</a> and
+<a href="https://github.com/bbatsov/solarized-emacs">Solarized</a>.</p>
+
+<p>In this short article we'll see how color theming has changed in Emacs
+24 and I'll share with you a few tips on theme creation and
+distribution.</p>
+
+<!--more-->
+
+
+<h2>Color Theming in Emacs 24</h2>
+
+<h3>Theme Engines</h3>
+
+<p>Prior to Emacs 24 the most popular way to incorporate custom color
+themes into Emacs was the
+<a href="http://www.emacswiki.org/emacs/ColorTheme">color-theme package</a>. While
+it usually got the job done it had some problems that I won't be
+discussing here and more importantly - it's a third-party package,
+that's not part of Emacs proper.</p>
+
+<p><a href="http://batsov.com/articles/2011/08/19/a-peek-at-emacs24/">Emacs 24</a>
+finally introduced a new standard way of dealing with color themes
+(based on Emacs's built-in customize facility). While it doesn't have
+a proper name (as far as I know) it's commonly referred to as the
+<code>deftheme</code> facility, since <code>deftheme</code> is the name of the macro you'd
+use to create such a theme. (<code>deftheme</code> has actually been around
+since Emacs 23, but it was heavily improved in Emacs 24)</p>
+
+<h3>Using Themes</h3>
+
+<p>Emacs 24 comes with a selection of built-in themes that you can choose
+from, so you're no longer bound to the default theme (which I find
+quite ugly). To choose a new theme just do a <code>M-x load-theme</code> (tab
+completion is available for the names of the available themes). At
+this point you can give the command a try with the <code>tango</code> theme. If you
+like a theme so much that you'd want to use it all the time you can
+put in your Emacs configuration (<code>.emacs</code> or <code>init.el</code> for instance) like this:</p>
+
+<p><code>cl
+(load-theme 'theme-name t)
+</code></p>
+
+<p>If you'd like to return to the default theme just do a <code>M-x disable-theme</code>.</p>
+
+<h3>Creating Themes</h3>
+
+<p>How do you create a <code>deftheme</code> theme? Quite simply actually - just do
+a <strong>M-x customize-create-theme</strong>. You'll be presented with an UI
+prompting you for a theme name, description and faces. After you save
+the theme a file called <code>name-theme.el</code> will be written on your
+filesystem. Here's its skeleton:</p>
+
+<p>``` cl
+(deftheme demo
+  "Demo theme")</p>
+
+<p>(custom-theme-set-faces
+ 'demo
+ ;;; list of custom faces
+ )</p>
+
+<p>(provide-theme 'demo)
+```</p>
+
+<p>Personally I dislike customize a lot, so when I needed to create an
+Emacs 24 theme for the first time I just opened the source code of
+the built-in <code>tango</code> theme and used it as a reference.</p>
+
+<p>Once you've created the new theme you'll have to drop it in a folder
+that's on the <code>custom-theme-load-path</code>. I'd suggest the following:</p>
+
+<p><code>cl
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+</code></p>
+
+<p>If you're an <a href="https://github.com/bbatsov/prelude">Emacs Prelude</a> user
+you're already covered. This folder exists and is automatically added
+to <code>custom-theme-load-path</code> by Prelude, so all you have to do is drop
+there the themes you'd want to try out. Prelude also uses the
+<strong>Zenburn</strong> theme by default.</p>
+
+<p><img src="/images/articles/zenburn_real.png"></p>
+
+<p>You may find the
+<a href="http://julien.danjou.info/software/rainbow-mode">rainbow-mode</a> useful
+when developing color themes. If fontifies strings that represent
+color codes according to those colors. The mode is known to be a great
+addition to css-mode, but I find it very helpful with color theme
+development as well. It's also included (and enabled) in Prelude by
+default. Here you can see it in action.</p>
+
+<p><img src="/images/articles/rainbow-mode.png"></p>
+
+<p>I'd also advise you follow the proper naming convention
+<code>name-theme.el</code> so that it's apparent that your theme is <code>deftheme</code>
+compatible.</p>
+
+<p>Oh, and one more thing - porting themes from <code>color-theme</code> to
+<code>deftheme</code> is really simple (just have a look at the old and the new
+version of Zenburn in its repo), so you should really consider porting
+all the themes you maintain to <code>deftheme</code>. These days most of the
+popular themes are <code>deftheme</code> only, but I guess you might still
+stumble on some theme that's <code>color-theme</code> only.</p>
+
+<h3>Installing Additional Themes</h3>
+
+<p>The Emacs package manager <code>package.el</code> (formerly known as ELPA) is
+gaining a lot of popularity lately and the community repos
+<a href="http://melpa.milkbox.net/">MELPA</a> and
+<a href="http://marmalade-repo.org/">Marmalade</a> already house <strong>many</strong> Emacs
+24 themes that you can install from there. Assuming you're using one
+of the repos you can install <code>zenburn</code> like this:</p>
+
+<p><code>
+M-x package-install RET zenburn-theme
+</code></p>
+
+<p>After it's installed you can activate it like this:</p>
+
+<p><code>
+M-x load-theme RET zenburn
+</code></p>
+
+<h3>Making Themes Package.el Friendly</h3>
+
+<p>If you're developing a theme that you'd like to submit to MELPA &amp;
+Marmalade it's imperative that the theme modifies the
+<code>custom-theme-load-path</code> in an <code>autoload</code> - otherwise it won't be of
+much use. Add the following snippet (or something similar) before the
+<code>provide-theme</code> line if your custom theme:</p>
+
+<p>``` cl
+;;;###autoload
+(when load-file-name
+  (add-to-list 'custom-theme-load-path</p>
+
+<pre><code>           (file-name-as-directory (file-name-directory load-file-name))))
+</code></pre>
+
+<p>```</p>
+
+<h3>A note for OSX users</h3>
+
+<p>For color themes to be rendered correctly you need to build your Emacs with
+<code>srbg</code> support. If you're a <strong>homebrew</strong> user this means you have to
+install Emacs like this:</p>
+
+<p><code>
+brew install emacs --cocoa --srgb
+</code></p>
+
+<p>The Emacs from <a href="http://emacsformacosx.com/">Emacs for MacOS X</a> is
+built without it and I would not recommend you using it.</p>
+
+<p>Here's how Zenburn looks with <code>srgb</code> support.</p>
+
+<p><img src="/images/articles/zenburn_real.png"></p>
+
+<p>And this is how it looks without it.</p>
+
+<p><img src="/images/articles/zenburn.png"></p>
+
+<p>Some colors look lighter and a bit washed out without <code>srgb</code>.</p>
+
+<h1>Epilogue</h1>
+
+<p>Color theming in Emacs has never been easier.</p>
+
+<p>Try many of the excellent themes available on MELPA &amp; Marmalade!
+Develop new themes &amp; share them with everyone!
+Port themes from <code>color-theme</code> to <code>deftheme</code> so we can finally say
+goodbye to <code>color-theme</code>!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Display visited file's path in the frame title]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2013/04/07/display-visited-files-path-in-the-frame-title/"/>
+    <updated>2013-04-07T14:19:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2013/04/07/display-visited-files-path-in-the-frame-title</id>
+    <content type="html"><![CDATA[<p>I'm fond of seeing somewhere the full path to the file I'm currently
+editing(as opposed to just the file name displayed in
+modeline). Emacs's frame title seems like a good place to display such
+information, since by default it doesn't show anything
+interesting. Here's how we can achieve this:</p>
+
+<p>``` cl
+(setq frame-title-format</p>
+
+<pre><code>  '((:eval (if (buffer-file-name)
+               (abbreviate-file-name (buffer-file-name))
+             "%b"))))
+</code></pre>
+
+<p>```</p>
+
+<p>The path will be displayed in an abbreviated manner(<code>/home/bozhidar/</code>
+will be shortened to just <code>~/</code>). If you'd like to see the expanded path
+just remove the <code>abbreviate-file-name</code> function invocation. If a
+buffer is not visiting a file, the buffer's name would be displayed
+instead.</p>
+
+<p><a href="https://github.com/bbatsov/prelude">Prelude</a> sets
+<code>frame-title-format</code> like this by default.</p>
+]]></content>
+  </entry>
+  
+</feed>

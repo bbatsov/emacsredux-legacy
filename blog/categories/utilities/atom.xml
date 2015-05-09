@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: utilities | Emacs Redux]]></title>
+  <link href="http://bbatsov.github.com/emacsredux/blog/categories/utilities/atom.xml" rel="self"/>
+  <link href="http://bbatsov.github.com/emacsredux/"/>
+  <updated>2015-05-09T14:28:00+03:00</updated>
+  <id>http://bbatsov.github.com/emacsredux/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A proper replacement for flet]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2013/09/05/a-proper-replacement-for-flet/"/>
+    <updated>2013-09-05T14:38:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2013/09/05/a-proper-replacement-for-flet</id>
+    <content type="html"><![CDATA[<p>The popular <code>flet</code> macro was deprecated in Emacs 24.3 and replaced with two similar macros - <code>cl-flet</code> and <code>cl-letf</code>.</p>
+
+<p><code>flet</code> was used to temporarily override function definitions.
+This was an analogue of a dynamically scoped <code>let</code> that operates on the function
+cell of symbols rather than their value cell.</p>
+
+<p>The ability to dynamically rebind a functions was very useful for stubbing purposes in unit tests (you do write unit tests, don't you?).</p>
+
+<p>``` cl
+(flet ((projectile-project-root () "/path/to/project")</p>
+
+<pre><code>   (projectile-project-name () "project"))
+</code></pre>
+
+<p>  ...)
+```</p>
+
+<p><code>projectile-project-root</code> and <code>projectile-project-name</code> are impure
+functions (they depend on the current directory) and testing functions
+that use them internally would normally be problematic. However, <code>flet</code>
+gives us the ability to override their actual definitions in our
+tests. <code>flet</code>'s official replacement <code>cl-flet</code> is lexically bound and this is no longer possible
+with it.</p>
+
+<p>Fortunately <a href="https://github.com/nicferrier">Nic Ferrier</a> created a
+true drop-in <code>flet</code> replacement (with some extra magic baked in) -
+<a href="https://github.com/nicferrier/emacs-noflet">noflet</a>. If you're missing <code>flet</code>, I suggest you to give <code>noflet</code> a try.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Version checks]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2013/09/05/version-checks/"/>
+    <updated>2013-09-05T14:25:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2013/09/05/version-checks</id>
+    <content type="html"><![CDATA[<p>Often the code you're writing would be depending on the version of
+some external tool (say <code>git</code>) or Emacs itself. Version checks in Emacs are pretty
+easy - just use the built-in functions <code>version=</code>, <code>version&lt;=</code> or <code>version=</code>.</p>
+
+<p>Let's illustrate this with an
+example. <a href="https://github.com/bbatsov/prelude">Prelude</a> requires at
+least GNU Emacs 24.1 to run and on startup it performs the following
+check:</p>
+
+<p><code>cl
+(when (version&lt; emacs-version "24.1")
+  (error "Prelude requires at least GNU Emacs 24.1"))
+</code></p>
+
+<p>Simple and effective. The <code>version</code> functions are pretty smart and recognize most popular version formats correctly.
+Note that version string "1" is equal to "1.0", "1.0.0", "1.0.0.0",
+etc.  That is, the trailing ".0"s are insignificant.  Also, version
+string "1" is higher (newer) than "1pre", which is higher than "1beta",
+which is higher than "1alpha".  Also, "-CVS" and "-NNN" are treated
+as alpha versions.</p>
+
+<p>If you're writing an Emacs package you can also add an explicit Emacs version dependency in the packge metadata:</p>
+
+<p><code>cl
+;; Package-Requires: ((emacs "24.1"))
+</code></p>
+
+<p>That way users of older Emacsen would not see a version of your package targeting newer Emacsen.</p>
+]]></content>
+  </entry>
+  
+</feed>

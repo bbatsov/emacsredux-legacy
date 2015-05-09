@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: info | Emacs Redux]]></title>
+  <link href="http://bbatsov.github.com/emacsredux/blog/categories/info/atom.xml" rel="self"/>
+  <link href="http://bbatsov.github.com/emacsredux/"/>
+  <updated>2015-05-09T14:28:00+03:00</updated>
+  <id>http://bbatsov.github.com/emacsredux/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Quickly Open an Info Manual]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/11/13/quickly-open-an-info-manual/"/>
+    <updated>2014-11-13T15:25:00+02:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/11/13/quickly-open-an-info-manual</id>
+    <content type="html"><![CDATA[<p>Every Emacs user knows that Emacs ships with plenty of built-in
+documentation in the <code>GNU info</code> format (they don't call it a
+self-documenting editor for no reason). Most Emacs users know how to
+access that built-in documentation with <code>C-h i</code> (<code>M-x info</code>) and some
+Emacs users even know that the Emacs manual can be opened directly
+with <code>C-h r</code> (<code>M-x info-emacs-manual</code>).</p>
+
+<p>If you know the name of the manual you're looking for, however,
+there's a nice little-known alternative to using <code>C-h i</code> - the
+<code>info-display-manual</code> command. When you run it you'll be prompted in
+the minibuffer for the name of the manual you'd like to view (manual
+name completion is available).</p>
+
+<p>To give you a more concrete example of the command's advantage over
+<code>info</code> let's try to open the Emacs Lisp manual with both
+commands. With <code>info</code> you'll have to type the following:</p>
+
+<p><code>
+M-x info RET m elisp RET
+</code></p>
+
+<p>And the alternative would be:</p>
+
+<p><code>
+M-x info-emacs-manual RET elisp RET
+</code></p>
+
+<p>If you like the command I'd suggest binding it to some keybinding:</p>
+
+<p><code>cl
+(define-key 'help-command (kbd "C-i") 'info-display-manual)
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

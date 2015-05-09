@@ -1,0 +1,1145 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Emacs Redux</title>
+  <meta name="author" content="Bozhidar Batsov">
+
+  
+  <meta name="description" content="Some time ago I wrote about
+highlighting matching delimiters with show-smartparens-mode. In
+Emacs 24.4, the built-in show-paren-mode is capable of &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://bbatsov.github.com/emacsredux/blog/page/4">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39624961-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Emacs Redux</a></h1>
+  
+    <h2>Return to the Essence of Text Editing</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:bbatsov.github.com/emacsredux" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/bbatsov/prelude">Prelude</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/31/a-peek-at-emacs-24-dot-4-smarter-show-paren-mode/">A Peek at Emacs 24.4: Smarter Show-paren-mode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-31T12:09:00+02:00" pubdate data-updated="true">Dec 31<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/12/31/a-peek-at-emacs-24-dot-4-smarter-show-paren-mode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Some time ago I wrote about
+<a href="http://emacsredux.com/blog/2013/11/01/highlight-matching-delimiters-with-smartparens/">highlighting matching delimiters with show-smartparens-mode</a>. In
+Emacs 24.4, the built-in <code>show-paren-mode</code> is capable of highlighting
+more complex paired delimiters as well (like <code>do/end</code> in Ruby for
+instance). There is one limitation to <code>show-paren-mode</code> (compared to
+<code>show-smartparens-mode</code>) - it requires that the major mode, that it&#8217;s
+used together with (e.g. <code>ruby-mode</code>), is implemented in terms of the
+new(ish) SMIE (Simple Minded Indentation Engine). SMIE has been around
+since 23.3, but hasn&#8217;t seen much adoption until quite recently. Prior
+to Emacs 24.4 very few built-in modes were using it (and just about no
+third-party major modes). In Emacs 24.4, however, a lot of modes were
+updated to use SMIE (like <code>ruby-mode</code>), so you&#8217;ll be able to enjoy the
+<code>show-paren-mode</code> improvement with them.</p>
+
+<p>Here&#8217;s a glimpse of the enhanced <code>show-paren-mode</code> in action:</p>
+
+<p><img src="/images/articles/show-paren-mode.gif"></p>
+
+<p>Long term, I still think that betting on <code>smartparens-mode</code> is a good idea, but if
+you prefer to stick with built-in modes - <code>show-paren-mode</code> is now more capable than ever.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/31/a-peek-at-emacs-24-dot-4/">A Peek at Emacs 24.4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-31T11:07:00+02:00" pubdate data-updated="true">Dec 31<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/12/31/a-peek-at-emacs-24-dot-4/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs 24.4 is now feature frozen and its release is (probably) just a
+few months away at this point. This makes it a good time to start
+talking about some of the exciting and not so exciting changes that
+will be introduced in it.</p>
+
+<p>Emacs 24.4 is a special for me, since it&#8217;s the first Emacs release to
+which I contributed code. On a related note - I&#8217;ve tracked its development
+much closer than I used to in previous years and I feel I have lots of interesting
+things to share with you.</p>
+
+<p>In a series of smallish posts I&#8217;ll highlight some of the many new features that are
+coming in 24.4. Keep in mind that since we&#8217;re talking about unreleased code, there&#8217;s
+the chance of changes in the final version of 24.4.</p>
+
+<p>By the way, if you&#8217;re looking for a brief overview of what to expect
+in Emacs 24.4 you might have a look at
+<a href="http://www.masteringemacs.org/articles/2013/12/29/whats-new-in-emacs-24-4/">Mickey Petersen&#8217;s article on the subject</a>.</p>
+
+<p>The first article in the series will be arriving momentarily!</p>
+
+<h2>Articles in the Series</h2>
+
+<ul>
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+
+<li><a href="/blog/2013/12/31/a-peek-at-emacs-24-dot-4-smarter-show-paren-mode/">A peek at Emacs 24.4: Smarter show-paren-mode</a></li>
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/01/01/a-peek-at-emacs-24-dot-4-rectangular-selection/">A peek at Emacs 24.4: Rectangular selection</a></li>
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/01/11/a-peek-at-emacs-24-dot-4-srgb-colours-on-os-x/">A peek at Emacs 24.4: sRGB colours on OS X</a></li>
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/01/19/a-peek-at-emacs-24-dot-4-auto-indentation-by-default/">A peek at Emacs 24.4: auto-indentation by default</a></li>
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/03/01/a-peek-at-emacs-24-dot-4-delete-duplicate-lines/">A peek at Emacs 24.4: delete-duplicate-lines</a></li>
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/">A peek at Emacs 24.4: Focus Hooks</a></li>
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/03/22/a-peek-at-emacs-24-dot-4-variadic-comparison-functions/">A peek at Emacs 24.4: Variadic Numeric Comparison Functions</a></li>
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/">A peek at Emacs 24.4: prettify-symbols-mode</a></li>
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/">A peek at Emacs 24.4: superword-mode</a></li>
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+ <!-- posts for -->
+</ul>
+
+
+<p><strong>P.S.</strong> Emacs 24.4 is fairly stable at this point, so can start using
+it today. I&#8217;ve been using it exclusively for about half an year now
+and I&#8217;ve rarely come across any issues whatsoever.  If you&#8217;re a Prelude
+user - it is 24.4 compatible.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">A Crazy Productivity Boost: Remap Return to Control</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-12T17:09:00+02:00" pubdate data-updated="true">Nov 12<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>People have always complained about the awkward positioning of
+the two <code>Control</code> keys on modern keyboards. That&#8217;s a fact! Effective Emacs
+usage is heavily dependent on the <code>Control</code> keys (yep, both of
+them). That&#8217;s also a fact!</p>
+
+<p>A great many Emacs users remap the infrequently used <code>CapsLock</code> key to
+<code>Control</code> to alleviate partially the problem with the accessibility of
+the control keys. That, while useful, is not sufficient for the
+optimal typing experience, since that way you&#8217;re breaking the key
+symmetry on both sides of your keyboard. Also - your right pinky has
+to go much further than your left one, while you&#8217;re typing. Many
+people seem to be using only the left <code>Control</code> and I guess they&#8217;re
+not particularly bothered by this, but touch typists like me are
+generally quite bothered by such things.</p>
+
+<p>A much better idea would be to leverage a little knows capability of
+keyboard input systems and map the <code>Return</code> key to <code>Control</code> only
+when it&#8217;s held down (it will behave like a normal <code>Return</code> key in all
+other situations). This sounds a bit crazy, but please bear with me for a while.</p>
+
+<p>This radical approach has several advantages.  First and foremost -
+it&#8217;s much easier to hit <code>Return</code> with your right pinky than it is to
+hit the regular right <code>Control</code> (especially if you&#8217;re using a US
+layout keyboard - these have long single row <code>Return</code> keys, compared
+to the short 2 row Returns found on European keyboards). Second, if
+you&#8217;ve already remapped <code>CapsLock</code> to <code>Control</code> (like you should have
+done) you&#8217;re getting a pretty symmetrical mapping on the opposite side
+of your keyboard. Last, but not least - it&#8217;s a great option for people
+using compact keyboards with no left <code>Control</code> key.</p>
+
+<p>Obviously you&#8217;ll need some keyboard remapping software to make this
+trick work. OSX users can use
+<a href="http://pqrs.org/macosx/keyremap4macbook/">KeyRemap4MacBook</a> to do
+that.  In its settings look up the <code>Change Return</code> section and under
+it <code>Return to Control_R (+ When you type Return only, send
+Return)</code>. As far as I know this remapping can be done on GNU/Linux systems with <a href="https://github.com/alols/xcape">xcape</a>
+(though I haven&#8217;t checked that myself), but I have no idea if it&#8217;s a viable option for Windows users.</p>
+
+<p>All in all - remapping <code>Return</code> to <code>Control</code> should be a big
+productivity win for some (the touch typists) of you and should make
+your right pinky&#8217;s life easier.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/01/highlight-matching-delimiters-with-smartparens/">Highlight Matching Delimiters With Smartparens</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-01T16:32:00+02:00" pubdate data-updated="true">Nov 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/01/highlight-matching-delimiters-with-smartparens/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Some time ago I wrote about
+<a href="http://emacsredux.com/blog/2013/04/01/highlight-matching-parentheses/">highlighting matching parentheses</a>
+with <code>show-paren-mode</code>. This is definitely useful, but it&#8217;s kind of
+restrictive, since parentheses are just a specific kind of paired
+delimiter. Single and double quotes are also paired delimiters (at
+least in most programmming languages). In the Ruby programmming
+language, for instance, <code>do</code> and <code>end</code> also constitute paired
+delimiter.</p>
+
+<p><a href="https://github.com/Fuco1/smartparens">smartparens</a> offers
+extremely customizable handling of paired delimiters and comes with an
+extra minor mode called <code>show-smartparens-mode</code> to highlight
+them. This mode totally replaces <code>show-paren-mode</code> and language
+specific modes like <code>hirb</code> (which highlights Ruby blocks).</p>
+
+<p>Assuming you&#8217;re already using <code>smartparens</code>, enabling <code>show-smartparens-mode</code> is trivial:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">show-smartparens-global-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&#8217;s a glimpse of it in action:</p>
+
+<p><img src="/images/articles/show-smartparens-mode.gif"></p>
+
+<p>In <a href="https://github.com/bbatsov/prelude">Prelude</a> <code>show-paren-mode</code> was
+replaced by <code>show-smartparens-mode</code> some time ago.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/27/instant-access-to-your-shell-init-file/">Instant Access to Your Shell Init File</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-27T11:48:00+03:00" pubdate data-updated="true">Sep 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/27/instant-access-to-your-shell-init-file/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A while ago I showed you a way to <a href="http://emacsredux.com/blog/2013/05/18/instant-access-to-init-dot-el/">instantly edit your Emacs init file</a>. Today
+we&#8217;ll adapt the original idea for shell init files like <code>.bashrc</code> and <code>.zshrc</code>. The code required is fairly short and simple:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">find-shell-init-file</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Edit the shell init file in another window.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let*</span> <span class="p">((</span><span class="nv">shell</span> <span class="p">(</span><span class="nb">car</span> <span class="p">(</span><span class="nb">reverse</span> <span class="p">(</span><span class="nv">split-string</span> <span class="p">(</span><span class="nv">getenv</span> <span class="s">&quot;SHELL&quot;</span><span class="p">)</span> <span class="s">&quot;/&quot;</span><span class="p">))))</span>
+</span><span class='line'>         <span class="p">(</span><span class="nv">shell-init-file</span> <span class="p">(</span><span class="nb">cond</span>
+</span><span class='line'>                           <span class="p">((</span><span class="nb">string-equal</span> <span class="s">&quot;zsh&quot;</span> <span class="nv">shell</span><span class="p">)</span> <span class="s">&quot;.zshrc&quot;</span><span class="p">)</span>
+</span><span class='line'>                           <span class="p">((</span><span class="nb">string-equal</span> <span class="s">&quot;bash&quot;</span> <span class="nv">shell</span><span class="p">)</span> <span class="s">&quot;.bashrc&quot;</span><span class="p">)</span>
+</span><span class='line'>                           <span class="p">(</span><span class="no">t</span> <span class="p">(</span><span class="nb">error</span> <span class="s">&quot;Unknown shell&quot;</span><span class="p">)))))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">find-file-other-window</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="nv">shell-init-file</span> <span class="p">(</span><span class="nv">getenv</span> <span class="s">&quot;HOME&quot;</span><span class="p">)))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The shell init file is deduced from your <code>SHELL</code> env variable. While there are different shell init files for most shell (e.g. <code>.bash_profile</code>, <code>.zshenv</code>, <code>.zprofile</code>), here we&#8217;re assuming you&#8217;re using the most commonly used files. <code>find-file-other-window</code> will
+open the file in a window adjacent to the one you&#8217;re currently in.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c S&quot;</span><span class="p">)</span> <span class="ss">&#39;find-shell-init-file</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>find-shell-init-file</code> is available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
+prefix).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/">Removing/Altering Key Bindings From Minor Mode Keymaps</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-25T12:26:00+03:00" pubdate data-updated="true">Sep 25<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Often minor modes don&#8217;t respect standard keybinding conventions and
+use some user reserved keys (like <code>C-c a</code>). Occasionally two minor
+modes would have conflicting keybindings or a minor mode would
+keybindings conflicting with a major mode. I guess you can imagine
+similar problems. Dealing with them is fairly straight-forward - we
+have to either unbind or rebind the offending binding:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; remove keybinding</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minor-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c c&quot;</span><span class="p">)</span> <span class="no">nil</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; change keybinding</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minor-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c c&quot;</span><span class="p">)</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c C-c&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Generally speaking you can use <code>define-key</code> to alter the keymap of a
+major mode as well, but those are rarely offenders when it comes to
+picking appropriate keybindings for their keymaps.</p>
+
+<p>Normally you&#8217;d want to invoke the above code right after the related
+minor (or major) mode is loaded:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">eval-after-load</span> <span class="s">&quot;minor-mode&quot;</span>
+</span><span class='line'>  <span class="o">&#39;</span><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minor-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c c&quot;</span><span class="p">)</span> <span class="no">nil</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Making a minor mode have different keymaps in different major modes is
+tricky, but possible. Here&#8217;s an example that disables some keybindings
+in the minor <code>prelude-mode</code>, that are conflicting with the major
+<code>org-mode</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-org-mode-hook</span> <span class="p">()</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">oldmap</span> <span class="p">(</span><span class="nb">cdr</span> <span class="p">(</span><span class="nb">assoc</span> <span class="ss">&#39;prelude-mode</span> <span class="nv">minor-mode-map-alist</span><span class="p">)))</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">newmap</span> <span class="p">(</span><span class="nv">make-sparse-keymap</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">set-keymap-parent</span> <span class="nv">newmap</span> <span class="nv">oldmap</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">define-key</span> <span class="nv">newmap</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c +&quot;</span><span class="p">)</span> <span class="no">nil</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">define-key</span> <span class="nv">newmap</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c -&quot;</span><span class="p">)</span> <span class="no">nil</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">make-local-variable</span> <span class="ss">&#39;minor-mode-overriding-map-alist</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">push</span> <span class="o">`</span><span class="p">(</span><span class="nv">prelude-mode</span> <span class="o">.</span> <span class="o">,</span><span class="nv">newmap</span><span class="p">)</span> <span class="nv">minor-mode-overriding-map-alist</span><span class="p">))</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-mode-hook</span> <span class="ss">&#39;my-org-mode-hook</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/24/dired-jump/">Dired Jump</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-24T17:53:00+03:00" pubdate data-updated="true">Sep 24<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/24/dired-jump/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Most Emacs users know that they can start <code>dired</code> (Emacs&#8217;s file
+browser) with <code>M-x dired</code> or <code>C-x d</code>. That would display a prompt in
+the minibuffer asking which directory to open with <code>dired</code> (the
+current directory will be suggested as a default).</p>
+
+<p>More often than not you&#8217;ll probably want <code>dired</code> to display the
+directory of file you&#8217;re currently editing. You might even want to
+have the cursor positioned over that very same file in the <code>dired</code>
+buffer. There&#8217;s a cool command that does exactly that -
+<code>dired-jump</code>. To use it you have to first load the built-in library
+<code>dired-x</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;dired-x</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can run the command with <code>C-x C-j</code> (<code>M-x dired-jump</code>). No prompts,
+no wasted time. You&#8217;re instantly teleported to the currently edited
+file&#8217;s position in a <code>dired</code> buffer.</p>
+
+<p>This command works out-of-the-box in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/05/a-proper-replacement-for-flet/">A Proper Replacement for Flet</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-05T14:38:00+03:00" pubdate data-updated="true">Sep 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/05/a-proper-replacement-for-flet/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The popular <code>flet</code> macro was deprecated in Emacs 24.3 and replaced with two similar macros - <code>cl-flet</code> and <code>cl-letf</code>.</p>
+
+<p><code>flet</code> was used to temporarily override function definitions.
+This was an analogue of a dynamically scoped <code>let</code> that operates on the function
+cell of symbols rather than their value cell.</p>
+
+<p>The ability to dynamically rebind a functions was very useful for stubbing purposes in unit tests (you do write unit tests, don&#8217;t you?).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">flet</span> <span class="p">((</span><span class="nv">projectile-project-root</span> <span class="p">()</span> <span class="s">&quot;/path/to/project&quot;</span><span class="p">)</span>
+</span><span class='line'>       <span class="p">(</span><span class="nv">projectile-project-name</span> <span class="p">()</span> <span class="s">&quot;project&quot;</span><span class="p">))</span>
+</span><span class='line'>  <span class="o">...</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>projectile-project-root</code> and <code>projectile-project-name</code> are impure
+functions (they depend on the current directory) and testing functions
+that use them internally would normally be problematic. However, <code>flet</code>
+gives us the ability to override their actual definitions in our
+tests. <code>flet</code>&#8217;s official replacement <code>cl-flet</code> is lexically bound and this is no longer possible
+with it.</p>
+
+<p>Fortunately <a href="https://github.com/nicferrier">Nic Ferrier</a> created a
+true drop-in <code>flet</code> replacement (with some extra magic baked in) -
+<a href="https://github.com/nicferrier/emacs-noflet">noflet</a>. If you&#8217;re missing <code>flet</code>, I suggest you to give <code>noflet</code> a try.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/05/version-checks/">Version Checks</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-05T14:25:00+03:00" pubdate data-updated="true">Sep 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/05/version-checks/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Often the code you&#8217;re writing would be depending on the version of
+some external tool (say <code>git</code>) or Emacs itself. Version checks in Emacs are pretty
+easy - just use the built-in functions <code>version=</code>, <code>version&lt;=</code> or <code>version=</code>.</p>
+
+<p>Let&#8217;s illustrate this with an
+example. <a href="https://github.com/bbatsov/prelude">Prelude</a> requires at
+least GNU Emacs 24.1 to run and on startup it performs the following
+check:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">version&lt;</span> <span class="nv">emacs-version</span> <span class="s">&quot;24.1&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">error</span> <span class="s">&quot;Prelude requires at least GNU Emacs 24.1&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Simple and effective. The <code>version</code> functions are pretty smart and recognize most popular version formats correctly.
+Note that version string &#8220;1&#8221; is equal to &#8220;1.0&#8221;, &#8220;1.0.0&#8221;, &#8220;1.0.0.0&#8221;,
+etc.  That is, the trailing &#8220;.0&#8221;s are insignificant.  Also, version
+string &#8220;1&#8221; is higher (newer) than &#8220;1pre&#8221;, which is higher than &#8220;1beta&#8221;,
+which is higher than &#8220;1alpha&#8221;.  Also, &#8220;-CVS&#8221; and &#8220;-NNN&#8221; are treated
+as alpha versions.</p>
+
+<p>If you&#8217;re writing an Emacs package you can also add an explicit Emacs version dependency in the packge metadata:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; Package-Requires: ((emacs &quot;24.1&quot;))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That way users of older Emacsen would not see a version of your package targeting newer Emacsen.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/26/search-youtube/">Search Youtube</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-26T17:59:00+03:00" pubdate data-updated="true">Aug 26<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/26/search-youtube/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Some time ago I showed you how to do
+<a href="http://emacsredux.com/blog/2013/03/28/google/">Google queries from Emacs</a>. The
+approach used in that articles is pretty generic and can be used for
+the creation of various similar commands. Let&#8217;s create a command that
+searches in YouTube:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">youtube</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Search YouTube with a query or region if any.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">browse-url</span>
+</span><span class='line'>   <span class="p">(</span><span class="nv">concat</span>
+</span><span class='line'>    <span class="s">&quot;http://www.youtube.com/results?search_query=&quot;</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="p">(</span><span class="k">if</span> <span class="nv">mark-active</span>
+</span><span class='line'>                           <span class="p">(</span><span class="nv">buffer-substring</span> <span class="p">(</span><span class="nv">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nv">region-end</span><span class="p">))</span>
+</span><span class='line'>                         <span class="p">(</span><span class="nv">read-string</span> <span class="s">&quot;Search YouTube: &quot;</span><span class="p">))))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This command will display the query results in your default browser.</p>
+
+<p>I&#8217;d suggest binding the command to <code>C-c y</code> if you plan to use it regularly.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c y&quot;</span><span class="p">)</span> <span class="ss">&#39;youtube</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>youtube</code> is available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
+prefix).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/5/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/3/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Emacs Redux</h1>
+  <p>Emacs Redux&#8217;s mission is to hone your Emacs skills and increase your appreciation for Emacs&#8217;s might and magic.
+  You can show your love for Emacs Redux via Gratipay:</p>
+  <a href="https://www.gratipay.com/bbatsov"><img src="https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png"></img></a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/lossage/">Lossage</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/uptime/">Uptime</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+     <h1>Twitter</h1>
+     <!-- PASTE THE WIDGET CODE HERE -->
+     <a class="twitter-timeline" href="https://twitter.com/bbatsov" data-widget-id="382536919663386624">Tweets by @bbatsov</a>
+     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ </section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/bbatsov">@bbatsov</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'bbatsov',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Bozhidar Batsov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'emacsredux';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,1 +1,968 @@
-My Octopress Page is coming soon &hellip;
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Emacs Redux</title>
+  <meta name="author" content="Bozhidar Batsov">
+
+  
+  <meta name="description" content="Prelude In this article I&#8217;ll share with you a few tips and tricks about
+running Emacs under the Max OS X operating system. This article will &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://bbatsov.github.com/emacsredux">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39624961-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Emacs Redux</a></h1>
+  
+    <h2>Return to the Essence of Text Editing</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:bbatsov.github.com/emacsredux" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/bbatsov/prelude">Prelude</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-09T13:31:00+03:00" pubdate data-updated="true">May 9<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/05/09/emacs-on-os-x/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Prelude</h2>
+
+<p>In this article I&#8217;ll share with you a few tips and tricks about
+running Emacs under the Max OS X operating system. This article will
+focus on the vanilla GNU Emacs, but if you want a more native OS X experience you
+might have a look at the
+<a href="https://github.com/railwaycat/homebrew-emacsmacport/releases">enhanced Emacs Mac port</a>.</p>
+
+<h2>Installation</h2>
+
+<p>While Emacs is available for installation from
+<a href="http://wikemacs.org/wiki/Installing_Emacs_on_OS_X">various sources</a>
+I recommend you to use the
+<a href="http://emacsformacosx.com/">Emacs for Mac OS X binary distribution</a>.</p>
+
+<p>I always run the latest development version and I use homebrew to install it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew install emacs --HEAD --cocoa
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Keep in mind there&#8217;s an ancient Emacs 22 that ships with OS X.  You
+might want to alter your <code>PATH</code>, so that the new Emacs is picked up in
+a shell.</p>
+
+<p>Alternatively you can just create an alias in your shell and when you
+invoke <code>emacs</code> it will run the newly installed version:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">alias </span><span class="nv">emacs</span><span class="o">=</span><span class="s2">&quot;/Applications/Emacs.app/Contents/MacOS/Emacs -nw&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you installed via Homebrew that path might look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">alias </span><span class="nv">emacs</span><span class="o">=</span><span class="s2">&quot;/usr/local/Cellar/emacs/24.5/Emacs.app/Contents/MacOS/Emacs -nw&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To make it permanent, if using bash, add that line to
+<code>~/.bash_profile</code>. zsh users will want to update <code>~/.zshrc</code> instead.</p>
+
+<p>In case you&#8217;re wondering - <code>nw</code> tells Emacs to start in &#8220;terminal&#8221;
+mode (instead of in GUI mode).</p>
+
+<h2>Keybindings</h2>
+
+<p>I heartily recommend you to remap your <em>Caps Lock</em> key to <em>Control</em>. This
+can be easily done via <em>Preferences -> Keyboard -> Modifier Keys</em>. If
+you&#8217;re using a laptop keyboard or the bluetooth keyboard you&#8217;ll
+might want to remap your right <code>Option</code> key to <code>Control</code> as
+well. No one can use effectively Emacs without a right Control
+key. Remapping it is a bit more involved and requires the use of the
+third-party utility
+<a href="http://pqrs.org/macosx/keyremap4macbook/">KeyRemap4MacBook</a>.</p>
+
+<p>If you&#8217;re adventurous you might even try <a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">a crazier idea</a>.</p>
+
+<h2>Setting the PATH variable</h2>
+
+<p>Long story short - if you&#8217;re running Emacs from Spotlight (or any
+other launcher for that matter) your <code>PATH</code> and <code>exec-path</code> variables
+won&#8217;t be same as the ones in your shell (and that&#8217;s every nasty since
+you want be able to run some external programs from Emacs). The best
+way to handle this would be installing the package
+<a href="https://github.com/purcell/exec-path-from-shell">exec-path-from-shell</a>
+by Steve Purcell.</p>
+
+<h2>Flyspell</h2>
+
+<p>For flyspell to work correctly you&#8217;ll need to install aspell plus a few dictionaries.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew install aspell --lang<span class="o">=</span>en
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Proced</h2>
+
+<p>The mighty
+<a href="http://emacsredux.com/blog/2013/05/02/manage-processes-with-proced/">proced</a>
+doesn&#8217;t work on OS X.  You can use
+<a href="http://www.splode.com/~friedman/software/emacs-lisp/src/vkill.el">vkill</a>
+as a replacement. It&#8217;s kind of basic, but it mostly works.</p>
+
+<h2>Dired</h2>
+
+<p>OS X ships with BSD&#8217;s <code>ls</code> command which doesn&#8217;t have all the features
+of GNU <code>ls</code> (used internally by <code>dired</code>). Fortunately, this is easily solvable:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew install coreutils
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To avoid conflicts the GNU utils are prefixed with <code>g</code>, so <code>ls</code> becomes <code>gls</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">insert-directory-program</span> <span class="p">(</span><span class="nv">executable-find</span> <span class="s">&quot;gls&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>More goodies</h2>
+
+<p>If you want to spare yourself part of the headache of configuring
+Emacs on OSX and get a lot of extra firepower you might want to install
+<a href="https://github.com/bbatsov/prelude">Emacs Prelude</a> - an enhanced
+Emacs 24.x configuration (developed by yours truly) that should make
+your experience with Emacs both more pleasant and more powerful.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-18T21:57:00+02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/01/18/clear-comint-buffers/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><code>comint</code> provides Emacs infrastructure for building command
+interpreters. It&#8217;s backing a lot of popular shell/REPL modes - like <code>eshell</code>,
+<code>inferior-lisp</code>, <code>inf-ruby</code>, <code>inf-clojure</code>, etc.</p>
+
+<p><code>comint</code> provides a myriad of built-in commands, but somewhat surprisingly
+it doesn&#8217;t feature a command to clear the contents of a <code>comint</code> buffer.
+Let&#8217;s write one such command ourselves!</p>
+
+<p>While there are several way to tackle it, I feel this is the simplest
+(and the one that makes the best use of <code>comint</code>&#8217;s existing
+functionality):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">comint-clear-buffer</span> <span class="p">()</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">comint-buffer-maximum-size</span> <span class="mi">0</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">comint-truncate-buffer</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; let&#39;s bind the new command to a keycombo</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">comint-mode-map</span> <span class="s">&quot;\C-c\M-o&quot;</span> <span class="nf">#&#39;</span><span class="nv">comint-clear-buffer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Simple and elegant, right? One day it might even end up being part of <code>comint</code> itself.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-18T09:41:00+02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/01/18/customizing-the-fringes/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>On graphical displays, each Emacs window normally has narrow <strong>fringes</strong> (gutters/margins)
+on the left and right edges. The fringes are used to display symbols
+that provide information about the text in the window. You can type
+<code>M-x fringe-mode</code> to disable the fringes, or modify their width. This
+command affects fringes in all frames; to modify fringes on the
+selected frame only, use <code>M-x set-fringe-style</code>. You can make your
+changes to the fringes permanent by customizing the variable
+<code>fringe-mode</code>.</p>
+
+<p>Out-of-the-box the most common use of the fringes is to indicate a continuation
+line. When one line of text is split into multiple screen lines, the
+left fringe shows a curving arrow for each screen line except the
+first, indicating that “this is not the real beginning”. The right
+fringe shows a curving arrow for each screen line except the last,
+indicating that “this is not the real end”. If the line&#8217;s direction is
+right-to-left, the meanings of the curving
+arrows in the fringes are swapped.</p>
+
+<p>Third-party modes like
+<a href="https://github.com/flycheck/flycheck">flycheck</a> and
+<a href="https://github.com/dgutov/diff-hl">diff-hl</a> also make use of the fringe to
+display valuable information there (e.g. lint and VC information).</p>
+
+<p>By default both fringes have width 8 pixels, but we can easily adjust this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; make both fringes 4 pixels wide</span>
+</span><span class='line'><span class="p">(</span><span class="nv">fringe-mode</span> <span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; make the left fringe 4 pixels wide and the right disappear</span>
+</span><span class='line'><span class="p">(</span><span class="nv">fringe-mode</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">4</span> <span class="o">.</span> <span class="mi">0</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; restore the default sizes</span>
+</span><span class='line'><span class="p">(</span><span class="nv">fringe-mode</span> <span class="no">nil</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As mentioned before, you can also invoke this command interactively and
+determine the optimal fringe size for you, before making it permanent in
+your config. The options presented by the <code>fring-mode</code> command are defined
+in the <code>fringe-styles</code> list:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">defconst</span> <span class="nv">fringe-styles</span>
+</span><span class='line'>  <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;default&quot;</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">&quot;no-fringes&quot;</span> <span class="o">.</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">&quot;right-only&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="mi">0</span> <span class="o">.</span> <span class="no">nil</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">&quot;left-only&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="no">nil</span> <span class="o">.</span> <span class="mi">0</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">&quot;half-width&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="mi">4</span> <span class="o">.</span> <span class="mi">4</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">&quot;minimal&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="mi">1</span> <span class="o">.</span> <span class="mi">1</span><span class="p">)))</span>
+</span><span class='line'>  <span class="s">&quot;Alist mapping fringe mode names to fringe widths.</span>
+</span><span class='line'><span class="s">Each list element has the form (NAME . WIDTH), where NAME is a</span>
+</span><span class='line'><span class="s">mnemonic fringe mode name and WIDTH is one of the following:</span>
+</span><span class='line'><span class="s">- nil, which means the default width (8 pixels).</span>
+</span><span class='line'><span class="s">- a cons cell (LEFT . RIGHT), where LEFT and RIGHT are</span>
+</span><span class='line'><span class="s">  respectively the left and right fringe widths in pixels, or</span>
+</span><span class='line'><span class="s">  nil (meaning the default width).</span>
+</span><span class='line'><span class="s">- a single integer, which specifies the pixel widths of both</span>
+</span><span class='line'><span class="s">fringes.&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Be careful when playing with the fringe size. Certain info doesn&#8217;t
+look very good when the fringe is too small (e.g. less than 4 pixels).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/23/lossage/">Lossage</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-23T17:35:00+02:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2014</time>
+        
+         | <a href="/blog/2014/12/23/lossage/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Are you sure you&#8217;re using Emacs in an efficient way? Perhaps you&#8217;re
+overusing commands like <code>C-f</code> and <code>C-b</code> to navigate around when you
+can be using more efficient alternatives like <code>M-f</code> and <code>M-b</code> (or a
+third-party package like
+<a href="http://emacsrocks.com/e10.html">ace-jump-mode</a>).  Gaining such
+insight is somewhat hard, as we generally don&#8217;t pay attention to our
+sub-optimal usage patterns. If we could only see what were the last
+few hundred keystrokes we entered in our current Emacs
+session&#8230; Turns out we can do this with the aptly-named command
+<code>view-lossage</code> (<code>C-h l</code>) (<code>lossage</code> means <code>malfunction</code>). It displays
+the last 300 keystrokes and its output looks like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>n e r a l l y SPC d o n ' t SPC n o t i c e SPC o u
+</span><span class='line'>r SPC s u b o p t i m a l SPC s u a g &lt;backspace&gt; &lt;backspace&gt;
+</span><span class='line'>&lt;backspace&gt; &lt;backspace&gt; u s a g e SPC p a t e &lt;backspace&gt;
+</span><span class='line'>t e r n s . SPC I f SPC w e SPC c o u l d SPC o n l
+</span><span class='line'>y &lt;return&gt; s e e SPC w h a t SPC w e r e SPC t h e
+</span><span class='line'>SPC l a s t SPC f &lt;backspace&gt; h e w SPC &lt;backspace&gt;
+</span><span class='line'>&lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt; f e w SPC h u n
+</span><span class='line'>d r e d SPC k e y s t r o k e s SPC w e SPC i &lt;backspace&gt;
+</span><span class='line'>e n t e r e d SPC i n SPC o u r SPC c u r r e n t SPC
+</span><span class='line'>E m a c s SPC s e s s i o n . . . SPC T u r n s SPC
+</span><span class='line'>o u t SPC &lt;backspace&gt; SPC w e SPC c a n SPC d o SPC
+</span><span class='line'>t h i s &lt;company-dummy-event&gt; . &lt;backspace&gt; SPC w i
+</span><span class='line'>t h SPC t h e SPC m a c &lt;backspace&gt; g i c a l &lt;backspace&gt;
+</span><span class='line'>&lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt;
+</span><span class='line'>&lt;backspace&gt; &lt;backspace&gt; SPC c o m m a n d &lt;return&gt;
+</span><span class='line'>` v i e w - l o s s a g e ` SPC ( b o u n &lt;backspace&gt;
+</span><span class='line'>&lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt; ` C - h SPC l `
+</span><span class='line'>) . C-p C-p M-q C-n C-n C-n C-e C-x b l o s s &lt;return&gt;
+</span><span class='line'>C-x b l o s C-g C-h l</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Inspecting it can be super enlightening! I do this all the time.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/23/uptime/">Uptime</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-23T17:28:00+02:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2014</time>
+        
+         | <a href="/blog/2014/12/23/uptime/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Many Emacs users keep a single Emacs instance running for quite a while.
+I&#8217;ve had instances running for over a month. How do I know this? Unsurprisingly,
+there&#8217;s a built-in command for that:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>M-x emacs-uptime</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now it&#8217;s time to start bragging to your vim-using friends!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/05/converting-between-symbols-and-strings/">Converting Between Symbols and Strings</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-05T17:28:00+02:00" pubdate data-updated="true">Dec 5<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/12/05/converting-between-symbols-and-strings/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sometimes you might need to convert a symbol to string (or vice versa) in Emacs Lisp. You start
+looking for functions like <code>symbol-to-string</code> and <code>string-to-symbol</code> but, alas, they do not seem exist.
+Do not despair! Such functions do actually exist, although their names are likely to surprise you:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">symbol-name</span> <span class="ss">&#39;some-symbol</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; &quot;some-symbol&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="nb">intern</span> <span class="s">&quot;some-symbol&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; some-symbol</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/13/quickly-open-an-info-manual/">Quickly Open an Info Manual</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-13T15:25:00+02:00" pubdate data-updated="true">Nov 13<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/11/13/quickly-open-an-info-manual/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Every Emacs user knows that Emacs ships with plenty of built-in
+documentation in the <code>GNU info</code> format (they don&#8217;t call it a
+self-documenting editor for no reason). Most Emacs users know how to
+access that built-in documentation with <code>C-h i</code> (<code>M-x info</code>) and some
+Emacs users even know that the Emacs manual can be opened directly
+with <code>C-h r</code> (<code>M-x info-emacs-manual</code>).</p>
+
+<p>If you know the name of the manual you&#8217;re looking for, however,
+there&#8217;s a nice little-known alternative to using <code>C-h i</code> - the
+<code>info-display-manual</code> command. When you run it you&#8217;ll be prompted in
+the minibuffer for the name of the manual you&#8217;d like to view (manual
+name completion is available).</p>
+
+<p>To give you a more concrete example of the command&#8217;s advantage over
+<code>info</code> let&#8217;s try to open the Emacs Lisp manual with both
+commands. With <code>info</code> you&#8217;ll have to type the following:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>M-x info RET m elisp RET</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And the alternative would be:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>M-x info-emacs-manual RET elisp RET</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you like the command I&#8217;d suggest binding it to some keybinding:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-i&quot;</span><span class="p">)</span> <span class="ss">&#39;info-display-manual</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/13/emacss-development-has-migrated-to-git/">Emacs&#8217;s Development Has Migrated to Git</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-13T15:19:00+02:00" pubdate data-updated="true">Nov 13<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/11/13/emacss-development-has-migrated-to-git/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The long wait is over - Emacs&#8217;s development
+<a href="https://lists.gnu.org/archive/html/emacs-devel/2014-11/msg00681.html">has finally migrated from bazaar to git</a>.</p>
+
+<p>Now you don&#8217;t have any excuses not to contribute to Emacs!</p>
+
+<p>If you&#8217;re wondering where to start I&#8217;d suggest taking a look at <a href="http://lars.ingebrigtsen.no/2014/11/13/welcome-new-emacs-developers/">this short article</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/21/emacs-24-dot-4/">Emacs 24.4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-21T17:36:00+03:00" pubdate data-updated="true">Oct 21<span>st</span>, 2014</time>
+        
+         | <a href="/blog/2014/10/21/emacs-24-dot-4/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs 24.4 <a href="http://lists.gnu.org/archive/html/emacs-devel/2014-10/msg00713.html">is finally out</a>!</p>
+
+<p>You can read about all the new features
+<a href="http://www.gnu.org/software/emacs/news/NEWS.24.4">here</a>.  I&#8217;ve
+published
+<a href="http://emacsredux.com/blog/2013/12/31/a-peek-at-emacs-24-dot-4/">a series of articles</a>
+about some of the more interesting features.</p>
+
+<p>In related news - the Emacs Mac Port based on 24.4
+<a href="https://lists.gnu.org/archive/html/emacs-devel/2014-10/msg00725.html">has also been released</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/04/emacs-lisp-style-guide/">Emacs Lisp Style Guide</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-04T15:00:00+03:00" pubdate data-updated="true">Sep 4<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/09/04/emacs-lisp-style-guide/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve started working on a community
+<a href="https://github.com/bbatsov/emacs-lisp-style-guide">Emacs Lisp style guide</a>.
+My goal is to create a comprehensive document similar to the
+<a href="https://github.com/bbatsov/clojure-style-guide">Clojure</a> and
+<a href="https://github.com/bbatsov/ruby-style-guide">Ruby</a> community style
+guides.</p>
+
+<p>Such a document would be a great starting point for many newcomers to
+the Emacs community and should increase the overall quality of the
+code produced by it.  There&#8217;s much to be documented about code layout,
+preferred syntactic conventions, major and minor mode definitions,
+etc. and I obviously can&#8217;t know the best practices about everything so
+I&#8217;ll need a lot of help.</p>
+
+<p>Of course, we already have the official
+<a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Tips.html#Tips">coding guidelines</a>,
+but they are a bit light on examples, rationale, etc. Hopefully the community style guide
+will manage to fill any gaps in them and in good time portions of it will find their place
+in the official documentation.</p>
+
+<p>I&#8217;m inviting all members of our community interested in promoting good
+Emacs Lisp practices to join the development of this document!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Emacs Redux</h1>
+  <p>Emacs Redux&#8217;s mission is to hone your Emacs skills and increase your appreciation for Emacs&#8217;s might and magic.
+  You can show your love for Emacs Redux via Gratipay:</p>
+  <a href="https://www.gratipay.com/bbatsov"><img src="https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png"></img></a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/lossage/">Lossage</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/uptime/">Uptime</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+     <h1>Twitter</h1>
+     <!-- PASTE THE WIDGET CODE HERE -->
+     <a class="twitter-timeline" href="https://twitter.com/bbatsov" data-widget-id="382536919663386624">Tweets by @bbatsov</a>
+     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ </section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/bbatsov">@bbatsov</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'bbatsov',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Bozhidar Batsov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'emacsredux';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

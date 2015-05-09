@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: misc | Emacs Redux]]></title>
+  <link href="http://bbatsov.github.com/emacsredux/blog/categories/misc/atom.xml" rel="self"/>
+  <link href="http://bbatsov.github.com/emacsredux/"/>
+  <updated>2015-05-09T14:28:00+03:00</updated>
+  <id>http://bbatsov.github.com/emacsredux/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Lossage]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/12/23/lossage/"/>
+    <updated>2014-12-23T17:35:00+02:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/12/23/lossage</id>
+    <content type="html"><![CDATA[<p>Are you sure you're using Emacs in an efficient way? Perhaps you're
+overusing commands like <code>C-f</code> and <code>C-b</code> to navigate around when you
+can be using more efficient alternatives like <code>M-f</code> and <code>M-b</code> (or a
+third-party package like
+<a href="http://emacsrocks.com/e10.html">ace-jump-mode</a>).  Gaining such
+insight is somewhat hard, as we generally don't pay attention to our
+sub-optimal usage patterns. If we could only see what were the last
+few hundred keystrokes we entered in our current Emacs
+session... Turns out we can do this with the aptly-named command
+<code>view-lossage</code> (<code>C-h l</code>) (<code>lossage</code> means <code>malfunction</code>). It displays
+the last 300 keystrokes and its output looks like this:</p>
+
+<p><code>
+n e r a l l y SPC d o n ' t SPC n o t i c e SPC o u
+r SPC s u b o p t i m a l SPC s u a g &lt;backspace&gt; &lt;backspace&gt;
+&lt;backspace&gt; &lt;backspace&gt; u s a g e SPC p a t e &lt;backspace&gt;
+t e r n s . SPC I f SPC w e SPC c o u l d SPC o n l
+y &lt;return&gt; s e e SPC w h a t SPC w e r e SPC t h e
+SPC l a s t SPC f &lt;backspace&gt; h e w SPC &lt;backspace&gt;
+&lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt; f e w SPC h u n
+d r e d SPC k e y s t r o k e s SPC w e SPC i &lt;backspace&gt;
+e n t e r e d SPC i n SPC o u r SPC c u r r e n t SPC
+E m a c s SPC s e s s i o n . . . SPC T u r n s SPC
+o u t SPC &lt;backspace&gt; SPC w e SPC c a n SPC d o SPC
+t h i s &lt;company-dummy-event&gt; . &lt;backspace&gt; SPC w i
+t h SPC t h e SPC m a c &lt;backspace&gt; g i c a l &lt;backspace&gt;
+&lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt;
+&lt;backspace&gt; &lt;backspace&gt; SPC c o m m a n d &lt;return&gt;
+` v i e w - l o s s a g e ` SPC ( b o u n &lt;backspace&gt;
+&lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt; ` C - h SPC l `
+) . C-p C-p M-q C-n C-n C-n C-e C-x b l o s s &lt;return&gt;
+C-x b l o s C-g C-h l
+</code></p>
+
+<p>Inspecting it can be super enlightening! I do this all the time.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Uptime]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/12/23/uptime/"/>
+    <updated>2014-12-23T17:28:00+02:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/12/23/uptime</id>
+    <content type="html"><![CDATA[<p>Many Emacs users keep a single Emacs instance running for quite a while.
+I've had instances running for over a month. How do I know this? Unsurprisingly,
+there's a built-in command for that:</p>
+
+<p><code>
+M-x emacs-uptime
+</code></p>
+
+<p>Now it's time to start bragging to your vim-using friends!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs's Development has Migrated to Git]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/11/13/emacss-development-has-migrated-to-git/"/>
+    <updated>2014-11-13T15:19:00+02:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/11/13/emacss-development-has-migrated-to-git</id>
+    <content type="html"><![CDATA[<p>The long wait is over - Emacs's development
+<a href="https://lists.gnu.org/archive/html/emacs-devel/2014-11/msg00681.html">has finally migrated from bazaar to git</a>.</p>
+
+<p>Now you don't have any excuses not to contribute to Emacs!</p>
+
+<p>If you're wondering where to start I'd suggest taking a look at <a href="http://lars.ingebrigtsen.no/2014/11/13/welcome-new-emacs-developers/">this short article</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs 24.4]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/10/21/emacs-24-dot-4/"/>
+    <updated>2014-10-21T17:36:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/10/21/emacs-24-dot-4</id>
+    <content type="html"><![CDATA[<p>Emacs 24.4 <a href="http://lists.gnu.org/archive/html/emacs-devel/2014-10/msg00713.html">is finally out</a>!</p>
+
+<p>You can read about all the new features
+<a href="http://www.gnu.org/software/emacs/news/NEWS.24.4">here</a>.  I've
+published
+<a href="http://emacsredux.com/blog/2013/12/31/a-peek-at-emacs-24-dot-4/">a series of articles</a>
+about some of the more interesting features.</p>
+
+<p>In related news - the Emacs Mac Port based on 24.4
+<a href="https://lists.gnu.org/archive/html/emacs-devel/2014-10/msg00725.html">has also been released</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Configure the scratch buffer's mode]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/07/25/configure-the-scratch-buffers-mode/"/>
+    <updated>2014-07-25T15:23:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/07/25/configure-the-scratch-buffers-mode</id>
+    <content type="html"><![CDATA[<p>Pretty much every Emacs user knows of the <code>*scratch*</code> buffer - after
+all it's always present when you start your Emacs. If you've set
+<code>inhibit-startup-screen</code> to <code>t</code> (which I recommend) it will even be
+the very first buffer see each time you fire up your beloved editor
+(unless you alter <code>initial-buffer-choice</code>, that is).</p>
+
+<p>The scratch buffer was conceived a scratchpad for notes and Emacs Lisp
+experiments and a lot of Emacs users find it quite handy.  On the
+other hand - even more users don't really write Emacs Lisp and
+probably find little value in this buffer.</p>
+
+<p>One little know fact about the <code>*scratch*</code> buffer is that its initial
+major mode (by default it's <code>lisp-interaction-mode</code>) is not hardcoded
+and you can alter it.  If you're a Ruby developer you might opt to
+make it use <code>ruby-mode</code> by default:</p>
+
+<p><code>cl
+(setq initial-major-mode 'ruby-mode)
+</code></p>
+
+<p>If you do this I'd also advise you to change the buffer's initial
+contents. By default they are:</p>
+
+<p><code>cl
+;; This buffer is for notes you don't want to save, and for Lisp evaluation.
+;; If you want to create a file, visit that file with C-x C-f,
+;; then enter the text in that file's own buffer.
+</code></p>
+
+<p>For Ruby something like this might be better:</p>
+
+<p>``` cl
+(setq initial-scratch-message "\</p>
+
+<h1>This buffer is for notes you don't want to save, and for Ruby code.</h1>
+
+<h1>If you want to create a file, visit that file with C-x C-f,</h1>
+
+<h1>then enter the text in that file's own buffer.")</h1>
+
+<p>```</p>
+
+<p>Or you can simply set <code>initial-scratch-message</code> to <code>nil</code> and be done with it.</p>
+]]></content>
+  </entry>
+  
+</feed>

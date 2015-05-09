@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: appearance | Emacs Redux]]></title>
+  <link href="http://bbatsov.github.com/emacsredux/blog/categories/appearance/atom.xml" rel="self"/>
+  <link href="http://bbatsov.github.com/emacsredux/"/>
+  <updated>2015-05-09T14:28:00+03:00</updated>
+  <id>http://bbatsov.github.com/emacsredux/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Customizing the Fringes]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2015/01/18/customizing-the-fringes/"/>
+    <updated>2015-01-18T09:41:00+02:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2015/01/18/customizing-the-fringes</id>
+    <content type="html"><![CDATA[<p>On graphical displays, each Emacs window normally has narrow <strong>fringes</strong> (gutters/margins)
+on the left and right edges. The fringes are used to display symbols
+that provide information about the text in the window. You can type
+<code>M-x fringe-mode</code> to disable the fringes, or modify their width. This
+command affects fringes in all frames; to modify fringes on the
+selected frame only, use <code>M-x set-fringe-style</code>. You can make your
+changes to the fringes permanent by customizing the variable
+<code>fringe-mode</code>.</p>
+
+<p>Out-of-the-box the most common use of the fringes is to indicate a continuation
+line. When one line of text is split into multiple screen lines, the
+left fringe shows a curving arrow for each screen line except the
+first, indicating that “this is not the real beginning”. The right
+fringe shows a curving arrow for each screen line except the last,
+indicating that “this is not the real end”. If the line's direction is
+right-to-left, the meanings of the curving
+arrows in the fringes are swapped.</p>
+
+<p>Third-party modes like
+<a href="https://github.com/flycheck/flycheck">flycheck</a> and
+<a href="https://github.com/dgutov/diff-hl">diff-hl</a> also make use of the fringe to
+display valuable information there (e.g. lint and VC information).</p>
+
+<p>By default both fringes have width 8 pixels, but we can easily adjust this:</p>
+
+<p>``` cl
+;; make both fringes 4 pixels wide
+(fringe-mode 4)</p>
+
+<p>;; make the left fringe 4 pixels wide and the right disappear
+(fringe-mode '(4 . 0))</p>
+
+<p>;; restore the default sizes
+(fringe-mode nil)
+```</p>
+
+<p>As mentioned before, you can also invoke this command interactively and
+determine the optimal fringe size for you, before making it permanent in
+your config. The options presented by the <code>fring-mode</code> command are defined
+in the <code>fringe-styles</code> list:</p>
+
+<p>``` cl
+(defconst fringe-styles
+  '(("default" . nil)</p>
+
+<pre><code>("no-fringes" . 0)
+("right-only" . (0 . nil))
+("left-only" . (nil . 0))
+("half-width" . (4 . 4))
+("minimal" . (1 . 1)))
+</code></pre>
+
+<p>  "Alist mapping fringe mode names to fringe widths.
+Each list element has the form (NAME . WIDTH), where NAME is a
+mnemonic fringe mode name and WIDTH is one of the following:
+- nil, which means the default width (8 pixels).
+- a cons cell (LEFT . RIGHT), where LEFT and RIGHT are
+  respectively the left and right fringe widths in pixels, or
+  nil (meaning the default width).
+- a single integer, which specifies the pixel widths of both
+fringes.")
+```</p>
+
+<p>Be careful when playing with the fringe size. Certain info doesn't
+look very good when the fringe is too small (e.g. less than 4 pixels).</p>
+]]></content>
+  </entry>
+  
+</feed>

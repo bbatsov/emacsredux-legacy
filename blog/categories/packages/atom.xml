@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: packages | Emacs Redux]]></title>
+  <link href="http://bbatsov.github.com/emacsredux/blog/categories/packages/atom.xml" rel="self"/>
+  <link href="http://bbatsov.github.com/emacsredux/"/>
+  <updated>2015-05-09T14:28:00+03:00</updated>
+  <id>http://bbatsov.github.com/emacsredux/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ido-vertical-mode]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/01/18/ido-vertical-mode/"/>
+    <updated>2014-01-18T08:52:00+02:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/01/18/ido-vertical-mode</id>
+    <content type="html"><![CDATA[<p>If you like <code>ido</code>, but don't like the way it displays the available
+completion candidates you might want to have a look at
+<a href="https://github.com/gempesaw/ido-vertical-mode.el">ido-vertical-mode</a>.</p>
+
+<p>I won't duplicate here the installation instructions, but I'll show you
+how <code>ido-vertical-mode</code> displays the completion candidates:</p>
+
+<p><img src="https://raw.github.com/gempesaw/ido-vertical-mode.el/master/screenshot.gif"></p>
+
+<p>Is this better than the regular <code>ido</code>? Depends on your personal
+preference I guess. But it's good to have options, right?</p>
+
+<p>That's all for today, folks! Until next time.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,1123 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Emacs Redux</title>
+  <meta name="author" content="Bozhidar Batsov">
+
+  
+  <meta name="description" content="In a previous post I wrote about
+camel-case aware editing with subword-mode. Emacs
+24.4 adds a complementary minor mode called superword-mode, which &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://bbatsov.github.com/emacsredux/blog/page/2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39624961-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Emacs Redux</a></h1>
+  
+    <h2>Return to the Essence of Text Editing</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:bbatsov.github.com/emacsredux" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/bbatsov/prelude">Prelude</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/">A Peek at Emacs 24.4: Superword-mode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-27T18:24:00+03:00" pubdate data-updated="true">Aug 27<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In a previous post I wrote about
+<a href="http://emacsredux.com/blog/2013/04/21/camelcase-aware-editing/">camel-case aware editing with subword-mode</a>. Emacs
+24.4 adds a complementary minor mode called <code>superword-mode</code>, which
+also alters the behavior of word-based commands when enabled.</p>
+
+<p>Normally Emacs would consider underscores and dashes word separators
+(<code>snake_case</code> and <code>lisp-case</code> anyone?). This affects all <code>word</code>
+commands - <code>forward-word</code>, <code>backward-word</code>, <code>kill-word</code>, etc. Let&#8217;s
+see a couple of examples (<code>|</code> denotes the cursor position):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;; word with dash
+</span><span class='line'>|some-word
+</span><span class='line'>
+</span><span class='line'>;; press M-f (forward-word) once
+</span><span class='line'>some|-word
+</span><span class='line'>
+</span><span class='line'>;; press M-f again
+</span><span class='line'>some-word|
+</span><span class='line'>
+</span><span class='line'>;; press M-b (backward-word) once
+</span><span class='line'>some-|word
+</span><span class='line'>
+</span><span class='line'>;; word with underscore
+</span><span class='line'>|some_word
+</span><span class='line'>
+</span><span class='line'>;; press M-f once
+</span><span class='line'>some|_word
+</span><span class='line'>
+</span><span class='line'>;; press M-f again
+</span><span class='line'>some_word|
+</span><span class='line'>
+</span><span class='line'>;; press M-b once
+</span><span class='line'>some_|word
+</span><span class='line'>
+</span><span class='line'>;; word in camelCase (assuming subword-mode is not enabled)
+</span><span class='line'>|someWord
+</span><span class='line'>
+</span><span class='line'>;; press M-f once
+</span><span class='line'>someWord|
+</span><span class='line'>
+</span><span class='line'>;; word in camelCase (assuming subword-mode is enabled)
+</span><span class='line'>|someWord
+</span><span class='line'>
+</span><span class='line'>;; press M-f once
+</span><span class='line'>some|Word</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Personally I find the default behavior combined with <code>subword-mode</code>
+great. I do a lot of Ruby and Lisp programming and it also makes a lot
+of sense to me to be able to navigate the portions of a complex word,
+but I guess not everyone feels this way. Enter <code>superword-mode</code> - when
+it&#8217;s enabled all &#8220;complex/compound&#8221; words are treated as a single word:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;; word with dash
+</span><span class='line'>|some-word
+</span><span class='line'>
+</span><span class='line'>;; press M-f once
+</span><span class='line'>some-word|
+</span><span class='line'>
+</span><span class='line'>;; word with underscore
+</span><span class='line'>|some_word
+</span><span class='line'>
+</span><span class='line'>;; press M-f once
+</span><span class='line'>some_word|
+</span><span class='line'>
+</span><span class='line'>;; word in camelCase
+</span><span class='line'>|someWord
+</span><span class='line'>
+</span><span class='line'>;; press M-f once
+</span><span class='line'>someWord|</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that you cannot have <code>subword-mode</code> and <code>superword-mode</code> enabled
+at the same time. Turning one of them on will disable the other.</p>
+
+<p>Personally, I don&#8217;t see much value in <code>superword-mode</code> as a mode
+that&#8217;s enabled all the time, but I can imagine some useful
+scenarios in which I&#8217;d enable it briefly to do some focused editing.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/">A Peek at Emacs 24.4: Prettify-symbols-mode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-25T16:30:00+03:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs 24.4 ships with a new minor mode called
+<code>prettify-symbols-mode</code>. Its purpose is to replace the standard text
+representation of various identifiers/symbols with a (arguably) more
+aesthetically pleasing representation (often a single unicode
+character would replace several ascii characters).</p>
+
+<p>A classic example would be <code>lambda</code> from various Lisp dialects that many people
+prefer to replace with the greek letter <code>λ</code> (small lambda). <code>prettify-symbols-mode</code> allows you
+to achieve this by relying on a simple mapping expressed in the form of an <code>alist</code> that
+each major mode must initialize (<code>prettify-symbols-alist</code>).
+Simply put - major modes have to provide the configuration for <code>prettify-symbols-mode</code>.</p>
+
+<p>Lisp modes do this via <code>lisp--prettify-symbols-alist</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">defconst</span> <span class="nv">lisp--prettify-symbols-alist</span>
+</span><span class='line'>  <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;lambda&quot;</span>  <span class="o">.</span> <span class="nv">?</span><span class="err">λ</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This means that out of the box only <code>lambda</code> will get replaced.
+You can, of course, add more mappings for different major modes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-lisp-mode-hook</span>
+</span><span class='line'>            <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+</span><span class='line'>              <span class="p">(</span><span class="nb">push</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;&gt;=&quot;</span> <span class="o">.</span> <span class="nv">?</span><span class="err">≥</span><span class="p">)</span> <span class="nv">prettify-symbols-alist</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s see the mode in action. Consider this bit of Emacs Lisp code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&gt;=</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">something</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">something-else</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After you do <code>M-x prettify-symbols-mode</code> you&#8217;ll end up with:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="err">λ</span> <span class="p">(</span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="err">≥</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">something</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">something-else</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To enable this for a particular mode use <code>(add-hook 'some-mode-hook 'prettify-symbols-mode)</code>.
+If you&#8217;d like to enable it globally just add the following to your config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-prettify-symbols-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By the way, sky is the limit for symbol prettification. One fairly extreme example would be
+vim&#8217;s plugin <a href="https://github.com/enomsg/vim-haskellConcealPlus">haskell-conceal+</a> that goes to great
+lengths to bring proper mathematical notation to Haskell code. We can achieve more or less the same effect
+with <code>prettify-symbols-mode</code>, but one have to ask themselves where should we draw the border between
+tasteful and distasteful prettifications.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/25/configure-the-scratch-buffers-mode/">Configure the Scratch Buffer&#8217;s Mode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-25T15:23:00+03:00" pubdate data-updated="true">Jul 25<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/07/25/configure-the-scratch-buffers-mode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Pretty much every Emacs user knows of the <code>*scratch*</code> buffer - after
+all it&#8217;s always present when you start your Emacs. If you&#8217;ve set
+<code>inhibit-startup-screen</code> to <code>t</code> (which I recommend) it will even be
+the very first buffer see each time you fire up your beloved editor
+(unless you alter <code>initial-buffer-choice</code>, that is).</p>
+
+<p>The scratch buffer was conceived a scratchpad for notes and Emacs Lisp
+experiments and a lot of Emacs users find it quite handy.  On the
+other hand - even more users don&#8217;t really write Emacs Lisp and
+probably find little value in this buffer.</p>
+
+<p>One little know fact about the <code>*scratch*</code> buffer is that its initial
+major mode (by default it&#8217;s <code>lisp-interaction-mode</code>) is not hardcoded
+and you can alter it.  If you&#8217;re a Ruby developer you might opt to
+make it use <code>ruby-mode</code> by default:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">initial-major-mode</span> <span class="ss">&#39;ruby-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you do this I&#8217;d also advise you to change the buffer&#8217;s initial
+contents. By default they are:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; This buffer is for notes you don&#39;t want to save, and for Lisp evaluation.</span>
+</span><span class='line'><span class="c1">;; If you want to create a file, visit that file with C-x C-f,</span>
+</span><span class='line'><span class="c1">;; then enter the text in that file&#39;s own buffer.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For Ruby something like this might be better:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">initial-scratch-message</span> <span class="s">&quot;\</span>
+</span><span class='line'><span class="s"># This buffer is for notes you don&#39;t want to save, and for Ruby code.</span>
+</span><span class='line'><span class="s"># If you want to create a file, visit that file with C-x C-f,</span>
+</span><span class='line'><span class="s"># then enter the text in that file&#39;s own buffer.&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or you can simply set <code>initial-scratch-message</code> to <code>nil</code> and be done with it.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/22/travel-back-and-forward-in-git-history/">Travel Back and Forward in Git History</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-22T19:02:00+03:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2014</time>
+        
+         | <a href="/blog/2014/07/22/travel-back-and-forward-in-git-history/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently discovered an extremely cool package called
+<a href="https://github.com/pidu/git-timemachine">git-timemachine</a> that allows
+you to step though the git history of the file you&#8217;re currently
+editing in Emacs.</p>
+
+<p>Using it is pretty simple:</p>
+
+<ul>
+<li>visit a git-controlled file and issue <code>M-x git-timemachine</code> (or bind it to a keybinding of your choice)</li>
+<li>use the following keys to navigate historic version of the file:
+
+<ul>
+<li><code>p</code> visit previous historic version</li>
+<li><code>n</code> visit next historic version</li>
+<li><code>w</code> copy the hash of the current historic version</li>
+<li><code>q</code> exit the time machine buffer</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Here you can see <code>git-timemachine</code> in action:</p>
+
+<p><img src="/images/articles/timemachine.gif"></p>
+
+<p><strong>P.S.</strong></p>
+
+<p>This package is bundled with
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/22/become-an-emacs-redux-patron/">Become an Emacs Redux Patron</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-22T18:04:00+03:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2014</time>
+        
+         | <a href="/blog/2014/07/22/become-an-emacs-redux-patron/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Securing funding for OS projects and blogs (outside of displaying annoying ads)
+is a hard endeavor.  While I&#8217;d love to raise enough cash to work on
+CIDER, projectile and Emacs itself for an entire year through some
+wildly successful crowdfunding campaign, that&#8217;s unlikely to ever
+happen.</p>
+
+<p>That said, I recently discovered an interesting alternative to one-off
+crowdfunding campaigns called <a href="http://gratipay.com">gratipay</a>.
+Self-described as <code>sustainable crowdfunding</code> (meaning people will get
+microdonations (say half a buck) from their patrons each week) it seems like a
+reasonable way to raise a modest sum of money so you could work on
+open-source projects more than your regular schedule might permit.</p>
+
+<p>So, if you like Emacs Redux and the Emacs projects in which I&#8217;m involved like:</p>
+
+<ul>
+<li><a href="https://github.com/bbatsov/prelude">Prelude</a> - An Emacs distribution built on top of GNU Emacs 24</li>
+<li><a href="https://github.com/bbatsov/projectile">Projectile</a> - Project Interaction Library for Emacs, that stays out of your way</li>
+<li><a href="https://github.com/clojure-emacs/clojure-mode">clojure-mode</a> - A major mode for programming in Clojure</li>
+<li><a href="https://github.com/clojure-emacs/cider">cider</a> - A Clojure programming environment for Emacs</li>
+<li><a href="https://github.com/bbatsov/guru-mode">guru-mode</a> - An annoying companion on your journey to Emacs mastery</li>
+<li><a href="https://github.com/bbatsov/projectile">rubocop-emacs</a> - Emacs integration for <a href="https://github.com/bbatsov/rubocop">RuboCop</a></li>
+<li><a href="https://github.com/bbatsov/zenburn-emacs">zenburn-emacs</a> - The Zenburn color theme, ported to Emacs</li>
+<li><a href="https://github.com/bbatsov/solarized-emacs">solarized-emacs</a> - The Solarized color theme, ported to Emacs</li>
+<li><a href="https://github.com/lunaryorn/puppet-mode">puppet-mode</a> - A mode for editing Puppet 3 manifests</li>
+<li><a href="https://github.com/chrisbarrett/swift-mode">swift-mode</a> - A mode for editing Swift code</li>
+</ul>
+
+
+<p>consider supporting my work via Gratipay.</p>
+
+<p><a href="https://gratipay.com/bbatsov"><img src="https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png" alt="Support via Gratipay" /></a></p>
+
+<p><strong>P.S.</strong></p>
+
+<p>Alternatively you can use PayPal.</p>
+
+<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=3J4QE5QBJU84Q"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="Paypal" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/22/new-emacs-blogs/">New Emacs Blogs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-22T17:43:00+03:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2014</time>
+        
+         | <a href="/blog/2014/07/22/new-emacs-blogs/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The problem with Emacs blogs is one can never have enough of them (especially the good ones).</p>
+
+<p>I&#8217;d like to draw my readers attention to two new blogs:</p>
+
+<h3>lunarsite</h3>
+
+<p><a href="http://www.lunaryorn.com/">lunarsite</a> is not exactly new (it was
+started in March 2014), but I don&#8217;t think enough people have come
+across it, so I&#8217;m mentioning it here anyway. It&#8217;s operated by one of
+the most prolific members of the Emacs community in recent years - the
+great <a href="http://www.lunaryorn.com/pages/about.html">Sebastian Wiesner</a>
+(of <code>flycheck</code> and <code>cask</code> fame).</p>
+
+<p>If you&#8217;re thinking of writing your first major mode - you&#8217;ll find some
+great advice there.</p>
+
+<h3>Endless Parentheses</h3>
+
+<p><a href="http://endlessparentheses.com/">Endless Parentheses</a> is a brand new blog started by
+<a href="https://github.com/Bruce-Connor">Arthur Malabarba</a>. It&#8217;s dedicated to
+concise posts on improving your Emacs productivity.</p>
+
+<p>The content so far is similar to the articles I write here, so if you like <code>Emacs Redux</code>
+you&#8217;ll likely enjoy <code>Endless Parentheses</code> as well.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/18/quickly-find-emacs-lisp-sources/">Quickly Find Emacs Lisp Sources</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-18T16:26:00+03:00" pubdate data-updated="true">Jun 18<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/06/18/quickly-find-emacs-lisp-sources/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One thing Emacs users deal all the time is looking for the source of
+various libraries and function or variable definitions.  Typically this
+involves the use of commands like <code>C-h f</code> (<code>describe-function</code>), <code>C-h v</code>
+(<code>describe-variable</code>) and <code>C-h k</code> (<code>describe-key</code>) and jumping to the source from the help buffer those commands produce.
+Let&#8217;s see if we can improve upon this workflow.</p>
+
+<h3>find-func</h3>
+
+<p>Enter the built-in Emacs library <code>find-func</code>. It provides a myriad of useful commands to help us quickly locate sources.
+Let&#8217;s take a brief look at some of them.</p>
+
+<ul>
+<li>You can find the source of a library with <code>M-x find-library</code>. If you want to find the source of <code>ido</code> you can do so like this:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>M-x find-library RET ido RET</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&#8217;d suggest binding the command to <code>C-h C-l</code> for quick access:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-l&quot;</span><span class="p">)</span> <span class="ss">&#39;find-library</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>You can find the source of a function definition with <code>M-x find-function</code>. Here&#8217;s an example:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="nv">M-x</span> <span class="nv">find-function</span> <span class="nv">RET</span> <span class="nv">find-function</span> <span class="nv">RET</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&#8217;d suggest binding the command to <code>C-h C-f</code> for quick access:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-f&quot;</span><span class="p">)</span> <span class="ss">&#39;find-function</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can actually do one better - we can directly jump to a command
+definition using a keybinding of the command with <code>M-x
+find-function-on-key</code>. Here&#8217;s how we can find the source the command
+bound to <code>C-a</code> (<code>beginning-of-line</code>):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="nv">M-x</span> <span class="nv">find-function-on-key</span> <span class="nv">RET</span> <span class="nv">C-a</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&#8217;d suggest binding the command to <code>C-h C-k</code> for quick access:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-k&quot;</span><span class="p">)</span> <span class="ss">&#39;find-function-on-key</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>You can find the source of a variable definition with <code>M-x find-variable</code>. Here&#8217;s an example:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="nv">M-x</span> <span class="nv">find-variable</span> <span class="nv">RET</span> <span class="nv">large-file-warning-threshold</span> <span class="nv">RET</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&#8217;d suggest binding the command to <code>C-h C-v</code> for quick access:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-v&quot;</span><span class="p">)</span> <span class="ss">&#39;find-variable</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>The library provides other useful commands as well - like
+<code>find-function-at-point</code> and <code>find-variable-at-point</code>.</p>
+
+<p>If you don&#8217;t like the keybindings I suggested you can use
+<code>find-function-setup-keys</code> instead.  This will give you keybindings
+like <code>C-x F</code>, <code>C-x V</code>, <code>C-f K</code> (plus a few extra for commands like
+<code>find-funtion-other-window</code>).</p>
+
+<h3>elisp-slime-nav</h3>
+
+<p>Another really cool way to browse Elisp sources (and documentation) is the third-party package
+<a href="https://github.com/purcell/elisp-slime-nav">elisp-slime-nav</a>. Assuming you&#8217;ve installed it already you can
+enabled it like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;elisp-slime-nav</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">hook</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">emacs-lisp-mode-hook</span> <span class="nv">ielm-mode-hook</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="nv">hook</span> <span class="ss">&#39;elisp-slime-nav-mode</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once this is done you&#8217;ll be able to jump to the source of the Emacs
+Lisp object at point (function or variable) with <code>M-.</code> (as in SLIME
+and CIDER for Common Lisp and Clojure respectively) and jump back with
+<code>M-,</code>. You can also see the description of the object at point using
+<code>C-c C-d</code> (or <code>C-c C-d d</code>).</p>
+
+<p>That&#8217;s all for today, folks!</p>
+
+<p><strong>P.S.</strong></p>
+
+<p>All the suggested keybindings are present out-of-the-box in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>. <code>elisp-slime-nav</code> is also
+enabled out-of-the box in Prelude.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/16/melpa-stable/">MELPA Stable</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-16T14:52:00+03:00" pubdate data-updated="true">May 16<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/16/melpa-stable/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We all know and love the
+<a href="http://melpa.milkbox.net/#/">MELPA package repository</a>. At least we
+all know it, but not everyone loves the idea of using package
+snapshots.  Some people would rather use only <em>stable</em> package
+releases and that&#8217;s understandable. Unfortunately the major community
+repository for stable packages <a href="http://marmalade-repo.org/">Marmalade</a>
+is often plagued by technical issues (that should be fixed once its
+<code>elnode</code>-powered rewrite is ready) and stale packages (due to the fact
+the sometimes people upload packages they don&#8217;t own there and stop
+updating them after a while).</p>
+
+<p>Now there&#8217;s an alternative to Marmalade, which offers a MELPA-like
+experience - <a href="http://melpa-stable.milkbox.net/#/">MELPA stable</a>. It
+offers stable packages built automatically from <code>git</code> tags, meaning
+the only thing you have to do to release a new version of a package
+(assuming there&#8217;s a MELPA recipe for it, of course) is to tag the release in
+<code>git</code>. No more stale packages! No more manual package uploads!</p>
+
+<p>To use the new repo add this to your Emacs config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
+</span><span class='line'><span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;melpa-stable&quot;</span> <span class="o">.</span> <span class="s">&quot;http://melpa-stable.milkbox.net/packages/&quot;</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Currently more than 500 packages are available for installation there.
+That number is bound to grow (a lot).</p>
+
+<p>By the way, the maintainers of <code>MELPA</code> are looking for help to update
+the home page of the stable package archive.  Currently it&#8217;s the same
+as the one of the snapshot archive, which is a bit confusing
+(especially regarding installation instructions). If you&#8217;d like to
+help fork and improve the
+<a href="https://github.com/milkypostman/melpa/tree/master/html">page&#8217;s code on GitHub</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/16/opening-large-files/">Opening Large Files</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-16T12:37:00+03:00" pubdate data-updated="true">May 16<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/16/opening-large-files/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I guess everyone has seen the following warning (at some point or
+another) when trying to open a relatively large file in Emacs:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>File foo.bar is large (XX.XM), really open?</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By default Emacs will display this warning for every file bigger than
+10MB, which is quite annoying (conservative), especially given the
+fact that on any modern computer even much bigger files will be loaded
+almost instantaneously and won&#8217;t slow down Emacs significantly.</p>
+
+<p>You can adjust this behavior by altering the value of the
+<code>large-file-warning-threshold</code> variable. I&#8217;d suggest setting it to
+something like 100MB:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; warn when opening files bigger than 100MB</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">large-file-warning-threshold</span> <span class="mi">100000000</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Alternative, you can set it to <code>nil</code>, which will suppress the
+warning permanently, regardless of the size of the file you&#8217;re trying to open.</p>
+
+<p><strong>P.S.</strong> By the way, it&#8217;s not particularly wise to edit <strong>huge</strong> files
+(say bigger than 1GB) in Emacs directly.  If you need to do something
+like this I&#8217;d suggest taking a look at the excellent
+<a href="https://github.com/m00natic/vlfi">vlfi</a> package.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/16/emacs-chat-next-monday/">Emacs Chat Next Monday</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-16T12:15:00+03:00" pubdate data-updated="true">May 16<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/16/emacs-chat-next-monday/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Next Monday (19.05.2014) I&#8217;ll take part in
+<a href="http://sachachua.com/blog/">Sacha Chua</a>&#8217;s
+<a href="http://sachachua.com/blog/emacs-chat/">Emacs Chat series</a>.  Join us
+at
+<a href="https://plus.google.com/events/cgqo5hbafehh5ohptpn8uusld4o">Google Hangouts</a>
+and feel free to ask me anything you&#8217;d like regarding Emacs.</p>
+
+<p>See you soon!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Emacs Redux</h1>
+  <p>Emacs Redux&#8217;s mission is to hone your Emacs skills and increase your appreciation for Emacs&#8217;s might and magic.
+  You can show your love for Emacs Redux via Gratipay:</p>
+  <a href="https://www.gratipay.com/bbatsov"><img src="https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png"></img></a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/lossage/">Lossage</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/23/uptime/">Uptime</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+     <h1>Twitter</h1>
+     <!-- PASTE THE WIDGET CODE HERE -->
+     <a class="twitter-timeline" href="https://twitter.com/bbatsov" data-widget-id="382536919663386624">Tweets by @bbatsov</a>
+     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ </section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/bbatsov">@bbatsov</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'bbatsov',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Bozhidar Batsov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'emacsredux';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

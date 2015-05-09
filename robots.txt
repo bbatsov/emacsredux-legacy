@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://bbatsov.github.com/emacsredux/sitemap.xml 

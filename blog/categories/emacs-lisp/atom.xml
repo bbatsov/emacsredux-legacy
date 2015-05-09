@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Emacs Lisp | Emacs Redux]]></title>
+  <link href="http://bbatsov.github.com/emacsredux/blog/categories/emacs-lisp/atom.xml" rel="self"/>
+  <link href="http://bbatsov.github.com/emacsredux/"/>
+  <updated>2015-05-09T14:28:00+03:00</updated>
+  <id>http://bbatsov.github.com/emacsredux/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Remove variable &amp; function definitions]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2013/03/26/remove-variable-and-function-definitions/"/>
+    <updated>2013-03-26T17:15:00+02:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2013/03/26/remove-variable-and-function-definitions</id>
+    <content type="html"><![CDATA[<p>From time to time you might want to void (unbind) a variable or a
+function definition in Emacs. Most often you'll probably be dealing
+with variables created with <code>defvar</code>, whose values you'll want to
+update.  The magic functions you need are the following:</p>
+
+<p><code>cl
+;; this will make the symbol my-nasty-variable's value void
+(makunbound 'my-nasty-variable)
+;; this will make the symbol my-nasty-function's
+;; function definition void
+(fmakunbound 'my-nasty-function)
+</code></p>
+
+<p>The names aren't exactly intuitive and even I happen to forget them from time to
+time.</p>
+]]></content>
+  </entry>
+  
+</feed>

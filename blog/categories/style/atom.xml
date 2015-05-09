@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: style | Emacs Redux]]></title>
+  <link href="http://bbatsov.github.com/emacsredux/blog/categories/style/atom.xml" rel="self"/>
+  <link href="http://bbatsov.github.com/emacsredux/"/>
+  <updated>2015-05-09T14:28:00+03:00</updated>
+  <id>http://bbatsov.github.com/emacsredux/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs Lisp Style Guide]]></title>
+    <link href="http://bbatsov.github.com/emacsredux/blog/2014/09/04/emacs-lisp-style-guide/"/>
+    <updated>2014-09-04T15:00:00+03:00</updated>
+    <id>http://bbatsov.github.com/emacsredux/blog/2014/09/04/emacs-lisp-style-guide</id>
+    <content type="html"><![CDATA[<p>I've started working on a community
+<a href="https://github.com/bbatsov/emacs-lisp-style-guide">Emacs Lisp style guide</a>.
+My goal is to create a comprehensive document similar to the
+<a href="https://github.com/bbatsov/clojure-style-guide">Clojure</a> and
+<a href="https://github.com/bbatsov/ruby-style-guide">Ruby</a> community style
+guides.</p>
+
+<p>Such a document would be a great starting point for many newcomers to
+the Emacs community and should increase the overall quality of the
+code produced by it.  There's much to be documented about code layout,
+preferred syntactic conventions, major and minor mode definitions,
+etc. and I obviously can't know the best practices about everything so
+I'll need a lot of help.</p>
+
+<p>Of course, we already have the official
+<a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Tips.html#Tips">coding guidelines</a>,
+but they are a bit light on examples, rationale, etc. Hopefully the community style guide
+will manage to fill any gaps in them and in good time portions of it will find their place
+in the official documentation.</p>
+
+<p>I'm inviting all members of our community interested in promoting good
+Emacs Lisp practices to join the development of this document!</p>
+]]></content>
+  </entry>
+  
+</feed>
