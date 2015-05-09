@@ -4,7 +4,7 @@
   <title><![CDATA[Category: osx | Emacs Redux]]></title>
   <link href="http://bbatsov.github.com/emacsredux/blog/categories/osx/atom.xml" rel="self"/>
   <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T14:33:32+03:00</updated>
+  <updated>2015-05-09T14:34:29+03:00</updated>
   <id>http://bbatsov.github.com/emacsredux/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -118,8 +118,10 @@ $ brew install coreutils
 
 <h2>Dash</h2>
 
-<p><a href="https://kapeli.com/dash">Dash</a> is the ultimately documentation
-browser. If you're using it you might want to install
+<p><a href="https://kapeli.com/dash">Dash</a> is the ultimately API documentation
+browser. I can't live without it!</p>
+
+<p>If you're using it as well, you might want to install
 <a href="https://github.com/stanaka/dash-at-point">dash-at-point</a>.</p>
 
 <h2>More goodies</h2>
