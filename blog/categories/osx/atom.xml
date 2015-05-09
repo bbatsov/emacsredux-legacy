@@ -4,7 +4,7 @@
   <title><![CDATA[Category: osx | Emacs Redux]]></title>
   <link href="http://bbatsov.github.com/emacsredux/blog/categories/osx/atom.xml" rel="self"/>
   <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T14:29:55+03:00</updated>
+  <updated>2015-05-09T14:33:32+03:00</updated>
   <id>http://bbatsov.github.com/emacsredux/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -66,12 +66,12 @@ mode (instead of in GUI mode).</p>
 
 <p>I heartily recommend you to remap your <em>Caps Lock</em> key to <em>Control</em>. This
 can be easily done via <em>Preferences -> Keyboard -> Modifier Keys</em>. If
-you're using a laptop keyboard or the bluetooth keyboard you'll
+you're using a laptop keyboard or the bluetooth keyboard you
 might want to remap your right <code>Option</code> key to <code>Control</code> as
 well. No one can use effectively Emacs without a right Control
 key. Remapping it is a bit more involved and requires the use of the
 third-party utility
-<a href="http://pqrs.org/macosx/keyremap4macbook/">KeyRemap4MacBook</a>.</p>
+<a href="http://pqrs.org/macosx/karabiner/">Karabiner</a>.</p>
 
 <p>If you're adventurous you might even try <a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">a crazier idea</a>.</p>
 
@@ -115,6 +115,12 @@ $ brew install coreutils
 <p><code>cl
 (setq insert-directory-program (executable-find "gls"))
 </code></p>
+
+<h2>Dash</h2>
+
+<p><a href="https://kapeli.com/dash">Dash</a> is the ultimately documentation
+browser. If you're using it you might want to install
+<a href="https://github.com/stanaka/dash-at-point">dash-at-point</a>.</p>
 
 <h2>More goodies</h2>
 
