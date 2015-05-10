@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: packages | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/packages/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/packages/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ido-vertical-mode]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/01/18/ido-vertical-mode/"/>
+    <link href="http://emacsredux.com/blog/2014/01/18/ido-vertical-mode/"/>
     <updated>2014-01-18T08:52:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/01/18/ido-vertical-mode</id>
+    <id>http://emacsredux.com/blog/2014/01/18/ido-vertical-mode</id>
     <content type="html"><![CDATA[<p>If you like <code>ido</code>, but don't like the way it displays the available
 completion candidates you might want to have a look at
 <a href="https://github.com/gempesaw/ido-vertical-mode.el">ido-vertical-mode</a>.</p>

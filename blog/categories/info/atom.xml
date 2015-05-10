@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: info | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/info/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/info/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Quickly Open an Info Manual]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/11/13/quickly-open-an-info-manual/"/>
+    <link href="http://emacsredux.com/blog/2014/11/13/quickly-open-an-info-manual/"/>
     <updated>2014-11-13T15:25:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/11/13/quickly-open-an-info-manual</id>
+    <id>http://emacsredux.com/blog/2014/11/13/quickly-open-an-info-manual</id>
     <content type="html"><![CDATA[<p>Every Emacs user knows that Emacs ships with plenty of built-in
 documentation in the <code>GNU info</code> format (they don't call it a
 self-documenting editor for no reason). Most Emacs users know how to

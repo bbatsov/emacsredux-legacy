@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Emacs | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/emacs/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/emacs/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Converting between symbols and strings]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/12/05/converting-between-symbols-and-strings/"/>
+    <link href="http://emacsredux.com/blog/2014/12/05/converting-between-symbols-and-strings/"/>
     <updated>2014-12-05T17:28:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/12/05/converting-between-symbols-and-strings</id>
+    <id>http://emacsredux.com/blog/2014/12/05/converting-between-symbols-and-strings</id>
     <content type="html"><![CDATA[<p>Sometimes you might need to convert a symbol to string (or vice versa) in Emacs Lisp. You start
 looking for functions like <code>symbol-to-string</code> and <code>string-to-symbol</code> but, alas, they do not seem exist.
 Do not despair! Such functions do actually exist, although their names are likely to surprise you:</p>

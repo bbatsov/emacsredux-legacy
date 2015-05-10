@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Generic | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/generic/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/generic/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Blastoff]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2013/03/26/blastoff/"/>
+    <link href="http://emacsredux.com/blog/2013/03/26/blastoff/"/>
     <updated>2013-03-26T13:17:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2013/03/26/blastoff</id>
+    <id>http://emacsredux.com/blog/2013/03/26/blastoff</id>
     <content type="html"><![CDATA[<p>While many people consider Emacs(and vim for that matter) a remnant of
 the Dark Ages of computing, we (the crazy Emacs devotees) know better!
 It's time to bring Emacs under the spotlight once more and showcase

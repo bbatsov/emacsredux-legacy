@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -14,10 +14,29 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Building MELPA packages locally]]></title>
+    <link href="http://emacsredux.com/blog/2015/05/10/building-melpa-packages-locally/"/>
+    <updated>2015-05-10T11:00:00+03:00</updated>
+    <id>http://emacsredux.com/blog/2015/05/10/building-melpa-packages-locally</id>
+    <content type="html"><![CDATA[<p>Don&#8217;t want to wait for the MELPA packages to be automatically rebuilt?
+Want to try out some package recipe before submitting it upstream? You can
+totally do this!</p>
+
+<p>Just clone the
+<a href="https://github.com/milkypostman/melpa">MELPA github repo</a>, open a
+recipe from it in Emacs and press <code>C-c C-c</code> (bound to the command
+<code>package-build-current-recipe</code>). Once the package is built you&#8217;ll be
+prompted to install it.</p>
+
+<p>Pretty neat, right?</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Emacs on OS X]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2015/05/09/emacs-on-os-x/"/>
+    <link href="http://emacsredux.com/blog/2015/05/09/emacs-on-os-x/"/>
     <updated>2015-05-09T13:31:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2015/05/09/emacs-on-os-x</id>
+    <id>http://emacsredux.com/blog/2015/05/09/emacs-on-os-x</id>
     <content type="html"><![CDATA[<h2>Prelude</h2>
 
 <p>In this article I&#8217;ll share with you a few tips and tricks about
@@ -145,9 +164,9 @@ Emacs experience on OS X nicer and more powerful!</p>
   
   <entry>
     <title type="html"><![CDATA[Clear Comint Buffers]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2015/01/18/clear-comint-buffers/"/>
+    <link href="http://emacsredux.com/blog/2015/01/18/clear-comint-buffers/"/>
     <updated>2015-01-18T21:57:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2015/01/18/clear-comint-buffers</id>
+    <id>http://emacsredux.com/blog/2015/01/18/clear-comint-buffers</id>
     <content type="html"><![CDATA[<p><code>comint</code> provides Emacs infrastructure for building command
 interpreters. It&#8217;s backing a lot of popular shell/REPL modes - like <code>eshell</code>,
 <code>inferior-lisp</code>, <code>inf-ruby</code>, <code>inf-clojure</code>, etc.</p>
@@ -185,9 +204,9 @@ functionality):</p>
   
   <entry>
     <title type="html"><![CDATA[Customizing the Fringes]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2015/01/18/customizing-the-fringes/"/>
+    <link href="http://emacsredux.com/blog/2015/01/18/customizing-the-fringes/"/>
     <updated>2015-01-18T09:41:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2015/01/18/customizing-the-fringes</id>
+    <id>http://emacsredux.com/blog/2015/01/18/customizing-the-fringes</id>
     <content type="html"><![CDATA[<p>On graphical displays, each Emacs window normally has narrow <strong>fringes</strong> (gutters/margins)
 on the left and right edges. The fringes are used to display symbols
 that provide information about the text in the window. You can type
@@ -279,9 +298,9 @@ look very good when the fringe is too small (e.g. less than 4 pixels).</p>
   
   <entry>
     <title type="html"><![CDATA[Lossage]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/12/23/lossage/"/>
+    <link href="http://emacsredux.com/blog/2014/12/23/lossage/"/>
     <updated>2014-12-23T17:35:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/12/23/lossage</id>
+    <id>http://emacsredux.com/blog/2014/12/23/lossage</id>
     <content type="html"><![CDATA[<p>Are you sure you&#8217;re using Emacs in an efficient way? Perhaps you&#8217;re
 overusing commands like <code>C-f</code> and <code>C-b</code> to navigate around when you
 can be using more efficient alternatives like <code>M-f</code> and <code>M-b</code> (or a
@@ -340,9 +359,9 @@ the last 300 keystrokes and its output looks like this:</p>
   
   <entry>
     <title type="html"><![CDATA[Uptime]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/12/23/uptime/"/>
+    <link href="http://emacsredux.com/blog/2014/12/23/uptime/"/>
     <updated>2014-12-23T17:28:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/12/23/uptime</id>
+    <id>http://emacsredux.com/blog/2014/12/23/uptime</id>
     <content type="html"><![CDATA[<p>Many Emacs users keep a single Emacs instance running for quite a while.
 I&#8217;ve had instances running for over a month. How do I know this? Unsurprisingly,
 there&#8217;s a built-in command for that:</p>
@@ -357,9 +376,9 @@ there&#8217;s a built-in command for that:</p>
   
   <entry>
     <title type="html"><![CDATA[Converting between symbols and strings]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/12/05/converting-between-symbols-and-strings/"/>
+    <link href="http://emacsredux.com/blog/2014/12/05/converting-between-symbols-and-strings/"/>
     <updated>2014-12-05T17:28:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/12/05/converting-between-symbols-and-strings</id>
+    <id>http://emacsredux.com/blog/2014/12/05/converting-between-symbols-and-strings</id>
     <content type="html"><![CDATA[<p>Sometimes you might need to convert a symbol to string (or vice versa) in Emacs Lisp. You start
 looking for functions like <code>symbol-to-string</code> and <code>string-to-symbol</code> but, alas, they do not seem exist.
 Do not despair! Such functions do actually exist, although their names are likely to surprise you:</p>
@@ -379,9 +398,9 @@ Do not despair! Such functions do actually exist, although their names are likel
   
   <entry>
     <title type="html"><![CDATA[Quickly Open an Info Manual]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/11/13/quickly-open-an-info-manual/"/>
+    <link href="http://emacsredux.com/blog/2014/11/13/quickly-open-an-info-manual/"/>
     <updated>2014-11-13T15:25:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/11/13/quickly-open-an-info-manual</id>
+    <id>http://emacsredux.com/blog/2014/11/13/quickly-open-an-info-manual</id>
     <content type="html"><![CDATA[<p>Every Emacs user knows that Emacs ships with plenty of built-in
 documentation in the <code>GNU info</code> format (they don&#8217;t call it a
 self-documenting editor for no reason). Most Emacs users know how to
@@ -422,9 +441,9 @@ commands. With <code>info</code> you&#8217;ll have to type the following:</p>
   
   <entry>
     <title type="html"><![CDATA[Emacs's Development has Migrated to Git]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/11/13/emacss-development-has-migrated-to-git/"/>
+    <link href="http://emacsredux.com/blog/2014/11/13/emacss-development-has-migrated-to-git/"/>
     <updated>2014-11-13T15:19:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/11/13/emacss-development-has-migrated-to-git</id>
+    <id>http://emacsredux.com/blog/2014/11/13/emacss-development-has-migrated-to-git</id>
     <content type="html"><![CDATA[<p>The long wait is over - Emacs&#8217;s development
 <a href="https://lists.gnu.org/archive/html/emacs-devel/2014-11/msg00681.html">has finally migrated from bazaar to git</a>.</p>
 
@@ -436,9 +455,9 @@ commands. With <code>info</code> you&#8217;ll have to type the following:</p>
   
   <entry>
     <title type="html"><![CDATA[Emacs 24.4]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/10/21/emacs-24-dot-4/"/>
+    <link href="http://emacsredux.com/blog/2014/10/21/emacs-24-dot-4/"/>
     <updated>2014-10-21T17:36:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/10/21/emacs-24-dot-4</id>
+    <id>http://emacsredux.com/blog/2014/10/21/emacs-24-dot-4</id>
     <content type="html"><![CDATA[<p>Emacs 24.4 <a href="http://lists.gnu.org/archive/html/emacs-devel/2014-10/msg00713.html">is finally out</a>!</p>
 
 <p>You can read about all the new features
@@ -454,9 +473,9 @@ about some of the more interesting features.</p>
   
   <entry>
     <title type="html"><![CDATA[Emacs Lisp Style Guide]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/09/04/emacs-lisp-style-guide/"/>
+    <link href="http://emacsredux.com/blog/2014/09/04/emacs-lisp-style-guide/"/>
     <updated>2014-09-04T15:00:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/09/04/emacs-lisp-style-guide</id>
+    <id>http://emacsredux.com/blog/2014/09/04/emacs-lisp-style-guide</id>
     <content type="html"><![CDATA[<p>I&#8217;ve started working on a community
 <a href="https://github.com/bbatsov/emacs-lisp-style-guide">Emacs Lisp style guide</a>.
 My goal is to create a comprehensive document similar to the
@@ -484,9 +503,9 @@ Emacs Lisp practices to join the development of this document!</p>
   
   <entry>
     <title type="html"><![CDATA[A peek at Emacs 24.4: superword-mode]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/"/>
+    <link href="http://emacsredux.com/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/"/>
     <updated>2014-08-27T18:24:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode</id>
+    <id>http://emacsredux.com/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode</id>
     <content type="html"><![CDATA[<p>In a previous post I wrote about
 <a href="http://emacsredux.com/blog/2013/04/21/camelcase-aware-editing/">camel-case aware editing with subword-mode</a>. Emacs
 24.4 adds a complementary minor mode called <code>superword-mode</code>, which
@@ -622,9 +641,9 @@ scenarios in which I&#8217;d enable it briefly to do some focused editing.</p>
   
   <entry>
     <title type="html"><![CDATA[A peek at Emacs 24.4: prettify-symbols-mode]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/"/>
+    <link href="http://emacsredux.com/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/"/>
     <updated>2014-08-25T16:30:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode</id>
+    <id>http://emacsredux.com/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode</id>
     <content type="html"><![CDATA[<p>Emacs 24.4 ships with a new minor mode called
 <code>prettify-symbols-mode</code>. Its purpose is to replace the standard text
 representation of various identifiers/symbols with a (arguably) more
@@ -702,9 +721,9 @@ tasteful and distasteful prettifications.</p>
   
   <entry>
     <title type="html"><![CDATA[Configure the scratch buffer's mode]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/07/25/configure-the-scratch-buffers-mode/"/>
+    <link href="http://emacsredux.com/blog/2014/07/25/configure-the-scratch-buffers-mode/"/>
     <updated>2014-07-25T15:23:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/07/25/configure-the-scratch-buffers-mode</id>
+    <id>http://emacsredux.com/blog/2014/07/25/configure-the-scratch-buffers-mode</id>
     <content type="html"><![CDATA[<p>Pretty much every Emacs user knows of the <code>*scratch*</code> buffer - after
 all it&#8217;s always present when you start your Emacs. If you&#8217;ve set
 <code>inhibit-startup-screen</code> to <code>t</code> (which I recommend) it will even be
@@ -757,9 +776,9 @@ contents. By default they are:</p>
   
   <entry>
     <title type="html"><![CDATA[Travel back and forward in git history]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/07/22/travel-back-and-forward-in-git-history/"/>
+    <link href="http://emacsredux.com/blog/2014/07/22/travel-back-and-forward-in-git-history/"/>
     <updated>2014-07-22T19:02:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/07/22/travel-back-and-forward-in-git-history</id>
+    <id>http://emacsredux.com/blog/2014/07/22/travel-back-and-forward-in-git-history</id>
     <content type="html"><![CDATA[<p>I recently discovered an extremely cool package called
 <a href="https://github.com/pidu/git-timemachine">git-timemachine</a> that allows
 you to step though the git history of the file you&#8217;re currently
@@ -783,7 +802,7 @@ editing in Emacs.</p>
 
 <p>Here you can see <code>git-timemachine</code> in action:</p>
 
-<p><img src="http://bbatsov.github.com/emacsredux/images/articles/timemachine.gif"></p>
+<p><img src="http://emacsredux.com/images/articles/timemachine.gif"></p>
 
 <p><strong>P.S.</strong></p>
 
@@ -794,9 +813,9 @@ editing in Emacs.</p>
   
   <entry>
     <title type="html"><![CDATA[Become an Emacs Redux patron]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/07/22/become-an-emacs-redux-patron/"/>
+    <link href="http://emacsredux.com/blog/2014/07/22/become-an-emacs-redux-patron/"/>
     <updated>2014-07-22T18:04:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/07/22/become-an-emacs-redux-patron</id>
+    <id>http://emacsredux.com/blog/2014/07/22/become-an-emacs-redux-patron</id>
     <content type="html"><![CDATA[<p>Securing funding for OS projects and blogs (outside of displaying annoying ads)
 is a hard endeavor.  While I&#8217;d love to raise enough cash to work on
 CIDER, projectile and Emacs itself for an entire year through some
@@ -840,9 +859,9 @@ open-source projects more than your regular schedule might permit.</p>
   
   <entry>
     <title type="html"><![CDATA[New Emacs blogs]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/07/22/new-emacs-blogs/"/>
+    <link href="http://emacsredux.com/blog/2014/07/22/new-emacs-blogs/"/>
     <updated>2014-07-22T17:43:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/07/22/new-emacs-blogs</id>
+    <id>http://emacsredux.com/blog/2014/07/22/new-emacs-blogs</id>
     <content type="html"><![CDATA[<p>The problem with Emacs blogs is one can never have enough of them (especially the good ones).</p>
 
 <p>I&#8217;d like to draw my readers attention to two new blogs:</p>
@@ -872,9 +891,9 @@ you&#8217;ll likely enjoy <code>Endless Parentheses</code> as well.</p>
   
   <entry>
     <title type="html"><![CDATA[Quickly find Emacs Lisp sources]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/06/18/quickly-find-emacs-lisp-sources/"/>
+    <link href="http://emacsredux.com/blog/2014/06/18/quickly-find-emacs-lisp-sources/"/>
     <updated>2014-06-18T16:26:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/06/18/quickly-find-emacs-lisp-sources</id>
+    <id>http://emacsredux.com/blog/2014/06/18/quickly-find-emacs-lisp-sources</id>
     <content type="html"><![CDATA[<p>One thing Emacs users deal all the time is looking for the source of
 various libraries and function or variable definitions.  Typically this
 involves the use of commands like <code>C-h f</code> (<code>describe-function</code>), <code>C-h v</code>
@@ -996,9 +1015,9 @@ enabled out-of-the box in Prelude.</p>
   
   <entry>
     <title type="html"><![CDATA[MELPA Stable]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/05/16/melpa-stable/"/>
+    <link href="http://emacsredux.com/blog/2014/05/16/melpa-stable/"/>
     <updated>2014-05-16T14:52:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/05/16/melpa-stable</id>
+    <id>http://emacsredux.com/blog/2014/05/16/melpa-stable</id>
     <content type="html"><![CDATA[<p>We all know and love the
 <a href="http://melpa.milkbox.net/#/">MELPA package repository</a>. At least we
 all know it, but not everyone loves the idea of using package
@@ -1040,9 +1059,9 @@ help fork and improve the
   
   <entry>
     <title type="html"><![CDATA[Opening Large Files]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/05/16/opening-large-files/"/>
+    <link href="http://emacsredux.com/blog/2014/05/16/opening-large-files/"/>
     <updated>2014-05-16T12:37:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/05/16/opening-large-files</id>
+    <id>http://emacsredux.com/blog/2014/05/16/opening-large-files</id>
     <content type="html"><![CDATA[<p>I guess everyone has seen the following warning (at some point or
 another) when trying to open a relatively large file in Emacs:</p>
 
@@ -1073,22 +1092,6 @@ warning permanently, regardless of the size of the file you&#8217;re trying to o
 (say bigger than 1GB) in Emacs directly.  If you need to do something
 like this I&#8217;d suggest taking a look at the excellent
 <a href="https://github.com/m00natic/vlfi">vlfi</a> package.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Emacs Chat Next Monday]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/05/16/emacs-chat-next-monday/"/>
-    <updated>2014-05-16T12:15:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/05/16/emacs-chat-next-monday</id>
-    <content type="html"><![CDATA[<p>Next Monday (19.05.2014) I&#8217;ll take part in
-<a href="http://sachachua.com/blog/">Sacha Chua</a>&#8217;s
-<a href="http://sachachua.com/blog/emacs-chat/">Emacs Chat series</a>.  Join us
-at
-<a href="https://plus.google.com/events/cgqo5hbafehh5ohptpn8uusld4o">Google Hangouts</a>
-and feel free to ask me anything you&#8217;d like regarding Emacs.</p>
-
-<p>See you soon!</p>
 ]]></content>
   </entry>
   

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Programming | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/programming/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/programming/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[prog-mode: The parent of all programming modes]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2013/04/05/prog-mode-the-parent-of-all-programming-modes/"/>
+    <link href="http://emacsredux.com/blog/2013/04/05/prog-mode-the-parent-of-all-programming-modes/"/>
     <updated>2013-04-05T12:04:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2013/04/05/prog-mode-the-parent-of-all-programming-modes</id>
+    <id>http://emacsredux.com/blog/2013/04/05/prog-mode-the-parent-of-all-programming-modes</id>
     <content type="html"><![CDATA[<p>You probably know that major modes in Emacs can derive(inherit)
 functionality from a parent major mode.</p>
 

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: osx | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/osx/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/osx/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs on OS X]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2015/05/09/emacs-on-os-x/"/>
+    <link href="http://emacsredux.com/blog/2015/05/09/emacs-on-os-x/"/>
     <updated>2015-05-09T13:31:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2015/05/09/emacs-on-os-x</id>
+    <id>http://emacsredux.com/blog/2015/05/09/emacs-on-os-x</id>
     <content type="html"><![CDATA[<h2>Prelude</h2>
 
 <p>In this article I'll share with you a few tips and tricks about
@@ -139,9 +139,9 @@ Emacs experience on OS X nicer and more powerful!</p>
   
   <entry>
     <title type="html"><![CDATA[A peek at Emacs 24.4: sRGB colours on OS X]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/01/11/a-peek-at-emacs-24-dot-4-srgb-colours-on-os-x/"/>
+    <link href="http://emacsredux.com/blog/2014/01/11/a-peek-at-emacs-24-dot-4-srgb-colours-on-os-x/"/>
     <updated>2014-01-11T13:40:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/01/11/a-peek-at-emacs-24-dot-4-srgb-colours-on-os-x</id>
+    <id>http://emacsredux.com/blog/2014/01/11/a-peek-at-emacs-24-dot-4-srgb-colours-on-os-x</id>
     <content type="html"><![CDATA[<p>A while ago I wrote about a
 <a href="http://emacsredux.com/blog/2013/08/21/color-themes-redux/">colour theme problem specific to OS X</a>.
 Thankfully in Emacs 24.4 the OS X (a.k.a. NS) port of Emacs uses sRGB

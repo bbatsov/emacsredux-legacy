@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: melpa | Emacs Redux]]></title>
+  <link href="http://emacsredux.com/blog/categories/melpa/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Building MELPA packages locally]]></title>
+    <link href="http://emacsredux.com/blog/2015/05/10/building-melpa-packages-locally/"/>
+    <updated>2015-05-10T11:00:00+03:00</updated>
+    <id>http://emacsredux.com/blog/2015/05/10/building-melpa-packages-locally</id>
+    <content type="html"><![CDATA[<p>Don't want to wait for the MELPA packages to be automatically rebuilt?
+Want to try out some package recipe before submitting it upstream? You can
+totally do this!</p>
+
+<p>Just clone the
+<a href="https://github.com/milkypostman/melpa">MELPA github repo</a>, open a
+recipe from it in Emacs and press <code>C-c C-c</code> (bound to the command
+<code>package-build-current-recipe</code>). Once the package is built you'll be
+prompted to install it.</p>
+
+<p>Pretty neat, right?</p>
+]]></content>
+  </entry>
+  
+</feed>

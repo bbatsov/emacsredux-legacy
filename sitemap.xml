@@ -1,515 +1,459 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/03/26/blastoff/</loc>
+        <loc>http://emacsredux.com/blog/2013/03/26/blastoff/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/03/26/smarter-open-line/</loc>
+        <loc>http://emacsredux.com/blog/2013/03/26/smarter-open-line/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/26/remove-variable-and-function-definitions/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/26/manipulating-word-case/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/26/repeat-last-command/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/27/copy-filename-to-the-clipboard/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/27/open-file-in-external-program/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/27/indent-region-or-buffer/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/28/indent-defun/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/28/google/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/28/network-utilities/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/29/automatic-electric-indentation/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/29/automatic-electric-character-pairing/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/29/terminal-at-your-fingertips/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/30/kill-other-buffers/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/03/30/go-back-to-previous-window/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/01/playing-with-font-sizes/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/01/highlight-matching-parentheses/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/02/highlight-current-line/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/02/move-current-line-up-or-down/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/03/delete-file-and-buffer/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/03/easter-eggs/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/03/26/remove-variable-and-function-definitions/
+            http://emacsredux.com/blog/2013/04/05/prog-mode-the-parent-of-all-programming-modes/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/03/26/manipulating-word-case/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/03/26/repeat-last-command/</loc>
+        <loc>http://emacsredux.com/blog/2013/04/05/recently-visited-files/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/03/27/copy-filename-to-the-clipboard/
+            http://emacsredux.com/blog/2013/04/07/display-visited-files-path-in-the-frame-title/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
+        <loc>http://emacsredux.com/blog/2013/04/08/kill-line-backward/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/09/kill-whole-line/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/12/delete-selection-on-insert/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/18/evaluate-emacs-lisp-in-the-minibuffer/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/21/edit-files-as-root/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/21/camelcase-aware-editing/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/21/custom-config-for-shells/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/04/28/switch-to-previous-buffer/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/03/27/open-file-in-external-program/
+            http://emacsredux.com/blog/2013/04/28/execute-commands-ninja-style-with-key-chord-mode/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/03/27/indent-region-or-buffer/</loc>
+        <loc>http://emacsredux.com/blog/2013/04/29/start-command-or-switch-to-its-buffer/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/03/28/indent-defun/</loc>
+        <loc>http://emacsredux.com/blog/2013/05/02/manage-processes-with-proced/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/03/28/google/</loc>
+        <loc>http://emacsredux.com/blog/2013/05/04/rename-file-and-buffer/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/03/28/network-utilities/</loc>
+        <loc>http://emacsredux.com/blog/2013/05/04/erase-buffer/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/03/29/automatic-electric-indentation/
+            http://emacsredux.com/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
+        <loc>http://emacsredux.com/blog/2013/05/16/whitespace-cleanup/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/05/18/instant-access-to-init-dot-el/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/05/19/delete-whitespace-around-point/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/03/29/automatic-electric-character-pairing/
+            http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
+        <loc>http://emacsredux.com/blog/2013/05/30/joining-lines/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/03/29/terminal-at-your-fingertips/
+            http://emacsredux.com/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/03/30/kill-other-buffers/</loc>
+        <loc>http://emacsredux.com/blog/2013/06/05/continue-a-comment-on-the-next-line/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/06/13/using-emacs-as-a-database-client/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/06/15/open-line-above/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/06/15/deleting-windows/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/06/21/eval-and-replace/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/03/30/go-back-to-previous-window/
+            http://emacsredux.com/blog/2013/06/25/boost-performance-by-leveraging-byte-compilation/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/04/01/playing-with-font-sizes/</loc>
+        <loc>http://emacsredux.com/blog/2013/07/05/locate/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/07/09/go-to-column/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/04/01/highlight-matching-parentheses/
+            http://emacsredux.com/blog/2013/07/17/advise-multiple-commands-in-the-same-manner/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/04/02/highlight-current-line/</loc>
+        <loc>http://emacsredux.com/blog/2013/07/17/make-use-of-the-super-key/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/07/24/highlight-comment-annotations/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/07/25/increment-and-decrement-integer-at-point/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/08/21/color-themes-redux/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/08/26/search-youtube/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/09/05/version-checks/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/09/05/a-proper-replacement-for-flet/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/09/24/dired-jump/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/04/02/move-current-line-up-or-down/
+            http://emacsredux.com/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/04/03/delete-file-and-buffer/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/04/03/easter-eggs/</loc>
+        <loc>http://emacsredux.com/blog/2013/09/27/instant-access-to-your-shell-init-file/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/04/05/prog-mode-the-parent-of-all-programming-modes/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/04/05/recently-visited-files/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/04/07/display-visited-files-path-in-the-frame-title/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/04/08/kill-line-backward/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/04/09/kill-whole-line/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/04/12/delete-selection-on-insert/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/04/18/evaluate-emacs-lisp-in-the-minibuffer/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/04/21/edit-files-as-root/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/04/21/camelcase-aware-editing/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/04/21/custom-config-for-shells/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/04/28/switch-to-previous-buffer/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/04/28/execute-commands-ninja-style-with-key-chord-mode/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/04/29/start-command-or-switch-to-its-buffer/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/05/02/manage-processes-with-proced/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/05/04/rename-file-and-buffer/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/05/04/erase-buffer/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/05/16/whitespace-cleanup/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/05/18/instant-access-to-init-dot-el/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/05/19/delete-whitespace-around-point/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/05/30/joining-lines/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/06/05/continue-a-comment-on-the-next-line/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/06/13/using-emacs-as-a-database-client/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/06/15/open-line-above/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/06/15/deleting-windows/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/06/21/eval-and-replace/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/06/25/boost-performance-by-leveraging-byte-compilation/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/07/05/locate/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/07/09/go-to-column/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/07/17/advise-multiple-commands-in-the-same-manner/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/07/17/make-use-of-the-super-key/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/07/24/highlight-comment-annotations/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/07/25/increment-and-decrement-integer-at-point/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/08/21/color-themes-redux/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/08/26/search-youtube/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/09/05/version-checks/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/09/05/a-proper-replacement-for-flet/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/09/24/dired-jump/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/
+            http://emacsredux.com/blog/2013/11/01/highlight-matching-delimiters-with-smartparens/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/09/27/instant-access-to-your-shell-init-file/
+            http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/
+        </loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2013/12/31/a-peek-at-emacs-24-dot-4/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://emacsredux.com/blog/2013/12/31/a-peek-at-emacs-24-dot-4-smarter-show-paren-mode/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/11/01/highlight-matching-delimiters-with-smartparens/
+            http://emacsredux.com/blog/2014/01/01/a-peek-at-emacs-24-dot-4-rectangular-selection/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/
+            http://emacsredux.com/blog/2014/01/11/a-peek-at-emacs-24-dot-4-srgb-colours-on-os-x/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2013/12/31/a-peek-at-emacs-24-dot-4/</loc>
+        <loc>http://emacsredux.com/blog/2014/01/18/ido-vertical-mode/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2013/12/31/a-peek-at-emacs-24-dot-4-smarter-show-paren-mode/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/01/01/a-peek-at-emacs-24-dot-4-rectangular-selection/
+            http://emacsredux.com/blog/2014/01/19/a-peek-at-emacs-24-dot-4-auto-indentation-by-default/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/01/11/a-peek-at-emacs-24-dot-4-srgb-colours-on-os-x/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2014/01/18/ido-vertical-mode/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/01/19/a-peek-at-emacs-24-dot-4-auto-indentation-by-default/
+            http://emacsredux.com/blog/2014/02/02/a-peek-at-emacs-24-dot-4-new-string-manipulation-functions/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/02/02/a-peek-at-emacs-24-dot-4-new-string-manipulation-functions/
+            http://emacsredux.com/blog/2014/02/02/a-peek-at-emacs-24-dot-4-hash-table-keys-and-hash-table-values/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/02/02/a-peek-at-emacs-24-dot-4-hash-table-keys-and-hash-table-values/
+            http://emacsredux.com/blog/2014/03/01/a-peek-at-emacs-24-dot-4-delete-duplicate-lines/
         </loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/03/01/a-peek-at-emacs-24-dot-4-delete-duplicate-lines/
+            http://emacsredux.com/blog/2014/03/22/a-peek-at-emacs-24-dot-4-variadic-comparison-functions/
         </loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2014/04/05/which-function-mode/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2014/05/16/emacs-chat-next-monday/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2014/05/16/opening-large-files/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2014/05/16/melpa-stable/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2014/06/18/quickly-find-emacs-lisp-sources/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2014/07/22/new-emacs-blogs/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2014/07/22/become-an-emacs-redux-patron/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2014/07/22/travel-back-and-forward-in-git-history/</loc>
+        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2014/07/25/configure-the-scratch-buffers-mode/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
         <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/
+            http://emacsredux.com/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/
         </loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/03/22/a-peek-at-emacs-24-dot-4-variadic-comparison-functions/
-        </loc>
+        <loc>http://emacsredux.com/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2014/04/05/which-function-mode/</loc>
+        <loc>http://emacsredux.com/blog/2014/09/04/emacs-lisp-style-guide/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2014/05/16/emacs-chat-next-monday/</loc>
+        <loc>http://emacsredux.com/blog/2014/10/21/emacs-24-dot-4/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2014/05/16/opening-large-files/</loc>
+        <loc>http://emacsredux.com/blog/2014/11/13/emacss-development-has-migrated-to-git/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2014/05/16/melpa-stable/</loc>
+        <loc>http://emacsredux.com/blog/2014/11/13/quickly-open-an-info-manual/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/06/18/quickly-find-emacs-lisp-sources/
-        </loc>
+        <loc>http://emacsredux.com/blog/2014/12/05/converting-between-symbols-and-strings/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2014/07/22/new-emacs-blogs/</loc>
+        <loc>http://emacsredux.com/blog/2014/12/23/uptime/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/07/22/become-an-emacs-redux-patron/
-        </loc>
+        <loc>http://emacsredux.com/blog/2014/12/23/lossage/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/07/22/travel-back-and-forward-in-git-history/
-        </loc>
+        <loc>http://emacsredux.com/blog/2015/01/18/customizing-the-fringes/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/07/25/configure-the-scratch-buffers-mode/
-        </loc>
+        <loc>http://emacsredux.com/blog/2015/01/18/clear-comint-buffers/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/
-        </loc>
+        <loc>http://emacsredux.com/blog/2015/05/09/emacs-on-os-x/</loc>
+        <lastmod>2015-05-10T10:07:56+03:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/blog/2015/05/10/building-melpa-packages-locally/</loc>
+        <lastmod>2015-05-10T11:10:00+03:00</lastmod>
+    </url>
+    <url>
+        <loc>http://emacsredux.com/about/</loc>
         <lastmod>2015-02-15T10:58:05+02:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+        <loc>http://emacsredux.com/blog/archives/</loc>
+        <lastmod>2015-05-10T11:10:00+03:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2014/09/04/emacs-lisp-style-guide/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
+        <loc>http://emacsredux.com/</loc>
+        <lastmod>2015-05-10T11:10:00+03:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2014/10/21/emacs-24-dot-4/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/11/13/emacss-development-has-migrated-to-git/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/11/13/quickly-open-an-info-manual/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://bbatsov.github.com/emacsredux/blog/2014/12/05/converting-between-symbols-and-strings/
-        </loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2014/12/23/uptime/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2014/12/23/lossage/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2015/01/18/customizing-the-fringes/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2015/01/18/clear-comint-buffers/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/2015/05/09/emacs-on-os-x/</loc>
-        <lastmod>2015-05-09T23:50:38+03:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/about/</loc>
-        <lastmod>2015-02-15T10:58:05+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/blog/archives/</loc>
-        <lastmod>2015-05-09T23:50:38+03:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/</loc>
-        <lastmod>2015-05-09T23:50:38+03:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bbatsov.github.com/emacsredux/robots.txt</loc>
+        <loc>http://emacsredux.com/robots.txt</loc>
         <lastmod>2015-02-15T10:58:06+02:00</lastmod>
     </url>
     <url>
-        <loc>http://bbatsov.github.com/emacsredux/search.html</loc>
+        <loc>http://emacsredux.com/search.html</loc>
         <lastmod>2015-02-15T10:58:06+02:00</lastmod>
     </url>
 </urlset>

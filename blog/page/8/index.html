@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="It most text editors if you select a piece of text and press any
-key(that&#8217;s not bound to some command) the selection would be replaced
-by the &hellip;">
+  <meta name="description" content="The Emacs Lisp interpreter&#8217;s integration with Emacs is pervasive. One
+can evaluate Emacs Lisp just about everywhere in so many different
+ways. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ by the &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bbatsov.github.com/emacsredux/blog/page/8">
+  <link rel="canonical" href="http://emacsredux.com/blog/page/8">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
@@ -64,7 +64,7 @@ by the &hellip;">
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:bbatsov.github.com/emacsredux" />
+    <input type="hidden" name="q" value="site:emacsredux.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -81,6 +81,80 @@ by the &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/18/evaluate-emacs-lisp-in-the-minibuffer/">Evaluate Emacs Lisp in the Minibuffer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-18T14:44:00+03:00" pubdate data-updated="true">Apr 18<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/18/evaluate-emacs-lisp-in-the-minibuffer/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The Emacs Lisp interpreter&#8217;s integration with Emacs is pervasive. One
+can evaluate Emacs Lisp just about everywhere in so many different
+ways. One way I find particularly handy(especially for short snippets of
+code) is evaluating Emacs Lisp directly in the minibuffer. This is
+done with <code>M-:</code>(bound to the command <code>eval-expression</code>).</p>
+
+<p>Upon typing this magic keycombo you&#8217;ll be presented with the prompt
+<code>Eval:</code> in the minibuffer and there you can enter any Lisp
+expression. Hitting <code>Return</code> will result in the expression&#8217;s
+evaluation.</p>
+
+<p>There is one minor snafu with this, though - I&#8217;m addicted to
+<a href="http://emacsrocks.com/e14.html">Paredit</a>(for editing Lisp code at
+least) and Paredit is not automatically enabled in the
+minibuffer. Let&#8217;s change that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">conditionally-enable-paredit-mode</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Enable `paredit-mode&#39; in the minibuffer, during `eval-expression&#39;.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">eq</span> <span class="nv">this-command</span> <span class="ss">&#39;eval-expression</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">paredit-mode</span> <span class="mi">1</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;minibuffer-setup-hook</span> <span class="ss">&#39;conditionally-enable-paredit-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Evaluate this snippet and try <code>M-:</code> again. If you&#8217;re like me - the
+results will please you.</p>
+
+<p>It should come as no surprise that
+<a href="https://github.com/bbatsov/prelude">Prelude</a> enables Paredit by
+default for <code>eval-expression</code>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -766,61 +840,6 @@ prefices).</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/02/highlight-current-line/">Highlight Current Line</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-02T11:50:00+03:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/02/highlight-current-line/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Just about every modern editor and IDE these days highlights the line
-you&#8217;re currently on, which I find extremely helpful. Emacs doesn&#8217;t do
-this out-of-the-box, but provides the means to do so - the built-in
-global minor mode <code>global-hl-line-mode</code>. To take it out for a spin
-just add the following line to your Emacs config:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-hl-line-mode</span> <span class="mi">+1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In case you don&#8217;t like the highlighting color you can change it by
-adjusting the value of the <code>hl-line-face</code> face. Most decent color themes
-pick a pretty good value for it, so normally you should not bother
-changing it manually.</p>
-
-<p><code>global-hl-line-mode</code> is enabled out-of-the-box in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -844,6 +863,10 @@ changing it manually.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA packages locally</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
       </li>
     
@@ -857,10 +880,6 @@ changing it manually.</p>
     
       <li class="post">
         <a href="/blog/2014/12/23/lossage/">Lossage</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/12/23/uptime/">Uptime</a>
       </li>
     
   </ul>

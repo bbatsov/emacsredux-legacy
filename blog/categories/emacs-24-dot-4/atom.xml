@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Emacs 24.4 | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/emacs-24-dot-4/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/emacs-24-dot-4/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A peek at Emacs 24.4: hash-table-keys &amp; hash-table-values]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/02/02/a-peek-at-emacs-24-dot-4-hash-table-keys-and-hash-table-values/"/>
+    <link href="http://emacsredux.com/blog/2014/02/02/a-peek-at-emacs-24-dot-4-hash-table-keys-and-hash-table-values/"/>
     <updated>2014-02-02T09:59:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/02/02/a-peek-at-emacs-24-dot-4-hash-table-keys-and-hash-table-values</id>
+    <id>http://emacsredux.com/blog/2014/02/02/a-peek-at-emacs-24-dot-4-hash-table-keys-and-hash-table-values</id>
     <content type="html"><![CDATA[<p>While Emacs has a pretty good hash-table API, two functions were
 rather mysteriously absent from it - <code>hash-table-keys</code> and
 <code>hash-table-values</code> (which would return a list of all keys/values in a
@@ -52,9 +52,9 @@ library <code>subr-x</code>.</p>
   
   <entry>
     <title type="html"><![CDATA[A peek at Emacs 24.4: New string manipulation functions]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/02/02/a-peek-at-emacs-24-dot-4-new-string-manipulation-functions/"/>
+    <link href="http://emacsredux.com/blog/2014/02/02/a-peek-at-emacs-24-dot-4-new-string-manipulation-functions/"/>
     <updated>2014-02-02T09:29:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/02/02/a-peek-at-emacs-24-dot-4-new-string-manipulation-functions</id>
+    <id>http://emacsredux.com/blog/2014/02/02/a-peek-at-emacs-24-dot-4-new-string-manipulation-functions</id>
     <content type="html"><![CDATA[<p>Emacs has often been criticized for failing to provide a more
 extensive string manipulation API (compared to that of programming
 languages like Ruby and Perl, for instance).  As many programs

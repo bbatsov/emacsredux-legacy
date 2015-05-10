@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Editing | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/editing/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/editing/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Highlight matching delimiters with smartparens]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2013/11/01/highlight-matching-delimiters-with-smartparens/"/>
+    <link href="http://emacsredux.com/blog/2013/11/01/highlight-matching-delimiters-with-smartparens/"/>
     <updated>2013-11-01T16:32:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2013/11/01/highlight-matching-delimiters-with-smartparens</id>
+    <id>http://emacsredux.com/blog/2013/11/01/highlight-matching-delimiters-with-smartparens</id>
     <content type="html"><![CDATA[<p>Some time ago I wrote about
 <a href="http://emacsredux.com/blog/2013/04/01/highlight-matching-parentheses/">highlighting matching parentheses</a>
 with <code>show-paren-mode</code>. This is definitely useful, but it's kind of
@@ -50,9 +50,9 @@ replaced by <code>show-smartparens-mode</code> some time ago.</p>
   
   <entry>
     <title type="html"><![CDATA[Open line above]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2013/06/15/open-line-above/"/>
+    <link href="http://emacsredux.com/blog/2013/06/15/open-line-above/"/>
     <updated>2013-06-15T09:04:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2013/06/15/open-line-above</id>
+    <id>http://emacsredux.com/blog/2013/06/15/open-line-above</id>
     <content type="html"><![CDATA[<p>This post continues a topic that was introduced in
 <a href="/blog/2013/03/26/smarter-open-line/">smarter open-line</a> few months
 back.</p>
@@ -104,9 +104,9 @@ one.</p>
   
   <entry>
     <title type="html"><![CDATA[Continue a comment on the next line]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2013/06/05/continue-a-comment-on-the-next-line/"/>
+    <link href="http://emacsredux.com/blog/2013/06/05/continue-a-comment-on-the-next-line/"/>
     <updated>2013-06-05T16:12:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2013/06/05/continue-a-comment-on-the-next-line</id>
+    <id>http://emacsredux.com/blog/2013/06/05/continue-a-comment-on-the-next-line</id>
     <content type="html"><![CDATA[<p>When writing code from time to time we have to write comments as
 well. Most of the time programmers are using single-line comments,
 denoted by some special starting character(s), like <code>#</code>, <code>//</code>,
@@ -157,9 +157,9 @@ several lines, use <code>C-j</code> (<code>newline-and-indent</code>).</p>
   
   <entry>
     <title type="html"><![CDATA[Joining lines]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2013/05/30/joining-lines/"/>
+    <link href="http://emacsredux.com/blog/2013/05/30/joining-lines/"/>
     <updated>2013-05-30T16:27:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2013/05/30/joining-lines</id>
+    <id>http://emacsredux.com/blog/2013/05/30/joining-lines</id>
     <content type="html"><![CDATA[<p>Often, while editing, you'll want to compress a few lines into
 one. Here's a simple example to illustrate the problem at hand. We
 want to convert this bit of Ruby code:</p>
@@ -214,9 +214,9 @@ sense to use something like <code>C-^</code> for the new command:</p>
   
   <entry>
     <title type="html"><![CDATA[Smarter navigation to the beginning of a line]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/"/>
+    <link href="http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/"/>
     <updated>2013-05-22T17:48:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line</id>
+    <id>http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line</id>
     <content type="html"><![CDATA[<p>In Emacs there are two essential commands when you have to go the
 beginning of a line - <code>move-beginning-of-line</code>(bound to <code>C-a</code>) and
 <code>back-to-indentation</code>(bound to <code>M-m</code>). The first takes you to the

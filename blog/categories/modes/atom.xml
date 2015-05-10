@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Modes | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/modes/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/modes/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Removing/Altering key bindings from minor mode keymaps]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/"/>
+    <link href="http://emacsredux.com/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/"/>
     <updated>2013-09-25T12:26:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps</id>
+    <id>http://emacsredux.com/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps</id>
     <content type="html"><![CDATA[<p>Often minor modes don't respect standard keybinding conventions and
 use some user reserved keys (like <code>C-c a</code>). Occasionally two minor
 modes would have conflicting keybindings or a minor mode would

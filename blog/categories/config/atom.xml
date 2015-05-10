@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: config | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/config/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/config/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Opening Large Files]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/05/16/opening-large-files/"/>
+    <link href="http://emacsredux.com/blog/2014/05/16/opening-large-files/"/>
     <updated>2014-05-16T12:37:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/05/16/opening-large-files</id>
+    <id>http://emacsredux.com/blog/2014/05/16/opening-large-files</id>
     <content type="html"><![CDATA[<p>I guess everyone has seen the following warning (at some point or
 another) when trying to open a relatively large file in Emacs:</p>
 

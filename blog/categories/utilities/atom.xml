@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: utilities | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/utilities/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/utilities/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A proper replacement for flet]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2013/09/05/a-proper-replacement-for-flet/"/>
+    <link href="http://emacsredux.com/blog/2013/09/05/a-proper-replacement-for-flet/"/>
     <updated>2013-09-05T14:38:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2013/09/05/a-proper-replacement-for-flet</id>
+    <id>http://emacsredux.com/blog/2013/09/05/a-proper-replacement-for-flet</id>
     <content type="html"><![CDATA[<p>The popular <code>flet</code> macro was deprecated in Emacs 24.3 and replaced with two similar macros - <code>cl-flet</code> and <code>cl-letf</code>.</p>
 
 <p><code>flet</code> was used to temporarily override function definitions.
@@ -50,9 +50,9 @@ true drop-in <code>flet</code> replacement (with some extra magic baked in) -
   
   <entry>
     <title type="html"><![CDATA[Version checks]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2013/09/05/version-checks/"/>
+    <link href="http://emacsredux.com/blog/2013/09/05/version-checks/"/>
     <updated>2013-09-05T14:25:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2013/09/05/version-checks</id>
+    <id>http://emacsredux.com/blog/2013/09/05/version-checks</id>
     <content type="html"><![CDATA[<p>Often the code you're writing would be depending on the version of
 some external tool (say <code>git</code>) or Emacs itself. Version checks in Emacs are pretty
 easy - just use the built-in functions <code>version=</code>, <code>version&lt;=</code> or <code>version=</code>.</p>

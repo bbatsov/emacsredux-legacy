@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Productivity | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/productivity/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/productivity/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A crazy productivity boost: Remap Return to Control]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/"/>
+    <link href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/"/>
     <updated>2013-11-12T17:09:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control</id>
+    <id>http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control</id>
     <content type="html"><![CDATA[<p>People have always complained about the awkward positioning of
 the two <code>Control</code> keys on modern keyboards. That's a fact! Effective Emacs
 usage is heavily dependent on the <code>Control</code> keys (yep, both of

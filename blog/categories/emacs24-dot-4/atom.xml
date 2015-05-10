@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Emacs24.4 | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/emacs24-dot-4/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/emacs24-dot-4/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A peek at Emacs 24.4: superword-mode]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/"/>
+    <link href="http://emacsredux.com/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/"/>
     <updated>2014-08-27T18:24:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode</id>
+    <id>http://emacsredux.com/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode</id>
     <content type="html"><![CDATA[<p>In a previous post I wrote about
 <a href="http://emacsredux.com/blog/2013/04/21/camelcase-aware-editing/">camel-case aware editing with subword-mode</a>. Emacs
 24.4 adds a complementary minor mode called <code>superword-mode</code>, which
@@ -103,9 +103,9 @@ scenarios in which I'd enable it briefly to do some focused editing.</p>
   
   <entry>
     <title type="html"><![CDATA[A peek at Emacs 24.4: prettify-symbols-mode]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/"/>
+    <link href="http://emacsredux.com/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/"/>
     <updated>2014-08-25T16:30:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode</id>
+    <id>http://emacsredux.com/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode</id>
     <content type="html"><![CDATA[<p>Emacs 24.4 ships with a new minor mode called
 <code>prettify-symbols-mode</code>. Its purpose is to replace the standard text
 representation of various identifiers/symbols with a (arguably) more
@@ -178,9 +178,9 @@ tasteful and distasteful prettifications.</p>
   
   <entry>
     <title type="html"><![CDATA[A peek at Emacs 24.4: Variadic Numeric Comparison Functions]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/03/22/a-peek-at-emacs-24-dot-4-variadic-comparison-functions/"/>
+    <link href="http://emacsredux.com/blog/2014/03/22/a-peek-at-emacs-24-dot-4-variadic-comparison-functions/"/>
     <updated>2014-03-22T16:48:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/03/22/a-peek-at-emacs-24-dot-4-variadic-comparison-functions</id>
+    <id>http://emacsredux.com/blog/2014/03/22/a-peek-at-emacs-24-dot-4-variadic-comparison-functions</id>
     <content type="html"><![CDATA[<p>In most Lisps numeric comparison functions like <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>
 and <code>&gt;=</code> are variadic - meaning they accept variable number of arguments (as do functions like <code>+</code>, <code>-</code>, <code>*</code>, etc).
 Here's an example:</p>
@@ -209,9 +209,9 @@ Emacs Lisp takes another small step to becoming a good Lisp dialect!</p>
   
   <entry>
     <title type="html"><![CDATA[A peek at Emacs 24.4: Focus Hooks]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/"/>
+    <link href="http://emacsredux.com/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/"/>
     <updated>2014-03-22T16:05:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks</id>
+    <id>http://emacsredux.com/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks</id>
     <content type="html"><![CDATA[<p>A couple of years ago I
 <a href="http://batsov.com/articles/2012/03/08/emacs-tip-number-5-save-buffers-automatically-on-buffer-or-window-switch/">lamented over the lack of frame focus hooks in Emacs</a>. This
 prohibited us from implemented a feature like IntelliJ IDEA's "auto-save on
@@ -237,9 +237,9 @@ So, if we want to save our active buffer when the Emacs frame loses focus we can
   
   <entry>
     <title type="html"><![CDATA[A peek at Emacs 24.4: delete-duplicate-lines]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/03/01/a-peek-at-emacs-24-dot-4-delete-duplicate-lines/"/>
+    <link href="http://emacsredux.com/blog/2014/03/01/a-peek-at-emacs-24-dot-4-delete-duplicate-lines/"/>
     <updated>2014-03-01T17:33:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/03/01/a-peek-at-emacs-24-dot-4-delete-duplicate-lines</id>
+    <id>http://emacsredux.com/blog/2014/03/01/a-peek-at-emacs-24-dot-4-delete-duplicate-lines</id>
     <content type="html"><![CDATA[<p>Emacs 24.4 introduces the command <code>delete-duplicate-lines</code>.</p>
 
 <p>By default <code>M-x delete-duplicate-lines</code> will delete all but one copy

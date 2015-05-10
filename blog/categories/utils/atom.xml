@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: utils | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/utils/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/utils/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Clear Comint Buffers]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2015/01/18/clear-comint-buffers/"/>
+    <link href="http://emacsredux.com/blog/2015/01/18/clear-comint-buffers/"/>
     <updated>2015-01-18T21:57:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2015/01/18/clear-comint-buffers</id>
+    <id>http://emacsredux.com/blog/2015/01/18/clear-comint-buffers</id>
     <content type="html"><![CDATA[<p><code>comint</code> provides Emacs infrastructure for building command
 interpreters. It's backing a lot of popular shell/REPL modes - like <code>eshell</code>,
 <code>inferior-lisp</code>, <code>inf-ruby</code>, <code>inf-clojure</code>, etc.</p>

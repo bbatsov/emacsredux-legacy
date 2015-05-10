@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: appearance | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/appearance/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/appearance/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Customizing the Fringes]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2015/01/18/customizing-the-fringes/"/>
+    <link href="http://emacsredux.com/blog/2015/01/18/customizing-the-fringes/"/>
     <updated>2015-01-18T09:41:00+02:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2015/01/18/customizing-the-fringes</id>
+    <id>http://emacsredux.com/blog/2015/01/18/customizing-the-fringes</id>
     <content type="html"><![CDATA[<p>On graphical displays, each Emacs window normally has narrow <strong>fringes</strong> (gutters/margins)
 on the left and right edges. The fringes are used to display symbols
 that provide information about the text in the window. You can type

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: style | Emacs Redux]]></title>
-  <link href="http://bbatsov.github.com/emacsredux/blog/categories/style/atom.xml" rel="self"/>
-  <link href="http://bbatsov.github.com/emacsredux/"/>
-  <updated>2015-05-09T23:52:01+03:00</updated>
-  <id>http://bbatsov.github.com/emacsredux/</id>
+  <link href="http://emacsredux.com/blog/categories/style/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-05-10T11:10:52+03:00</updated>
+  <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs Lisp Style Guide]]></title>
-    <link href="http://bbatsov.github.com/emacsredux/blog/2014/09/04/emacs-lisp-style-guide/"/>
+    <link href="http://emacsredux.com/blog/2014/09/04/emacs-lisp-style-guide/"/>
     <updated>2014-09-04T15:00:00+03:00</updated>
-    <id>http://bbatsov.github.com/emacsredux/blog/2014/09/04/emacs-lisp-style-guide</id>
+    <id>http://emacsredux.com/blog/2014/09/04/emacs-lisp-style-guide</id>
     <content type="html"><![CDATA[<p>I've started working on a community
 <a href="https://github.com/bbatsov/emacs-lisp-style-guide">Emacs Lisp style guide</a>.
 My goal is to create a comprehensive document similar to the
