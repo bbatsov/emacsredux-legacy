@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="The Emacs Lisp interpreter&#8217;s integration with Emacs is pervasive. One
-can evaluate Emacs Lisp just about everywhere in so many different
-ways. &hellip;">
+  <meta name="description" content="One common hurdle Emacs users experience when hacking in Emacs is that
+many programming languages use CamelCase for class names, method
+names, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,203 @@ ways. &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/21/camelcase-aware-editing/">CamelCase Aware Editing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-21T12:52:00+03:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/21/camelcase-aware-editing/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One common hurdle Emacs users experience when hacking in Emacs is that
+many programming languages use <code>CamelCase</code> for class names, method
+names, identifiers, etc, but Emacs (unlike most IDEs) doesn&#8217;t treat
+CamelCase words the same special way it treats <code>lisp-case</code> and <code>snake_case</code>
+words. Let me illustrate this with an example.</p>
+
+<p>If you invoke <code>kill-word</code>(<code>M-d</code>) when your cursor is before
+<code>lisp-case</code> this would kill just <code>lisp</code> and leave you with <code>-case</code>. If
+you do the same with <code>CamelCase</code> the entire &#8220;word&#8221; CamelCase will be
+killed. Same goes for navigation-by-word commands like <code>forward-word</code>,
+<code>backward-word</code>, etc - they are aware of the subwords that comprise a
+<code>lisp-case</code> or a <code>snake_case</code> word, but are oblivious to
+<code>CamelCase</code>. So, what can we do? The answer is surprisingly simple -
+just use the built-in minor mode <code>subword-mode</code> (formerly known as
+<code>c-subword-mode</code>).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; enable just in ruby-mode</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;ruby-mode-hook</span> <span class="ss">&#39;subword-mode</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; enable for all programming modes</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;subword-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At this point you can try again <code>kill-word</code> before <code>CamelCase</code>. Only
+<code>Camel</code> is killed now. Sweet!</p>
+
+<p><a href="https://github.com/bbatsov/prelude">Prelude</a> enables <code>subword-mode</code>
+out of the box for programming modes that make use of <code>CamelCase</code>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/21/edit-files-as-root/">Edit Files as Root</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-21T10:03:00+03:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/21/edit-files-as-root/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One area where Emacs traditionally falls short by default is editing
+files that require <code>root</code> permissions. Since most Emacs users just use
+a single Emacs frame they never leave, they have the problem of having
+started it with their current user&#8217;s privileges(and it&#8217;s unlikely this
+user is <code>root</code>). In this post I&#8217;ll describe two ways to alleviate that
+particular problem (note that <code>emacsclient</code> users have other options
+to pick from as well - one is mentioned at the very end of the post).</p>
+
+<p>Here&#8217;s <strong>Option A</strong> - a simple command that allows you to reopen the
+currently visited file with root permissions(obtained via <code>tramp</code> and
+<code>sudo</code>) and prompts you for a file name if you&#8217;re not currently
+visiting a file or supply a prefix argument:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">sudo-edit</span> <span class="p">(</span><span class="k">&amp;optional</span> <span class="nv">arg</span><span class="p">)</span>
+</span><span class='line'>  <span class="s">&quot;Edit currently visited file as root.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">With a prefix ARG prompt for a file to visit.</span>
+</span><span class='line'><span class="s">Will also prompt for a file to visit if current</span>
+</span><span class='line'><span class="s">buffer is not visiting a file.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">arg</span> <span class="p">(</span><span class="nb">not</span> <span class="nv">buffer-file-name</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">find-file</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;/sudo:root@localhost:&quot;</span>
+</span><span class='line'>                         <span class="p">(</span><span class="nv">ido-read-file-name</span> <span class="s">&quot;Find file(as root): &quot;</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">find-alternate-file</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;/sudo:root@localhost:&quot;</span> <span class="nv">buffer-file-name</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I came across a similar command a few years back and it&#8217;s been pretty
+useful to me ever since. If you like it, I&#8217;d suggest binding it to <code>C-x
+C-r</code> (kind of like <code>find-file</code>&#8217;s binding <code>C-x C-f</code>).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-x C-r&quot;</span><span class="p">)</span> <span class="ss">&#39;sudo-edit</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Option B</strong></p>
+
+<p>Lately I&#8217;ve decided that such a command is a bit of an overhead, since
+we can check the file permissions automatically anyways. While I&#8217;m not
+quite fond of advising commands (debugging advised commands is no
+fun) this was an excellent opportunity to exploit them (for great
+good):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">defadvice</span> <span class="nv">ido-find-file</span> <span class="p">(</span><span class="nv">after</span> <span class="nv">find-file-sudo</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>  <span class="s">&quot;Find file as root if necessary.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">buffer-file-name</span>
+</span><span class='line'>               <span class="p">(</span><span class="nv">file-writable-p</span> <span class="nv">buffer-file-name</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">find-alternate-file</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;/sudo:root@localhost:&quot;</span> <span class="nv">buffer-file-name</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This advises <code>ido-find-file</code>(you might want to advise <code>find-file</code>
+instead if you&#8217;re not using <code>ido</code>) to reopen the selected file as
+root(you&#8217;ll be prompted for your <code>sudo</code> password) if you don&#8217;t have
+write permissions for it. Extremely cool!</p>
+
+<p>The first command has been part of
+<a href="https://github.com/bbatsov/prelude">Prelude</a> since forever. As of late,
+the <code>ido-find-file</code> advice is also present there and it
+generally voids the need for <code>sudo-edit</code>.</p>
+
+<p><strong>P.S.</strong></p>
+
+<p><code>emacsclient</code> users have it easy. They just need the following shell
+alias(I generally alias <code>e</code> to <code>emacsclient -t</code>):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">alias </span><span class="nv">E</span><span class="o">=</span><span class="s2">&quot;SUDO_EDITOR=\&quot;emacsclient -t -a emacs\&quot; sudoedit&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This should(will) finally save you from reaching for <code>vim</code> in the terminal.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -654,192 +851,6 @@ eggs you know of, that I haven&#8217;t mentioned.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/03/delete-file-and-buffer/">Delete File and Buffer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-03T12:24:00+03:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/03/delete-file-and-buffer/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>From time to time(most often when I refactor code) I need to
-quickly(this removes <code>dired</code> from the equation) delete a file and kill
-the buffer associated with it. Since most of the files I work with
-are under version control I can just use the tried and true <code>M-x
-vc-delete-file</code>. Unfortunately the command does not act on the current
-file and will prompt you for a file to delete. Looks like we need to
-create a simple wrapper around it to get the job done:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">delete-file-and-buffer</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Kill the current buffer and deletes the file it is visiting.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">filename</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="nv">filename</span>
-</span><span class='line'>      <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">vc-backend</span> <span class="nv">filename</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nv">vc-delete-file</span> <span class="nv">filename</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">(</span><span class="k">progn</span>
-</span><span class='line'>          <span class="p">(</span><span class="nb">delete-file</span> <span class="nv">filename</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Deleted file %s&quot;</span> <span class="nv">filename</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nv">kill-buffer</span><span class="p">))))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The wrapper is extra smart and will work on files that are not under
-version control as well! I&#8217;m pretty fond of commands that do what you
-mean instead of throwing errors. Now that we have this neat little
-command we should probably bind it to some each to press keys, like <code>C-c D</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c D&quot;</span><span class="p">)</span>  <span class="ss">&#39;delete-file-and-buffer</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As usual both the command and its keybinding are available in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/02/move-current-line-up-or-down/">Move Current Line Up or Down</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-02T12:00:00+03:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/02/move-current-line-up-or-down/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>While programming(at least in some languages) I often find myself
-wishing to drag the current line a couple lines up or down. Emacs does
-have the means to transpose (switch) lines (courtesy of the
-<code>transpose-lines</code> command bound to <code>C-x C-t</code>), but I find it
-unwieldy. That&#8217;s why I&#8217;ve built a couple of custom commands on top of
-it:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">move-line-up</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Move up the current line.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">transpose-lines</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">forward-line</span> <span class="mi">-2</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">indent-according-to-mode</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">move-line-down</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Move down the current line.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">forward-line</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">transpose-lines</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">forward-line</span> <span class="mi">-1</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">indent-according-to-mode</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Those are not the kind of commands you&#8217;ll want to invoke with
-<code>M-x</code>. Therefore I suggest binding them to something like <code>C-S-up</code> and
-<code>C-S-down</code>(these bindings are often used for the same purpose in other
-editors and IDEs):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">control</span> <span class="nv">shift</span> <span class="nv">up</span><span class="p">)</span><span class="nv">]</span>  <span class="ss">&#39;move-line-up</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">control</span> <span class="nv">shift</span> <span class="nv">down</span><span class="p">)</span><span class="nv">]</span>  <span class="ss">&#39;move-line-down</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Since this won&#8217;t work on OSX(<code>Control+arrow</code> is used by the window
-manager) I&#8217;d recommend the following alternative to OSX users:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">meta</span> <span class="nv">shift</span> <span class="nv">up</span><span class="p">)</span><span class="nv">]</span>  <span class="ss">&#39;move-line-up</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">meta</span> <span class="nv">shift</span> <span class="nv">down</span><span class="p">)</span><span class="nv">]</span>  <span class="ss">&#39;move-line-down</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Personally I&#8217;m not a fan of any keybindings that require me to move my
-hands off the home keyboard row, but I wasn&#8217;t able to come up with
-anything better. Suggestions are welcome!</p>
-
-<p>As usual both commands(and both set of keybindings) are available in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with <code>prelude-</code>
-prefices).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -863,6 +874,14 @@ prefices).</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/16/pragmatic-emacs/">Pragmatic Emacs</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA packages locally</a>
       </li>
     
@@ -872,14 +891,6 @@ prefices).</p>
     
       <li class="post">
         <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/12/23/lossage/">Lossage</a>
       </li>
     
   </ul>

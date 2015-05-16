@@ -9,8 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="I&#8217;m extremely fond of rectangle editing (the ability to select a
-rectangular region and apply editing commands only to it), but I&#8217;ve &hellip;">
+  <meta name="description" content="If you like ido, but don&#8217;t like the way it displays the available
+completion candidates you might want to have a look at
+ido-vertical-mode. I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,107 @@ rectangular region and apply editing commands only to it), but I&#8217;ve &helli
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/18/ido-vertical-mode/">Ido-vertical-mode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-18T08:52:00+02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/01/18/ido-vertical-mode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you like <code>ido</code>, but don&#8217;t like the way it displays the available
+completion candidates you might want to have a look at
+<a href="https://github.com/gempesaw/ido-vertical-mode.el">ido-vertical-mode</a>.</p>
+
+<p>I won&#8217;t duplicate here the installation instructions, but I&#8217;ll show you
+how <code>ido-vertical-mode</code> displays the completion candidates:</p>
+
+<p><img src="https://raw.github.com/gempesaw/ido-vertical-mode.el/master/screenshot.gif"></p>
+
+<p>Is this better than the regular <code>ido</code>? Depends on your personal
+preference I guess. But it&#8217;s good to have options, right?</p>
+
+<p>That&#8217;s all for today, folks! Until next time.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/11/a-peek-at-emacs-24-dot-4-srgb-colours-on-os-x/">A Peek at Emacs 24.4: sRGB Colours on OS X</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-11T13:40:00+02:00" pubdate data-updated="true">Jan 11<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/01/11/a-peek-at-emacs-24-dot-4-srgb-colours-on-os-x/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A while ago I wrote about a
+<a href="http://emacsredux.com/blog/2013/08/21/color-themes-redux/">colour theme problem specific to OS X</a>.
+Thankfully in Emacs 24.4 the OS X (a.k.a. NS) port of Emacs uses sRGB
+colours by default (at least on OS X Lion (10.7) and newer), so you&#8217;ll
+no longer need to install Emacs from <code>homebrew</code> (or apply an sRGB
+colour support patch manually). If for some reason you want to stick
+to the colours add this to your Emacs config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">ns-use-srgb-colorspace</span> <span class="no">nil</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I doubt that anyone would want to do that, but the option is there for those of you who want it.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -441,6 +543,10 @@ in Emacs 24.4 you might have a look at
 
 
 <li><a href="/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/">A peek at Emacs 24.4: superword-mode</a></li>
+  <!-- categories if -->
+
+  <!-- categories if -->
+
   <!-- categories if -->
 
   <!-- categories if -->
@@ -854,138 +960,6 @@ file&#8217;s position in a <code>dired</code> buffer.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/05/a-proper-replacement-for-flet/">A Proper Replacement for Flet</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-05T14:38:00+03:00" pubdate data-updated="true">Sep 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/05/a-proper-replacement-for-flet/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The popular <code>flet</code> macro was deprecated in Emacs 24.3 and replaced with two similar macros - <code>cl-flet</code> and <code>cl-letf</code>.</p>
-
-<p><code>flet</code> was used to temporarily override function definitions.
-This was an analogue of a dynamically scoped <code>let</code> that operates on the function
-cell of symbols rather than their value cell.</p>
-
-<p>The ability to dynamically rebind a functions was very useful for stubbing purposes in unit tests (you do write unit tests, don&#8217;t you?).</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">flet</span> <span class="p">((</span><span class="nv">projectile-project-root</span> <span class="p">()</span> <span class="s">&quot;/path/to/project&quot;</span><span class="p">)</span>
-</span><span class='line'>       <span class="p">(</span><span class="nv">projectile-project-name</span> <span class="p">()</span> <span class="s">&quot;project&quot;</span><span class="p">))</span>
-</span><span class='line'>  <span class="o">...</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>projectile-project-root</code> and <code>projectile-project-name</code> are impure
-functions (they depend on the current directory) and testing functions
-that use them internally would normally be problematic. However, <code>flet</code>
-gives us the ability to override their actual definitions in our
-tests. <code>flet</code>&#8217;s official replacement <code>cl-flet</code> is lexically bound and this is no longer possible
-with it.</p>
-
-<p>Fortunately <a href="https://github.com/nicferrier">Nic Ferrier</a> created a
-true drop-in <code>flet</code> replacement (with some extra magic baked in) -
-<a href="https://github.com/nicferrier/emacs-noflet">noflet</a>. If you&#8217;re missing <code>flet</code>, I suggest you to give <code>noflet</code> a try.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/05/version-checks/">Version Checks</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-05T14:25:00+03:00" pubdate data-updated="true">Sep 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/05/version-checks/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Often the code you&#8217;re writing would be depending on the version of
-some external tool (say <code>git</code>) or Emacs itself. Version checks in Emacs are pretty
-easy - just use the built-in functions <code>version=</code>, <code>version&lt;=</code> or <code>version=</code>.</p>
-
-<p>Let&#8217;s illustrate this with an
-example. <a href="https://github.com/bbatsov/prelude">Prelude</a> requires at
-least GNU Emacs 24.1 to run and on startup it performs the following
-check:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">version&lt;</span> <span class="nv">emacs-version</span> <span class="s">&quot;24.1&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">error</span> <span class="s">&quot;Prelude requires at least GNU Emacs 24.1&quot;</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Simple and effective. The <code>version</code> functions are pretty smart and recognize most popular version formats correctly.
-Note that version string &#8220;1&#8221; is equal to &#8220;1.0&#8221;, &#8220;1.0.0&#8221;, &#8220;1.0.0.0&#8221;,
-etc.  That is, the trailing &#8220;.0&#8221;s are insignificant.  Also, version
-string &#8220;1&#8221; is higher (newer) than &#8220;1pre&#8221;, which is higher than &#8220;1beta&#8221;,
-which is higher than &#8220;1alpha&#8221;.  Also, &#8220;-CVS&#8221; and &#8220;-NNN&#8221; are treated
-as alpha versions.</p>
-
-<p>If you&#8217;re writing an Emacs package you can also add an explicit Emacs version dependency in the packge metadata:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; Package-Requires: ((emacs &quot;24.1&quot;))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That way users of older Emacsen would not see a version of your package targeting newer Emacsen.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -1009,6 +983,14 @@ as alpha versions.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/16/pragmatic-emacs/">Pragmatic Emacs</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA packages locally</a>
       </li>
     
@@ -1018,14 +1000,6 @@ as alpha versions.</p>
     
       <li class="post">
         <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/12/23/lossage/">Lossage</a>
       </li>
     
   </ul>

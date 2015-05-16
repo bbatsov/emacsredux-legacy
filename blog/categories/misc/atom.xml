@@ -4,7 +4,7 @@
   <title><![CDATA[Category: misc | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/misc/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2015-05-10T11:10:52+03:00</updated>
+  <updated>2015-05-16T14:54:46+03:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Pragmatic Emacs]]></title>
+    <link href="http://emacsredux.com/blog/2015/05/16/pragmatic-emacs/"/>
+    <updated>2015-05-16T14:29:00+03:00</updated>
+    <id>http://emacsredux.com/blog/2015/05/16/pragmatic-emacs</id>
+    <content type="html"><![CDATA[<p>I recently noticed a new blog targeting beginner and intermediate
+Emacs users - <a href="http://pragmaticemacs.com/">Pragmatic Emacs</a> by
+<a href="http://www.bristol.ac.uk/physics/people/ben-j-maughan/overview.html">Ben Maughan</a>.</p>
+
+<p>If you're relatively new to Emacs you should definitely check it
+out. Knowing how vast the Emacs ecosystem is, I'm pretty sure that
+more experienced Emacs users will also learn a thing or two there.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Lossage]]></title>
@@ -102,57 +117,6 @@ about some of the more interesting features.</p>
 
 <p>In related news - the Emacs Mac Port based on 24.4
 <a href="https://lists.gnu.org/archive/html/emacs-devel/2014-10/msg00725.html">has also been released</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Configure the scratch buffer's mode]]></title>
-    <link href="http://emacsredux.com/blog/2014/07/25/configure-the-scratch-buffers-mode/"/>
-    <updated>2014-07-25T15:23:00+03:00</updated>
-    <id>http://emacsredux.com/blog/2014/07/25/configure-the-scratch-buffers-mode</id>
-    <content type="html"><![CDATA[<p>Pretty much every Emacs user knows of the <code>*scratch*</code> buffer - after
-all it's always present when you start your Emacs. If you've set
-<code>inhibit-startup-screen</code> to <code>t</code> (which I recommend) it will even be
-the very first buffer see each time you fire up your beloved editor
-(unless you alter <code>initial-buffer-choice</code>, that is).</p>
-
-<p>The scratch buffer was conceived a scratchpad for notes and Emacs Lisp
-experiments and a lot of Emacs users find it quite handy.  On the
-other hand - even more users don't really write Emacs Lisp and
-probably find little value in this buffer.</p>
-
-<p>One little know fact about the <code>*scratch*</code> buffer is that its initial
-major mode (by default it's <code>lisp-interaction-mode</code>) is not hardcoded
-and you can alter it.  If you're a Ruby developer you might opt to
-make it use <code>ruby-mode</code> by default:</p>
-
-<p><code>cl
-(setq initial-major-mode 'ruby-mode)
-</code></p>
-
-<p>If you do this I'd also advise you to change the buffer's initial
-contents. By default they are:</p>
-
-<p><code>cl
-;; This buffer is for notes you don't want to save, and for Lisp evaluation.
-;; If you want to create a file, visit that file with C-x C-f,
-;; then enter the text in that file's own buffer.
-</code></p>
-
-<p>For Ruby something like this might be better:</p>
-
-<p>``` cl
-(setq initial-scratch-message "\</p>
-
-<h1>This buffer is for notes you don't want to save, and for Ruby code.</h1>
-
-<h1>If you want to create a file, visit that file with C-x C-f,</h1>
-
-<h1>then enter the text in that file's own buffer.")</h1>
-
-<p>```</p>
-
-<p>Or you can simply set <code>initial-scratch-message</code> to <code>nil</code> and be done with it.</p>
 ]]></content>
   </entry>
   

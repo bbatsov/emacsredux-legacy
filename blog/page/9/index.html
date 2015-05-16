@@ -9,8 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Just about every modern editor and IDE these days highlights the line
-you&#8217;re currently on, which I find extremely helpful. Emacs doesn&#8217;t &hellip;">
+  <meta name="description" content="From time to time(most often when I refactor code) I need to
+quickly(this removes dired from the equation) delete a file and kill
+the buffer &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,192 @@ you&#8217;re currently on, which I find extremely helpful. Emacs doesn&#8217;t &
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/03/delete-file-and-buffer/">Delete File and Buffer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-03T12:24:00+03:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/03/delete-file-and-buffer/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>From time to time(most often when I refactor code) I need to
+quickly(this removes <code>dired</code> from the equation) delete a file and kill
+the buffer associated with it. Since most of the files I work with
+are under version control I can just use the tried and true <code>M-x
+vc-delete-file</code>. Unfortunately the command does not act on the current
+file and will prompt you for a file to delete. Looks like we need to
+create a simple wrapper around it to get the job done:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">delete-file-and-buffer</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Kill the current buffer and deletes the file it is visiting.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">filename</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="nv">filename</span>
+</span><span class='line'>      <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">vc-backend</span> <span class="nv">filename</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nv">vc-delete-file</span> <span class="nv">filename</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="k">progn</span>
+</span><span class='line'>          <span class="p">(</span><span class="nb">delete-file</span> <span class="nv">filename</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Deleted file %s&quot;</span> <span class="nv">filename</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nv">kill-buffer</span><span class="p">))))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The wrapper is extra smart and will work on files that are not under
+version control as well! I&#8217;m pretty fond of commands that do what you
+mean instead of throwing errors. Now that we have this neat little
+command we should probably bind it to some each to press keys, like <code>C-c D</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c D&quot;</span><span class="p">)</span>  <span class="ss">&#39;delete-file-and-buffer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As usual both the command and its keybinding are available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/02/move-current-line-up-or-down/">Move Current Line Up or Down</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-02T12:00:00+03:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/02/move-current-line-up-or-down/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While programming(at least in some languages) I often find myself
+wishing to drag the current line a couple lines up or down. Emacs does
+have the means to transpose (switch) lines (courtesy of the
+<code>transpose-lines</code> command bound to <code>C-x C-t</code>), but I find it
+unwieldy. That&#8217;s why I&#8217;ve built a couple of custom commands on top of
+it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">move-line-up</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Move up the current line.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">transpose-lines</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">forward-line</span> <span class="mi">-2</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">indent-according-to-mode</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">move-line-down</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Move down the current line.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">forward-line</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">transpose-lines</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">forward-line</span> <span class="mi">-1</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">indent-according-to-mode</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Those are not the kind of commands you&#8217;ll want to invoke with
+<code>M-x</code>. Therefore I suggest binding them to something like <code>C-S-up</code> and
+<code>C-S-down</code>(these bindings are often used for the same purpose in other
+editors and IDEs):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">control</span> <span class="nv">shift</span> <span class="nv">up</span><span class="p">)</span><span class="nv">]</span>  <span class="ss">&#39;move-line-up</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">control</span> <span class="nv">shift</span> <span class="nv">down</span><span class="p">)</span><span class="nv">]</span>  <span class="ss">&#39;move-line-down</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Since this won&#8217;t work on OSX(<code>Control+arrow</code> is used by the window
+manager) I&#8217;d recommend the following alternative to OSX users:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">meta</span> <span class="nv">shift</span> <span class="nv">up</span><span class="p">)</span><span class="nv">]</span>  <span class="ss">&#39;move-line-up</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">meta</span> <span class="nv">shift</span> <span class="nv">down</span><span class="p">)</span><span class="nv">]</span>  <span class="ss">&#39;move-line-down</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Personally I&#8217;m not a fan of any keybindings that require me to move my
+hands off the home keyboard row, but I wasn&#8217;t able to come up with
+anything better. Suggestions are welcome!</p>
+
+<p>As usual both commands(and both set of keybindings) are available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with <code>prelude-</code>
+prefices).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -655,132 +842,6 @@ add this line to your Emacs config to get to enjoy
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/28/network-utilities/">Network Utilities</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-28T18:56:00+02:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/28/network-utilities/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A little known feature of Emacs is that it provides basic wrappers
-from various command-line network utilities. Here&#8217;s a few Emacs
-commands for you to try out:</p>
-
-<ul>
-<li><code>M-x ping</code></li>
-<li><code>M-x telnet</code></li>
-<li><code>M-x dig</code></li>
-<li><code>M-x ifconfig</code></li>
-</ul>
-
-
-<p>Try to find as many related commands as you can!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/28/google/">Google</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-28T14:32:00+02:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/28/google/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Wouldn&#8217;t it be cool to be able to invoke a Google search from the
-comfort of your beloved text editor? Here&#8217;s a couple of use-cases. You
-may wish to Google the selected region or to be prompted to enter a
-query manually. Apart from cool it&#8217;s also pretty simple to add such a
-feature to Emacs.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">google</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Google the selected region if any, display a query prompt otherwise.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">browse-url</span>
-</span><span class='line'>   <span class="p">(</span><span class="nv">concat</span>
-</span><span class='line'>    <span class="s">&quot;http://www.google.com/search?ie=utf-8&amp;oe=utf-8&amp;q=&quot;</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="p">(</span><span class="k">if</span> <span class="nv">mark-active</span>
-</span><span class='line'>         <span class="p">(</span><span class="nv">buffer-substring</span> <span class="p">(</span><span class="nv">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nv">region-end</span><span class="p">))</span>
-</span><span class='line'>       <span class="p">(</span><span class="nv">read-string</span> <span class="s">&quot;Google: &quot;</span><span class="p">))))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This command will display the query results in your default browser.</p>
-
-<p>I&#8217;d suggest binding the command to <code>C-c g</code> if you plan to use it regularly.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c g&quot;</span><span class="p">)</span> <span class="ss">&#39;google</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>google</code> is available in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
-prefix).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -804,6 +865,14 @@ prefix).</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/16/pragmatic-emacs/">Pragmatic Emacs</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA packages locally</a>
       </li>
     
@@ -813,14 +882,6 @@ prefix).</p>
     
       <li class="post">
         <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/12/23/lossage/">Lossage</a>
       </li>
     
   </ul>
