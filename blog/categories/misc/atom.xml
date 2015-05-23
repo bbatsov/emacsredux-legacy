@@ -4,7 +4,7 @@
   <title><![CDATA[Category: misc | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/misc/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2015-05-23T15:25:39+03:00</updated>
+  <updated>2015-05-23T15:28:11+03:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -23,6 +23,8 @@
 book about our beloved editor, since
 <a href="http://shop.oreilly.com/product/9780596006488.do">Learning GNU Emacs</a>(released
 way back in 2004).</p>
+
+<p><img src="/images/articles/mastering_emacs_cover.png"></p>
 
 <p>I haven't had the time to read the book yet, but being familiar with
 Mickey's work I have no doubt it's outstanding.  That's all from me
