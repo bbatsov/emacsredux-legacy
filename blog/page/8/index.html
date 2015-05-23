@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="One common hurdle Emacs users experience when hacking in Emacs is that
-many programming languages use CamelCase for class names, method
-names, &hellip;">
+  <meta name="description" content="Anybody knows that you can run a shell inside Emacs with M-x
+shell. Few people know you can have Emacs run some additional
+configuration for the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,61 @@ names, &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/21/custom-config-for-shells/">Custom Config for Shells</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-21T15:06:00+03:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/21/custom-config-for-shells/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Anybody knows that you can run a shell inside Emacs with <code>M-x
+shell</code>. Few people know you can have Emacs run some additional
+configuration for the shell after it&#8217;s started.</p>
+
+<p>Emacs sends the new shell the contents of the file
+<code>~/.emacs_shellname</code> as input, if it exists, where <code>shellname</code> is the
+name of the name if your shell - <code>bash</code>, <code>zsh</code>, etc. For example, if you
+use <code>bash</code>, the file sent to it is <code>~/.emacs_bash</code>. If this file is not
+found, Emacs tries with <code>~/.emacs.d/init_shellname.sh</code>.</p>
+
+<p>One popular application of such custom configuration is to have a
+simpler shell prompt in Emacs, compared to the one you usually employ,
+since <code>shell-mode</code> doesn&#8217;t deal well with fancy prompts.</p>
+
+<p>You can find out more about running interactive shells in Emacs
+<a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Interactive-Shell.html">here</a>
+or by typing <code>C-h r m Interactive Shell RET</code> in your favorite text
+editor.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -782,75 +837,6 @@ spell-checking in comments:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/03/easter-eggs/">Easter Eggs</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-03T12:39:00+03:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/03/easter-eggs/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Emacs is packed with an insane amount of cool stuff. With Easter fast
-approaching (I&#8217;m an Orthodox Christian and ours is in the beginning of
-May this year) I cannot help but think of <strong>easter eggs</strong>(&#8220;secret&#8221;
-commands, inside jokes, etc). Let&#8217;s see if we can find some in Emacs!</p>
-
-<h4>Snake</h4>
-
-<p><code>M-x snake</code></p>
-
-<h4>Tetris</h4>
-
-<p><code>M-x tetris</code></p>
-
-<h4>Zone</h4>
-
-<p><code>M-x zone</code>
-<code>M-x zone-mode</code></p>
-
-<h4>Doctor</h4>
-
-<p><code>M-x doctor</code></p>
-
-<h4>Butterfly Mode</h4>
-
-<p><code>M-x butterfly</code> (refer to <a href="http://xkcd.com/378/">this xkcd comics</a> if
-you have no idea what this is)</p>
-
-<h4>Final Words</h4>
-
-<p>This was a short post(and not particularly instructive I guess), but I
-hope you&#8217;ve enjoyed it. Share in the comments section any Emacs easter
-eggs you know of, that I haven&#8217;t mentioned.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -874,6 +860,10 @@ eggs you know of, that I haven&#8217;t mentioned.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
       </li>
     
@@ -887,10 +877,6 @@ eggs you know of, that I haven&#8217;t mentioned.</p>
     
       <li class="post">
         <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
       </li>
     
   </ul>

@@ -9,9 +9,11 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="People who have been using Emacs for a while often develop the desire
-to learn Emacs Lisp, so they can customize Emacs more extensively,
-develop &hellip;">
+  <meta name="description" content="Mickey Petersen just released
+Mastering Emacs, the first new
+book about our beloved editor, since
+Learning GNU Emacs(released
+way back in 2004). I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +83,56 @@ develop &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the First Emacs Book in Over a Decade) Is Out</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-23T15:19:00+03:00" pubdate data-updated="true">May 23<span>rd</span>, 2015</time>
+        
+         | <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://www.masteringemacs.org/about">Mickey Petersen</a> just released
+<a href="https://www.masteringemacs.org/book">Mastering Emacs</a>, the first new
+book about our beloved editor, since
+<a href="http://shop.oreilly.com/product/9780596006488.do">Learning GNU Emacs</a>(released
+way back in 2004).</p>
+
+<p>I haven&#8217;t had the time to read the book yet, but being familiar with
+Mickey&#8217;s work I have no doubt it&#8217;s outstanding.  That&#8217;s all from me
+for now - go buy the book and start mastering Emacs.</p>
+
+<p><strong>P.S.</strong></p>
+
+<p>I hope we won&#8217;t have to wait another decade for the next great Emacs book.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -774,78 +826,6 @@ Do not despair! Such functions do actually exist, although their names are likel
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/13/quickly-open-an-info-manual/">Quickly Open an Info Manual</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-13T15:25:00+02:00" pubdate data-updated="true">Nov 13<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/11/13/quickly-open-an-info-manual/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Every Emacs user knows that Emacs ships with plenty of built-in
-documentation in the <code>GNU info</code> format (they don&#8217;t call it a
-self-documenting editor for no reason). Most Emacs users know how to
-access that built-in documentation with <code>C-h i</code> (<code>M-x info</code>) and some
-Emacs users even know that the Emacs manual can be opened directly
-with <code>C-h r</code> (<code>M-x info-emacs-manual</code>).</p>
-
-<p>If you know the name of the manual you&#8217;re looking for, however,
-there&#8217;s a nice little-known alternative to using <code>C-h i</code> - the
-<code>info-display-manual</code> command. When you run it you&#8217;ll be prompted in
-the minibuffer for the name of the manual you&#8217;d like to view (manual
-name completion is available).</p>
-
-<p>To give you a more concrete example of the command&#8217;s advantage over
-<code>info</code> let&#8217;s try to open the Emacs Lisp manual with both
-commands. With <code>info</code> you&#8217;ll have to type the following:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>M-x info RET m elisp RET</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And the alternative would be:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>M-x info-emacs-manual RET elisp RET</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you like the command I&#8217;d suggest binding it to some keybinding:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-i&quot;</span><span class="p">)</span> <span class="ss">&#39;info-display-manual</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -867,6 +847,10 @@ commands. With <code>info</code> you&#8217;ll have to type the following:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
       </li>
     
@@ -880,10 +864,6 @@ commands. With <code>info</code> you&#8217;ll have to type the following:</p>
     
       <li class="post">
         <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
       </li>
     
   </ul>

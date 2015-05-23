@@ -9,9 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="From time to time(most often when I refactor code) I need to
-quickly(this removes dired from the equation) delete a file and kill
-the buffer &hellip;">
+  <meta name="description" content="Emacs is packed with an insane amount of cool stuff. With Easter fast
+approaching (I&#8217;m an Orthodox Christian and ours is in the beginning of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,75 @@ the buffer &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/03/easter-eggs/">Easter Eggs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-03T12:39:00+03:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/03/easter-eggs/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs is packed with an insane amount of cool stuff. With Easter fast
+approaching (I&#8217;m an Orthodox Christian and ours is in the beginning of
+May this year) I cannot help but think of <strong>easter eggs</strong>(&#8220;secret&#8221;
+commands, inside jokes, etc). Let&#8217;s see if we can find some in Emacs!</p>
+
+<h4>Snake</h4>
+
+<p><code>M-x snake</code></p>
+
+<h4>Tetris</h4>
+
+<p><code>M-x tetris</code></p>
+
+<h4>Zone</h4>
+
+<p><code>M-x zone</code>
+<code>M-x zone-mode</code></p>
+
+<h4>Doctor</h4>
+
+<p><code>M-x doctor</code></p>
+
+<h4>Butterfly Mode</h4>
+
+<p><code>M-x butterfly</code> (refer to <a href="http://xkcd.com/378/">this xkcd comics</a> if
+you have no idea what this is)</p>
+
+<h4>Final Words</h4>
+
+<p>This was a short post(and not particularly instructive I guess), but I
+hope you&#8217;ve enjoyed it. Share in the comments section any Emacs easter
+eggs you know of, that I haven&#8217;t mentioned.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -780,68 +848,6 @@ looks at some of the (more powerful) alternatives to
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/29/automatic-electric-indentation/">Automatic(electric) Indentation</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-29T12:09:00+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/29/automatic-electric-indentation/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Many newcomers dislike Emacs&#8217;s default behavior of not indenting
-automatically new lines in programming major modes. Usually one has to
-press <code>Return</code>, followed by <code>Tab</code> to open a new line and indent it
-according to its context.</p>
-
-<p>Of course Emacs has a command named <code>newline-and-indent</code>, that&#8217;s bound
-to <code>C-j</code> and many people are into the habit of using it instead of the
-pressing <code>Return+Tab</code>. Some even rebind <code>Return</code> to
-<code>newline-and-indent</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;RET&quot;</span><span class="p">)</span> <span class="ss">&#39;newline-and-indent</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>What&#8217;s little known is that Emacs 24.1 introduced a new global minor
-mode called <code>electric-indent-mode</code>.  When enabled, typing certain
-characters(like newlines) triggers reindentation. So you can simply
-add this line to your Emacs config to get to enjoy
-<code>electric-ident-mode</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">electric-indent-mode</span> <span class="mi">+1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -865,6 +871,10 @@ add this line to your Emacs config to get to enjoy
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
       </li>
     
@@ -878,10 +888,6 @@ add this line to your Emacs config to get to enjoy
     
       <li class="post">
         <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
       </li>
     
   </ul>

@@ -9,9 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="One of the files Emacs users often edit is init.el(especially if they
-are having all of their configuration inside of it). It might be
-sensible then &hellip;">
+  <meta name="description" content="One task that often pops when editing text or code is the need to
+remove some extra whitespace around the point(the cursor). Emacs has your back! &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,71 @@ sensible then &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/19/delete-whitespace-around-point/">Delete Whitespace Around Point</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-19T12:08:00+03:00" pubdate data-updated="true">May 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/19/delete-whitespace-around-point/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One task that often pops when editing text or code is the need to
+remove some extra whitespace around the point(the cursor). Emacs has your back!</p>
+
+<p>First, we have the command <code>delete-horizontal-space</code>(bound to <code>M-\</code>) -
+it deletes all spaces and tabs around the point. With a prefix
+argument(<code>C-u M-\</code>) the command deletes only the whitespace before the point.</p>
+
+<p>One similar, although a bit less known, command is
+<code>just-one-space</code>(bound to <code>M-SPC</code>) - it deletes all spaces and tabs
+around the point, leaving just one space (or <code>N</code> spaces if you supply <code>N</code> as a
+prefix argument like <code>C-4 M-SPC</code>). If <code>N</code> is negative, the command
+deletes newlines as well, leaving <code>-N</code> spaces.</p>
+
+<p>One minor snafu with <code>just-one-space</code> is that <code>M-SPC</code> is a no-go on
+OSX since just about everyone uses it for quick access to Spotlight or
+switching between languages. You might want to use a different
+keybinding like this one:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c j&quot;</span><span class="p">)</span> <span class="ss">&#39;just-one-space</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Personally, of the two commands I find <code>just-one-space</code> the more useful.</p>
+
+<p>In <a href="https://github.com/bbatsov/prelude">Prelude</a> <code>just-one-space</code> is
+additionally bound to the <code>kk</code>
+<a href="/blog/2013/04/28/execute-commands-ninja-style-with-key-chord-mode/">keychord</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -887,61 +951,6 @@ it becomes a great performance booster:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/21/custom-config-for-shells/">Custom Config for Shells</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-21T15:06:00+03:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/21/custom-config-for-shells/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Anybody knows that you can run a shell inside Emacs with <code>M-x
-shell</code>. Few people know you can have Emacs run some additional
-configuration for the shell after it&#8217;s started.</p>
-
-<p>Emacs sends the new shell the contents of the file
-<code>~/.emacs_shellname</code> as input, if it exists, where <code>shellname</code> is the
-name of the name if your shell - <code>bash</code>, <code>zsh</code>, etc. For example, if you
-use <code>bash</code>, the file sent to it is <code>~/.emacs_bash</code>. If this file is not
-found, Emacs tries with <code>~/.emacs.d/init_shellname.sh</code>.</p>
-
-<p>One popular application of such custom configuration is to have a
-simpler shell prompt in Emacs, compared to the one you usually employ,
-since <code>shell-mode</code> doesn&#8217;t deal well with fancy prompts.</p>
-
-<p>You can find out more about running interactive shells in Emacs
-<a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Interactive-Shell.html">here</a>
-or by typing <code>C-h r m Interactive Shell RET</code> in your favorite text
-editor.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -965,6 +974,10 @@ editor.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
       </li>
     
@@ -978,10 +991,6 @@ editor.</p>
     
       <li class="post">
         <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
       </li>
     
   </ul>

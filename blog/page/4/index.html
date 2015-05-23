@@ -9,9 +9,10 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="If you like ido, but don&#8217;t like the way it displays the available
-completion candidates you might want to have a look at
-ido-vertical-mode. I &hellip;">
+  <meta name="description" content="I&#8217;ve written in the past about
+electric-indent-mode,
+which was added in Emacs 24.1. In Emacs 24.4 one of the most prominent
+user visible &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +82,105 @@ ido-vertical-mode. I &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/19/a-peek-at-emacs-24-dot-4-auto-indentation-by-default/">A Peek at Emacs 24.4: Auto-indentation by Default</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-19T08:52:00+02:00" pubdate data-updated="true">Jan 19<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/01/19/a-peek-at-emacs-24-dot-4-auto-indentation-by-default/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve written in the past about
+<a href="http://emacsredux.com/blog/2013/03/29/automatic-electric-indentation/">electric-indent-mode</a>,
+which was added in Emacs 24.1. In Emacs 24.4 one of the most prominent
+user visible changes is that it&#8217;s enabled out-of-the box. That&#8217;s a
+huge step towards the &#8220;modernization&#8221; of Emacs and one of the bigger
+changes to the defaults in recent times. Let&#8217;s review briefly how the
+mode works with a couple of Ruby examples (<code>|</code> signifies the cursor
+position). Without <code>electric-indent-mode</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">something</span><span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After you press <code>Return</code> you&#8217;ll get:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">something</span>
+</span><span class='line'><span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">something</span><span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After you press <code>Return</code> you&#8217;ll get:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">something</span>
+</span><span class='line'>  <span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nice, ah?</p>
+
+<p>One problem with <code>electric-indent-mode</code> is that it doesn&#8217;t play nice
+with some (mostly third-party) modes (<code>yaml-mode</code>, <code>slim-mode</code>,
+etc). I guess the situation will improve over time, but for now you
+can simply disable the mode in such problematic cases:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;yaml-mode-hook</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">electric-indent-local-mode</span> <span class="mi">-1</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that <code>electric-indent-local-mode</code> was introduced in Emacs 24.4.</p>
+
+<p>If you want to make a major mode electric-indent aware, have a look at
+the documentation of <code>electric-indent-functions</code> and
+<code>electric-indent-chars</code>.</p>
+
+<p><strong>P.S.</strong></p>
+
+<p>Dmitry Gutov recently wrote
+<a href="http://dgutov.github.io/blog/2014/01/20/electric-indentation-in-ruby-in-emacs-24-dot-4/">more on the topic</a>
+in the context of <code>ruby-mode</code> in Emacs 24.4.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -570,6 +670,8 @@ in Emacs 24.4 you might have a look at
   <!-- categories if -->
 
   <!-- categories if -->
+
+  <!-- categories if -->
  <!-- posts for -->
 </ul>
 
@@ -900,66 +1002,6 @@ in the minor <code>prelude-mode</code>, that are conflicting with the major
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/24/dired-jump/">Dired Jump</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-24T17:53:00+03:00" pubdate data-updated="true">Sep 24<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/24/dired-jump/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Most Emacs users know that they can start <code>dired</code> (Emacs&#8217;s file
-browser) with <code>M-x dired</code> or <code>C-x d</code>. That would display a prompt in
-the minibuffer asking which directory to open with <code>dired</code> (the
-current directory will be suggested as a default).</p>
-
-<p>More often than not you&#8217;ll probably want <code>dired</code> to display the
-directory of file you&#8217;re currently editing. You might even want to
-have the cursor positioned over that very same file in the <code>dired</code>
-buffer. There&#8217;s a cool command that does exactly that -
-<code>dired-jump</code>. To use it you have to first load the built-in library
-<code>dired-x</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;dired-x</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can run the command with <code>C-x C-j</code> (<code>M-x dired-jump</code>). No prompts,
-no wasted time. You&#8217;re instantly teleported to the currently edited
-file&#8217;s position in a <code>dired</code> buffer.</p>
-
-<p>This command works out-of-the-box in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -983,6 +1025,10 @@ file&#8217;s position in a <code>dired</code> buffer.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
       </li>
     
@@ -996,10 +1042,6 @@ file&#8217;s position in a <code>dired</code> buffer.</p>
     
       <li class="post">
         <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a>
       </li>
     
   </ul>
