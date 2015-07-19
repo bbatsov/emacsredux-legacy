@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="From time to time you might want to void (unbind) a variable or a
-function definition in Emacs. Most often you&#8217;ll probably be dealing
-with &hellip;">
+  <meta name="description" content="One operation that we have to do fairly often when editing text is
+manipulating the case of words. The most popular case manipulations
+are probably &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,59 @@ with &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/26/manipulating-word-case/">Manipulating Word Case</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-26T17:19:00+02:00" pubdate data-updated="true">Mar 26<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/26/manipulating-word-case/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One operation that we have to do fairly often when editing text is
+manipulating the case of words. The most popular case manipulations
+are probably <strong>capitalize</strong>, <strong>convert to lowercase</strong> and <strong>convert to
+uppercase</strong>. Emacs naturally has built-in commands for all of those.</p>
+
+<p>Pressing <code>M-c</code> runs the command <code>capitalize-word</code>, which will
+capitalize the next word and move the cursor after it. Pressing <code>M--
+M-c</code> will capitalize the previous word without moving the cursor.</p>
+
+<p>Pressing <code>M-l</code> runs the command <code>downcase-word</code>, which will lowercase
+the next word and move the cursor after it. Pressing <code>M-- M-l</code> will
+lowercase the previous word without moving the cursor.</p>
+
+<p>Pressing <code>M-u</code> runs the command <code>upcase-word</code>, which will uppercase the
+next word and move the cursor after it. Pressing <code>M-- M-u</code> will uppercase
+the previous word without moving the cursor.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -286,6 +339,10 @@ that I&#8217;ve uncovered many interesting things to share with you.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/19/ace-jump-mode-is-dead/">ace-jump-mode is Dead</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
       </li>
     
@@ -299,10 +356,6 @@ that I&#8217;ve uncovered many interesting things to share with you.</p>
     
       <li class="post">
         <a href="/blog/2015/05/16/pragmatic-emacs/">Pragmatic Emacs</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA packages locally</a>
       </li>
     
   </ul>

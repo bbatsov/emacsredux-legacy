@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Productivity - Emacs Redux</title>
+  <title>ace-jump-mode is Dead - Emacs Redux</title>
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Category: Productivity">
+  <meta name="description" content="People often ask how am I navigating efficiently Emacs windows and
+buffers. I have the feeling they expect me to share with them some
+secrets that &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://emacsredux.comblog/categories/productivity">
+  <link rel="canonical" href="http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
@@ -78,36 +80,149 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Productivity</h1>
+    
+      <h1 class="entry-title">Ace-jump-mode Is Dead</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-19T11:48:00+03:00" pubdate data-updated="true">Jul 19<span>th</span>, 2015</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>People often ask how am I navigating efficiently Emacs windows and
+buffers. I have the feeling they expect me to share with them some
+secrets that would turbo-charge common commands like <code>C-s</code>, <code>M-f</code>,
+<code>C-x o</code>, etc.  I don&#8217;t, however, use those commands that much. Ever
+since I saw that vim&#8217;s
+<a href="https://github.com/easymotion/vim-easymotion">EasyMotion</a> has been
+ported to Emacs, I&#8217;ve been using that port - namely
+<a href="https://github.com/winterTTr/ace-jump-mode">ace-jump-mode</a>.</p>
 
-  
-  <h2>2013</h2>
+<p>Basically, it allows you to navigate to every visible portion of your
+Emacs (buffers &amp; windows) with only a handful of keystrokes (usually
+one two activate it and one or two to get where you want to go). You
+can see it in action in this
+<a href="http://emacsrocks.com/e10.html">excellent video</a>. <code>ace-jump</code> served
+me well for years, but I&#8217;ve had a few gripes with it that were never
+addressed (multi-char targets, CamelCase support, etc). I would have
+implemented those myself, if the project was maintained at all, but
+alas - that&#8217;s not the case. Seems I wasn&#8217;t the only one who was
+frustrated with <code>ace-jump</code>, as the prolific
+<a href="http://oremacs.com/">Oleh Krehel</a> reimplemented it pretty much from
+scratch for the purposes of his excellent
+<a href="https://github.com/abo-abo/ace-window">ace-window</a> library. Once I
+got wind of this, I managed to persuade Oleh to start distributing his
+rewrite as a standalone project, which he dubbed
+<a href="https://github.com/abo-abo/avy">avy</a>.</p>
 
-<article>
-  
-<h1><a href="/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">A crazy productivity boost: Remap Return to Control</a></h1>
-<time datetime="2013-11-12T17:09:00+02:00" pubdate><span class='month'>Nov</span> <span class='day'>12</span> <span class='year'>2013</span></time>
+<p><code>Avy</code> features everything <code>ace-jump</code> does and more. Apart from the
+many extra features, its codebase is way cleaner and readable and Oleh
+is a fantastic and very responsive maintainer. So, as far as I&#8217;m
+concerned <code>ace-jump</code> is now a dead project and pretty much everyone
+who&#8217;s using it should try out <code>avy</code> instead. Their usage and interface
+are pretty similar, so the learning curve is non-existing. By the way,
+here&#8217;s <code>avy</code> in action:</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/productivity/'>Productivity</a></span>
-</footer>
+<p><img src="https://raw.githubusercontent.com/wiki/nloyola/avy/images/avy-goto-char.png"></p>
+
+<p>And what about my usage of <code>avy</code>? Nothing fancy here - I just bind the
+commands I consider most important to handy keystrokes.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c j&quot;</span><span class="p">)</span> <span class="ss">&#39;avy-goto-word-or-subword-1</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;s-.&quot;</span><span class="p">)</span> <span class="ss">&#39;avy-goto-word-or-subword-1</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;s-w&quot;</span><span class="p">)</span> <span class="ss">&#39;ace-window</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p><code>avy-goto-word-or-subword-1</code> is aware of CamelCase words and I do a
+lot of programming in languages that use those extensively.</p>
 
+<p><code>avy</code> and <code>ace-window</code> are naturally part of
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+
+<p>P.S. Oleh, one of those days you should rename <code>ace-window</code> to <code>avy-window</code>. :-)</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Bozhidar Batsov</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-19T11:48:00+03:00" pubdate data-updated="true">Jul 19<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/navigation/'>Navigation</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead/" data-via="bbatsov" data-counturl="http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/07/19/jdee-reborn/" title="Previous Post: JDEE Reborn">&laquo; JDEE Reborn</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -202,7 +317,10 @@
       var disqus_shortname = 'emacsredux';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead/';
+        var disqus_url = 'http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

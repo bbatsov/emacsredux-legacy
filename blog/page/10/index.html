@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="When editing text (and source code in particular) we often have to
-deal with characters that are usually paired (like (), [], {},
-etc). By default &hellip;">
+  <meta name="description" content="Most of you probably know that you can run a terminal emulator(or
+simply a shell for that matter) inside Emacs(M-x ansi-term). This
+is pretty neat on &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,89 @@ etc). By default &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/29/terminal-at-your-fingertips/">Terminal at Your Fingertips</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-29T15:38:00+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/29/terminal-at-your-fingertips/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Most of you probably know that you can run a terminal emulator(or
+simply a shell for that matter) inside Emacs(<code>M-x ansi-term</code>).  This
+is pretty neat on its own, but what I think is even better is to have
+a quick way to jump to a particular terminal buffer reserved for the
+occasional command invocation or two. I achieve this goal with the
+following simple command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">visit-term-buffer</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Create or visit a terminal buffer.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nv">get-buffer</span> <span class="s">&quot;*ansi-term*&quot;</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="k">progn</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">split-window-sensibly</span> <span class="p">(</span><span class="nv">selected-window</span><span class="p">))</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">other-window</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">ansi-term</span> <span class="p">(</span><span class="nv">getenv</span> <span class="s">&quot;SHELL&quot;</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">switch-to-buffer-other-window</span> <span class="s">&quot;*ansi-term*&quot;</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first time you run the command it will create a new terminal
+buffer based on your <code>SHELL</code> environment variable and display it in a
+window adjacent to the one you&#8217;re working in(in other words - it won&#8217;t
+clobber the window you are currently in). On successive invocations
+the command will simply take you to that existing buffer (it will
+still be displayed in a separate window).</p>
+
+<p>Personally, I find this command extremely useful and therefore I bind
+it to <code>C-c t</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c t&quot;</span><span class="p">)</span> <span class="ss">&#39;visit-term-buffer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>visit-term-buffer</code> is available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
+prefix).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -755,59 +838,6 @@ hitting <code>M-@</code>, but you get the point.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/26/manipulating-word-case/">Manipulating Word Case</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-26T17:19:00+02:00" pubdate data-updated="true">Mar 26<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/26/manipulating-word-case/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One operation that we have to do fairly often when editing text is
-manipulating the case of words. The most popular case manipulations
-are probably <strong>capitalize</strong>, <strong>convert to lowercase</strong> and <strong>convert to
-uppercase</strong>. Emacs naturally has built-in commands for all of those.</p>
-
-<p>Pressing <code>M-c</code> runs the command <code>capitalize-word</code>, which will
-capitalize the next word and move the cursor after it. Pressing <code>M--
-M-c</code> will capitalize the previous word without moving the cursor.</p>
-
-<p>Pressing <code>M-l</code> runs the command <code>downcase-word</code>, which will lowercase
-the next word and move the cursor after it. Pressing <code>M-- M-l</code> will
-lowercase the previous word without moving the cursor.</p>
-
-<p>Pressing <code>M-u</code> runs the command <code>upcase-word</code>, which will uppercase the
-next word and move the cursor after it. Pressing <code>M-- M-u</code> will uppercase
-the previous word without moving the cursor.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -831,6 +861,10 @@ the previous word without moving the cursor.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/19/ace-jump-mode-is-dead/">ace-jump-mode is Dead</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
       </li>
     
@@ -844,10 +878,6 @@ the previous word without moving the cursor.</p>
     
       <li class="post">
         <a href="/blog/2015/05/16/pragmatic-emacs/">Pragmatic Emacs</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA packages locally</a>
       </li>
     
   </ul>

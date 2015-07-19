@@ -9,11 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="JDEE (Java Development
-Environment for Emacs) used to be best way to develop Java apps in
-Emacs a while back. It offered a ton of
-cool features,
-like &hellip;">
+  <meta name="description" content="People often ask how am I navigating efficiently Emacs windows and
+buffers. I have the feeling they expect me to share with them some
+secrets that &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +81,98 @@ like &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/19/ace-jump-mode-is-dead/">Ace-jump-mode Is Dead</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-19T11:48:00+03:00" pubdate data-updated="true">Jul 19<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/07/19/ace-jump-mode-is-dead/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>People often ask how am I navigating efficiently Emacs windows and
+buffers. I have the feeling they expect me to share with them some
+secrets that would turbo-charge common commands like <code>C-s</code>, <code>M-f</code>,
+<code>C-x o</code>, etc.  I don&#8217;t, however, use those commands that much. Ever
+since I saw that vim&#8217;s
+<a href="https://github.com/easymotion/vim-easymotion">EasyMotion</a> has been
+ported to Emacs, I&#8217;ve been using that port - namely
+<a href="https://github.com/winterTTr/ace-jump-mode">ace-jump-mode</a>.</p>
+
+<p>Basically, it allows you to navigate to every visible portion of your
+Emacs (buffers &amp; windows) with only a handful of keystrokes (usually
+one two activate it and one or two to get where you want to go). You
+can see it in action in this
+<a href="http://emacsrocks.com/e10.html">excellent video</a>. <code>ace-jump</code> served
+me well for years, but I&#8217;ve had a few gripes with it that were never
+addressed (multi-char targets, CamelCase support, etc). I would have
+implemented those myself, if the project was maintained at all, but
+alas - that&#8217;s not the case. Seems I wasn&#8217;t the only one who was
+frustrated with <code>ace-jump</code>, as the prolific
+<a href="http://oremacs.com/">Oleh Krehel</a> reimplemented it pretty much from
+scratch for the purposes of his excellent
+<a href="https://github.com/abo-abo/ace-window">ace-window</a> library. Once I
+got wind of this, I managed to persuade Oleh to start distributing his
+rewrite as a standalone project, which he dubbed
+<a href="https://github.com/abo-abo/avy">avy</a>.</p>
+
+<p><code>Avy</code> features everything <code>ace-jump</code> does and more. Apart from the
+many extra features, its codebase is way cleaner and readable and Oleh
+is a fantastic and very responsive maintainer. So, as far as I&#8217;m
+concerned <code>ace-jump</code> is now a dead project and pretty much everyone
+who&#8217;s using it should try out <code>avy</code> instead. Their usage and interface
+are pretty similar, so the learning curve is non-existing. By the way,
+here&#8217;s <code>avy</code> in action:</p>
+
+<p><img src="https://raw.githubusercontent.com/wiki/nloyola/avy/images/avy-goto-char.png"></p>
+
+<p>And what about my usage of <code>avy</code>? Nothing fancy here - I just bind the
+commands I consider most important to handy keystrokes.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c j&quot;</span><span class="p">)</span> <span class="ss">&#39;avy-goto-word-or-subword-1</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;s-.&quot;</span><span class="p">)</span> <span class="ss">&#39;avy-goto-word-or-subword-1</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;s-w&quot;</span><span class="p">)</span> <span class="ss">&#39;ace-window</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>avy-goto-word-or-subword-1</code> is aware of CamelCase words and I do a
+lot of programming in languages that use those extensively.</p>
+
+<p><code>avy</code> and <code>ace-window</code> are naturally part of
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+
+<p>P.S. Oleh, one of those days you should rename <code>ace-window</code> to <code>avy-window</code>. :-)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -790,52 +880,6 @@ the last 300 keystrokes and its output looks like this:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/12/23/uptime/">Uptime</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-23T17:28:00+02:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2014</time>
-        
-         | <a href="/blog/2014/12/23/uptime/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Many Emacs users keep a single Emacs instance running for quite a while.
-I&#8217;ve had instances running for over a month. How do I know this? Unsurprisingly,
-there&#8217;s a built-in command for that:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>M-x emacs-uptime</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now it&#8217;s time to start bragging to your vim-using friends!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -857,6 +901,10 @@ there&#8217;s a built-in command for that:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/19/ace-jump-mode-is-dead/">ace-jump-mode is Dead</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
       </li>
     
@@ -870,10 +918,6 @@ there&#8217;s a built-in command for that:</p>
     
       <li class="post">
         <a href="/blog/2015/05/16/pragmatic-emacs/">Pragmatic Emacs</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA packages locally</a>
       </li>
     
   </ul>

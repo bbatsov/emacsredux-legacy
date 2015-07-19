@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Navigation | Emacs Redux]]></title>
+  <link href="http://emacsredux.com/blog/categories/navigation/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2015-07-19T12:10:06+03:00</updated>
+  <id>http://emacsredux.com/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ace-jump-mode is Dead]]></title>
+    <link href="http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead/"/>
+    <updated>2015-07-19T11:48:00+03:00</updated>
+    <id>http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead</id>
+    <content type="html"><![CDATA[<p>People often ask how am I navigating efficiently Emacs windows and
+buffers. I have the feeling they expect me to share with them some
+secrets that would turbo-charge common commands like <code>C-s</code>, <code>M-f</code>,
+<code>C-x o</code>, etc.  I don't, however, use those commands that much. Ever
+since I saw that vim's
+<a href="https://github.com/easymotion/vim-easymotion">EasyMotion</a> has been
+ported to Emacs, I've been using that port - namely
+<a href="https://github.com/winterTTr/ace-jump-mode">ace-jump-mode</a>.</p>
+
+<p>Basically, it allows you to navigate to every visible portion of your
+Emacs (buffers &amp; windows) with only a handful of keystrokes (usually
+one two activate it and one or two to get where you want to go). You
+can see it in action in this
+<a href="http://emacsrocks.com/e10.html">excellent video</a>. <code>ace-jump</code> served
+me well for years, but I've had a few gripes with it that were never
+addressed (multi-char targets, CamelCase support, etc). I would have
+implemented those myself, if the project was maintained at all, but
+alas - that's not the case. Seems I wasn't the only one who was
+frustrated with <code>ace-jump</code>, as the prolific
+<a href="http://oremacs.com/">Oleh Krehel</a> reimplemented it pretty much from
+scratch for the purposes of his excellent
+<a href="https://github.com/abo-abo/ace-window">ace-window</a> library. Once I
+got wind of this, I managed to persuade Oleh to start distributing his
+rewrite as a standalone project, which he dubbed
+<a href="https://github.com/abo-abo/avy">avy</a>.</p>
+
+<p><code>Avy</code> features everything <code>ace-jump</code> does and more. Apart from the
+many extra features, its codebase is way cleaner and readable and Oleh
+is a fantastic and very responsive maintainer. So, as far as I'm
+concerned <code>ace-jump</code> is now a dead project and pretty much everyone
+who's using it should try out <code>avy</code> instead. Their usage and interface
+are pretty similar, so the learning curve is non-existing. By the way,
+here's <code>avy</code> in action:</p>
+
+<p><img src="https://raw.githubusercontent.com/wiki/nloyola/avy/images/avy-goto-char.png"></p>
+
+<p>And what about my usage of <code>avy</code>? Nothing fancy here - I just bind the
+commands I consider most important to handy keystrokes.</p>
+
+<p><code>cl
+(global-set-key (kbd "C-c j") 'avy-goto-word-or-subword-1)
+(global-set-key (kbd "s-.") 'avy-goto-word-or-subword-1)
+(global-set-key (kbd "s-w") 'ace-window)
+</code></p>
+
+<p><code>avy-goto-word-or-subword-1</code> is aware of CamelCase words and I do a
+lot of programming in languages that use those extensively.</p>
+
+<p><code>avy</code> and <code>ace-window</code> are naturally part of
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+
+<p>P.S. Oleh, one of those days you should rename <code>ace-window</code> to <code>avy-window</code>. :-)</p>
+]]></content>
+  </entry>
+  
+</feed>

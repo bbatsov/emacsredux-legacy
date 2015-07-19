@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Jumping between the current buffer and the one you were in before is a
-pretty common task. It&#8217;s also one you can solve in a multitude of
-way - &hellip;">
+  <meta name="description" content="One of my bigger problems as an Emacs user is that there only so
+many good keybindings available. At some point you&#8217;re out of good
+options, but &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,94 @@ way - &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/28/execute-commands-ninja-style-with-key-chord-mode/">Execute Commands Ninja-style With Key-chord-mode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-28T08:45:00+03:00" pubdate data-updated="true">Apr 28<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/28/execute-commands-ninja-style-with-key-chord-mode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of my bigger problems as an Emacs user is that there <strong>only so
+many good keybindings</strong> available. At some point you&#8217;re out of good
+options, but there are still plenty of commands you&#8217;d rather be able
+to execute faster than you&#8217;d be able to do with <code>M-x command-name</code>.</p>
+
+<p><a href="http://www.emacswiki.org/emacs/key-chord.el">key-chord-mode</a> to the
+rescue! It&#8217;s a pretty handy minor mode which allows you to bind
+commands to keys that should be pressed together or consecutively(with
+little time between the keystrokes - by default 0.3 seconds). This
+gives you some pretty good opportunities to increase your
+productivity. Assuming you&#8217;ve installed the mode somehow, you can start
+playing with it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; key chords</span>
+</span><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;key-chord</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">key-chord-define-global</span> <span class="s">&quot;BB&quot;</span> <span class="ss">&#39;iswitchb</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">key-chord-define-global</span> <span class="s">&quot;FF&quot;</span> <span class="ss">&#39;find-file</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">key-chord-define-global</span> <span class="s">&quot;jk&quot;</span> <span class="ss">&#39;beginning-of-buffer</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">key-chord-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The examples above illustrate global key-chords. Major mode specific
+key chords are also available.</p>
+
+<p>One should be careful about the key-chord he chooses - it should
+definitely be something you&#8217;re unlikely to type normally. This also
+means that if you&#8217;re writing in Emacs in several languages with common
+letters, key chords that make sense in say English, might not make
+sense in French (for instance). Luckily for me - I write almost
+exclusively in English or some programming language (and Bulgarian and
+English are nothing alike).</p>
+
+<p>One other note - key chords don&#8217;t play very well with
+<code>evil-mode</code>(Emacs&#8217;s vim emulation layer) for obvious reasons. vim is
+kind of key-chord-mode&#8217;s principle inspiration. If you&#8217;re an <code>evil-mode</code> user you
+probably don&#8217;t need key-chord-mode anyways.</p>
+
+<p><a href="https://github.com/bbatsov/prelude">Prelude</a> enables <code>key-chord-mode</code>
+out of the box and makes some creative use of it with <code>jj</code> and <code>JJ</code>
+(which I&#8217;d advise you try out if you didn&#8217;t know about them).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -765,100 +853,6 @@ instead.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/05/recently-visited-files/">Recently Visited Files</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-05T14:50:00+03:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/05/recently-visited-files/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Emacs does not keep track of recently visited files by default. Sad,
-but true.  On a more positive note - it has the feature(courtesy of
-<code>recentf</code>), but it&#8217;s simply not enabled out-of-the-box. Let&#8217;s see what
-we can do to change that:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;recentf</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">recentf-max-saved-items</span> <span class="mi">200</span>
-</span><span class='line'>      <span class="nv">recentf-max-menu-items</span> <span class="mi">15</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">recentf-mode</span> <span class="mi">+1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That wasn&#8217;t that hard. Now Emacs will keep track of the last <code>200</code>
-files we visited and will show the last 15 of them in the <code>File-&gt;Open
-recent</code>(this menu entry is added by <code>recentf</code>) menu. That&#8217;s it.</p>
-
-<p>At this point you&#8217;re probably feeling let down. After all - who uses
-the menu bar in Emacs anyways? Fortunately there is also a command
-named <code>recentf-open-files</code>.  Upon invoking it with <code>M-x
-recentf-open-files</code> you&#8217;ll be presented with a list of all recently
-visited files.</p>
-
-<p>If you&#8217;re an <code>ido</code> user you might prefer to use some command based on
-it instead. Here&#8217;s one:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">recentf-ido-find-file</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Find a recent file using ido.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">file</span> <span class="p">(</span><span class="nv">ido-completing-read</span> <span class="s">&quot;Choose recent file: &quot;</span> <span class="nv">recentf-list</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="nv">file</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">find-file</span> <span class="nv">file</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I&#8217;d suggest binding whichever command you prefer to either <code>C-c f</code> or
-<code>C-x C-r</code> (bound by default to the infrequently used
-<code>find-file-read-only</code> command):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c f&quot;</span><span class="p">)</span> <span class="ss">&#39;recentf-ido-find-file</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As usual - both the command <code>recentf-ido-find-file</code> and its keybinding
-<code>C-c f</code> are available in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>(obviously <code>recentf</code> is
-enabled there out-of-the-box).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -882,6 +876,10 @@ enabled there out-of-the-box).</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/19/ace-jump-mode-is-dead/">ace-jump-mode is Dead</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
       </li>
     
@@ -895,10 +893,6 @@ enabled there out-of-the-box).</p>
     
       <li class="post">
         <a href="/blog/2015/05/16/pragmatic-emacs/">Pragmatic Emacs</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA packages locally</a>
       </li>
     
   </ul>
