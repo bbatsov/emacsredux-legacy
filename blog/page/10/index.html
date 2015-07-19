@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Many newcomers dislike Emacs&#8217;s default behavior of not indenting
-automatically new lines in programming major modes. Usually one has to
-press &hellip;">
+  <meta name="description" content="When editing text (and source code in particular) we often have to
+deal with characters that are usually paired (like (), [], {},
+etc). By default &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,83 @@ press &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/29/automatic-electric-character-pairing/">Automatic(electric) Character Pairing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-29T12:38:00+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/29/automatic-electric-character-pairing/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When editing text (and source code in particular) we often have to
+deal with characters that are usually paired (like <code>()</code>, <code>[]</code>, <code>{}</code>,
+etc). By default Emacs doesn&#8217;t treat such characters in any special
+manner and that kind of sucks, since it&#8217;s quite easy to misplace a
+closing parenthesis for instance.</p>
+
+<p>While there are several modes that target that particular problem, in
+this post I&#8217;ll showcase just one of them - the built-in(since
+Emacs 24.1) global minor mode <code>electric-pair-mode</code>. Enabling it is trivial:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">electric-pair-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At this point typing an open parenthesis automatically inserts the
+corresponding closing parenthesis. (Likewise for brackets, etc.)  As
+an added bonus, consider the following scenario(the bar(<code>|</code>)
+represents your cursor):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">some_fun</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="o">|</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Typing a closing parenthesis a this point will not insert a second
+parenthesis, but will simple move the cursor over the existing one,
+keeping the expression correct.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">some_fun</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">)</span><span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Simple, but effective. A little bit down the road we might take a
+looks at some of the (more powerful) alternatives to
+<code>electric-pair-mode</code>.</p>
+
+<p><code>electric-pair-mode</code> is enabled by default in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -731,63 +808,6 @@ the previous word without moving the cursor.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/26/remove-variable-and-function-definitions/">Remove Variable &amp; Function Definitions</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-26T17:15:00+02:00" pubdate data-updated="true">Mar 26<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/26/remove-variable-and-function-definitions/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>From time to time you might want to void (unbind) a variable or a
-function definition in Emacs. Most often you&#8217;ll probably be dealing
-with variables created with <code>defvar</code>, whose values you&#8217;ll want to
-update.  The magic functions you need are the following:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; this will make the symbol my-nasty-variable&#39;s value void</span>
-</span><span class='line'><span class="p">(</span><span class="nb">makunbound</span> <span class="ss">&#39;my-nasty-variable</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; this will make the symbol my-nasty-function&#39;s</span>
-</span><span class='line'><span class="c1">;; function definition void</span>
-</span><span class='line'><span class="p">(</span><span class="nb">fmakunbound</span> <span class="ss">&#39;my-nasty-function</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The names aren&#8217;t exactly intuitive and even I happen to forget them from time to
-time.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -811,6 +831,10 @@ time.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
       </li>
     
@@ -824,10 +848,6 @@ time.</p>
     
       <li class="post">
         <a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA packages locally</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
       </li>
     
   </ul>

@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Most Emacs users know that they can start dired (Emacs&#8217;s file
-browser) with M-x dired or C-x d. That would display a prompt in
-the minibuffer &hellip;">
+  <meta name="description" content="Often minor modes don&#8217;t respect standard keybinding conventions and
+use some user reserved keys (like C-c a). Occasionally two minor
+modes &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,106 @@ the minibuffer &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/">Removing/Altering Key Bindings From Minor Mode Keymaps</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-25T12:26:00+03:00" pubdate data-updated="true">Sep 25<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Often minor modes don&#8217;t respect standard keybinding conventions and
+use some user reserved keys (like <code>C-c a</code>). Occasionally two minor
+modes would have conflicting keybindings or a minor mode would
+keybindings conflicting with a major mode. I guess you can imagine
+similar problems. Dealing with them is fairly straight-forward - we
+have to either unbind or rebind the offending binding:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; remove keybinding</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minor-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c c&quot;</span><span class="p">)</span> <span class="no">nil</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; change keybinding</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minor-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c c&quot;</span><span class="p">)</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c C-c&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Generally speaking you can use <code>define-key</code> to alter the keymap of a
+major mode as well, but those are rarely offenders when it comes to
+picking appropriate keybindings for their keymaps.</p>
+
+<p>Normally you&#8217;d want to invoke the above code right after the related
+minor (or major) mode is loaded:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">eval-after-load</span> <span class="s">&quot;minor-mode&quot;</span>
+</span><span class='line'>  <span class="o">&#39;</span><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minor-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c c&quot;</span><span class="p">)</span> <span class="no">nil</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Making a minor mode have different keymaps in different major modes is
+tricky, but possible. Here&#8217;s an example that disables some keybindings
+in the minor <code>prelude-mode</code>, that are conflicting with the major
+<code>org-mode</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-org-mode-hook</span> <span class="p">()</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">oldmap</span> <span class="p">(</span><span class="nb">cdr</span> <span class="p">(</span><span class="nb">assoc</span> <span class="ss">&#39;prelude-mode</span> <span class="nv">minor-mode-map-alist</span><span class="p">)))</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">newmap</span> <span class="p">(</span><span class="nv">make-sparse-keymap</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">set-keymap-parent</span> <span class="nv">newmap</span> <span class="nv">oldmap</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">define-key</span> <span class="nv">newmap</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c +&quot;</span><span class="p">)</span> <span class="no">nil</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">define-key</span> <span class="nv">newmap</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c -&quot;</span><span class="p">)</span> <span class="no">nil</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">make-local-variable</span> <span class="ss">&#39;minor-mode-overriding-map-alist</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">push</span> <span class="o">`</span><span class="p">(</span><span class="nv">prelude-mode</span> <span class="o">.</span> <span class="o">,</span><span class="nv">newmap</span><span class="p">)</span> <span class="nv">minor-mode-overriding-map-alist</span><span class="p">))</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-mode-hook</span> <span class="ss">&#39;my-org-mode-hook</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -940,68 +1040,6 @@ some code Emacs Lisp&#8217;s macros have your back.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/09/go-to-column/">Go to Column</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-09T16:30:00+03:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/09/go-to-column/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Almost every Emacs user knows that <code>M-g M-g</code> and <code>M-g g</code> (both bound to
-<code>go-to-line</code>) will take him to the line of his choosing (provided he
-knows the number of the target line, of course).</p>
-
-<p>Surprisingly few Emacs users know that there is a similar way to jump
-to a column by its number - <code>M-g TAB</code> (bound to
-<code>move-to-column</code>). Interactively you cannot jump past the end of the
-line you&#8217;re currently on, but you can always cook your own version of
-the command to get around that limitation:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">go-to-column</span> <span class="p">(</span><span class="nv">column</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;nColumn: &quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">move-to-column</span> <span class="nv">column</span> <span class="no">t</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Let&#8217;s bind that to some keycombo:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-g M-c&quot;</span><span class="p">)</span> <span class="ss">&#39;go-to-column</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -1025,6 +1063,10 @@ the command to get around that limitation:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
       </li>
     
@@ -1038,10 +1080,6 @@ the command to get around that limitation:</p>
     
       <li class="post">
         <a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA packages locally</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
       </li>
     
   </ul>

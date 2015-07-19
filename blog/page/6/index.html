@@ -9,8 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="locate is one extremely popular Unix command that allows you to
-search for files in a pre-built database. One little know fact is that Emacs provides &hellip;">
+  <meta name="description" content="Almost every Emacs user knows that M-g M-g and M-g g (both bound to
+go-to-line) will take him to the line of his choosing (provided he
+knows the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,68 @@ search for files in a pre-built database. One little know fact is that Emacs pro
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/09/go-to-column/">Go to Column</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-09T16:30:00+03:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/09/go-to-column/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Almost every Emacs user knows that <code>M-g M-g</code> and <code>M-g g</code> (both bound to
+<code>go-to-line</code>) will take him to the line of his choosing (provided he
+knows the number of the target line, of course).</p>
+
+<p>Surprisingly few Emacs users know that there is a similar way to jump
+to a column by its number - <code>M-g TAB</code> (bound to
+<code>move-to-column</code>). Interactively you cannot jump past the end of the
+line you&#8217;re currently on, but you can always cook your own version of
+the command to get around that limitation:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">go-to-column</span> <span class="p">(</span><span class="nv">column</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;nColumn: &quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">move-to-column</span> <span class="nv">column</span> <span class="no">t</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s bind that to some keycombo:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-g M-c&quot;</span><span class="p">)</span> <span class="ss">&#39;go-to-column</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -836,142 +899,6 @@ sense to use something like <code>C-^</code> for the new command:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/">Smarter Navigation to the Beginning of a Line</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-22T17:48:00+03:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
-        
-         | <a href="/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In Emacs there are two essential commands when you have to go the
-beginning of a line - <code>move-beginning-of-line</code>(bound to <code>C-a</code>) and
-<code>back-to-indentation</code>(bound to <code>M-m</code>). The first takes you to the
-first column of a line and the latter takes you the first non-whitespace
-character on a line.</p>
-
-<p>Generally, I find <code>back-to-indentation</code> more useful, but occasionally
-it makes sense to go to the real beginning of a line as well. What
-doesn&#8217;t make sense is to have to think all the time what command is
-the most appropriate in a particular situation. Wouldn&#8217;t it be great
-if <code>C-a</code> initially took you to the first non-whitespace char(as
-<code>back-to-indentation</code> does) on a line, and if pressed again took
-you to the actual beginning of the line? It would be! Let&#8217;s get it
-done:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">smarter-move-beginning-of-line</span> <span class="p">(</span><span class="nv">arg</span><span class="p">)</span>
-</span><span class='line'>  <span class="s">&quot;Move point back to indentation of beginning of line.</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">Move point to the first non-whitespace character on this line.</span>
-</span><span class='line'><span class="s">If point is already there, move to the beginning of the line.</span>
-</span><span class='line'><span class="s">Effectively toggle between the first non-whitespace character and</span>
-</span><span class='line'><span class="s">the beginning of the line.</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">If ARG is not nil or 1, move forward ARG - 1 lines first.  If</span>
-</span><span class='line'><span class="s">point reaches the beginning or end of the buffer, stop there.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;^p&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">setq</span> <span class="nv">arg</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">arg</span> <span class="mi">1</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">;; Move lines first</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">/=</span> <span class="nv">arg</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">line-move-visual</span> <span class="no">nil</span><span class="p">))</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">forward-line</span> <span class="p">(</span><span class="nb">1-</span> <span class="nv">arg</span><span class="p">))))</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">orig-point</span> <span class="p">(</span><span class="nv">point</span><span class="p">)))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">back-to-indentation</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">=</span> <span class="nv">orig-point</span> <span class="p">(</span><span class="nv">point</span><span class="p">))</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">move-beginning-of-line</span> <span class="mi">1</span><span class="p">))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">;; remap C-a to `smarter-move-beginning-of-line&#39;</span>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">move-beginning-of-line]</span>
-</span><span class='line'>                <span class="ss">&#39;smarter-move-beginning-of-line</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The command will keep toggling between the first non-whitespace char
-and the beginning of the line when invoked.</p>
-
-<p>Here&#8217;s a visual example(<code>|</code> is the cursor):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>This is a short example
-</span><span class='line'>    text|
-</span><span class='line'>    <span class="c"># pressing C-a once</span>
-</span><span class='line'>   |text
-</span><span class='line'>    <span class="c"># pressing C-a again</span>
-</span><span class='line'>|   text
-</span><span class='line'>    <span class="c"># pressing C-a again</span>
-</span><span class='line'>   |text
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This functionality could also be implemented with <code>defadvice</code>, but I tend to avoid their use.</p>
-
-<p><code>smarter-move-beginning-of-line</code> is part of <a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
-
-<p><strong>P.S.</strong> The credit for this tip goes to <a href="https://github.com/lunaryorn">Sebastian Wiesner</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -995,6 +922,10 @@ and the beginning of the line when invoked.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
       </li>
     
@@ -1008,10 +939,6 @@ and the beginning of the line when invoked.</p>
     
       <li class="post">
         <a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA packages locally</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
       </li>
     
   </ul>

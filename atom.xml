@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2015-05-23T15:28:11+03:00</updated>
+  <updated>2015-07-19T11:47:00+03:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[JDEE Reborn]]></title>
+    <link href="http://emacsredux.com/blog/2015/07/19/jdee-reborn/"/>
+    <updated>2015-07-19T11:37:00+03:00</updated>
+    <id>http://emacsredux.com/blog/2015/07/19/jdee-reborn</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/jdee-emacs/jdee">JDEE</a> (Java Development
+Environment for Emacs) used to be best way to develop Java apps in
+Emacs a while back. It offered a ton of
+<a href="http://emacswiki.org/emacs/JavaDevelopmentEnvironment">cool features</a>,
+like smart auto-completion and a debugger. Unfortunately at some point
+the development slowed down significantly and the project went in a
+catatonic state. There was pretty much no activity for years in the
+official SourceForge repo and there was also no support for features
+introduced in Java 5+.</p>
+
+<p>Recently, however, the project migrated to
+<a href="https://github.com/jdee-emacs/jdee">GitHub</a> and it&#8217;s now way easier
+to get involved. Seems that some people have already started work on
+updating JDEE to support modern JDKs and modern Emacs functionality.</p>
+
+<p>That&#8217;s a really exciting project, as Java support has traditionally
+been a weakness of Emacs and I&#8217;m writing this post with the hope that
+most people will help make JDEE great again.</p>
+
+<p>So what are you waiting for? If you&#8217;re into Java and friends (Scala,
+Clojure, Groovy, etc), check out the new official repo and let&#8217;s get
+this party started!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mastering Emacs (the first Emacs book in over a decade) is out]]></title>
@@ -925,38 +955,6 @@ open-source projects more than your regular schedule might permit.</p>
 <p>Alternatively you can use PayPal.</p>
 
 <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=3J4QE5QBJU84Q"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="Paypal" /></a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[New Emacs blogs]]></title>
-    <link href="http://emacsredux.com/blog/2014/07/22/new-emacs-blogs/"/>
-    <updated>2014-07-22T17:43:00+03:00</updated>
-    <id>http://emacsredux.com/blog/2014/07/22/new-emacs-blogs</id>
-    <content type="html"><![CDATA[<p>The problem with Emacs blogs is one can never have enough of them (especially the good ones).</p>
-
-<p>I&#8217;d like to draw my readers attention to two new blogs:</p>
-
-<h3>lunarsite</h3>
-
-<p><a href="http://www.lunaryorn.com/">lunarsite</a> is not exactly new (it was
-started in March 2014), but I don&#8217;t think enough people have come
-across it, so I&#8217;m mentioning it here anyway. It&#8217;s operated by one of
-the most prolific members of the Emacs community in recent years - the
-great <a href="http://www.lunaryorn.com/pages/about.html">Sebastian Wiesner</a>
-(of <code>flycheck</code> and <code>cask</code> fame).</p>
-
-<p>If you&#8217;re thinking of writing your first major mode - you&#8217;ll find some
-great advice there.</p>
-
-<h3>Endless Parentheses</h3>
-
-<p><a href="http://endlessparentheses.com/">Endless Parentheses</a> is a brand new blog started by
-<a href="https://github.com/Bruce-Connor">Arthur Malabarba</a>. It&#8217;s dedicated to
-concise posts on improving your Emacs productivity.</p>
-
-<p>The content so far is similar to the articles I write here, so if you like <code>Emacs Redux</code>
-you&#8217;ll likely enjoy <code>Endless Parentheses</code> as well.</p>
 ]]></content>
   </entry>
   

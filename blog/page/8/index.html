@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Anybody knows that you can run a shell inside Emacs with M-x
-shell. Few people know you can have Emacs run some additional
-configuration for the &hellip;">
+  <meta name="description" content="Jumping between the current buffer and the one you were in before is a
+pretty common task. It&#8217;s also one you can solve in a multitude of
+way - &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,82 @@ configuration for the &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/28/switch-to-previous-buffer/">Switch to Previous Buffer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-28T08:43:00+03:00" pubdate data-updated="true">Apr 28<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/28/switch-to-previous-buffer/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Jumping between the current buffer and the one you were in before is a
+pretty common task. It&#8217;s also one you can solve in a multitude of
+way - the most popular being simply the use of <code>switch-to-buffer</code> and
+<code>ido-switch-to-buffer</code>. Both commands (which are generally bound to
+<code>C-x b</code>) would suggest to select the previous buffer when you invoke
+them. While this was good enough for me for many years, recently
+<a href="https://github.com/lukerandall">Luke Randall</a> suggested me a neat
+alternative:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">switch-to-previous-buffer</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Switch to previously open buffer.</span>
+</span><span class='line'><span class="s">Repeated invocations toggle between the two most recently open buffers.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">switch-to-buffer</span> <span class="p">(</span><span class="nv">other-buffer</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">)</span> <span class="mi">1</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you pair this command with a handy
+<a href="/blog/2013/04/28/execute-commands-ninja-style-with-key-chord-mode/">key chord</a>
+it becomes a great performance booster:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">key-chord-define-global</span> <span class="s">&quot;JJ&quot;</span> <span class="ss">&#39;switch-to-previous-buffer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&#8217;re not fond of key chords I&#8217;d suggest a good old keybinding instead:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c b&quot;</span><span class="p">)</span> <span class="ss">&#39;switch-to-previous-buffer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The command and its key chord are part of <a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -783,60 +859,6 @@ enabled there out-of-the-box).</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/05/prog-mode-the-parent-of-all-programming-modes/">Prog-mode: The Parent of All Programming Modes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-05T12:04:00+03:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/05/prog-mode-the-parent-of-all-programming-modes/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>You probably know that major modes in Emacs can derive(inherit)
-functionality from a parent major mode.</p>
-
-<p>Emacs 24.1 introduced <code>prog-mode</code> - a new major mode from which all
-programming modes should be derived. All of the programming modes that
-come bundled with Emacs already inherit it(as do most
-actively maintained third-party modes). Having a common parent for all
-the programming modes allows us to do some pretty neat stuff - like
-setting common behavior for all of them. Here&#8217;s how we can enable
-spell-checking in comments:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;flyspell-prog-mode</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That&#8217;s all for now. We&#8217;ll discuss <code>flyspell</code> in more detail down the road.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -860,6 +882,10 @@ spell-checking in comments:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
       </li>
     
@@ -873,10 +899,6 @@ spell-checking in comments:</p>
     
       <li class="post">
         <a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA packages locally</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a>
       </li>
     
   </ul>
