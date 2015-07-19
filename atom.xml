@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2015-07-19T12:10:06+03:00</updated>
+  <updated>2015-07-19T12:11:05+03:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[ace-jump-mode is Dead]]></title>
-    <link href="http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead/"/>
+    <title type="html"><![CDATA[ace-jump-mode is Dead, Long Live Avy]]></title>
+    <link href="http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/"/>
     <updated>2015-07-19T11:48:00+03:00</updated>
-    <id>http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead</id>
+    <id>http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy</id>
     <content type="html"><![CDATA[<p>People often ask how am I navigating efficiently Emacs windows and
 buffers. I have the feeling they expect me to share with them some
 secrets that would turbo-charge common commands like <code>C-s</code>, <code>M-f</code>,
