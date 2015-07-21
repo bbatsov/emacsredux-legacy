@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2015-07-19T12:11:05+03:00</updated>
+  <updated>2015-07-21T14:43:34+03:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -35,7 +35,7 @@ updating JDEE to support modern JDKs and modern Emacs functionality.</p>
 
 <p>That's a really exciting project, as Java support has traditionally
 been a weakness of Emacs and I'm writing this post with the hope that
-most people will help make JDEE great again.</p>
+more people will help make JDEE great again.</p>
 
 <p>So what are you waiting for? If you're into Java and friends (Scala,
 Clojure, Groovy, etc), check out the new official repo and let's get

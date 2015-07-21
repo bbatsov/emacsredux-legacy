@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Navigation | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/navigation/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2015-07-19T12:11:05+03:00</updated>
+  <updated>2015-07-21T14:43:34+03:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -65,6 +65,11 @@ commands I consider most important to handy keystrokes.</p>
 
 <p><code>avy-goto-word-or-subword-1</code> is aware of CamelCase words and I do a
 lot of programming in languages that use those extensively.</p>
+
+<p><code>avy</code> has one more thing going for it - it's part of the default Emacs
+package repo <a href="https://elpa.gnu.org/packages/">GNU ELPA</a>, which means
+that you can install it right away without having to setup any
+third-party repositories (which you'll probably need sooner or later).</p>
 
 <p><code>avy</code> and <code>ace-window</code> are naturally part of
 <a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
