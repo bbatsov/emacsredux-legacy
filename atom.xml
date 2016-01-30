@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-01-30T12:29:35+02:00</updated>
+  <updated>2016-01-30T12:38:55+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[My Personal Emacs Configuration]]></title>
+    <link href="http://emacsredux.com/blog/2016/01/30/my-personal-emacs-configuration/"/>
+    <updated>2016-01-30T12:31:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/01/30/my-personal-emacs-configuration</id>
+    <content type="html"><![CDATA[<p>From time to time people ask me about my personal Emacs
+configuration. Other just assume that I use
+<a href="https://github.com/bbatsov/prelude">Prelude</a>. For a very long time my
+personal configuration was pretty similar to Prelude - in a way it was
+a staging ground for things to go into Prelude eventually (although
+changes would travel both ways when Prelude users suggest some cool
+things).</p>
+
+<p>Recently I&#8217;ve decided that in the future I want to do a few things with Prelude:</p>
+
+<ul>
+<li>extract as much functionality from it as possible into reusable
+packages (e.g. <a href="https://github.com/bbatsov/super-save">super-save</a>
+and <a href="https://github.com/bbatsov/crux">crux</a>)</li>
+<li>adopt there <a href="https://github.com/jwiegley/use-package">use-package</a></li>
+<li>improve the support for Windows (because now I have Windows computer)</li>
+</ul>
+
+
+<p>As part of these efforts I reworked my personal config into something
+pretty simple (it&#8217;s a single <code>init.el</code> file) and I&#8217;ve started
+experimenting with ideas for the future. Stay tuned for the results!</p>
+
+<p>The config is available
+<a href="https://github.com/bbatsov/emacs.d">here</a>. Perhaps some of you will
+find something useful there.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Remap Return to Control in GNU/Linux]]></title>
@@ -812,144 +846,6 @@ in the official documentation.</p>
 
 <p>I&#8217;m inviting all members of our community interested in promoting good
 Emacs Lisp practices to join the development of this document!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A peek at Emacs 24.4: superword-mode]]></title>
-    <link href="http://emacsredux.com/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/"/>
-    <updated>2014-08-27T18:24:00+03:00</updated>
-    <id>http://emacsredux.com/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode</id>
-    <content type="html"><![CDATA[<p>In a previous post I wrote about
-<a href="http://emacsredux.com/blog/2013/04/21/camelcase-aware-editing/">camel-case aware editing with subword-mode</a>. Emacs
-24.4 adds a complementary minor mode called <code>superword-mode</code>, which
-also alters the behavior of word-based commands when enabled.</p>
-
-<p>Normally Emacs would consider underscores and dashes word separators
-(<code>snake_case</code> and <code>lisp-case</code> anyone?). This affects all <code>word</code>
-commands - <code>forward-word</code>, <code>backward-word</code>, <code>kill-word</code>, etc. Let&#8217;s
-see a couple of examples (<code>|</code> denotes the cursor position):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>;; word with dash
-</span><span class='line'>|some-word
-</span><span class='line'>
-</span><span class='line'>;; press M-f (forward-word) once
-</span><span class='line'>some|-word
-</span><span class='line'>
-</span><span class='line'>;; press M-f again
-</span><span class='line'>some-word|
-</span><span class='line'>
-</span><span class='line'>;; press M-b (backward-word) once
-</span><span class='line'>some-|word
-</span><span class='line'>
-</span><span class='line'>;; word with underscore
-</span><span class='line'>|some_word
-</span><span class='line'>
-</span><span class='line'>;; press M-f once
-</span><span class='line'>some|_word
-</span><span class='line'>
-</span><span class='line'>;; press M-f again
-</span><span class='line'>some_word|
-</span><span class='line'>
-</span><span class='line'>;; press M-b once
-</span><span class='line'>some_|word
-</span><span class='line'>
-</span><span class='line'>;; word in camelCase (assuming subword-mode is not enabled)
-</span><span class='line'>|someWord
-</span><span class='line'>
-</span><span class='line'>;; press M-f once
-</span><span class='line'>someWord|
-</span><span class='line'>
-</span><span class='line'>;; word in camelCase (assuming subword-mode is enabled)
-</span><span class='line'>|someWord
-</span><span class='line'>
-</span><span class='line'>;; press M-f once
-</span><span class='line'>some|Word</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Personally I find the default behavior combined with <code>subword-mode</code>
-great. I do a lot of Ruby and Lisp programming and it also makes a lot
-of sense to me to be able to navigate the portions of a complex word,
-but I guess not everyone feels this way. Enter <code>superword-mode</code> - when
-it&#8217;s enabled all &#8220;complex/compound&#8221; words are treated as a single word:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>;; word with dash
-</span><span class='line'>|some-word
-</span><span class='line'>
-</span><span class='line'>;; press M-f once
-</span><span class='line'>some-word|
-</span><span class='line'>
-</span><span class='line'>;; word with underscore
-</span><span class='line'>|some_word
-</span><span class='line'>
-</span><span class='line'>;; press M-f once
-</span><span class='line'>some_word|
-</span><span class='line'>
-</span><span class='line'>;; word in camelCase
-</span><span class='line'>|someWord
-</span><span class='line'>
-</span><span class='line'>;; press M-f once
-</span><span class='line'>someWord|</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note that you cannot have <code>subword-mode</code> and <code>superword-mode</code> enabled
-at the same time. Turning one of them on will disable the other.</p>
-
-<p>Personally, I don&#8217;t see much value in <code>superword-mode</code> as a mode
-that&#8217;s enabled all the time, but I can imagine some useful
-scenarios in which I&#8217;d enable it briefly to do some focused editing.</p>
 ]]></content>
   </entry>
   

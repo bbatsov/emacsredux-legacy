@@ -9,9 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="comint provides Emacs infrastructure for building command
-interpreters. It&#8217;s backing a lot of popular shell/REPL modes - like eshell,
-inferior- &hellip;">
+  <meta name="description" content="Prelude In this article I&#8217;ll share with you a few tips and tricks about
+running Emacs under the Max OS X operating system. This article will &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,165 @@ inferior- &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/09/emacs-on-os-x/">Emacs on OS X</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-09T13:31:00+03:00" pubdate data-updated="true">May 9<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/05/09/emacs-on-os-x/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Prelude</h2>
+
+<p>In this article I&#8217;ll share with you a few tips and tricks about
+running Emacs under the Max OS X operating system. This article will
+focus on the vanilla GNU Emacs, but if you want a more native OS X experience you
+might have a look at the
+<a href="https://github.com/railwaycat/homebrew-emacsmacport/releases">enhanced Emacs Mac port</a>.</p>
+
+<h2>Installation</h2>
+
+<p>While Emacs is available for installation from
+<a href="http://wikemacs.org/wiki/Installing_Emacs_on_OS_X">various sources</a>
+I recommend you to use the
+<a href="http://emacsformacosx.com/">Emacs for Mac OS X binary distribution</a>.</p>
+
+<p>I always run the latest development version and I use homebrew to install it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew install emacs --HEAD --with-cocoa
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Keep in mind there&#8217;s an ancient Emacs 22 that ships with OS X.  You
+might want to alter your <code>PATH</code>, so that the new Emacs is picked up in
+a shell.</p>
+
+<p>Alternatively you can just create an alias in your shell and when you
+invoke <code>emacs</code> it will run the newly installed version:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">alias </span><span class="nv">emacs</span><span class="o">=</span><span class="s2">&quot;/Applications/Emacs.app/Contents/MacOS/Emacs -nw&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you installed via Homebrew that path might look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">alias </span><span class="nv">emacs</span><span class="o">=</span><span class="s2">&quot;/usr/local/Cellar/emacs/24.5/Emacs.app/Contents/MacOS/Emacs -nw&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To make it permanent, if using bash, add that line to
+<code>~/.bash_profile</code>. zsh users will want to update <code>~/.zshrc</code> instead.</p>
+
+<p>In case you&#8217;re wondering - <code>nw</code> tells Emacs to start in &#8220;terminal&#8221;
+mode (instead of in GUI mode).</p>
+
+<h2>Keybindings</h2>
+
+<p>I heartily recommend you to remap your <em>Caps Lock</em> key to <em>Control</em>. This
+can be easily done via <em>Preferences -> Keyboard -> Modifier Keys</em>. If
+you&#8217;re using a laptop keyboard or the bluetooth keyboard you
+might want to remap your right <code>Option</code> key to <code>Control</code> as
+well. No one can use effectively Emacs without a right Control
+key. Remapping it is a bit more involved and requires the use of the
+third-party utility
+<a href="http://pqrs.org/macosx/karabiner/">Karabiner</a>.</p>
+
+<p>If you&#8217;re adventurous you might even try <a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">a crazier idea</a>.</p>
+
+<h2>Setting the PATH variable</h2>
+
+<p>Long story short - if you&#8217;re running Emacs from Spotlight (or any
+other launcher for that matter) your <code>PATH</code> and <code>exec-path</code> variables
+won&#8217;t be same as the ones in your shell (and that&#8217;s every nasty since
+you want be able to run some external programs from Emacs). The best
+way to handle this would be installing the package
+<a href="https://github.com/purcell/exec-path-from-shell">exec-path-from-shell</a>
+by Steve Purcell.</p>
+
+<h2>Flyspell</h2>
+
+<p>For flyspell to work correctly you&#8217;ll need to install aspell plus a few dictionaries.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew install aspell --lang<span class="o">=</span>en
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Proced</h2>
+
+<p>The mighty
+<a href="http://emacsredux.com/blog/2013/05/02/manage-processes-with-proced/">proced</a>
+doesn&#8217;t work on OS X.  You can use
+<a href="http://www.splode.com/~friedman/software/emacs-lisp/src/vkill.el">vkill</a>
+as a replacement. It&#8217;s kind of basic, but it mostly works.</p>
+
+<h2>Dired</h2>
+
+<p>OS X ships with BSD&#8217;s <code>ls</code> command which doesn&#8217;t have all the features
+of GNU <code>ls</code> (used internally by <code>dired</code>). Fortunately, this is easily solvable:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>brew install coreutils
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To avoid conflicts the GNU utils are prefixed with <code>g</code>, so <code>ls</code> becomes <code>gls</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">insert-directory-program</span> <span class="p">(</span><span class="nv">executable-find</span> <span class="s">&quot;gls&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Dash</h2>
+
+<p><a href="https://kapeli.com/dash">Dash</a> is the ultimately API documentation
+browser. I can&#8217;t live without it!</p>
+
+<p>If you&#8217;re using it as well, you might want to install
+<a href="https://github.com/stanaka/dash-at-point">dash-at-point</a>.</p>
+
+<h2>More goodies</h2>
+
+<p>If you want to spare yourself part of the headache of configuring
+Emacs on OSX and get a lot of extra firepower you might want to install
+<a href="https://github.com/bbatsov/prelude">Emacs Prelude</a> - an enhanced
+Emacs 24.x configuration (developed by yours truly) that should make
+your experience with Emacs both more pleasant and more powerful.</p>
+
+<p><strong>P.S.</strong> I&#8217;d like to hear your tips &amp; suggestions about making the
+Emacs experience on OS X nicer and more powerful!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -682,173 +840,6 @@ Emacs Lisp practices to join the development of this document!</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/">A Peek at Emacs 24.4: Superword-mode</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-27T18:24:00+03:00" pubdate data-updated="true">Aug 27<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In a previous post I wrote about
-<a href="http://emacsredux.com/blog/2013/04/21/camelcase-aware-editing/">camel-case aware editing with subword-mode</a>. Emacs
-24.4 adds a complementary minor mode called <code>superword-mode</code>, which
-also alters the behavior of word-based commands when enabled.</p>
-
-<p>Normally Emacs would consider underscores and dashes word separators
-(<code>snake_case</code> and <code>lisp-case</code> anyone?). This affects all <code>word</code>
-commands - <code>forward-word</code>, <code>backward-word</code>, <code>kill-word</code>, etc. Let&#8217;s
-see a couple of examples (<code>|</code> denotes the cursor position):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>;; word with dash
-</span><span class='line'>|some-word
-</span><span class='line'>
-</span><span class='line'>;; press M-f (forward-word) once
-</span><span class='line'>some|-word
-</span><span class='line'>
-</span><span class='line'>;; press M-f again
-</span><span class='line'>some-word|
-</span><span class='line'>
-</span><span class='line'>;; press M-b (backward-word) once
-</span><span class='line'>some-|word
-</span><span class='line'>
-</span><span class='line'>;; word with underscore
-</span><span class='line'>|some_word
-</span><span class='line'>
-</span><span class='line'>;; press M-f once
-</span><span class='line'>some|_word
-</span><span class='line'>
-</span><span class='line'>;; press M-f again
-</span><span class='line'>some_word|
-</span><span class='line'>
-</span><span class='line'>;; press M-b once
-</span><span class='line'>some_|word
-</span><span class='line'>
-</span><span class='line'>;; word in camelCase (assuming subword-mode is not enabled)
-</span><span class='line'>|someWord
-</span><span class='line'>
-</span><span class='line'>;; press M-f once
-</span><span class='line'>someWord|
-</span><span class='line'>
-</span><span class='line'>;; word in camelCase (assuming subword-mode is enabled)
-</span><span class='line'>|someWord
-</span><span class='line'>
-</span><span class='line'>;; press M-f once
-</span><span class='line'>some|Word</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Personally I find the default behavior combined with <code>subword-mode</code>
-great. I do a lot of Ruby and Lisp programming and it also makes a lot
-of sense to me to be able to navigate the portions of a complex word,
-but I guess not everyone feels this way. Enter <code>superword-mode</code> - when
-it&#8217;s enabled all &#8220;complex/compound&#8221; words are treated as a single word:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>;; word with dash
-</span><span class='line'>|some-word
-</span><span class='line'>
-</span><span class='line'>;; press M-f once
-</span><span class='line'>some-word|
-</span><span class='line'>
-</span><span class='line'>;; word with underscore
-</span><span class='line'>|some_word
-</span><span class='line'>
-</span><span class='line'>;; press M-f once
-</span><span class='line'>some_word|
-</span><span class='line'>
-</span><span class='line'>;; word in camelCase
-</span><span class='line'>|someWord
-</span><span class='line'>
-</span><span class='line'>;; press M-f once
-</span><span class='line'>someWord|</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note that you cannot have <code>subword-mode</code> and <code>superword-mode</code> enabled
-at the same time. Turning one of them on will disable the other.</p>
-
-<p>Personally, I don&#8217;t see much value in <code>superword-mode</code> as a mode
-that&#8217;s enabled all the time, but I can imagine some useful
-scenarios in which I&#8217;d enable it briefly to do some focused editing.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -872,6 +863,10 @@ scenarios in which I&#8217;d enable it briefly to do some focused editing.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
       </li>
     
@@ -885,10 +880,6 @@ scenarios in which I&#8217;d enable it briefly to do some focused editing.</p>
     
       <li class="post">
         <a href="/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/">ace-jump-mode is Dead, Long Live Avy</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
       </li>
     
   </ul>

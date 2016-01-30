@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Let&#8217;s continue our exploration of the fascinating topic of
-killing lines. Apart from
-killing lines from the cursor to the end of the line(kill- &hellip;">
+  <meta name="description" content="It most text editors if you select a piece of text and press any
+key(that&#8217;s not bound to some command) the selection would be replaced
+by the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,64 @@ killing lines from the cursor to the end of the line(kill- &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/12/delete-selection-on-insert/">Delete Selection on Insert</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-12T11:57:00+03:00" pubdate data-updated="true">Apr 12<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/12/delete-selection-on-insert/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It most text editors if you select a piece of text and press any
+key(that&#8217;s not bound to some command) the selection would be replaced
+by the character bound to the key(or deleted if you press
+<code>Backspace</code>).  In Emacs things look differently - by default typed
+text is just inserted at point, regardless of any selection.</p>
+
+<p>Of course, there is a way to change this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">delete-selection-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now when <code>transient-mark-mode</code> is also enabled(it is enabled by
+default since Emacs 23) any typed text replaces the selection if the
+selection is active.</p>
+
+<p>Personally I find this behavior more useful than the default
+one. That&#8217;s why it should be no surprise that <code>delete-selection-mode</code>
+is enabled by default in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -763,71 +821,6 @@ changing it manually.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/01/highlight-matching-parentheses/">Highlight Matching Parentheses</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-01T14:40:00+03:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/01/highlight-matching-parentheses/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you&#8217;re into programming highlighting the matching parentheses in
-your code is probably something you find rather desirable. Emacs
-doesn&#8217;t do so by default, but the global minor mode <code>show-paren-mode</code>,
-that comes bundled with Emacs, does.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;paren</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">show-paren-style</span> <span class="ss">&#39;parenthesis</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">show-paren-mode</span> <span class="mi">+1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Valid styles are <code>parenthesis</code> (meaning highlight the matching
-parentheses), <code>expression</code> (meaning show the entire expression
-enclosed by the parentheses) and <code>mixed</code> (meaning show the matching
-parentheses if both are visible, and the expression otherwise).</p>
-
-<p>Personally I find <code>parenthesis</code> as the least distracting option and
-therefore I favor it.</p>
-
-<p>If you&#8217;d like to change the faces used for matching and mismatched
-parentheses you&#8217;d have to alter <code>show-paren-mismatch</code> and
-<code>show-paren-match</code>. Most decent color themes do this out the box.</p>
-
-<p><code>show-paren-mode</code> is enabled out-of-the-box in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -851,6 +844,10 @@ parentheses you&#8217;d have to alter <code>show-paren-mismatch</code> and
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
       </li>
     
@@ -864,10 +861,6 @@ parentheses you&#8217;d have to alter <code>show-paren-mismatch</code> and
     
       <li class="post">
         <a href="/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/">ace-jump-mode is Dead, Long Live Avy</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: misc | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/misc/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-01-30T12:29:35+02:00</updated>
+  <updated>2016-01-30T12:38:55+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[My Personal Emacs Configuration]]></title>
+    <link href="http://emacsredux.com/blog/2016/01/30/my-personal-emacs-configuration/"/>
+    <updated>2016-01-30T12:31:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/01/30/my-personal-emacs-configuration</id>
+    <content type="html"><![CDATA[<p>From time to time people ask me about my personal Emacs
+configuration. Other just assume that I use
+<a href="https://github.com/bbatsov/prelude">Prelude</a>. For a very long time my
+personal configuration was pretty similar to Prelude - in a way it was
+a staging ground for things to go into Prelude eventually (although
+changes would travel both ways when Prelude users suggest some cool
+things).</p>
+
+<p>Recently I've decided that in the future I want to do a few things with Prelude:</p>
+
+<ul>
+<li>extract as much functionality from it as possible into reusable
+packages (e.g. <a href="https://github.com/bbatsov/super-save">super-save</a>
+and <a href="https://github.com/bbatsov/crux">crux</a>)</li>
+<li>adopt there <a href="https://github.com/jwiegley/use-package">use-package</a></li>
+<li>improve the support for Windows (because now I have Windows computer)</li>
+</ul>
+
+
+<p>As part of these efforts I reworked my personal config into something
+pretty simple (it's a single <code>init.el</code> file) and I've started
+experimenting with ideas for the future. Stay tuned for the results!</p>
+
+<p>The config is available
+<a href="https://github.com/bbatsov/emacs.d">here</a>. Perhaps some of you will
+find something useful there.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Remap Return to Control in GNU/Linux]]></title>
@@ -163,21 +197,6 @@ for now - go buy the book and start mastering Emacs.</p>
 <p><strong>P.S.</strong></p>
 
 <p>I hope we won't have to wait another decade for the next great Emacs book.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Pragmatic Emacs]]></title>
-    <link href="http://emacsredux.com/blog/2015/05/16/pragmatic-emacs/"/>
-    <updated>2015-05-16T14:29:00+03:00</updated>
-    <id>http://emacsredux.com/blog/2015/05/16/pragmatic-emacs</id>
-    <content type="html"><![CDATA[<p>I recently noticed a new blog targeting beginner and intermediate
-Emacs users - <a href="http://pragmaticemacs.com/">Pragmatic Emacs</a> by
-<a href="http://www.bristol.ac.uk/physics/people/ben-j-maughan/overview.html">Ben Maughan</a>.</p>
-
-<p>If you're relatively new to Emacs you should definitely check it
-out. Knowing how vast the Emacs ecosystem is, I'm pretty sure that
-more experienced Emacs users will also learn a thing or two there.</p>
 ]]></content>
   </entry>
   

@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="A few weeks ago I wrote an article called
-&#8220;Delete file and buffer&#8221;. Today
-we&#8217;ll revisit the article in a way, by exploring a pretty &hellip;">
+  <meta name="description" content="Some Emacs users find themselves wondering what&#8217;s the fastest way to
+erase the contents of a buffer. As you know, I&#8217;m fond of
+delete- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,79 @@ we&#8217;ll revisit the article in a way, by exploring a pretty &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/04/erase-buffer/">Erase Buffer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-04T10:44:00+03:00" pubdate data-updated="true">May 4<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/04/erase-buffer/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Some Emacs users find themselves wondering what&#8217;s the fastest way to
+erase the contents of a buffer. As you know, I&#8217;m fond of
+<a href="/blog/2013/04/12/delete-selection-on-insert/">delete-selection-mode</a>
+and I find the combination of <code>C-x h</code> (<code>mark-whole-buffer</code>) + inserting
+anything afterwards pretty potent.</p>
+
+<p>Another pretty quick way to erase a buffer would be the built-in
+<code>erase-buffer</code> command. It&#8217;s disabled by default since it&#8217;s considered
+that beginners find it confusing(although I&#8217;m not sure why), so you&#8217;ll
+be prompted to enable it the first time you run <code>M-x
+erase-buffer</code>. Alternative you can simply put this snippet in your
+config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; enable erase-buffer command</span>
+</span><span class='line'><span class="p">(</span><span class="nv">put</span> <span class="ss">&#39;erase-buffer</span> <span class="ss">&#39;disabled</span> <span class="no">nil</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You should note that any narrowing restrictions would have no effect
+over <code>erase-buffer</code> and the buffer would be truly empty after invoking
+the command. Conversely - narrowing has an effect over
+<code>mark-whole-buffer</code>.</p>
+
+<p>If you like the command you might want to bind it to some keybinding like <code>C-c E</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c E&quot;</span><span class="p">)</span>  <span class="ss">&#39;erase-buffer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Personally, I rarely need it, so I don&#8217;t bind it to anything.</p>
+
+<p>The <code>erase-buffer</code> command is enabled by default in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -876,64 +949,6 @@ default for <code>eval-expression</code>.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/12/delete-selection-on-insert/">Delete Selection on Insert</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-12T11:57:00+03:00" pubdate data-updated="true">Apr 12<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/12/delete-selection-on-insert/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>It most text editors if you select a piece of text and press any
-key(that&#8217;s not bound to some command) the selection would be replaced
-by the character bound to the key(or deleted if you press
-<code>Backspace</code>).  In Emacs things look differently - by default typed
-text is just inserted at point, regardless of any selection.</p>
-
-<p>Of course, there is a way to change this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">delete-selection-mode</span> <span class="mi">+1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now when <code>transient-mark-mode</code> is also enabled(it is enabled by
-default since Emacs 23) any typed text replaces the selection if the
-selection is active.</p>
-
-<p>Personally I find this behavior more useful than the default
-one. That&#8217;s why it should be no surprise that <code>delete-selection-mode</code>
-is enabled by default in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -957,6 +972,10 @@ is enabled by default in
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
       </li>
     
@@ -970,10 +989,6 @@ is enabled by default in
     
       <li class="post">
         <a href="/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/">ace-jump-mode is Dead, Long Live Avy</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
       </li>
     
   </ul>

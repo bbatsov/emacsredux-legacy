@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Adjusting interactively the font size is Emacs is pretty easy. Three
-keybindings refer to the mighty text-scale-adjust command - C-x
-C-+(increase &hellip;">
+  <meta name="description" content="If you&#8217;re into programming highlighting the matching parentheses in
+your code is probably something you find rather desirable. Emacs
+doesn&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,71 @@ C-+(increase &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/01/highlight-matching-parentheses/">Highlight Matching Parentheses</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-01T14:40:00+03:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/01/highlight-matching-parentheses/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you&#8217;re into programming highlighting the matching parentheses in
+your code is probably something you find rather desirable. Emacs
+doesn&#8217;t do so by default, but the global minor mode <code>show-paren-mode</code>,
+that comes bundled with Emacs, does.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;paren</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">show-paren-style</span> <span class="ss">&#39;parenthesis</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">show-paren-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Valid styles are <code>parenthesis</code> (meaning highlight the matching
+parentheses), <code>expression</code> (meaning show the entire expression
+enclosed by the parentheses) and <code>mixed</code> (meaning show the matching
+parentheses if both are visible, and the expression otherwise).</p>
+
+<p>Personally I find <code>parenthesis</code> as the least distracting option and
+therefore I favor it.</p>
+
+<p>If you&#8217;d like to change the faces used for matching and mismatched
+parentheses you&#8217;d have to alter <code>show-paren-mismatch</code> and
+<code>show-paren-match</code>. Most decent color themes do this out the box.</p>
+
+<p><code>show-paren-mode</code> is enabled out-of-the-box in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -745,97 +810,6 @@ prefix).</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/27/indent-region-or-buffer/">Indent Region or Buffer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-27T17:35:00+02:00" pubdate data-updated="true">Mar 27<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/27/indent-region-or-buffer/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Everyone who&#8217;s used Emacs for more than 10 minutes knows that you can
-indent the selected region in a buffer with <code>C-M-\</code> (bound to the
-command <code>indent-region</code>). While this is pretty useful I find that it&#8217;s
-more useful to have a command that indents the current region if
-present and the entire buffer otherwise.  Therefore I&#8217;ve devised the
-simple commands <code>indent-buffer</code> and <code>indent-region-or-buffer</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">indent-buffer</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Indent the currently visited buffer.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">indent-region</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">)</span> <span class="p">(</span><span class="nv">point-max</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">indent-region-or-buffer</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Indent a region if selected, otherwise the whole buffer.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">save-excursion</span>
-</span><span class='line'>    <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">region-active-p</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">(</span><span class="k">progn</span>
-</span><span class='line'>          <span class="p">(</span><span class="nv">indent-region</span> <span class="p">(</span><span class="nv">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nv">region-end</span><span class="p">))</span>
-</span><span class='line'>          <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Indented selected region.&quot;</span><span class="p">))</span>
-</span><span class='line'>      <span class="p">(</span><span class="k">progn</span>
-</span><span class='line'>        <span class="p">(</span><span class="nv">indent-buffer</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Indented buffer.&quot;</span><span class="p">)))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now that you have <code>indent-region-or-buffer</code> you don&#8217;t actually need
-<code>indent-region</code> or <code>indent-buffer</code> that much (if at all). That&#8217;s why I
-typically bind <code>indent-region-or-buffer</code> to <code>C-M-\</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-M-\\&quot;</span><span class="p">)</span> <span class="ss">&#39;indent-region-or-buffer</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As usual both commands are available in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with <code>prelude-</code>
-prefices).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -859,6 +833,10 @@ prefices).</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
       </li>
     
@@ -872,10 +850,6 @@ prefices).</p>
     
       <li class="post">
         <a href="/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/">ace-jump-mode is Dead, Long Live Avy</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
       </li>
     
   </ul>

@@ -5,11 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: info - Emacs Redux</title>
+  <title>My Personal Emacs Configuration - Emacs Redux</title>
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Category: info">
+  <meta name="description" content="From time to time people ask me about my personal Emacs
+configuration. Other just assume that I use
+Prelude. For a very long time my
+personal &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://emacsredux.comblog/categories/info">
+  <link rel="canonical" href="http://emacsredux.com/blog/2016/01/30/my-personal-emacs-configuration">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
@@ -78,36 +81,120 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Info</h1>
+    
+      <h1 class="entry-title">My Personal Emacs Configuration</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-30T12:31:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>From time to time people ask me about my personal Emacs
+configuration. Other just assume that I use
+<a href="https://github.com/bbatsov/prelude">Prelude</a>. For a very long time my
+personal configuration was pretty similar to Prelude - in a way it was
+a staging ground for things to go into Prelude eventually (although
+changes would travel both ways when Prelude users suggest some cool
+things).</p>
 
-  
-  <h2>2014</h2>
+<p>Recently I&#8217;ve decided that in the future I want to do a few things with Prelude:</p>
 
-<article>
-  
-<h1><a href="/blog/2014/11/13/quickly-open-an-info-manual/">Quickly Open an Info Manual</a></h1>
-<time datetime="2014-11-13T15:25:00+02:00" pubdate><span class='month'>Nov</span> <span class='day'>13</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/info/'>info</a></span>
-</footer>
+<ul>
+<li>extract as much functionality from it as possible into reusable
+packages (e.g. <a href="https://github.com/bbatsov/super-save">super-save</a>
+and <a href="https://github.com/bbatsov/crux">crux</a>)</li>
+<li>adopt there <a href="https://github.com/jwiegley/use-package">use-package</a></li>
+<li>improve the support for Windows (because now I have Windows computer)</li>
+</ul>
 
 
-</article>
+<p>As part of these efforts I reworked my personal config into something
+pretty simple (it&#8217;s a single <code>init.el</code> file) and I&#8217;ve started
+experimenting with ideas for the future. Stay tuned for the results!</p>
 
+<p>The config is available
+<a href="https://github.com/bbatsov/emacs.d">here</a>. Perhaps some of you will
+find something useful there.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Bozhidar Batsov</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-30T12:31:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/misc/'>misc</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://emacsredux.com/blog/2016/01/30/my-personal-emacs-configuration/" data-via="bbatsov" data-counturl="http://emacsredux.com/blog/2016/01/30/my-personal-emacs-configuration/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/" title="Previous Post: Remap Return to Control in GNU/Linux">&laquo; Remap Return to Control in GNU/Linux</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -202,7 +289,10 @@
       var disqus_shortname = 'emacsredux';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://emacsredux.com/blog/2016/01/30/my-personal-emacs-configuration/';
+        var disqus_url = 'http://emacsredux.com/blog/2016/01/30/my-personal-emacs-configuration/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
