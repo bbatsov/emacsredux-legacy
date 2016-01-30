@@ -9,7 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="One extremely cool (but little known) new feature in Emacs 23 was the addition of proced. proced basically allows you to run top inside Emacs and &hellip;">
+  <meta name="description" content="A few weeks ago I wrote an article called
+&#8220;Delete file and buffer&#8221;. Today
+we&#8217;ll revisit the article in a way, by exploring a pretty &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +81,100 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/04/rename-file-and-buffer/">Rename File and Buffer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-04T10:30:00+03:00" pubdate data-updated="true">May 4<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/04/rename-file-and-buffer/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>A few weeks ago I wrote an article called
+<a href="/blog/2013/04/03/delete-file-and-buffer/">&#8220;Delete file and buffer&#8221;</a>. Today
+we&#8217;ll revisit the article in a way, by exploring a pretty similar
+topic - renaming of a file and its associated buffer. I&#8217;ve taken the
+liberty to use pretty much the same wording I used in the
+aforementioned post to spare me the effort of thinking up something
+original.</em></p>
+
+<hr />
+
+<p>From time to time(most often when I refactor code) I need to
+quickly(this removes <code>dired</code> from the equation) rename a file and
+the buffer associated with it. Since most of the files I work with
+are under version control I can just use the tried and true <code>M-x
+vc-rename-file</code>. Unfortunately the command does not act on the current
+file and will prompt you for a file to rename. Looks like we need to
+create a simple wrapper around it to get the job done:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">rename-file-and-buffer</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Rename the current buffer and file it is visiting.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">filename</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">filename</span> <span class="p">(</span><span class="nv">file-exists-p</span> <span class="nv">filename</span><span class="p">)))</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Buffer is not visiting a file!&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">new-name</span> <span class="p">(</span><span class="nv">read-file-name</span> <span class="s">&quot;New name: &quot;</span> <span class="nv">filename</span><span class="p">)))</span>
+</span><span class='line'>        <span class="p">(</span><span class="nb">cond</span>
+</span><span class='line'>         <span class="p">((</span><span class="nv">vc-backend</span> <span class="nv">filename</span><span class="p">)</span> <span class="p">(</span><span class="nv">vc-rename-file</span> <span class="nv">filename</span> <span class="nv">new-name</span><span class="p">))</span>
+</span><span class='line'>         <span class="p">(</span><span class="no">t</span>
+</span><span class='line'>          <span class="p">(</span><span class="nb">rename-file</span> <span class="nv">filename</span> <span class="nv">new-name</span> <span class="no">t</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nv">set-visited-file-name</span> <span class="nv">new-name</span> <span class="no">t</span> <span class="no">t</span><span class="p">)))))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The wrapper is extra smart and will work on files that are not under
+version control as well! I&#8217;m pretty fond of commands that do what you
+mean instead of throwing errors. Now that we have this neat little
+command we should probably bind it to some each to press keys, like <code>C-c r</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c r&quot;</span><span class="p">)</span>  <span class="ss">&#39;rename-file-and-buffer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As usual both the command and its keybinding are available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -838,83 +934,6 @@ is enabled by default in
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/09/kill-whole-line/">Kill Whole Line</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-09T14:49:00+03:00" pubdate data-updated="true">Apr 9<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/09/kill-whole-line/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Let&#8217;s continue our exploration of the fascinating topic of
-<a href="/blog/2013/04/08/kill-line-backward/">killing lines</a>. Apart from
-killing lines from the cursor to the end of the line(<code>kill-line</code>) and
-killing lines from the cursor back to the beginning of the
-line(<code>kill-line</code> with a <code>0</code> prefix argument) you can also kill entire
-lines with a single command - <code>kill-whole-line</code>.</p>
-
-<p>The command is bound to <code>C-S-Backspace</code> by default and kills the line
-including its newline. With a prefix argument, it will kill that many
-lines starting from the current line. If the argument is negative it
-will kill that many lines backward plus the preceding newline. If the
-argument is <code>0</code>, it will kill the current line but exclude the
-trailing newline. We can improve the command a bit by making it
-indentation aware(like we did for backward kill line in the previous post):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">smart-kill-whole-line</span> <span class="p">(</span><span class="k">&amp;optional</span> <span class="nv">arg</span><span class="p">)</span>
-</span><span class='line'>  <span class="s">&quot;A simple wrapper around `kill-whole-line&#39; that respects indentation.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">kill-whole-line</span> <span class="nv">arg</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">back-to-indentation</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now we can rebind <code>C-S-Backspace</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">kill-whole-line]</span> <span class="ss">&#39;smart-kill-whole-line</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>remap</code> is a pretty neat trick in its own right; maybe I&#8217;ll write a
-bit more about it in the future.</p>
-
-<p>The <code>smart-kill-whole-line</code> command is available out-of-the-box in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -938,6 +957,10 @@ bit more about it in the future.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/crux/">crux</a>
       </li>
     
@@ -951,10 +974,6 @@ bit more about it in the future.</p>
     
       <li class="post">
         <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
       </li>
     
   </ul>

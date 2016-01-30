@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: utils - Emacs Redux</title>
+  <title>Remap Return to Control in GNU/Linux - Emacs Redux</title>
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Category: utils">
+  <meta name="description" content="A long time ago I wrote about
+remapping Return to Control in OS X.
+This was the best productivity boost for my Emacs experience ever! Recently I&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://emacsredux.comblog/categories/utils">
+  <link rel="canonical" href="http://emacsredux.com/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
@@ -78,36 +80,136 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Utils</h1>
+    
+      <h1 class="entry-title">Remap Return to Control in GNU/Linux</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-30T11:48:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>A long time ago I wrote about
+<a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">remapping Return to Control in OS X</a>.
+This was the best productivity boost for my Emacs experience ever!</p>
 
-  
-  <h2>2015</h2>
+<p>Recently I&#8217;ve bought a Windows ultrabook (wanted something as light as
+MacBook Air, but more powerful and versatile) and I&#8217;m doing most of my
+work there in a Xubuntu VM. The first thing I did while setting up Xubuntu
+was to figure out how to do the aforementioned remapping.</p>
 
-<article>
-  
-<h1><a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a></h1>
-<time datetime="2015-01-18T21:57:00+02:00" pubdate><span class='month'>Jan</span> <span class='day'>18</span> <span class='year'>2015</span></time>
+<p>In my original post some people suggested the tool
+<a href="https://github.com/alols/xcape">xcape</a>, so I took a look at it.  The
+tool can certainly use some documentation improvements (and pre-built
+packages), but it gets the job done. After you&#8217;ve installed it you
+just need to add the following to your login shell&#8217;s init file
+(e.g. <code>.bash_profile</code>) and you&#8217;re in business:</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/comint/'>comint</a>, <a class='category' href='/blog/categories/utils/'>utils</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>xmodmap -e "remove Control = Control_R"
+</span><span class='line'>xmodmap -e "keycode 0x69 = Return"
+</span><span class='line'>xmodmap -e "keycode 0x24 = Control_R"
+</span><span class='line'>xmodmap -e "add Control = Control_R"
+</span><span class='line'>
+</span><span class='line'>xcape -t 10000 -e "Control_R=Return"</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>Obviously the first time around you should source <code>.bash_profile</code>
+after updating it:</p>
 
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ . .bash_profile</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is definitely a lot more work than just clicking in the GUI of
+the wonderful <a href="https://pqrs.org/osx/karabiner/">Karabiner</a>, but it yields
+the desired results and that&#8217;s what&#8217;s important at the end of the day.</p>
+
+<p>Now if only there was a way to achieve the same result in Windows&#8230;</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Bozhidar Batsov</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-30T11:48:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/misc/'>misc</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://emacsredux.com/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/" data-via="bbatsov" data-counturl="http://emacsredux.com/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/01/30/crux/" title="Previous Post: crux">&laquo; crux</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -202,7 +304,10 @@
       var disqus_shortname = 'emacsredux';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://emacsredux.com/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/';
+        var disqus_url = 'http://emacsredux.com/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

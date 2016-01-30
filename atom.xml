@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-01-30T11:45:16+02:00</updated>
+  <updated>2016-01-30T11:59:23+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Remap Return to Control in GNU/Linux]]></title>
+    <link href="http://emacsredux.com/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/"/>
+    <updated>2016-01-30T11:48:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux</id>
+    <content type="html"><![CDATA[<p>A long time ago I wrote about
+<a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">remapping Return to Control in OS X</a>.
+This was the best productivity boost for my Emacs experience ever!</p>
+
+<p>Recently I&#8217;ve bought a Windows ultrabook (wanted something as light as
+MacBook Air, but more powerful and versatile) and I&#8217;m doing most of my
+work there in a Xubuntu VM. The first thing I did while setting up Xubuntu
+was to figure out how to do the aforementioned remapping.</p>
+
+<p>In my original post some people suggested the tool
+<a href="https://github.com/alols/xcape">xcape</a>, so I took a look at it.  The
+tool can certainly use some documentation improvements (and pre-built
+packages), but it gets the job done. After you&#8217;ve installed it you
+just need to add the following to your login shell&#8217;s init file
+(e.g. <code>.bash_profile</code>) and you&#8217;re in business:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>xmodmap -e "remove Control = Control_R"
+</span><span class='line'>xmodmap -e "keycode 0x69 = Return"
+</span><span class='line'>xmodmap -e "keycode 0x24 = Control_R"
+</span><span class='line'>xmodmap -e "add Control = Control_R"
+</span><span class='line'>
+</span><span class='line'>xcape -t 10000 -e "Control_R=Return"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously the first time around you should source <code>.bash_profile</code>
+after updating it:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ . .bash_profile</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is definitely a lot more work than just clicking in the GUI of
+the wonderful <a href="https://pqrs.org/osx/karabiner/">Karabiner</a>, but it yields
+the desired results and that&#8217;s what&#8217;s important at the end of the day.</p>
+
+<p>Now if only there was a way to achieve the same result in Windows&#8230;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[crux]]></title>
@@ -896,86 +946,6 @@ at the same time. Turning one of them on will disable the other.</p>
 <p>Personally, I don&#8217;t see much value in <code>superword-mode</code> as a mode
 that&#8217;s enabled all the time, but I can imagine some useful
 scenarios in which I&#8217;d enable it briefly to do some focused editing.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A peek at Emacs 24.4: prettify-symbols-mode]]></title>
-    <link href="http://emacsredux.com/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/"/>
-    <updated>2014-08-25T16:30:00+03:00</updated>
-    <id>http://emacsredux.com/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode</id>
-    <content type="html"><![CDATA[<p>Emacs 24.4 ships with a new minor mode called
-<code>prettify-symbols-mode</code>. Its purpose is to replace the standard text
-representation of various identifiers/symbols with a (arguably) more
-aesthetically pleasing representation (often a single unicode
-character would replace several ascii characters).</p>
-
-<p>A classic example would be <code>lambda</code> from various Lisp dialects that many people
-prefer to replace with the greek letter <code>λ</code> (small lambda). <code>prettify-symbols-mode</code> allows you
-to achieve this by relying on a simple mapping expressed in the form of an <code>alist</code> that
-each major mode must initialize (<code>prettify-symbols-alist</code>).
-Simply put - major modes have to provide the configuration for <code>prettify-symbols-mode</code>.</p>
-
-<p>Lisp modes do this via <code>lisp--prettify-symbols-alist</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">defconst</span> <span class="nv">lisp--prettify-symbols-alist</span>
-</span><span class='line'>  <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;lambda&quot;</span>  <span class="o">.</span> <span class="nv">?</span><span class="err">λ</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This means that out of the box only <code>lambda</code> will get replaced.
-You can, of course, add more mappings for different major modes:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-lisp-mode-hook</span>
-</span><span class='line'>            <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
-</span><span class='line'>              <span class="p">(</span><span class="nb">push</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;&gt;=&quot;</span> <span class="o">.</span> <span class="nv">?</span><span class="err">≥</span><span class="p">)</span> <span class="nv">prettify-symbols-alist</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Let&#8217;s see the mode in action. Consider this bit of Emacs Lisp code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&gt;=</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">something</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">something-else</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After you do <code>M-x prettify-symbols-mode</code> you&#8217;ll end up with:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="err">λ</span> <span class="p">(</span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="err">≥</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">something</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">something-else</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To enable this for a particular mode use <code>(add-hook 'some-mode-hook 'prettify-symbols-mode)</code>.
-If you&#8217;d like to enable it globally just add the following to your config:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-prettify-symbols-mode</span> <span class="mi">+1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>By the way, sky is the limit for symbol prettification. One fairly extreme example would be
-vim&#8217;s plugin <a href="https://github.com/enomsg/vim-haskellConcealPlus">haskell-conceal+</a> that goes to great
-lengths to bring proper mathematical notation to Haskell code. We can achieve more or less the same effect
-with <code>prettify-symbols-mode</code>, but one have to ask themselves where should we draw the border between
-tasteful and distasteful prettifications.</p>
 ]]></content>
   </entry>
   

@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Emacs does not have a command backward-kill-line(which would kill
-the text from the point to the beginning of the line), but it doesn&#8217;t
-really &hellip;">
+  <meta name="description" content="Let&#8217;s continue our exploration of the fascinating topic of
+killing lines. Apart from
+killing lines from the cursor to the end of the line(kill- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,83 @@ really &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/09/kill-whole-line/">Kill Whole Line</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-09T14:49:00+03:00" pubdate data-updated="true">Apr 9<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/09/kill-whole-line/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Let&#8217;s continue our exploration of the fascinating topic of
+<a href="/blog/2013/04/08/kill-line-backward/">killing lines</a>. Apart from
+killing lines from the cursor to the end of the line(<code>kill-line</code>) and
+killing lines from the cursor back to the beginning of the
+line(<code>kill-line</code> with a <code>0</code> prefix argument) you can also kill entire
+lines with a single command - <code>kill-whole-line</code>.</p>
+
+<p>The command is bound to <code>C-S-Backspace</code> by default and kills the line
+including its newline. With a prefix argument, it will kill that many
+lines starting from the current line. If the argument is negative it
+will kill that many lines backward plus the preceding newline. If the
+argument is <code>0</code>, it will kill the current line but exclude the
+trailing newline. We can improve the command a bit by making it
+indentation aware(like we did for backward kill line in the previous post):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">smart-kill-whole-line</span> <span class="p">(</span><span class="k">&amp;optional</span> <span class="nv">arg</span><span class="p">)</span>
+</span><span class='line'>  <span class="s">&quot;A simple wrapper around `kill-whole-line&#39; that respects indentation.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">kill-whole-line</span> <span class="nv">arg</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">back-to-indentation</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can rebind <code>C-S-Backspace</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">kill-whole-line]</span> <span class="ss">&#39;smart-kill-whole-line</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>remap</code> is a pretty neat trick in its own right; maybe I&#8217;ll write a
+bit more about it in the future.</p>
+
+<p>The <code>smart-kill-whole-line</code> command is available out-of-the-box in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -751,61 +828,6 @@ parentheses you&#8217;d have to alter <code>show-paren-mismatch</code> and
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/01/playing-with-font-sizes/">Playing With Font Sizes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-01T14:22:00+03:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/01/playing-with-font-sizes/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Adjusting interactively the font size is Emacs is pretty easy. Three
-keybindings refer to the mighty <code>text-scale-adjust</code> command - <code>C-x
-C-+</code>(increase font size), <code>C-x C--</code>(decrease font size) and <code>C-x
-C-0</code>(reset font size to default). After using any of the keybindings
-you can proceed to adjust the font size further just by pressing <code>+</code>,
-<code>-</code> or <code>0</code> respectively.  <code>text-scale-adjust</code> is mostly a wrapper
-around <code>text-scale-increase</code> and <code>text-scale-decrease</code>.</p>
-
-<p>You might want to bind them <code>C-+</code> and <code>C--</code>(generally a bad idea since
-you won&#8217;t be able to type stuff like <code>C-- some-command</code> anymore) to
-get more common keybindings for the operations.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-+&quot;</span><span class="p">)</span> <span class="ss">&#39;text-scale-increase</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C--&quot;</span><span class="p">)</span> <span class="ss">&#39;text-scale-decrease</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -829,6 +851,10 @@ get more common keybindings for the operations.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/crux/">crux</a>
       </li>
     
@@ -842,10 +868,6 @@ get more common keybindings for the operations.</p>
     
       <li class="post">
         <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
       </li>
     
   </ul>

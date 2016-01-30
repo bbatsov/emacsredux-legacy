@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="I&#8217;d often blog about some useful utility functions here. Pretty much
-all of them get included in
-Emacs Prelude, but I&#8217;ve decided I can do &hellip;">
+  <meta name="description" content="A long time ago I wrote about
+remapping Return to Control in OS X.
+This was the best productivity boost for my Emacs experience ever! Recently I&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,85 @@ Emacs Prelude, but I&#8217;ve decided I can do &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-30T11:48:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
+        
+         | <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A long time ago I wrote about
+<a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">remapping Return to Control in OS X</a>.
+This was the best productivity boost for my Emacs experience ever!</p>
+
+<p>Recently I&#8217;ve bought a Windows ultrabook (wanted something as light as
+MacBook Air, but more powerful and versatile) and I&#8217;m doing most of my
+work there in a Xubuntu VM. The first thing I did while setting up Xubuntu
+was to figure out how to do the aforementioned remapping.</p>
+
+<p>In my original post some people suggested the tool
+<a href="https://github.com/alols/xcape">xcape</a>, so I took a look at it.  The
+tool can certainly use some documentation improvements (and pre-built
+packages), but it gets the job done. After you&#8217;ve installed it you
+just need to add the following to your login shell&#8217;s init file
+(e.g. <code>.bash_profile</code>) and you&#8217;re in business:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>xmodmap -e "remove Control = Control_R"
+</span><span class='line'>xmodmap -e "keycode 0x69 = Return"
+</span><span class='line'>xmodmap -e "keycode 0x24 = Control_R"
+</span><span class='line'>xmodmap -e "add Control = Control_R"
+</span><span class='line'>
+</span><span class='line'>xcape -t 10000 -e "Control_R=Return"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously the first time around you should source <code>.bash_profile</code>
+after updating it:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ . .bash_profile</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is definitely a lot more work than just clicking in the GUI of
+the wonderful <a href="https://pqrs.org/osx/karabiner/">Karabiner</a>, but it yields
+the desired results and that&#8217;s what&#8217;s important at the end of the day.</p>
+
+<p>Now if only there was a way to achieve the same result in Windows&#8230;</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -752,75 +831,6 @@ Emacs experience on OS X nicer and more powerful!</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-18T21:57:00+02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2015</time>
-        
-         | <a href="/blog/2015/01/18/clear-comint-buffers/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><code>comint</code> provides Emacs infrastructure for building command
-interpreters. It&#8217;s backing a lot of popular shell/REPL modes - like <code>eshell</code>,
-<code>inferior-lisp</code>, <code>inf-ruby</code>, <code>inf-clojure</code>, etc.</p>
-
-<p><code>comint</code> provides a myriad of built-in commands, but somewhat surprisingly
-it doesn&#8217;t feature a command to clear the contents of a <code>comint</code> buffer.
-Let&#8217;s write one such command ourselves!</p>
-
-<p>While there are several way to tackle it, I feel this is the simplest
-(and the one that makes the best use of <code>comint</code>&#8217;s existing
-functionality):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">comint-clear-buffer</span> <span class="p">()</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">comint-buffer-maximum-size</span> <span class="mi">0</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">comint-truncate-buffer</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">;; let&#39;s bind the new command to a keycombo</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">comint-mode-map</span> <span class="s">&quot;\C-c\M-o&quot;</span> <span class="nf">#&#39;</span><span class="nv">comint-clear-buffer</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Simple and elegant, right? One day it might even end up being part of <code>comint</code> itself.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -842,6 +852,10 @@ functionality):</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/crux/">crux</a>
       </li>
     
@@ -855,10 +869,6 @@ functionality):</p>
     
       <li class="post">
         <a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
       </li>
     
   </ul>

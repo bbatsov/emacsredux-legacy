@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: linux | Emacs Redux]]></title>
+  <link href="http://emacsredux.com/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2016-01-30T11:59:23+02:00</updated>
+  <id>http://emacsredux.com/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Remap Return to Control in GNU/Linux]]></title>
+    <link href="http://emacsredux.com/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/"/>
+    <updated>2016-01-30T11:48:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux</id>
+    <content type="html"><![CDATA[<p>A long time ago I wrote about
+<a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">remapping Return to Control in OS X</a>.
+This was the best productivity boost for my Emacs experience ever!</p>
+
+<p>Recently I've bought a Windows ultrabook (wanted something as light as
+MacBook Air, but more powerful and versatile) and I'm doing most of my
+work there in a Xubuntu VM. The first thing I did while setting up Xubuntu
+was to figure out how to do the aforementioned remapping.</p>
+
+<p>In my original post some people suggested the tool
+<a href="https://github.com/alols/xcape">xcape</a>, so I took a look at it.  The
+tool can certainly use some documentation improvements (and pre-built
+packages), but it gets the job done. After you've installed it you
+just need to add the following to your login shell's init file
+(e.g. <code>.bash_profile</code>) and you're in business:</p>
+
+<p>```
+xmodmap -e "remove Control = Control_R"
+xmodmap -e "keycode 0x69 = Return"
+xmodmap -e "keycode 0x24 = Control_R"
+xmodmap -e "add Control = Control_R"</p>
+
+<p>xcape -t 10000 -e "Control_R=Return"
+```</p>
+
+<p>Obviously the first time around you should source <code>.bash_profile</code>
+after updating it:</p>
+
+<p><code>
+$ . .bash_profile
+</code></p>
+
+<p>This is definitely a lot more work than just clicking in the GUI of
+the wonderful <a href="https://pqrs.org/osx/karabiner/">Karabiner</a>, but it yields
+the desired results and that's what's important at the end of the day.</p>
+
+<p>Now if only there was a way to achieve the same result in Windows...</p>
+]]></content>
+  </entry>
+  
+</feed>
