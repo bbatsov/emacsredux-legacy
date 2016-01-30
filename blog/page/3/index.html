@@ -9,8 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Securing funding for OS projects and blogs (outside of displaying annoying ads)
-is a hard endeavor. While I&#8217;d love to raise enough cash to work &hellip;">
+  <meta name="description" content="I recently discovered an extremely cool package called
+git-timemachine that allows
+you to step though the git history of the file you&#8217;re &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,72 @@ is a hard endeavor. While I&#8217;d love to raise enough cash to work &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/22/travel-back-and-forward-in-git-history/">Travel Back and Forward in Git History</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-22T19:02:00+03:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2014</time>
+        
+         | <a href="/blog/2014/07/22/travel-back-and-forward-in-git-history/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently discovered an extremely cool package called
+<a href="https://github.com/pidu/git-timemachine">git-timemachine</a> that allows
+you to step though the git history of the file you&#8217;re currently
+editing in Emacs.</p>
+
+<p>Using it is pretty simple:</p>
+
+<ul>
+<li>visit a git-controlled file and issue <code>M-x git-timemachine</code> (or bind it to a keybinding of your choice)</li>
+<li>use the following keys to navigate historic version of the file:
+
+<ul>
+<li><code>p</code> visit previous historic version</li>
+<li><code>n</code> visit next historic version</li>
+<li><code>w</code> copy the hash of the current historic version</li>
+<li><code>q</code> exit the time machine buffer</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Here you can see <code>git-timemachine</code> in action:</p>
+
+<p><img src="/images/articles/timemachine.gif"></p>
+
+<p><strong>P.S.</strong></p>
+
+<p>This package is bundled with
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -786,130 +853,6 @@ So, if we want to save our active buffer when the Emacs frame loses focus we can
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/01/a-peek-at-emacs-24-dot-4-delete-duplicate-lines/">A Peek at Emacs 24.4: Delete-duplicate-lines</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-01T17:33:00+02:00" pubdate data-updated="true">Mar 1<span>st</span>, 2014</time>
-        
-         | <a href="/blog/2014/03/01/a-peek-at-emacs-24-dot-4-delete-duplicate-lines/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Emacs 24.4 introduces the command <code>delete-duplicate-lines</code>.</p>
-
-<p>By default <code>M-x delete-duplicate-lines</code> will delete all but one copy
-of any identical lines in the region. So assuming this is the region:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>test
-</span><span class='line'>dup
-</span><span class='line'>dup
-</span><span class='line'>one
-</span><span class='line'>two
-</span><span class='line'>one
-</span><span class='line'>three
-</span><span class='line'>one
-</span><span class='line'>test
-</span><span class='line'>five</span></code></pre></td></tr></table></div></figure>
-
-
-<p>it will be reduced to this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>test
-</span><span class='line'>dup
-</span><span class='line'>one
-</span><span class='line'>two
-</span><span class='line'>three
-</span><span class='line'>five</span></code></pre></td></tr></table></div></figure>
-
-
-<p>When the command is invoked with a <code>C-u</code> prefix, it searches backwards
-and keeps the last instance of each repeated line. So this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>test
-</span><span class='line'>dup
-</span><span class='line'>dup
-</span><span class='line'>one
-</span><span class='line'>two
-</span><span class='line'>one
-</span><span class='line'>three
-</span><span class='line'>one
-</span><span class='line'>test
-</span><span class='line'>five</span></code></pre></td></tr></table></div></figure>
-
-
-<p>will become:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>dup
-</span><span class='line'>two
-</span><span class='line'>three
-</span><span class='line'>one
-</span><span class='line'>test
-</span><span class='line'>five</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Identical lines need not be adjacent, unless you&#8217;ve invoked the
-command with a <code>C-u C-u</code> prefix.  When the command is invoked with a
-<code>C-u C-u C-u</code> prefix, it retains repeated blank lines.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -933,6 +876,10 @@ command with a <code>C-u C-u</code> prefix.  When the command is invoked with a
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/super-save/">super-save</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/">ace-jump-mode is Dead, Long Live Avy</a>
       </li>
     
@@ -946,10 +893,6 @@ command with a <code>C-u C-u</code> prefix.  When the command is invoked with a
     
       <li class="post">
         <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/16/pragmatic-emacs/">Pragmatic Emacs</a>
       </li>
     
   </ul>
@@ -999,7 +942,7 @@ command with a <code>C-u C-u</code> prefix.  When the command is invoked with a
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Bozhidar Batsov -
+  Copyright &copy; 2016 - Bozhidar Batsov -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

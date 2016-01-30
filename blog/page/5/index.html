@@ -9,8 +9,10 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="A while ago I showed you a way to instantly edit your Emacs init file. Today
-we&#8217;ll adapt the original idea for shell init files like .bashrc &hellip;">
+  <meta name="description" content="Some time ago I wrote about
+highlighting matching parentheses
+with show-paren-mode. This is definitely useful, but it&#8217;s kind of
+restrictive, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +82,71 @@ we&#8217;ll adapt the original idea for shell init files like .bashrc &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/01/highlight-matching-delimiters-with-smartparens/">Highlight Matching Delimiters With Smartparens</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-01T16:32:00+02:00" pubdate data-updated="true">Nov 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/01/highlight-matching-delimiters-with-smartparens/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Some time ago I wrote about
+<a href="http://emacsredux.com/blog/2013/04/01/highlight-matching-parentheses/">highlighting matching parentheses</a>
+with <code>show-paren-mode</code>. This is definitely useful, but it&#8217;s kind of
+restrictive, since parentheses are just a specific kind of paired
+delimiter. Single and double quotes are also paired delimiters (at
+least in most programmming languages). In the Ruby programmming
+language, for instance, <code>do</code> and <code>end</code> also constitute paired
+delimiter.</p>
+
+<p><a href="https://github.com/Fuco1/smartparens">smartparens</a> offers
+extremely customizable handling of paired delimiters and comes with an
+extra minor mode called <code>show-smartparens-mode</code> to highlight
+them. This mode totally replaces <code>show-paren-mode</code> and language
+specific modes like <code>hirb</code> (which highlights Ruby blocks).</p>
+
+<p>Assuming you&#8217;re already using <code>smartparens</code>, enabling <code>show-smartparens-mode</code> is trivial:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">show-smartparens-global-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&#8217;s a glimpse of it in action:</p>
+
+<p><img src="/images/articles/show-smartparens-mode.gif"></p>
+
+<p>In <a href="https://github.com/bbatsov/prelude">Prelude</a> <code>show-paren-mode</code> was
+replaced by <code>show-smartparens-mode</code> some time ago.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -855,95 +922,6 @@ functionally for free out-of-the-box.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/17/make-use-of-the-super-key/">Make Use of the Super Key</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-17T16:16:00+03:00" pubdate data-updated="true">Jul 17<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/17/make-use-of-the-super-key/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Emacs users have a lot of power at their disposal, but in one
-department they are always short - the number of available
-non-complex keybindings that they can leverage.</p>
-
-<p>Obviously nobody likes pressing keybindings like <code>C-p C-v k</code> (or
-something like that). One way to get your hands on some extra
-keybindings is to utilize the <code>Super</code> key (it&#8217;s the <code>Windows</code> key on
-Win keyboards and the <code>Command</code> key on Mac keyboards (although most
-people remap <code>Command</code> to <code>Meta</code> and <code>Option</code> to <code>Super</code>)). One great
-thing about <code>Super</code> is that you generally have two of them, which
-makes them touch-typing friend. Since almost no packages use those
-keys you&#8217;re left with plenty of options.</p>
-
-<p><a href="https://github.com/bbatsov/prelude">Prelude</a> defines a bunch of
-global keybindings that use the <code>Super</code> key.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; make some use of the Super key</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-d]</span> <span class="ss">&#39;projectile-find-dir</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-e]</span> <span class="ss">&#39;er/expand-region</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-f]</span> <span class="ss">&#39;projectile-find-file</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-g]</span> <span class="ss">&#39;projectile-grep</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-j]</span> <span class="ss">&#39;prelude-top-join-line</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-k]</span> <span class="ss">&#39;prelude-kill-whole-line</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-l]</span> <span class="ss">&#39;goto-line</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-m]</span> <span class="ss">&#39;magit-status</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-o]</span> <span class="ss">&#39;prelude-open-line-above</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-w]</span> <span class="ss">&#39;delete-frame</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-x]</span> <span class="ss">&#39;exchange-point-and-mark</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-p]</span> <span class="ss">&#39;projectile-switch-project</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you find pressing <code>Super</code> comfortable obviously you have the
-potential to add quite a lot more keybindings to this list.</p>
-
-<p><strong>P.S.</strong> Some keyboards (notably laptop ones) have a <code>Fn</code> key as well
-  that&#8217;s also usable in Emacs keybindings. Somewhat funny that key is
-  known in Emacs as <code>Hyper</code> (<code>Star Wars</code> fans are undoubtedly adding a
-  <strong>Hyper-Space</strong> keybinding to their setups right about now).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -967,6 +945,10 @@ potential to add quite a lot more keybindings to this list.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/super-save/">super-save</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/">ace-jump-mode is Dead, Long Live Avy</a>
       </li>
     
@@ -980,10 +962,6 @@ potential to add quite a lot more keybindings to this list.</p>
     
       <li class="post">
         <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/16/pragmatic-emacs/">Pragmatic Emacs</a>
       </li>
     
   </ul>
@@ -1033,7 +1011,7 @@ potential to add quite a lot more keybindings to this list.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Bozhidar Batsov -
+  Copyright &copy; 2016 - Bozhidar Batsov -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Emacs does not keep track of recently visited files by default. Sad,
-but true. On a more positive note - it has the feature(courtesy of
-recentf), but &hellip;">
+  <meta name="description" content="I&#8217;m fond of seeing somewhere the full path to the file I&#8217;m currently
+editing(as opposed to just the file name displayed in
+modeline). &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,68 @@ recentf), but &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/07/display-visited-files-path-in-the-frame-title/">Display Visited File&#8217;s Path in the Frame Title</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-07T14:19:00+03:00" pubdate data-updated="true">Apr 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/07/display-visited-files-path-in-the-frame-title/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;m fond of seeing somewhere the full path to the file I&#8217;m currently
+editing(as opposed to just the file name displayed in
+modeline). Emacs&#8217;s frame title seems like a good place to display such
+information, since by default it doesn&#8217;t show anything
+interesting. Here&#8217;s how we can achieve this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">frame-title-format</span>
+</span><span class='line'>      <span class="o">&#39;</span><span class="p">((</span><span class="ss">:eval</span> <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)</span>
+</span><span class='line'>                   <span class="p">(</span><span class="nv">abbreviate-file-name</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">))</span>
+</span><span class='line'>                 <span class="s">&quot;%b&quot;</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The path will be displayed in an abbreviated manner(<code>/home/bozhidar/</code>
+will be shortened to just <code>~/</code>). If you&#8217;d like to see the expanded path
+just remove the <code>abbreviate-file-name</code> function invocation. If a
+buffer is not visiting a file, the buffer&#8217;s name would be displayed
+instead.</p>
+
+<p><a href="https://github.com/bbatsov/prelude">Prelude</a> sets
+<code>frame-title-format</code> like this by default.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -734,109 +796,6 @@ currently present.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/30/kill-other-buffers/">Kill Other Buffers</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-30T15:50:00+02:00" pubdate data-updated="true">Mar 30<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/30/kill-other-buffers/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Many text editors and IDEs offer the ability to close all open files
-with the exception of the one you&#8217;re currently in. Emacs does not.  At
-least it doesn&#8217;t until you add a snippet such as this one to your
-Emacs setup:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">kill-other-buffers</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Kill all buffers but the current one.</span>
-</span><span class='line'><span class="s">Don&#39;t mess with special buffers.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">buffer</span> <span class="p">(</span><span class="nv">buffer-list</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nb">eql</span> <span class="nv">buffer</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">))</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nv">buffer-file-name</span> <span class="nv">buffer</span><span class="p">)))</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">kill-buffer</span> <span class="nv">buffer</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note that the command takes care not to kill <em>special</em> buffers(buffers
-that do not correspond to files).</p>
-
-<p>I&#8217;d suggest binding <code>kill-other-buffers</code> to <code>C-c k</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c k&quot;</span><span class="p">)</span> <span class="ss">&#39;kill-other-buffers</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The command can be implemented in a more elegant manner if one chooses to
-leverage either the built-in <code>cl.el</code> library or the newer
-<a href="https://github.com/magnars/dash.el">dash.el</a>. Here&#8217;s the version of
-the same command from <a href="https://github.com/bbatsov/prelude">Prelude</a>,
-using <code>dash.el</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;dash</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">prelude-kill-other-buffers</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Kill all buffers but the current one.</span>
-</span><span class='line'><span class="s">Doesn&#39;t mess with special buffers.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">-each</span>
-</span><span class='line'>   <span class="p">(</span><span class="nv">-&gt;&gt;</span> <span class="p">(</span><span class="nv">buffer-list</span><span class="p">)</span>
-</span><span class='line'>     <span class="p">(</span><span class="nv">-filter</span> <span class="nf">#&#39;</span><span class="nv">buffer-file-name</span><span class="p">)</span>
-</span><span class='line'>     <span class="p">(</span><span class="nv">--remove</span> <span class="p">(</span><span class="nb">eql</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">)</span> <span class="nv">it</span><span class="p">)))</span>
-</span><span class='line'>   <span class="nf">#&#39;</span><span class="nv">kill-buffer</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>According to your personal preference on functional programming the
-second version might seem either much more elegant, ghastly or just the
-same of the original.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -860,6 +819,10 @@ same of the original.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/super-save/">super-save</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/">ace-jump-mode is Dead, Long Live Avy</a>
       </li>
     
@@ -873,10 +836,6 @@ same of the original.</p>
     
       <li class="post">
         <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/16/pragmatic-emacs/">Pragmatic Emacs</a>
       </li>
     
   </ul>
@@ -926,7 +885,7 @@ same of the original.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Bozhidar Batsov -
+  Copyright &copy; 2016 - Bozhidar Batsov -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

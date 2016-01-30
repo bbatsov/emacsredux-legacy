@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2015-07-21T14:43:34+03:00</updated>
+  <updated>2016-01-30T11:36:23+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[super-save]]></title>
+    <link href="http://emacsredux.com/blog/2016/01/30/super-save/"/>
+    <updated>2016-01-30T11:26:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/01/30/super-save</id>
+    <content type="html"><![CDATA[<p>A while back I wrote
+<a href="http://batsov.com/articles/2012/03/08/emacs-tip-number-5-save-buffers-automatically-on-buffer-or-window-switch/">an article on saving buffers when they lose focus</a>.</p>
+
+<p>Recently I&#8217;ve packaged (an improved version of) this functionality
+into a tiny global minor mode called
+<a href="https://github.com/bbatsov/super-save">super-save</a>.</p>
+
+<p>The package is available on MELPA and MELPA Stable and enabling it is trivial:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">super-save-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&#8217;re like me and don&#8217;t care about the backups created by the
+built-in <code>auto-save-mode</code>, you can disable it aftewards:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">auto-save-default</span> <span class="no">nil</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I wouldn&#8217;t really recommend doing this until I&#8217;ve added a bit of
+functionality to save the current buffer when you&#8217;re not typing, but
+the option obviously exists. I&#8217;ve been using Emacs for over 10 years
+now and I&#8217;ve never needed the auto-created backups - I&#8217;m either very
+lucky or this is less useful than it&#8217;s supposed to be.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ace-jump-mode is Dead, Long Live Avy]]></title>
@@ -940,43 +975,6 @@ contents. By default they are:</p>
 
 
 <p>Or you can simply set <code>initial-scratch-message</code> to <code>nil</code> and be done with it.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Travel back and forward in git history]]></title>
-    <link href="http://emacsredux.com/blog/2014/07/22/travel-back-and-forward-in-git-history/"/>
-    <updated>2014-07-22T19:02:00+03:00</updated>
-    <id>http://emacsredux.com/blog/2014/07/22/travel-back-and-forward-in-git-history</id>
-    <content type="html"><![CDATA[<p>I recently discovered an extremely cool package called
-<a href="https://github.com/pidu/git-timemachine">git-timemachine</a> that allows
-you to step though the git history of the file you&#8217;re currently
-editing in Emacs.</p>
-
-<p>Using it is pretty simple:</p>
-
-<ul>
-<li>visit a git-controlled file and issue <code>M-x git-timemachine</code> (or bind it to a keybinding of your choice)</li>
-<li>use the following keys to navigate historic version of the file:
-
-<ul>
-<li><code>p</code> visit previous historic version</li>
-<li><code>n</code> visit next historic version</li>
-<li><code>w</code> copy the hash of the current historic version</li>
-<li><code>q</code> exit the time machine buffer</li>
-</ul>
-</li>
-</ul>
-
-
-<p>Here you can see <code>git-timemachine</code> in action:</p>
-
-<p><img src="http://emacsredux.com/images/articles/timemachine.gif"></p>
-
-<p><strong>P.S.</strong></p>
-
-<p>This package is bundled with
-<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
 ]]></content>
   </entry>
   
