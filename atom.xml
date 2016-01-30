@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-01-30T11:59:23+02:00</updated>
+  <updated>2016-01-30T12:26:54+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -60,6 +60,10 @@ the wonderful <a href="https://pqrs.org/osx/karabiner/">Karabiner</a>, but it yi
 the desired results and that&#8217;s what&#8217;s important at the end of the day.</p>
 
 <p>Now if only there was a way to achieve the same result in Windows&#8230;</p>
+
+<p>P.S. <code>vim</code> users will love <code>xcape</code>. Its default behaviour is to
+generate the <code>Escape</code> key when <code>Left Control</code> is pressed and released on
+its own.</p>
 ]]></content>
   </entry>
   
