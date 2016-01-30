@@ -9,7 +9,10 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Prelude This is a slightly refreshed version of an article originally published on my personal blog. If there is something that people love as much &hellip;">
+  <meta name="description" content="Some time ago I showed you how to do
+Google queries from Emacs. The
+approach used in that articles is pretty generic and can be used for
+the creation &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +82,82 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/26/search-youtube/">Search Youtube</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-26T17:59:00+03:00" pubdate data-updated="true">Aug 26<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/26/search-youtube/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Some time ago I showed you how to do
+<a href="http://emacsredux.com/blog/2013/03/28/google/">Google queries from Emacs</a>. The
+approach used in that articles is pretty generic and can be used for
+the creation of various similar commands. Let&#8217;s create a command that
+searches in YouTube:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">youtube</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Search YouTube with a query or region if any.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">browse-url</span>
+</span><span class='line'>   <span class="p">(</span><span class="nv">concat</span>
+</span><span class='line'>    <span class="s">&quot;http://www.youtube.com/results?search_query=&quot;</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="p">(</span><span class="k">if</span> <span class="nv">mark-active</span>
+</span><span class='line'>                           <span class="p">(</span><span class="nv">buffer-substring</span> <span class="p">(</span><span class="nv">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nv">region-end</span><span class="p">))</span>
+</span><span class='line'>                         <span class="p">(</span><span class="nv">read-string</span> <span class="s">&quot;Search YouTube: &quot;</span><span class="p">))))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This command will display the query results in your default browser.</p>
+
+<p>I&#8217;d suggest binding the command to <code>C-c y</code> if you plan to use it regularly.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c y&quot;</span><span class="p">)</span> <span class="ss">&#39;youtube</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>youtube</code> is available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
+prefix).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -998,75 +1077,6 @@ expression. Pretty neat!</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/15/deleting-windows/">Deleting Windows</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-15T10:28:00+03:00" pubdate data-updated="true">Jun 15<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/15/deleting-windows/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Every Emacs user knows that he can split the current window
-horizontally (with <code>C-x 2</code>) and vertically (with <code>C-x 3</code>) as much as
-he desires to. However, some Emacs users don&#8217;t know what to do with
-the extra windows they&#8217;ve created when they do not them.</p>
-
-<p>To delete the selected window, type <code>C-x 0</code> (<code>delete-window</code>).
-Once a window is deleted, the space that it occupied
-is given to an adjacent window (but not the minibuffer window, even if
-that is the active window at the time). Deleting the window has no effect on the
-buffer it used to display; the buffer continues to exist, and you can
-still switch to with <code>C-x b</code> or any other buffer navigation command.</p>
-
-<p><code>C-x 4 0</code> (<code>kill-buffer-and-window</code>) is a stronger (and fairly
-unknown) command; it kills the current buffer and then deletes the
-selected window (basically it combines <code>C-x k</code> and <code>C-x 0</code>). Obviously
-it&#8217;s a good idea to use it on windows displaying buffers you&#8217;re no
-longer needing.</p>
-
-<p><code>C-x 1</code> (<code>delete-other-windows</code>) deletes all the windows, <em>except</em> the
-selected one; the selected window expands to use the whole frame.
-(This command cannot be used while the minibuffer window is active;
-attempting to do so signals an error.) In the era of narrow screens I
-used that command fairly often when I needed to focus on a particular
-task. Now I keep my screen split in half vertically 99% of the time,
-but I still use <code>C-x 1</code> from time to time when I&#8217;m about to resplit my
-screen in some uncommon way.</p>
-
-<p>Windows displaying help buffers (generally created with commands like
-<code>C-h ...</code>) warrant a special mention. They can be deleted with a
-single keystroke - <code>q</code>. That would delete the help window altogether
-if it was created by the help command, or restore its original
-content if the window existing beforehand and was reused by the help command.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -1090,6 +1100,10 @@ content if the window existing beforehand and was reused by the help command.</p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
       </li>
     
@@ -1103,10 +1117,6 @@ content if the window existing beforehand and was reused by the help command.</p
     
       <li class="post">
         <a href="/blog/2016/01/30/super-save/">super-save</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/">ace-jump-mode is Dead, Long Live Avy</a>
       </li>
     
   </ul>

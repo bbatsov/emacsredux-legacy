@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Everyone who&#8217;s used Emacs for more than 10 minutes knows that you can
-indent the selected region in a buffer with C-M-\ (bound to the
-command &hellip;">
+  <meta name="description" content="As a continuation of our previous topic of
+indenting a buffer or a region,
+this time around I&#8217;ll show you how to indent a single defun(Emacs &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,89 @@ command &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/28/indent-defun/">Indent Defun</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-28T12:23:00+02:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/28/indent-defun/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As a continuation of our previous topic of
+<a href="/blog/2013/03/27/indent-region-or-buffer">indenting a buffer or a region</a>,
+this time around I&#8217;ll show you how to indent a single <strong>defun</strong>(Emacs
+slang/terminology for a function/procedure/method definition, originating
+from the way functions are defined in Emacs Lisp(and a few other Lisp
+dialects)). So here&#8217;s the magic bit of code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">indent-defun</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Indent the current defun.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">save-excursion</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">mark-defun</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">indent-region</span> <span class="p">(</span><span class="nv">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nv">region-end</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This function should work in all properly written major programming modes.</p>
+
+<p>Why would you want to use <code>indent-defun</code> instead of
+<code>indent-region-or-buffer</code>? Pretty simple - indenting huge buffers can
+take quite a while and you might want to save a bit of time if you
+know that a buffer&#8217;s indentation is correct pretty much everywhere
+else.</p>
+
+<p>I&#8217;d suggest binding the command to <code>C-M-z</code> (since it kind of resembles
+the keybinding for function evaluation in major modes for dynamic
+programming languages <code>C-M-x</code>).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-M-z&quot;</span><span class="p">)</span> <span class="ss">&#39;indent-defun</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Special thanks to <code>Fuco</code> (who I assume is Matus Goljer, of
+<a href="https://github.com/Fuco1/smartparens">smartparens</a> fame) who
+suggested that command in the previous post.</p>
+
+<p><code>indent-defun</code> is available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
+prefix).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -664,6 +747,10 @@ that I&#8217;ve uncovered many interesting things to share with you.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
       </li>
     
@@ -677,10 +764,6 @@ that I&#8217;ve uncovered many interesting things to share with you.</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/super-save/">super-save</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/">ace-jump-mode is Dead, Long Live Avy</a>
       </li>
     
   </ul>

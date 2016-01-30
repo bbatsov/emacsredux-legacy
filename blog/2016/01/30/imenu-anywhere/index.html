@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Programming - Emacs Redux</title>
+  <title>imenu-anywhere - Emacs Redux</title>
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Category: Programming">
+  <meta name="description" content="For the longest time Prelude
+included the function prelude-goto-symbol (bound to C-c i).
+It basically allowed you to jump to any definition in the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://emacsredux.comblog/categories/programming">
+  <link rel="canonical" href="http://emacsredux.com/blog/2016/01/30/imenu-anywhere">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
@@ -78,36 +80,110 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Programming</h1>
+    
+      <h1 class="entry-title">Imenu-anywhere</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-30T12:45:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>For the longest time <a href="https://github.com/bbatsov/prelude">Prelude</a>
+included the function <code>prelude-goto-symbol</code> (bound to <code>C-c i</code>).
+It basically allowed you to jump to any definition in the current source file
+using <code>imenu</code> behind the curtains.</p>
 
-  
-  <h2>2013</h2>
+<p>Recently I&#8217;ve found an even better option - the package
+<a href="https://github.com/vspinu/imenu-anywhere">imenu-anywhere</a>. It works in a pretty similar
+manner but gives you the ability to jump to any definition in any currently open buffer.
+That&#8217;s quite handy and it greatly reduces the need to use something like <code>etags</code>.</p>
 
-<article>
-  
-<h1><a href="/blog/2013/04/05/prog-mode-the-parent-of-all-programming-modes/">prog-mode: The parent of all programming modes</a></h1>
-<time datetime="2013-04-05T12:04:00+03:00" pubdate><span class='month'>Apr</span> <span class='day'>05</span> <span class='year'>2013</span></time>
+<p>As an added bonus - <code>imenu-anywhere</code> features helm integration.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/programming/'>Programming</a></span>
-</footer>
+<p>This is a very handy package and I encourage you to give it a go!</p>
 
-
-</article>
-
+<p>P.S. Prelude users should simply upgrade to the latest version of
+Prelude (it already uses it).</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Bozhidar Batsov</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-30T12:45:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/imenu/'>imenu</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://emacsredux.com/blog/2016/01/30/imenu-anywhere/" data-via="bbatsov" data-counturl="http://emacsredux.com/blog/2016/01/30/imenu-anywhere/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/01/30/my-personal-emacs-configuration/" title="Previous Post: My Personal Emacs Configuration">&laquo; My Personal Emacs Configuration</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -202,7 +278,10 @@
       var disqus_shortname = 'emacsredux';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://emacsredux.com/blog/2016/01/30/imenu-anywhere/';
+        var disqus_url = 'http://emacsredux.com/blog/2016/01/30/imenu-anywhere/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

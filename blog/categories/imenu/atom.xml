@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: imenu | Emacs Redux]]></title>
+  <link href="http://emacsredux.com/blog/categories/imenu/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2016-01-30T12:51:25+02:00</updated>
+  <id>http://emacsredux.com/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[imenu-anywhere]]></title>
+    <link href="http://emacsredux.com/blog/2016/01/30/imenu-anywhere/"/>
+    <updated>2016-01-30T12:45:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/01/30/imenu-anywhere</id>
+    <content type="html"><![CDATA[<p>For the longest time <a href="https://github.com/bbatsov/prelude">Prelude</a>
+included the function <code>prelude-goto-symbol</code> (bound to <code>C-c i</code>).
+It basically allowed you to jump to any definition in the current source file
+using <code>imenu</code> behind the curtains.</p>
+
+<p>Recently I've found an even better option - the package
+<a href="https://github.com/vspinu/imenu-anywhere">imenu-anywhere</a>. It works in a pretty similar
+manner but gives you the ability to jump to any definition in any currently open buffer.
+That's quite handy and it greatly reduces the need to use something like <code>etags</code>.</p>
+
+<p>As an added bonus - <code>imenu-anywhere</code> features helm integration.</p>
+
+<p>This is a very handy package and I encourage you to give it a go!</p>
+
+<p>P.S. Prelude users should simply upgrade to the latest version of
+Prelude (it already uses it).</p>
+]]></content>
+  </entry>
+  
+</feed>

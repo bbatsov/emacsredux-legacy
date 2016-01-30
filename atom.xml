@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-01-30T12:38:55+02:00</updated>
+  <updated>2016-01-30T12:51:25+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[imenu-anywhere]]></title>
+    <link href="http://emacsredux.com/blog/2016/01/30/imenu-anywhere/"/>
+    <updated>2016-01-30T12:45:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/01/30/imenu-anywhere</id>
+    <content type="html"><![CDATA[<p>For the longest time <a href="https://github.com/bbatsov/prelude">Prelude</a>
+included the function <code>prelude-goto-symbol</code> (bound to <code>C-c i</code>).
+It basically allowed you to jump to any definition in the current source file
+using <code>imenu</code> behind the curtains.</p>
+
+<p>Recently I&#8217;ve found an even better option - the package
+<a href="https://github.com/vspinu/imenu-anywhere">imenu-anywhere</a>. It works in a pretty similar
+manner but gives you the ability to jump to any definition in any currently open buffer.
+That&#8217;s quite handy and it greatly reduces the need to use something like <code>etags</code>.</p>
+
+<p>As an added bonus - <code>imenu-anywhere</code> features helm integration.</p>
+
+<p>This is a very handy package and I encourage you to give it a go!</p>
+
+<p>P.S. Prelude users should simply upgrade to the latest version of
+Prelude (it already uses it).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[My Personal Emacs Configuration]]></title>
@@ -816,36 +840,6 @@ about some of the more interesting features.</p>
 
 <p>In related news - the Emacs Mac Port based on 24.4
 <a href="https://lists.gnu.org/archive/html/emacs-devel/2014-10/msg00725.html">has also been released</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Emacs Lisp Style Guide]]></title>
-    <link href="http://emacsredux.com/blog/2014/09/04/emacs-lisp-style-guide/"/>
-    <updated>2014-09-04T15:00:00+03:00</updated>
-    <id>http://emacsredux.com/blog/2014/09/04/emacs-lisp-style-guide</id>
-    <content type="html"><![CDATA[<p>I&#8217;ve started working on a community
-<a href="https://github.com/bbatsov/emacs-lisp-style-guide">Emacs Lisp style guide</a>.
-My goal is to create a comprehensive document similar to the
-<a href="https://github.com/bbatsov/clojure-style-guide">Clojure</a> and
-<a href="https://github.com/bbatsov/ruby-style-guide">Ruby</a> community style
-guides.</p>
-
-<p>Such a document would be a great starting point for many newcomers to
-the Emacs community and should increase the overall quality of the
-code produced by it.  There&#8217;s much to be documented about code layout,
-preferred syntactic conventions, major and minor mode definitions,
-etc. and I obviously can&#8217;t know the best practices about everything so
-I&#8217;ll need a lot of help.</p>
-
-<p>Of course, we already have the official
-<a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Tips.html#Tips">coding guidelines</a>,
-but they are a bit light on examples, rationale, etc. Hopefully the community style guide
-will manage to fill any gaps in them and in good time portions of it will find their place
-in the official documentation.</p>
-
-<p>I&#8217;m inviting all members of our community interested in promoting good
-Emacs Lisp practices to join the development of this document!</p>
 ]]></content>
   </entry>
   

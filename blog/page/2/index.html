@@ -9,8 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Prelude In this article I&#8217;ll share with you a few tips and tricks about
-running Emacs under the Max OS X operating system. This article will &hellip;">
+  <meta name="description" content="Don&#8217;t want to wait for the MELPA packages to be automatically rebuilt?
+Want to try out some package recipe before submitting it upstream? You &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,54 @@ running Emacs under the Max OS X operating system. This article will &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/10/building-melpa-packages-locally/">Building MELPA Packages Locally</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-10T11:00:00+03:00" pubdate data-updated="true">May 10<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/05/10/building-melpa-packages-locally/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Don&#8217;t want to wait for the MELPA packages to be automatically rebuilt?
+Want to try out some package recipe before submitting it upstream? You can
+totally do this!</p>
+
+<p>Just clone the
+<a href="https://github.com/milkypostman/melpa">MELPA github repo</a>, open a
+recipe from it in Emacs and press <code>C-c C-c</code> (bound to the command
+<code>package-build-current-recipe</code>). Once the package is built you&#8217;ll be
+prompted to install it.</p>
+
+<p>Pretty neat, right?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -781,65 +829,6 @@ about some of the more interesting features.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/04/emacs-lisp-style-guide/">Emacs Lisp Style Guide</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-04T15:00:00+03:00" pubdate data-updated="true">Sep 4<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/09/04/emacs-lisp-style-guide/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;ve started working on a community
-<a href="https://github.com/bbatsov/emacs-lisp-style-guide">Emacs Lisp style guide</a>.
-My goal is to create a comprehensive document similar to the
-<a href="https://github.com/bbatsov/clojure-style-guide">Clojure</a> and
-<a href="https://github.com/bbatsov/ruby-style-guide">Ruby</a> community style
-guides.</p>
-
-<p>Such a document would be a great starting point for many newcomers to
-the Emacs community and should increase the overall quality of the
-code produced by it.  There&#8217;s much to be documented about code layout,
-preferred syntactic conventions, major and minor mode definitions,
-etc. and I obviously can&#8217;t know the best practices about everything so
-I&#8217;ll need a lot of help.</p>
-
-<p>Of course, we already have the official
-<a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Tips.html#Tips">coding guidelines</a>,
-but they are a bit light on examples, rationale, etc. Hopefully the community style guide
-will manage to fill any gaps in them and in good time portions of it will find their place
-in the official documentation.</p>
-
-<p>I&#8217;m inviting all members of our community interested in promoting good
-Emacs Lisp practices to join the development of this document!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -863,6 +852,10 @@ Emacs Lisp practices to join the development of this document!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
       </li>
     
@@ -876,10 +869,6 @@ Emacs Lisp practices to join the development of this document!</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/super-save/">super-save</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/">ace-jump-mode is Dead, Long Live Avy</a>
       </li>
     
   </ul>
