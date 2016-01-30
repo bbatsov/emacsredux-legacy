@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Building MELPA packages locally - Emacs Redux</title>
+  <title>crux - Emacs Redux</title>
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Don&#8217;t want to wait for the MELPA packages to be automatically rebuilt?
-Want to try out some package recipe before submitting it upstream? You &hellip;">
+  <meta name="description" content="I&#8217;d often blog about some useful utility functions here. Pretty much
+all of them get included in
+Emacs Prelude, but I&#8217;ve decided I can do &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@ Want to try out some package recipe before submitting it upstream? You &hellip;"
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://emacsredux.com/blog/2015/05/10/building-melpa-packages-locally">
+  <link rel="canonical" href="http://emacsredux.com/blog/2016/01/30/crux">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
@@ -83,7 +84,7 @@ Want to try out some package recipe before submitting it upstream? You &hellip;"
   
   <header>
     
-      <h1 class="entry-title">Building MELPA Packages Locally</h1>
+      <h1 class="entry-title">Crux</h1>
     
     
       <p class="meta">
@@ -99,7 +100,7 @@ Want to try out some package recipe before submitting it upstream? You &hellip;"
   
 
 
-<time datetime="2015-05-10T11:00:00+03:00" pubdate data-updated="true">May 10<span>th</span>, 2015</time>
+<time datetime="2016-01-30T11:37:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -108,17 +109,54 @@ Want to try out some package recipe before submitting it upstream? You &hellip;"
   </header>
 
 
-<div class="entry-content"><p>Don&#8217;t want to wait for the MELPA packages to be automatically rebuilt?
-Want to try out some package recipe before submitting it upstream? You can
-totally do this!</p>
+<div class="entry-content"><p>I&#8217;d often blog about some useful utility functions here. Pretty much
+all of them get included in
+<a href="https://github.com/bbatsov/prelude">Emacs Prelude</a>, but I&#8217;ve decided I can do one better and extract those of
+them which are most useful/universal into a separate package.</p>
 
-<p>Just clone the
-<a href="https://github.com/milkypostman/melpa">MELPA github repo</a>, open a
-recipe from it in Emacs and press <code>C-c C-c</code> (bound to the command
-<code>package-build-current-recipe</code>). Once the package is built you&#8217;ll be
-prompted to install it.</p>
+<p>This package is <a href="https://github.com/bbatsov/crux">crux</a> - a
+<strong>C</strong>ollection of <strong>R</strong>idiculously <strong>U</strong>seful e<strong>X</strong>tensions for
+Emacs.</p>
 
-<p>Pretty neat, right?</p>
+<p>You can install it from MELPA and MELPA Stable. Once this is done you
+just have to pick keybindings for the commands shipped with
+<code>crux</code>. I&#8217;ve suggested some keybindings
+<a href="https://github.com/bbatsov/crux#keybindings">here</a>. And here&#8217;s a
+small configuration snippet showing how to actually bind keys to some
+of <code>crux</code>&#8217;s commands:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">move-beginning-of-line]</span> <span class="nf">#&#39;</span><span class="nv">crux-move-beginning-of-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c o&quot;</span><span class="p">)</span> <span class="nf">#&#39;</span><span class="nv">crux-open-with</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">shift</span> <span class="nb">return</span><span class="p">)</span><span class="nv">]</span> <span class="nf">#&#39;</span><span class="nv">crux-smart-open-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;s-r&quot;</span><span class="p">)</span> <span class="nf">#&#39;</span><span class="nv">crux-recentf-ido-find-file</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-&lt;backspace&gt;&quot;</span> <span class="nf">#&#39;</span><span class="nv">crux-kill-line-backwards</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">kill-whole-line]</span> <span class="nf">#&#39;</span><span class="nv">crux-kill-whole-line</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>crux</code> also ships with some handy advises that can enhance the operation of existing commands.</p>
+
+<p>For instance - you can use <code>crux-with-region-or-buffer</code> to make a
+command acting normally on a region to operate on the entire buffer in
+the absense of a region. Here are a few examples you can stuff in your
+config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">crux-with-region-or-buffer</span> <span class="nv">indent-region</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">crux-with-region-or-buffer</span> <span class="nv">untabify</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, this is <code>crux</code> for you - simple and neat! I&#8217;d love it if you
+contributed more useful commands to it, so we can make it even more
+versatile!</p>
 </div>
 
 
@@ -141,12 +179,12 @@ prompted to install it.</p>
   
 
 
-<time datetime="2015-05-10T11:00:00+03:00" pubdate data-updated="true">May 10<span>th</span>, 2015</time>
+<time datetime="2016-01-30T11:37:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/melpa/'>melpa</a>, <a class='category' href='/blog/categories/package-dot-el/'>package.el</a>
+    <a class='category' href='/blog/categories/misc/'>misc</a>
   
 </span>
 
@@ -155,7 +193,7 @@ prompted to install it.</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://emacsredux.com/blog/2015/05/10/building-melpa-packages-locally/" data-via="bbatsov" data-counturl="http://emacsredux.com/blog/2015/05/10/building-melpa-packages-locally/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://emacsredux.com/blog/2016/01/30/crux/" data-via="bbatsov" data-counturl="http://emacsredux.com/blog/2016/01/30/crux/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -166,10 +204,8 @@ prompted to install it.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/05/09/emacs-on-os-x/" title="Previous Post: Emacs on OS X">&laquo; Emacs on OS X</a>
+        <a class="basic-alignment left" href="/blog/2016/01/30/super-save/" title="Previous Post: super-save">&laquo; super-save</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/05/16/pragmatic-emacs/" title="Next Post: Pragmatic Emacs">Pragmatic Emacs &raquo;</a>
       
     </p>
   </footer>
@@ -275,8 +311,8 @@ prompted to install it.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://emacsredux.com/blog/2015/05/10/building-melpa-packages-locally/';
-        var disqus_url = 'http://emacsredux.com/blog/2015/05/10/building-melpa-packages-locally/';
+        var disqus_identifier = 'http://emacsredux.com/blog/2016/01/30/crux/';
+        var disqus_url = 'http://emacsredux.com/blog/2016/01/30/crux/';
         var disqus_script = 'embed.js';
       
     (function () {

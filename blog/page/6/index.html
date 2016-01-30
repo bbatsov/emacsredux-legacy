@@ -9,9 +9,10 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Emacs users have a lot of power at their disposal, but in one
-department they are always short - the number of available
-non-complex keybindings that &hellip;">
+  <meta name="description" content="Programming code is often filled with comment annotations indicating stuff that should be done in the future. 1
+2
+3
+# REFACTOR: Decouple and clean up &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +82,86 @@ non-complex keybindings that &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/24/highlight-comment-annotations/">Highlight Comment Annotations</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-24T16:15:00+03:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/24/highlight-comment-annotations/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Programming code is often filled with comment annotations indicating stuff that should be done in the future.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># REFACTOR: Decouple and clean up this crap.</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># crappy code omitted</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Normally Emacs doesn&#8217;t highlight such comment annotations, unless
+you&#8217;re using some minor mode like
+<a href="https://github.com/lewang/fic-mode/blob/master/fic-mode.el">fic-mode</a>. I find such mode overkill given the fact we can cook a pretty decent solution in just about 5 lines of code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">font-lock-comment-annotations</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Highlight a bunch of well known comment annotations.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">This functions should be added to the hooks of major modes for programming.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">font-lock-add-keywords</span>
+</span><span class='line'>   <span class="no">nil</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;\\&lt;\\(FIX\\(ME\\)?\\|TODO\\|OPTIMIZE\\|HACK\\|REFACTOR\\):&quot;</span>
+</span><span class='line'>          <span class="mi">1</span> <span class="nv">font-lock-warning-face</span> <span class="no">t</span><span class="p">))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;font-lock-comment-annotations</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And that&#8217;s all there is to it. This code is not perfect, since it
+would highlight <code>FIXME:</code> everywhere in the source code (as opposed to
+only in comments), but it&#8217;s extremely highly unlikely that it&#8217;ll
+appear outside of the source comments anyways.</p>
+
+<p>As usual <a href="https://github.com/bbatsov/prelude">Prelude</a> users get this
+functionally for free out-of-the-box.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -897,87 +978,6 @@ the region will be executed in the associated connection buffer.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/05/continue-a-comment-on-the-next-line/">Continue a Comment on the Next Line</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-05T16:12:00+03:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/05/continue-a-comment-on-the-next-line/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When writing code from time to time we have to write comments as
-well. Most of the time programmers are using single-line comments,
-denoted by some special starting character(s), like <code>#</code>, <code>//</code>,
-etc. When you want to write a few lines of comments in Emacs you have two
-options:</p>
-
-<h4>Option A</h4>
-
-<ul>
-<li>Write the first line of the comment.</li>
-<li>Go to the next line.</li>
-<li>Insert the comment delimiter.</li>
-<li>Continue writing the comment.</li>
-</ul>
-
-
-<h4>Option B (editor&#8217;s choice)</h4>
-
-<ul>
-<li>White the first line of the comment.</li>
-<li>Press <code>M-j</code> (<code>indent-new-comment-line</code>).</li>
-<li>Continue writing the comment on the second line.</li>
-</ul>
-
-
-<p>The command breaks the line at point and indents the following line,
-continuing the comment if invoked within one. The indentation on the
-second line matches the indentation on the first line.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># first line</span>
-</span><span class='line'><span class="c1">#     indented line|(we press `M-j` here)</span>
-</span><span class='line'><span class="c1">#     |(we get here after pressing `M-j`)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This command is intended for styles where you write a comment per
-line, starting a new comment (and terminating it if necessary) on each
-line.  If you want to continue one comment of the type <code>/* */</code> across
-several lines, use <code>C-j</code> (<code>newline-and-indent</code>).</p>
-
-<p>Outside of comments <code>M-j</code> behaves pretty much the same way as <code>C-j</code>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -1001,6 +1001,10 @@ several lines, use <code>C-j</code> (<code>newline-and-indent</code>).</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/crux/">crux</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/super-save/">super-save</a>
       </li>
     
@@ -1014,10 +1018,6 @@ several lines, use <code>C-j</code> (<code>newline-and-indent</code>).</p>
     
       <li class="post">
         <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
       </li>
     
   </ul>

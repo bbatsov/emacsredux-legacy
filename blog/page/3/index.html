@@ -9,9 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="I recently discovered an extremely cool package called
-git-timemachine that allows
-you to step though the git history of the file you&#8217;re &hellip;">
+  <meta name="description" content="Pretty much every Emacs user knows of the *scratch* buffer - after
+all it&#8217;s always present when you start your Emacs. If you&#8217;ve set &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,90 @@ you to step though the git history of the file you&#8217;re &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/25/configure-the-scratch-buffers-mode/">Configure the Scratch Buffer&#8217;s Mode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-25T15:23:00+03:00" pubdate data-updated="true">Jul 25<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/07/25/configure-the-scratch-buffers-mode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Pretty much every Emacs user knows of the <code>*scratch*</code> buffer - after
+all it&#8217;s always present when you start your Emacs. If you&#8217;ve set
+<code>inhibit-startup-screen</code> to <code>t</code> (which I recommend) it will even be
+the very first buffer see each time you fire up your beloved editor
+(unless you alter <code>initial-buffer-choice</code>, that is).</p>
+
+<p>The scratch buffer was conceived a scratchpad for notes and Emacs Lisp
+experiments and a lot of Emacs users find it quite handy.  On the
+other hand - even more users don&#8217;t really write Emacs Lisp and
+probably find little value in this buffer.</p>
+
+<p>One little know fact about the <code>*scratch*</code> buffer is that its initial
+major mode (by default it&#8217;s <code>lisp-interaction-mode</code>) is not hardcoded
+and you can alter it.  If you&#8217;re a Ruby developer you might opt to
+make it use <code>ruby-mode</code> by default:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">initial-major-mode</span> <span class="ss">&#39;ruby-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you do this I&#8217;d also advise you to change the buffer&#8217;s initial
+contents. By default they are:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; This buffer is for notes you don&#39;t want to save, and for Lisp evaluation.</span>
+</span><span class='line'><span class="c1">;; If you want to create a file, visit that file with C-x C-f,</span>
+</span><span class='line'><span class="c1">;; then enter the text in that file&#39;s own buffer.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For Ruby something like this might be better:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">initial-scratch-message</span> <span class="s">&quot;\</span>
+</span><span class='line'><span class="s"># This buffer is for notes you don&#39;t want to save, and for Ruby code.</span>
+</span><span class='line'><span class="s"># If you want to create a file, visit that file with C-x C-f,</span>
+</span><span class='line'><span class="s"># then enter the text in that file&#39;s own buffer.&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or you can simply set <code>initial-scratch-message</code> to <code>nil</code> and be done with it.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -794,65 +877,6 @@ Emacs Lisp takes another small step to becoming a good Lisp dialect!</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/">A Peek at Emacs 24.4: Focus Hooks</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-22T16:05:00+02:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2014</time>
-        
-         | <a href="/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A couple of years ago I
-<a href="http://batsov.com/articles/2012/03/08/emacs-tip-number-5-save-buffers-automatically-on-buffer-or-window-switch/">lamented over the lack of frame focus hooks in Emacs</a>. This
-prohibited us from implemented a feature like IntelliJ IDEA&#8217;s &#8220;auto-save on
-focus lost&#8221;, which was kind of frustrating as we&#8217;re generally assuming that everything is doable in Emacs!</p>
-
-<p>All this changes in Emacs 24.4 with the introduction of two new hooks - <code>focus-in-hook</code> and <code>focus-out-hook</code>.
-The first is triggered when the current frame gains focus and the second when the frame loses focus.
-So, if we want to save our active buffer when the Emacs frame loses focus we can simply do it like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;focus-out-hook</span> <span class="ss">&#39;save-buffer</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Or you can go a step further and save all the buffers:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;focus-out-hook</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">save-some-buffers</span> <span class="no">t</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I pretty sure you&#8217;ll find other creative ways to apply those new hooks to good use!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -876,6 +900,10 @@ So, if we want to save our active buffer when the Emacs frame loses focus we can
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/crux/">crux</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/super-save/">super-save</a>
       </li>
     
@@ -889,10 +917,6 @@ So, if we want to save our active buffer when the Emacs frame loses focus we can
     
       <li class="post">
         <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
       </li>
     
   </ul>

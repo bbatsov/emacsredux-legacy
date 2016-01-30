@@ -4,7 +4,7 @@
   <title><![CDATA[Category: misc | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/misc/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-01-30T11:36:23+02:00</updated>
+  <updated>2016-01-30T11:45:16+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[crux]]></title>
+    <link href="http://emacsredux.com/blog/2016/01/30/crux/"/>
+    <updated>2016-01-30T11:37:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/01/30/crux</id>
+    <content type="html"><![CDATA[<p>I'd often blog about some useful utility functions here. Pretty much
+all of them get included in
+<a href="https://github.com/bbatsov/prelude">Emacs Prelude</a>, but I've decided I can do one better and extract those of
+them which are most useful/universal into a separate package.</p>
+
+<p>This package is <a href="https://github.com/bbatsov/crux">crux</a> - a
+<strong>C</strong>ollection of <strong>R</strong>idiculously <strong>U</strong>seful e<strong>X</strong>tensions for
+Emacs.</p>
+
+<p>You can install it from MELPA and MELPA Stable. Once this is done you
+just have to pick keybindings for the commands shipped with
+<code>crux</code>. I've suggested some keybindings
+<a href="https://github.com/bbatsov/crux#keybindings">here</a>. And here's a
+small configuration snippet showing how to actually bind keys to some
+of <code>crux</code>'s commands:</p>
+
+<p><code>cl
+(global-set-key [remap move-beginning-of-line] #'crux-move-beginning-of-line)
+(global-set-key (kbd "C-c o") #'crux-open-with)
+(global-set-key [(shift return)] #'crux-smart-open-line)
+(global-set-key (kbd "s-r") #'crux-recentf-ido-find-file)
+(global-set-key (kbd "C-&lt;backspace&gt;" #'crux-kill-line-backwards))
+(global-set-key [remap kill-whole-line] #'crux-kill-whole-line)
+</code></p>
+
+<p><code>crux</code> also ships with some handy advises that can enhance the operation of existing commands.</p>
+
+<p>For instance - you can use <code>crux-with-region-or-buffer</code> to make a
+command acting normally on a region to operate on the entire buffer in
+the absense of a region. Here are a few examples you can stuff in your
+config:</p>
+
+<p><code>cl
+(crux-with-region-or-buffer indent-region)
+(crux-with-region-or-buffer untabify)
+</code></p>
+
+<p>So, this is <code>crux</code> for you - simple and neat! I'd love it if you
+contributed more useful commands to it, so we can make it even more
+versatile!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[super-save]]></title>
@@ -124,23 +172,6 @@ C-x b l o s C-g C-h l
 </code></p>
 
 <p>Inspecting it can be super enlightening! I do this all the time.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Uptime]]></title>
-    <link href="http://emacsredux.com/blog/2014/12/23/uptime/"/>
-    <updated>2014-12-23T17:28:00+02:00</updated>
-    <id>http://emacsredux.com/blog/2014/12/23/uptime</id>
-    <content type="html"><![CDATA[<p>Many Emacs users keep a single Emacs instance running for quite a while.
-I've had instances running for over a month. How do I know this? Unsurprisingly,
-there's a built-in command for that:</p>
-
-<p><code>
-M-x emacs-uptime
-</code></p>
-
-<p>Now it's time to start bragging to your vim-using friends!</p>
 ]]></content>
   </entry>
   

@@ -9,9 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Are you sure you&#8217;re using Emacs in an efficient way? Perhaps you&#8217;re
-overusing commands like C-f and C-b to navigate around when you
-can &hellip;">
+  <meta name="description" content="On graphical displays, each Emacs window normally has narrow fringes (gutters/margins)
+on the left and right edges. The fringes are used to display &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,129 @@ can &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-18T09:41:00+02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/01/18/customizing-the-fringes/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>On graphical displays, each Emacs window normally has narrow <strong>fringes</strong> (gutters/margins)
+on the left and right edges. The fringes are used to display symbols
+that provide information about the text in the window. You can type
+<code>M-x fringe-mode</code> to disable the fringes, or modify their width. This
+command affects fringes in all frames; to modify fringes on the
+selected frame only, use <code>M-x set-fringe-style</code>. You can make your
+changes to the fringes permanent by customizing the variable
+<code>fringe-mode</code>.</p>
+
+<p>Out-of-the-box the most common use of the fringes is to indicate a continuation
+line. When one line of text is split into multiple screen lines, the
+left fringe shows a curving arrow for each screen line except the
+first, indicating that “this is not the real beginning”. The right
+fringe shows a curving arrow for each screen line except the last,
+indicating that “this is not the real end”. If the line&#8217;s direction is
+right-to-left, the meanings of the curving
+arrows in the fringes are swapped.</p>
+
+<p>Third-party modes like
+<a href="https://github.com/flycheck/flycheck">flycheck</a> and
+<a href="https://github.com/dgutov/diff-hl">diff-hl</a> also make use of the fringe to
+display valuable information there (e.g. lint and VC information).</p>
+
+<p>By default both fringes have width 8 pixels, but we can easily adjust this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; make both fringes 4 pixels wide</span>
+</span><span class='line'><span class="p">(</span><span class="nv">fringe-mode</span> <span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; make the left fringe 4 pixels wide and the right disappear</span>
+</span><span class='line'><span class="p">(</span><span class="nv">fringe-mode</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">4</span> <span class="o">.</span> <span class="mi">0</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; restore the default sizes</span>
+</span><span class='line'><span class="p">(</span><span class="nv">fringe-mode</span> <span class="no">nil</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As mentioned before, you can also invoke this command interactively and
+determine the optimal fringe size for you, before making it permanent in
+your config. The options presented by the <code>fring-mode</code> command are defined
+in the <code>fringe-styles</code> list:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">defconst</span> <span class="nv">fringe-styles</span>
+</span><span class='line'>  <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;default&quot;</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">&quot;no-fringes&quot;</span> <span class="o">.</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">&quot;right-only&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="mi">0</span> <span class="o">.</span> <span class="no">nil</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">&quot;left-only&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="no">nil</span> <span class="o">.</span> <span class="mi">0</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">&quot;half-width&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="mi">4</span> <span class="o">.</span> <span class="mi">4</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="s">&quot;minimal&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="mi">1</span> <span class="o">.</span> <span class="mi">1</span><span class="p">)))</span>
+</span><span class='line'>  <span class="s">&quot;Alist mapping fringe mode names to fringe widths.</span>
+</span><span class='line'><span class="s">Each list element has the form (NAME . WIDTH), where NAME is a</span>
+</span><span class='line'><span class="s">mnemonic fringe mode name and WIDTH is one of the following:</span>
+</span><span class='line'><span class="s">- nil, which means the default width (8 pixels).</span>
+</span><span class='line'><span class="s">- a cons cell (LEFT . RIGHT), where LEFT and RIGHT are</span>
+</span><span class='line'><span class="s">  respectively the left and right fringe widths in pixels, or</span>
+</span><span class='line'><span class="s">  nil (meaning the default width).</span>
+</span><span class='line'><span class="s">- a single integer, which specifies the pixel widths of both</span>
+</span><span class='line'><span class="s">fringes.&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Be careful when playing with the fringe size. Certain info doesn&#8217;t
+look very good when the fringe is too small (e.g. less than 4 pixels).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -766,90 +888,6 @@ tasteful and distasteful prettifications.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/07/25/configure-the-scratch-buffers-mode/">Configure the Scratch Buffer&#8217;s Mode</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-25T15:23:00+03:00" pubdate data-updated="true">Jul 25<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/07/25/configure-the-scratch-buffers-mode/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Pretty much every Emacs user knows of the <code>*scratch*</code> buffer - after
-all it&#8217;s always present when you start your Emacs. If you&#8217;ve set
-<code>inhibit-startup-screen</code> to <code>t</code> (which I recommend) it will even be
-the very first buffer see each time you fire up your beloved editor
-(unless you alter <code>initial-buffer-choice</code>, that is).</p>
-
-<p>The scratch buffer was conceived a scratchpad for notes and Emacs Lisp
-experiments and a lot of Emacs users find it quite handy.  On the
-other hand - even more users don&#8217;t really write Emacs Lisp and
-probably find little value in this buffer.</p>
-
-<p>One little know fact about the <code>*scratch*</code> buffer is that its initial
-major mode (by default it&#8217;s <code>lisp-interaction-mode</code>) is not hardcoded
-and you can alter it.  If you&#8217;re a Ruby developer you might opt to
-make it use <code>ruby-mode</code> by default:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">initial-major-mode</span> <span class="ss">&#39;ruby-mode</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you do this I&#8217;d also advise you to change the buffer&#8217;s initial
-contents. By default they are:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; This buffer is for notes you don&#39;t want to save, and for Lisp evaluation.</span>
-</span><span class='line'><span class="c1">;; If you want to create a file, visit that file with C-x C-f,</span>
-</span><span class='line'><span class="c1">;; then enter the text in that file&#39;s own buffer.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>For Ruby something like this might be better:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">initial-scratch-message</span> <span class="s">&quot;\</span>
-</span><span class='line'><span class="s"># This buffer is for notes you don&#39;t want to save, and for Ruby code.</span>
-</span><span class='line'><span class="s"># If you want to create a file, visit that file with C-x C-f,</span>
-</span><span class='line'><span class="s"># then enter the text in that file&#39;s own buffer.&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Or you can simply set <code>initial-scratch-message</code> to <code>nil</code> and be done with it.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -873,6 +911,10 @@ contents. By default they are:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/crux/">crux</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/super-save/">super-save</a>
       </li>
     
@@ -886,10 +928,6 @@ contents. By default they are:</p>
     
       <li class="post">
         <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
       </li>
     
   </ul>

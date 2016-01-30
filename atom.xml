@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-01-30T11:36:23+02:00</updated>
+  <updated>2016-01-30T11:45:16+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[crux]]></title>
+    <link href="http://emacsredux.com/blog/2016/01/30/crux/"/>
+    <updated>2016-01-30T11:37:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/01/30/crux</id>
+    <content type="html"><![CDATA[<p>I&#8217;d often blog about some useful utility functions here. Pretty much
+all of them get included in
+<a href="https://github.com/bbatsov/prelude">Emacs Prelude</a>, but I&#8217;ve decided I can do one better and extract those of
+them which are most useful/universal into a separate package.</p>
+
+<p>This package is <a href="https://github.com/bbatsov/crux">crux</a> - a
+<strong>C</strong>ollection of <strong>R</strong>idiculously <strong>U</strong>seful e<strong>X</strong>tensions for
+Emacs.</p>
+
+<p>You can install it from MELPA and MELPA Stable. Once this is done you
+just have to pick keybindings for the commands shipped with
+<code>crux</code>. I&#8217;ve suggested some keybindings
+<a href="https://github.com/bbatsov/crux#keybindings">here</a>. And here&#8217;s a
+small configuration snippet showing how to actually bind keys to some
+of <code>crux</code>&#8217;s commands:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">move-beginning-of-line]</span> <span class="nf">#&#39;</span><span class="nv">crux-move-beginning-of-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c o&quot;</span><span class="p">)</span> <span class="nf">#&#39;</span><span class="nv">crux-open-with</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">shift</span> <span class="nb">return</span><span class="p">)</span><span class="nv">]</span> <span class="nf">#&#39;</span><span class="nv">crux-smart-open-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;s-r&quot;</span><span class="p">)</span> <span class="nf">#&#39;</span><span class="nv">crux-recentf-ido-find-file</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-&lt;backspace&gt;&quot;</span> <span class="nf">#&#39;</span><span class="nv">crux-kill-line-backwards</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">kill-whole-line]</span> <span class="nf">#&#39;</span><span class="nv">crux-kill-whole-line</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>crux</code> also ships with some handy advises that can enhance the operation of existing commands.</p>
+
+<p>For instance - you can use <code>crux-with-region-or-buffer</code> to make a
+command acting normally on a region to operate on the entire buffer in
+the absense of a region. Here are a few examples you can stuff in your
+config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">crux-with-region-or-buffer</span> <span class="nv">indent-region</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">crux-with-region-or-buffer</span> <span class="nv">untabify</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, this is <code>crux</code> for you - simple and neat! I&#8217;d love it if you
+contributed more useful commands to it, so we can make it even more
+versatile!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[super-save]]></title>
@@ -920,61 +976,6 @@ vim&#8217;s plugin <a href="https://github.com/enomsg/vim-haskellConcealPlus">ha
 lengths to bring proper mathematical notation to Haskell code. We can achieve more or less the same effect
 with <code>prettify-symbols-mode</code>, but one have to ask themselves where should we draw the border between
 tasteful and distasteful prettifications.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Configure the scratch buffer's mode]]></title>
-    <link href="http://emacsredux.com/blog/2014/07/25/configure-the-scratch-buffers-mode/"/>
-    <updated>2014-07-25T15:23:00+03:00</updated>
-    <id>http://emacsredux.com/blog/2014/07/25/configure-the-scratch-buffers-mode</id>
-    <content type="html"><![CDATA[<p>Pretty much every Emacs user knows of the <code>*scratch*</code> buffer - after
-all it&#8217;s always present when you start your Emacs. If you&#8217;ve set
-<code>inhibit-startup-screen</code> to <code>t</code> (which I recommend) it will even be
-the very first buffer see each time you fire up your beloved editor
-(unless you alter <code>initial-buffer-choice</code>, that is).</p>
-
-<p>The scratch buffer was conceived a scratchpad for notes and Emacs Lisp
-experiments and a lot of Emacs users find it quite handy.  On the
-other hand - even more users don&#8217;t really write Emacs Lisp and
-probably find little value in this buffer.</p>
-
-<p>One little know fact about the <code>*scratch*</code> buffer is that its initial
-major mode (by default it&#8217;s <code>lisp-interaction-mode</code>) is not hardcoded
-and you can alter it.  If you&#8217;re a Ruby developer you might opt to
-make it use <code>ruby-mode</code> by default:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">initial-major-mode</span> <span class="ss">&#39;ruby-mode</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you do this I&#8217;d also advise you to change the buffer&#8217;s initial
-contents. By default they are:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; This buffer is for notes you don&#39;t want to save, and for Lisp evaluation.</span>
-</span><span class='line'><span class="c1">;; If you want to create a file, visit that file with C-x C-f,</span>
-</span><span class='line'><span class="c1">;; then enter the text in that file&#39;s own buffer.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>For Ruby something like this might be better:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">initial-scratch-message</span> <span class="s">&quot;\</span>
-</span><span class='line'><span class="s"># This buffer is for notes you don&#39;t want to save, and for Ruby code.</span>
-</span><span class='line'><span class="s"># If you want to create a file, visit that file with C-x C-f,</span>
-</span><span class='line'><span class="s"># then enter the text in that file&#39;s own buffer.&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Or you can simply set <code>initial-scratch-message</code> to <code>nil</code> and be done with it.</p>
 ]]></content>
   </entry>
   

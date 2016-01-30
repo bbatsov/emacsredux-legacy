@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="I&#8217;m fond of seeing somewhere the full path to the file I&#8217;m currently
-editing(as opposed to just the file name displayed in
-modeline). &hellip;">
+  <meta name="description" content="Emacs does not have a command backward-kill-line(which would kill
+the text from the point to the beginning of the line), but it doesn&#8217;t
+really &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,90 @@ modeline). &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/08/kill-line-backward/">Kill Line Backward</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-08T18:33:00+03:00" pubdate data-updated="true">Apr 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/08/kill-line-backward/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs does not have a command <code>backward-kill-line</code>(which would kill
+the text from the point to the beginning of the line), but it doesn&#8217;t
+really need one anyways. Why so? Simple enough - invoking <code>kill-line</code>
+with a prefix argument <code>0</code> does exactly the same thing!</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>C-0 C-k
+</span><span class='line'>M-0 C-k
+</span><span class='line'>C-u 0 C-k</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Take your pick! If you&#8217;d rather have a quicker way to do backward line
+killing you might consider rebinding <code>C-Backspace</code> or
+<code>M-Backspace</code>(both are bound to <code>backward-word-kill</code> by
+default). Personally I always do word killing with <code>M-Backspace</code>, so I
+favor rebinding <code>C-Backspace</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-&lt;backspace&gt;&quot;</span><span class="p">)</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+</span><span class='line'>                                        <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>                                        <span class="p">(</span><span class="nv">kill-line</span> <span class="mi">0</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This command can be further improved if killing backward factors the
+current indentation level:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-&lt;backspace&gt;&quot;</span><span class="p">)</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+</span><span class='line'>                                        <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>                                        <span class="p">(</span><span class="nv">kill-line</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>                                        <span class="p">(</span><span class="nv">indent-according-to-mode</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thanks to <a href="https://twitter.com/sanityinc">Steve Purcell</a> for
+suggesting a similar command in the comments.</p>
+
+<p>The <code>C-Backspace</code> keybinding is available out-of-the-box in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -722,80 +806,6 @@ get more common keybindings for the operations.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/30/go-back-to-previous-window/">Go Back to Previous Window</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-30T18:11:00+02:00" pubdate data-updated="true">Mar 30<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/30/go-back-to-previous-window/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Every Emacs user knows what <code>C-x o</code>(<code>other-window</code>) does - it moves
-your cursor to the next window. When you&#8217;re out of windows - the
-command will take you back to the first one.</p>
-
-<p>Relatively few people are aware that the command takes a prefix
-argument which allows you to move several windows forward or
-backward. That&#8217;s obviously pretty useful when you&#8217;re a heavy window user
-and like to split your frames into many windows.</p>
-
-<p>To move 3 windows forward you&#8217;d do <code>C-u 3 C-x o</code>. To move 2 windows
-backwards you&#8217;d do <code>C-u -2 C-x o</code>.</p>
-
-<p>If you&#8217;re mostly working with only two windows you probably don&#8217;t need
-to know that much about <code>other-window</code> - after all invoking the
-command one time will take you to the other window and invoking it a
-second time will take you back to the window you were originally
-in. I, however, often employ 3 or windows (blessed be the people who
-made huge LCD displays so cheap) and I really dislike having to type
-<code>C-u -1 C-x o</code> (or <code>C-- C-x o</code>, <code>M--1 C-x o</code> or <code>M-- C-x o</code> for that
-matter) to go back to the previous window. To alleviate that
-particular nuisance I utilize the following little trick:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-x O&quot;</span><span class="p">)</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
-</span><span class='line'>                                <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>                                <span class="p">(</span><span class="nv">other-window</span> <span class="mi">-1</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now pressing <code>C-x O</code> (that&#8217;s not a zero, it&#8217;s a capital <code>o</code>) will
-always take me to the previous window, no matter how many windows are
-currently present.</p>
-
-<p>The <code>C-x O</code> keybinding is available out-of-the-box in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -819,6 +829,10 @@ currently present.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/30/crux/">crux</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/super-save/">super-save</a>
       </li>
     
@@ -832,10 +846,6 @@ currently present.</p>
     
       <li class="post">
         <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the first Emacs book in over a decade) is out</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/16/learning-emacs-lisp/">Learning Emacs Lisp</a>
       </li>
     
   </ul>
