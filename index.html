@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="For the longest time Prelude
-included the function prelude-goto-symbol (bound to C-c i).
-It basically allowed you to jump to any definition in the &hellip;">
+  <meta name="description" content="By default in Emacs the Tab key does only indentation. If some major
+mode provides completion of some form, you normally have to trigger it
+with M- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,63 @@ It basically allowed you to jump to any definition in the &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-31T09:02:00+02:00" pubdate data-updated="true">Jan 31<span>st</span>, 2016</time>
+        
+         | <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>By default in Emacs the <code>Tab</code> key does only indentation. If some major
+mode provides completion of some form, you normally have to trigger it
+with <code>M-Tab</code>. In most window managers, however, this keybinding is used to
+switch between open windows, which makes it a bit hard to use out of the box.</p>
+
+<p>There&#8217;s a simple trick to augment the default <code>Tab</code> behavior. Just put
+this in your Emacs config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">tab-always-indent</span> <span class="err">‘</span><span class="nv">complete</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, when you press <code>Tab</code> one time it will indent and if you press it
+again you&#8217;ll get completion candidates. If the indentation at point is
+already correct you&#8217;ll get the completion candidates right away. As an
+added bonus - you don&#8217;t really need <code>M-Tab</code> anymore.</p>
+
+<p>Simple and neat! One really has to wonder why this isn&#8217;t the default
+behavior.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -700,50 +757,6 @@ time well spent!</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/16/pragmatic-emacs/">Pragmatic Emacs</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-16T14:29:00+03:00" pubdate data-updated="true">May 16<span>th</span>, 2015</time>
-        
-         | <a href="/blog/2015/05/16/pragmatic-emacs/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I recently noticed a new blog targeting beginner and intermediate
-Emacs users - <a href="http://pragmaticemacs.com/">Pragmatic Emacs</a> by
-<a href="http://www.bristol.ac.uk/physics/people/ben-j-maughan/overview.html">Ben Maughan</a>.</p>
-
-<p>If you&#8217;re relatively new to Emacs you should definitely check it
-out. Knowing how vast the Emacs ecosystem is, I&#8217;m pretty sure that
-more experienced Emacs users will also learn a thing or two there.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -765,6 +778,10 @@ more experienced Emacs users will also learn a thing or two there.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
       </li>
     
@@ -778,10 +795,6 @@ more experienced Emacs users will also learn a thing or two there.</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/crux/">crux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/super-save/">super-save</a>
       </li>
     
   </ul>

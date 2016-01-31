@@ -9,12 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Next Monday (19.05.2014) I&#8217;ll take part in
-Sacha Chua&#8217;s
-Emacs Chat series. Join us
-at
-Google Hangouts
-and feel free to ask me anything &hellip;">
+  <meta name="description" content="I guess everyone has seen the following warning (at some point or
+another) when trying to open a relatively large file in Emacs: 1
+File foo.bar is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +81,73 @@ and feel free to ask me anything &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/16/opening-large-files/">Opening Large Files</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-16T12:37:00+03:00" pubdate data-updated="true">May 16<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/16/opening-large-files/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I guess everyone has seen the following warning (at some point or
+another) when trying to open a relatively large file in Emacs:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>File foo.bar is large (XX.XM), really open?</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By default Emacs will display this warning for every file bigger than
+10MB, which is quite annoying (conservative), especially given the
+fact that on any modern computer even much bigger files will be loaded
+almost instantaneously and won&#8217;t slow down Emacs significantly.</p>
+
+<p>You can adjust this behavior by altering the value of the
+<code>large-file-warning-threshold</code> variable. I&#8217;d suggest setting it to
+something like 100MB:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; warn when opening files bigger than 100MB</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">large-file-warning-threshold</span> <span class="mi">100000000</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Alternative, you can set it to <code>nil</code>, which will suppress the
+warning permanently, regardless of the size of the file you&#8217;re trying to open.</p>
+
+<p><strong>P.S.</strong> By the way, it&#8217;s not particularly wise to edit <strong>huge</strong> files
+(say bigger than 1GB) in Emacs directly.  If you need to do something
+like this I&#8217;d suggest taking a look at the excellent
+<a href="https://github.com/m00natic/vlfi">vlfi</a> package.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -849,57 +913,6 @@ preference I guess. But it&#8217;s good to have options, right?</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/11/a-peek-at-emacs-24-dot-4-srgb-colours-on-os-x/">A Peek at Emacs 24.4: sRGB Colours on OS X</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-11T13:40:00+02:00" pubdate data-updated="true">Jan 11<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/01/11/a-peek-at-emacs-24-dot-4-srgb-colours-on-os-x/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A while ago I wrote about a
-<a href="http://emacsredux.com/blog/2013/08/21/color-themes-redux/">colour theme problem specific to OS X</a>.
-Thankfully in Emacs 24.4 the OS X (a.k.a. NS) port of Emacs uses sRGB
-colours by default (at least on OS X Lion (10.7) and newer), so you&#8217;ll
-no longer need to install Emacs from <code>homebrew</code> (or apply an sRGB
-colour support patch manually). If for some reason you want to stick
-to the colours add this to your Emacs config:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">ns-use-srgb-colorspace</span> <span class="no">nil</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I doubt that anyone would want to do that, but the option is there for those of you who want it.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -923,6 +936,10 @@ to the colours add this to your Emacs config:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
       </li>
     
@@ -936,10 +953,6 @@ to the colours add this to your Emacs config:</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/crux/">crux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/super-save/">super-save</a>
       </li>
     
   </ul>

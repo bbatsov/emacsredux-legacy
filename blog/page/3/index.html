@@ -9,11 +9,11 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="I&#8217;ve started working on a community
-Emacs Lisp style guide.
-My goal is to create a comprehensive document similar to the
-Clojure and
-Ruby &hellip;">
+  <meta name="description" content="Emacs 24.4 is finally out! You can read about all the new features
+here. I&#8217;ve
+published
+a series of articles
+about some of the more interesting &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,53 @@ Ruby &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/21/emacs-24-dot-4/">Emacs 24.4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-21T17:36:00+03:00" pubdate data-updated="true">Oct 21<span>st</span>, 2014</time>
+        
+         | <a href="/blog/2014/10/21/emacs-24-dot-4/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs 24.4 <a href="http://lists.gnu.org/archive/html/emacs-devel/2014-10/msg00713.html">is finally out</a>!</p>
+
+<p>You can read about all the new features
+<a href="http://www.gnu.org/software/emacs/news/NEWS.24.4">here</a>.  I&#8217;ve
+published
+<a href="http://emacsredux.com/blog/2013/12/31/a-peek-at-emacs-24-dot-4/">a series of articles</a>
+about some of the more interesting features.</p>
+
+<p>In related news - the Emacs Mac Port based on 24.4
+<a href="https://lists.gnu.org/archive/html/emacs-devel/2014-10/msg00725.html">has also been released</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -931,73 +978,6 @@ help fork and improve the
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/16/opening-large-files/">Opening Large Files</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-16T12:37:00+03:00" pubdate data-updated="true">May 16<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/05/16/opening-large-files/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I guess everyone has seen the following warning (at some point or
-another) when trying to open a relatively large file in Emacs:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>File foo.bar is large (XX.XM), really open?</span></code></pre></td></tr></table></div></figure>
-
-
-<p>By default Emacs will display this warning for every file bigger than
-10MB, which is quite annoying (conservative), especially given the
-fact that on any modern computer even much bigger files will be loaded
-almost instantaneously and won&#8217;t slow down Emacs significantly.</p>
-
-<p>You can adjust this behavior by altering the value of the
-<code>large-file-warning-threshold</code> variable. I&#8217;d suggest setting it to
-something like 100MB:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; warn when opening files bigger than 100MB</span>
-</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">large-file-warning-threshold</span> <span class="mi">100000000</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Alternative, you can set it to <code>nil</code>, which will suppress the
-warning permanently, regardless of the size of the file you&#8217;re trying to open.</p>
-
-<p><strong>P.S.</strong> By the way, it&#8217;s not particularly wise to edit <strong>huge</strong> files
-(say bigger than 1GB) in Emacs directly.  If you need to do something
-like this I&#8217;d suggest taking a look at the excellent
-<a href="https://github.com/m00natic/vlfi">vlfi</a> package.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1021,6 +1001,10 @@ like this I&#8217;d suggest taking a look at the excellent
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
       </li>
     
@@ -1034,10 +1018,6 @@ like this I&#8217;d suggest taking a look at the excellent
     
       <li class="post">
         <a href="/blog/2016/01/30/crux/">crux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/super-save/">super-save</a>
       </li>
     
   </ul>

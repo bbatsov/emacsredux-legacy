@@ -9,10 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Some time ago I showed you how to do
-Google queries from Emacs. The
-approach used in that articles is pretty generic and can be used for
-the creation &hellip;">
+  <meta name="description" content="Often the code you&#8217;re writing would be depending on the version of
+some external tool (say git) or Emacs itself. Version checks in Emacs are &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +80,74 @@ the creation &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/05/version-checks/">Version Checks</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-05T14:25:00+03:00" pubdate data-updated="true">Sep 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/05/version-checks/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Often the code you&#8217;re writing would be depending on the version of
+some external tool (say <code>git</code>) or Emacs itself. Version checks in Emacs are pretty
+easy - just use the built-in functions <code>version=</code>, <code>version&lt;=</code> or <code>version=</code>.</p>
+
+<p>Let&#8217;s illustrate this with an
+example. <a href="https://github.com/bbatsov/prelude">Prelude</a> requires at
+least GNU Emacs 24.1 to run and on startup it performs the following
+check:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">version&lt;</span> <span class="nv">emacs-version</span> <span class="s">&quot;24.1&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">error</span> <span class="s">&quot;Prelude requires at least GNU Emacs 24.1&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Simple and effective. The <code>version</code> functions are pretty smart and recognize most popular version formats correctly.
+Note that version string &#8220;1&#8221; is equal to &#8220;1.0&#8221;, &#8220;1.0.0&#8221;, &#8220;1.0.0.0&#8221;,
+etc.  That is, the trailing &#8220;.0&#8221;s are insignificant.  Also, version
+string &#8220;1&#8221; is higher (newer) than &#8220;1pre&#8221;, which is higher than &#8220;1beta&#8221;,
+which is higher than &#8220;1alpha&#8221;.  Also, &#8220;-CVS&#8221; and &#8220;-NNN&#8221; are treated
+as alpha versions.</p>
+
+<p>If you&#8217;re writing an Emacs package you can also add an explicit Emacs version dependency in the packge metadata:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; Package-Requires: ((emacs &quot;24.1&quot;))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That way users of older Emacsen would not see a version of your package targeting newer Emacsen.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -991,92 +1057,6 @@ itself when <code>M-x prelude-update</code> is invoked.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/21/eval-and-replace/">Eval and Replace</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-21T12:35:00+03:00" pubdate data-updated="true">Jun 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/21/eval-and-replace/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Sometimes people tend to overlook how well Emacs and Emacs Lisp are
-integrated. Basically there is no limit to the places where you can
-evaluate a bit of Emacs Lisp and reap the associated benefits. From
-time to time I find myself editing something and thinking - &#8220;Hey, it&#8217;d
-be really great of I could just insert the result of some Emacs Lisp
-expression at point!&#8221; (my thoughts are pretty crazy, right?). Here&#8217;s a
-contrived example - I might have to enter somewhere the result of
-<code>1984 / 16</code>. I can calculate that manually or I can fire up <code>M-x calc</code>
-and get the result, or I can play extra smart and devise the following
-command (which I did not actually devise - I&#8217;m pretty sure I saw it
-in someone else&#8217;s config a while back):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">eval-and-replace</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Replace the preceding sexp with its value.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">backward-kill-sexp</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">condition-case</span> <span class="no">nil</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">prin1</span> <span class="p">(</span><span class="nb">eval</span> <span class="p">(</span><span class="nb">read</span> <span class="p">(</span><span class="nv">current-kill</span> <span class="mi">0</span><span class="p">)))</span>
-</span><span class='line'>             <span class="p">(</span><span class="nv">current-buffer</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">error</span> <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Invalid expression&quot;</span><span class="p">)</span>
-</span><span class='line'>           <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nv">current-kill</span> <span class="mi">0</span><span class="p">)))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Let&#8217;s bind that to <code>C-c e</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c e&quot;</span><span class="p">)</span> <span class="ss">&#39;eval-and-replace</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now in the buffer I&#8217;m currently editing I can type <code>(/ 1984 16)</code> and
-press <code>C-c e</code> afterwards getting the result <code>124</code> replace the original
-expression. Pretty neat!</p>
-
-<p>I&#8217;ll leave it up to you to think of more creative applications of the command.</p>
-
-<p>This command is part of
-<a href="https://github.com/bbatsov/prelude">Prelude</a>(it&#8217;s named
-<code>prelude-eval-and-replace</code> there).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -1100,6 +1080,10 @@ expression. Pretty neat!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
       </li>
     
@@ -1113,10 +1097,6 @@ expression. Pretty neat!</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/crux/">crux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/super-save/">super-save</a>
       </li>
     
   </ul>

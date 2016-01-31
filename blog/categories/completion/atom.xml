@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: completion | Emacs Redux]]></title>
+  <link href="http://emacsredux.com/blog/categories/completion/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2016-01-31T09:10:32+02:00</updated>
+  <id>http://emacsredux.com/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Use Tab to Indent or Complete]]></title>
+    <link href="http://emacsredux.com/blog/2016/01/31/use-tab-to-indent-or-complete/"/>
+    <updated>2016-01-31T09:02:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/01/31/use-tab-to-indent-or-complete</id>
+    <content type="html"><![CDATA[<p>By default in Emacs the <code>Tab</code> key does only indentation. If some major
+mode provides completion of some form, you normally have to trigger it
+with <code>M-Tab</code>. In most window managers, however, this keybinding is used to
+switch between open windows, which makes it a bit hard to use out of the box.</p>
+
+<p>There's a simple trick to augment the default <code>Tab</code> behavior. Just put
+this in your Emacs config:</p>
+
+<p><code>cl
+(setq tab-always-indent ‘complete)
+</code></p>
+
+<p>Now, when you press <code>Tab</code> one time it will indent and if you press it
+again you'll get completion candidates. If the indentation at point is
+already correct you'll get the completion candidates right away. As an
+added bonus - you don't really need <code>M-Tab</code> anymore.</p>
+
+<p>Simple and neat! One really has to wonder why this isn't the default
+behavior.</p>
+]]></content>
+  </entry>
+  
+</feed>

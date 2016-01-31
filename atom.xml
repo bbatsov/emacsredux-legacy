@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-01-30T12:51:25+02:00</updated>
+  <updated>2016-01-31T09:10:32+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Use Tab to Indent or Complete]]></title>
+    <link href="http://emacsredux.com/blog/2016/01/31/use-tab-to-indent-or-complete/"/>
+    <updated>2016-01-31T09:02:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/01/31/use-tab-to-indent-or-complete</id>
+    <content type="html"><![CDATA[<p>By default in Emacs the <code>Tab</code> key does only indentation. If some major
+mode provides completion of some form, you normally have to trigger it
+with <code>M-Tab</code>. In most window managers, however, this keybinding is used to
+switch between open windows, which makes it a bit hard to use out of the box.</p>
+
+<p>There&#8217;s a simple trick to augment the default <code>Tab</code> behavior. Just put
+this in your Emacs config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">tab-always-indent</span> <span class="err">‘</span><span class="nv">complete</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, when you press <code>Tab</code> one time it will indent and if you press it
+again you&#8217;ll get completion candidates. If the indentation at point is
+already correct you&#8217;ll get the completion candidates right away. As an
+added bonus - you don&#8217;t really need <code>M-Tab</code> anymore.</p>
+
+<p>Simple and neat! One really has to wonder why this isn&#8217;t the default
+behavior.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[imenu-anywhere]]></title>
@@ -822,24 +850,6 @@ commands. With <code>info</code> you&#8217;ll have to type the following:</p>
 <p>Now you don&#8217;t have any excuses not to contribute to Emacs!</p>
 
 <p>If you&#8217;re wondering where to start I&#8217;d suggest taking a look at <a href="http://lars.ingebrigtsen.no/2014/11/13/welcome-new-emacs-developers/">this short article</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Emacs 24.4]]></title>
-    <link href="http://emacsredux.com/blog/2014/10/21/emacs-24-dot-4/"/>
-    <updated>2014-10-21T17:36:00+03:00</updated>
-    <id>http://emacsredux.com/blog/2014/10/21/emacs-24-dot-4</id>
-    <content type="html"><![CDATA[<p>Emacs 24.4 <a href="http://lists.gnu.org/archive/html/emacs-devel/2014-10/msg00713.html">is finally out</a>!</p>
-
-<p>You can read about all the new features
-<a href="http://www.gnu.org/software/emacs/news/NEWS.24.4">here</a>.  I&#8217;ve
-published
-<a href="http://emacsredux.com/blog/2013/12/31/a-peek-at-emacs-24-dot-4/">a series of articles</a>
-about some of the more interesting features.</p>
-
-<p>In related news - the Emacs Mac Port based on 24.4
-<a href="https://lists.gnu.org/archive/html/emacs-devel/2014-10/msg00725.html">has also been released</a>.</p>
 ]]></content>
   </entry>
   

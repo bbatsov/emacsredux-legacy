@@ -9,9 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="As a continuation of our previous topic of
-indenting a buffer or a region,
-this time around I&#8217;ll show you how to indent a single defun(Emacs &hellip;">
+  <meta name="description" content="Wouldn&#8217;t it be cool to be able to invoke a Google search from the
+comfort of your beloved text editor? Here&#8217;s a couple of use-cases. You &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,82 @@ this time around I&#8217;ll show you how to indent a single defun(Emacs &hellip;
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/28/google/">Google</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-28T14:32:00+02:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/28/google/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Wouldn&#8217;t it be cool to be able to invoke a Google search from the
+comfort of your beloved text editor? Here&#8217;s a couple of use-cases. You
+may wish to Google the selected region or to be prompted to enter a
+query manually. Apart from cool it&#8217;s also pretty simple to add such a
+feature to Emacs.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">google</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Google the selected region if any, display a query prompt otherwise.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">browse-url</span>
+</span><span class='line'>   <span class="p">(</span><span class="nv">concat</span>
+</span><span class='line'>    <span class="s">&quot;http://www.google.com/search?ie=utf-8&amp;oe=utf-8&amp;q=&quot;</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="p">(</span><span class="k">if</span> <span class="nv">mark-active</span>
+</span><span class='line'>         <span class="p">(</span><span class="nv">buffer-substring</span> <span class="p">(</span><span class="nv">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nv">region-end</span><span class="p">))</span>
+</span><span class='line'>       <span class="p">(</span><span class="nv">read-string</span> <span class="s">&quot;Google: &quot;</span><span class="p">))))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This command will display the query results in your default browser.</p>
+
+<p>I&#8217;d suggest binding the command to <code>C-c g</code> if you plan to use it regularly.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c g&quot;</span><span class="p">)</span> <span class="ss">&#39;google</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>google</code> is available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
+prefix).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -747,6 +822,10 @@ that I&#8217;ve uncovered many interesting things to share with you.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
       </li>
     
@@ -760,10 +839,6 @@ that I&#8217;ve uncovered many interesting things to share with you.</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/crux/">crux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/super-save/">super-save</a>
       </li>
     
   </ul>

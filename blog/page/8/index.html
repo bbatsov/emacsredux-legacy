@@ -9,8 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Emacs has two helpful features, called auto-backup and
-auto-save(or at least I call them this way). Auto-backup is triggered when you save a file - &hellip;">
+  <meta name="description" content="Good developers are very careful about the proper use of
+whitespace in their files - there should be no empty lines at the
+beginning of a file, no &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,118 @@ auto-save(or at least I call them this way). Auto-backup is triggered when you s
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/16/whitespace-cleanup/">Whitespace Cleanup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-16T17:30:00+03:00" pubdate data-updated="true">May 16<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/16/whitespace-cleanup/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Good developers are very careful about the proper use of
+whitespace in their files - there should be no empty lines at the
+beginning of a file, no empty lines at the end of a file, no trailing
+whitespace, no mixture of tabs and spaces, etc.</p>
+
+<p>Emacs, naturally, wants to help with every problem possible and
+provides a very nice solution in the form of the <code>whitespace-cleanup</code>
+command. It&#8217;s a much more powerful alternative to the older
+<code>delete-trailing-whitespace</code> command, that simply deletes trailing
+whitespace, and it&#8217;s aware of the <code>whitespace-style</code> variable, used by <code>whitespace-mode</code>.</p>
+
+<p>It usually applies to the whole buffer, but in <code>transient-mark-mode</code>
+when the mark is active, it applies to the region.  It also
+applies to the region when it is not in transient mark mode, the
+mark is active and <code>C-u</code> was pressed just before
+calling <code>whitespace-cleanup</code> interactively. There is also a similar
+command called <code>whitespace-cleanup-region</code>.</p>
+
+<p>The problems cleaned up are (borrowed from the official documentation):</p>
+
+<ol>
+<li><p>Empty lines at beginning of buffer.</p></li>
+<li><p>Empty lines at end of buffer.
+If <code>whitespace-style</code> includes the value <code>empty</code>, remove all
+empty lines at beginning and/or end of buffer.</p></li>
+<li><p>8 or more SPACEs at beginning of line.
+If <code>whitespace-style</code> includes the value <code>indentation</code>:
+replace 8 or more SPACEs at beginning of line by TABs, if
+<code>indent-tabs-mode</code> is non-nil; otherwise, replace TABs by
+SPACEs.
+If <code>whitespace-style</code> includes the value <code>indentation::tab</code>,
+replace 8 or more SPACEs at beginning of line by TABs.
+If <code>whitespace-style</code> includes the value <code>indentation::space</code>,
+replace TABs by SPACEs.</p></li>
+<li><p>SPACEs before TAB.
+If <code>whitespace-style</code> includes the value <code>space-before-tab</code>:
+replace SPACEs by TABs, if <code>indent-tabs-mode</code> is non-nil;
+otherwise, replace TABs by SPACEs.
+If <code>whitespace-style</code> includes the value
+<code>space-before-tab::tab</code>, replace SPACEs by TABs.
+If <code>whitespace-style</code> includes the value
+<code>space-before-tab::space</code>, replace TABs by SPACEs.</p></li>
+<li><p>SPACEs or TABs at end of line.
+If <code>whitespace-style</code> includes the value <code>trailing</code>, remove
+all SPACEs or TABs at end of line.</p></li>
+<li><p>8 or more SPACEs after TAB.
+If <code>whitespace-style</code> includes the value <code>space-after-tab</code>:
+replace SPACEs by TABs, if <code>indent-tabs-mode</code> is non-nil;
+otherwise, replace TABs by SPACEs.
+If <code>whitespace-style</code> includes the value
+<code>space-after-tab::tab</code>, replace SPACEs by TABs.
+If <code>whitespace-style</code> includes the value
+<code>space-after-tab::space</code>, replace TABs by SPACEs.</p></li>
+</ol>
+
+
+<p>It might be a good idea to add <code>whitespace-cleanup</code> to your
+<code>before-save-hook</code> so that every buffer would be cleaned up before it&#8217;s saved:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;before-save-hook</span> <span class="ss">&#39;whitespace-cleanup</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For programming languages that rely on tabs being tabs you should
+enable <code>indent-tabs-mode</code> (as noted above). Here&#8217;s an example for
+<code>makefile-mode</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;makefile-mode-hook</span> <span class="ss">&#39;indent-tabs-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/bbatsov/prelude">Prelude</a> adds
+<code>whitespace-cleanup</code> to <code>before-save-hook</code> by default.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -835,132 +948,6 @@ out of the box for programming modes that make use of <code>CamelCase</code>.</p
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/21/edit-files-as-root/">Edit Files as Root</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-21T10:03:00+03:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/21/edit-files-as-root/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One area where Emacs traditionally falls short by default is editing
-files that require <code>root</code> permissions. Since most Emacs users just use
-a single Emacs frame they never leave, they have the problem of having
-started it with their current user&#8217;s privileges(and it&#8217;s unlikely this
-user is <code>root</code>). In this post I&#8217;ll describe two ways to alleviate that
-particular problem (note that <code>emacsclient</code> users have other options
-to pick from as well - one is mentioned at the very end of the post).</p>
-
-<p>Here&#8217;s <strong>Option A</strong> - a simple command that allows you to reopen the
-currently visited file with root permissions(obtained via <code>tramp</code> and
-<code>sudo</code>) and prompts you for a file name if you&#8217;re not currently
-visiting a file or supply a prefix argument:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">sudo-edit</span> <span class="p">(</span><span class="k">&amp;optional</span> <span class="nv">arg</span><span class="p">)</span>
-</span><span class='line'>  <span class="s">&quot;Edit currently visited file as root.</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">With a prefix ARG prompt for a file to visit.</span>
-</span><span class='line'><span class="s">Will also prompt for a file to visit if current</span>
-</span><span class='line'><span class="s">buffer is not visiting a file.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">arg</span> <span class="p">(</span><span class="nb">not</span> <span class="nv">buffer-file-name</span><span class="p">))</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">find-file</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;/sudo:root@localhost:&quot;</span>
-</span><span class='line'>                         <span class="p">(</span><span class="nv">ido-read-file-name</span> <span class="s">&quot;Find file(as root): &quot;</span><span class="p">)))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">find-alternate-file</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;/sudo:root@localhost:&quot;</span> <span class="nv">buffer-file-name</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I came across a similar command a few years back and it&#8217;s been pretty
-useful to me ever since. If you like it, I&#8217;d suggest binding it to <code>C-x
-C-r</code> (kind of like <code>find-file</code>&#8217;s binding <code>C-x C-f</code>).</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-x C-r&quot;</span><span class="p">)</span> <span class="ss">&#39;sudo-edit</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Option B</strong></p>
-
-<p>Lately I&#8217;ve decided that such a command is a bit of an overhead, since
-we can check the file permissions automatically anyways. While I&#8217;m not
-quite fond of advising commands (debugging advised commands is no
-fun) this was an excellent opportunity to exploit them (for great
-good):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">defadvice</span> <span class="nv">ido-find-file</span> <span class="p">(</span><span class="nv">after</span> <span class="nv">find-file-sudo</span> <span class="nv">activate</span><span class="p">)</span>
-</span><span class='line'>  <span class="s">&quot;Find file as root if necessary.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">buffer-file-name</span>
-</span><span class='line'>               <span class="p">(</span><span class="nv">file-writable-p</span> <span class="nv">buffer-file-name</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">find-alternate-file</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;/sudo:root@localhost:&quot;</span> <span class="nv">buffer-file-name</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This advises <code>ido-find-file</code>(you might want to advise <code>find-file</code>
-instead if you&#8217;re not using <code>ido</code>) to reopen the selected file as
-root(you&#8217;ll be prompted for your <code>sudo</code> password) if you don&#8217;t have
-write permissions for it. Extremely cool!</p>
-
-<p>The first command has been part of
-<a href="https://github.com/bbatsov/prelude">Prelude</a> since forever. As of late,
-the <code>ido-find-file</code> advice is also present there and it
-generally voids the need for <code>sudo-edit</code>.</p>
-
-<p><strong>P.S.</strong></p>
-
-<p><code>emacsclient</code> users have it easy. They just need the following shell
-alias(I generally alias <code>e</code> to <code>emacsclient -t</code>):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">alias </span><span class="nv">E</span><span class="o">=</span><span class="s2">&quot;SUDO_EDITOR=\&quot;emacsclient -t -a emacs\&quot; sudoedit&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This should(will) finally save you from reaching for <code>vim</code> in the terminal.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -984,6 +971,10 @@ alias(I generally alias <code>e</code> to <code>emacsclient -t</code>):</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
       </li>
     
@@ -997,10 +988,6 @@ alias(I generally alias <code>e</code> to <code>emacsclient -t</code>):</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/crux/">crux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/super-save/">super-save</a>
       </li>
     
   </ul>
