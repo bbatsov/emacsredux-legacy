@@ -14,12 +14,16 @@ I happen to maintain a few Emacs related projects:
 * [Projectile](https://github.com/bbatsov/projectile) - Project Interaction Library for Emacs, that stays out of your way
 * [clojure-mode](https://github.com/clojure-emacs/clojure-mode) - A major mode for programming in Clojure
 * [cider](https://github.com/clojure-emacs/cider) - A Clojure programming environment for Emacs
+* [inf-clojure](https://github.com/clojure-emacs/inf-clojure) - Basic interaction with a Clojure subprocess
 * [guru-mode](https://github.com/bbatsov/guru-mode) - An annoying companion on your journey to Emacs mastery
 * [rubocop-emacs](https://github.com/bbatsov/projectile) - Emacs integration for [RuboCop](https://github.com/bbatsov/rubocop)
 * [zenburn-emacs](https://github.com/bbatsov/zenburn-emacs) - The Zenburn color theme, ported to Emacs
 * [solarized-emacs](https://github.com/bbatsov/solarized-emacs) - The Solarized color theme, ported to Emacs
+* [super-save](https://github.com/bbatsov/super-save) - Save your buffers when they lose focus
+* [crux](https://github.com/bbatsov/crux) - A collection of useful Emacs extensions
 * [puppet-mode](https://github.com/lunaryorn/puppet-mode) - A mode for editing Puppet 3 manifests
 * [swift-mode](https://github.com/chrisbarrett/swift-mode) - A mode for editing Swift code
+* [grizzl](https://github.com/grizzl/grizzl) - A fuzzy search index & completing-read for Emacs
 
 I was also the original maintainer of [WikEmacs](http://wikemacs.org) - a community documentation portal for Emacs.
 
