@@ -123,6 +123,14 @@ into a tiny global minor mode called
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>If you want to enable the additional feature of auto-saving buffers
+when Emacs is idle, add the following as well:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">super-save-auto-save-when-idle</span> <span class="no">t</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <p>If you&#8217;re like me and don&#8217;t care about the backups created by the
 built-in <code>auto-save-mode</code>, you can disable it aftewards:</p>
 
@@ -131,9 +139,7 @@ built-in <code>auto-save-mode</code>, you can disable it aftewards:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>I wouldn&#8217;t really recommend doing this until I&#8217;ve added a bit of
-functionality to save the current buffer when you&#8217;re not typing, but
-the option obviously exists. I&#8217;ve been using Emacs for over 10 years
+<p>I&#8217;ve been using Emacs for over 10 years
 now and I&#8217;ve never needed the auto-created backups - I&#8217;m either very
 lucky or this is less useful than it&#8217;s supposed to be.</p>
 </div>
