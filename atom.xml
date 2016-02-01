@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-01-31T12:21:41+02:00</updated>
+  <updated>2016-02-01T08:34:04+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Display the Keybinding for a Command with substitute-command-keys]]></title>
+    <link href="http://emacsredux.com/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/"/>
+    <updated>2016-02-01T08:23:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys</id>
+    <content type="html"><![CDATA[<p>If you ever need to show the keybinding for a particular command to
+the users of your package (e.g. you&#8217;re adding some tips
+functionality), you should avoid resisting the urge to write something like
+this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Press &lt;C-c p p&gt; to switch between projects.&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Why is this a bad idea? Because you might change the keybinding of the
+command in question (e.g. <code>projectile-switch-project</code>, but you might
+forget to update messages like this. Is there a better way?
+<code>substitute-command-keys</code> to the rescue:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">message</span> <span class="p">(</span><span class="nv">substitute-command-keys</span> <span class="s">&quot;Press &lt;\\[projectile-switch-project]&gt; to switch between projects&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will produce exactly the same message as before and you&#8217;re
+guaranteed the keybinding will always be in sync with the command.</p>
+
+<p>Neat!</p>
+
+<p>P.S. If you want to check interactively the keybinding of some command use <code>C-h f</code> (<code>describe-function</code>). Here&#8217;s
+an example - <code>C-h f RET projectile-switch-project RET</code> will produce this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="nv">projectile-switch-project</span> <span class="nv">is</span> <span class="nv">an</span> <span class="nv">interactive</span> <span class="nv">compiled</span> <span class="nv">Lisp</span> <span class="nv">function.</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">It</span> <span class="nv">is</span> <span class="nv">bound</span> <span class="nv">to</span> <span class="nv">C-c</span> <span class="nv">p</span> <span class="nv">p,</span> <span class="nv">s-p</span> <span class="nv">p,</span> <span class="nv">&lt;menu-bar&gt;</span> <span class="nv">&lt;tools&gt;</span> <span class="nv">&lt;Projectile&gt;</span> <span class="nv">&lt;Switch</span>
+</span><span class='line'><span class="nv">to</span> <span class="nv">project&gt;.</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">projectile-switch-project</span> <span class="k">&amp;optional</span> <span class="nv">ARG1</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can also check which command is bound to some key with <code>C-h k</code>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Use Tab to Indent or Complete]]></title>
@@ -842,20 +898,6 @@ commands. With <code>info</code> you&#8217;ll have to type the following:</p>
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Emacs's Development has Migrated to Git]]></title>
-    <link href="http://emacsredux.com/blog/2014/11/13/emacss-development-has-migrated-to-git/"/>
-    <updated>2014-11-13T15:19:00+02:00</updated>
-    <id>http://emacsredux.com/blog/2014/11/13/emacss-development-has-migrated-to-git</id>
-    <content type="html"><![CDATA[<p>The long wait is over - Emacs&#8217;s development
-<a href="https://lists.gnu.org/archive/html/emacs-devel/2014-11/msg00681.html">has finally migrated from bazaar to git</a>.</p>
-
-<p>Now you don&#8217;t have any excuses not to contribute to Emacs!</p>
-
-<p>If you&#8217;re wondering where to start I&#8217;d suggest taking a look at <a href="http://lars.ingebrigtsen.no/2014/11/13/welcome-new-emacs-developers/">this short article</a>.</p>
 ]]></content>
   </entry>
   

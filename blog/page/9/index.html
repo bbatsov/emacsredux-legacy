@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="One area where Emacs traditionally falls short by default is editing
-files that require root permissions. Since most Emacs users just use
-a single &hellip;">
+  <meta name="description" content="One common hurdle Emacs users experience when hacking in Emacs is that
+many programming languages use CamelCase for class names, method
+names, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,77 @@ a single &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/21/camelcase-aware-editing/">CamelCase Aware Editing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-21T12:52:00+03:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/21/camelcase-aware-editing/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One common hurdle Emacs users experience when hacking in Emacs is that
+many programming languages use <code>CamelCase</code> for class names, method
+names, identifiers, etc, but Emacs (unlike most IDEs) doesn&#8217;t treat
+CamelCase words the same special way it treats <code>lisp-case</code> and <code>snake_case</code>
+words. Let me illustrate this with an example.</p>
+
+<p>If you invoke <code>kill-word</code>(<code>M-d</code>) when your cursor is before
+<code>lisp-case</code> this would kill just <code>lisp</code> and leave you with <code>-case</code>. If
+you do the same with <code>CamelCase</code> the entire &#8220;word&#8221; CamelCase will be
+killed. Same goes for navigation-by-word commands like <code>forward-word</code>,
+<code>backward-word</code>, etc - they are aware of the subwords that comprise a
+<code>lisp-case</code> or a <code>snake_case</code> word, but are oblivious to
+<code>CamelCase</code>. So, what can we do? The answer is surprisingly simple -
+just use the built-in minor mode <code>subword-mode</code> (formerly known as
+<code>c-subword-mode</code>).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; enable just in ruby-mode</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;ruby-mode-hook</span> <span class="ss">&#39;subword-mode</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; enable for all programming modes</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;subword-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At this point you can try again <code>kill-word</code> before <code>CamelCase</code>. Only
+<code>Camel</code> is killed now. Sweet!</p>
+
+<p><a href="https://github.com/bbatsov/prelude">Prelude</a> enables <code>subword-mode</code>
+out of the box for programming modes that make use of <code>CamelCase</code>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -780,88 +851,6 @@ eggs you know of, that I haven&#8217;t mentioned.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/03/delete-file-and-buffer/">Delete File and Buffer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-03T12:24:00+03:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/03/delete-file-and-buffer/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>From time to time(most often when I refactor code) I need to
-quickly(this removes <code>dired</code> from the equation) delete a file and kill
-the buffer associated with it. Since most of the files I work with
-are under version control I can just use the tried and true <code>M-x
-vc-delete-file</code>. Unfortunately the command does not act on the current
-file and will prompt you for a file to delete. Looks like we need to
-create a simple wrapper around it to get the job done:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">delete-file-and-buffer</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Kill the current buffer and deletes the file it is visiting.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">filename</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="nv">filename</span>
-</span><span class='line'>      <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">vc-backend</span> <span class="nv">filename</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nv">vc-delete-file</span> <span class="nv">filename</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">(</span><span class="k">progn</span>
-</span><span class='line'>          <span class="p">(</span><span class="nb">delete-file</span> <span class="nv">filename</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Deleted file %s&quot;</span> <span class="nv">filename</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nv">kill-buffer</span><span class="p">))))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The wrapper is extra smart and will work on files that are not under
-version control as well! I&#8217;m pretty fond of commands that do what you
-mean instead of throwing errors. Now that we have this neat little
-command we should probably bind it to some each to press keys, like <code>C-c D</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c D&quot;</span><span class="p">)</span>  <span class="ss">&#39;delete-file-and-buffer</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As usual both the command and its keybinding are available in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -885,6 +874,10 @@ command we should probably bind it to some each to press keys, like <code>C-c D<
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a>
       </li>
     
@@ -898,10 +891,6 @@ command we should probably bind it to some each to press keys, like <code>C-c D<
     
       <li class="post">
         <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/crux/">crux</a>
       </li>
     
   </ul>

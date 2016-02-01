@@ -485,16 +485,22 @@
         <lastmod>2016-01-31T09:10:03+02:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://emacsredux.com/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/
+        </loc>
+        <lastmod>2016-02-01T08:33:46+02:00</lastmod>
+    </url>
+    <url>
         <loc>http://emacsredux.com/about/</loc>
         <lastmod>2016-01-31T09:52:57+02:00</lastmod>
     </url>
     <url>
         <loc>http://emacsredux.com/blog/archives/</loc>
-        <lastmod>2016-01-31T12:20:57+02:00</lastmod>
+        <lastmod>2016-02-01T08:33:46+02:00</lastmod>
     </url>
     <url>
         <loc>http://emacsredux.com/</loc>
-        <lastmod>2016-01-31T12:20:57+02:00</lastmod>
+        <lastmod>2016-02-01T08:33:46+02:00</lastmod>
     </url>
     <url>
         <loc>http://emacsredux.com/robots.txt</loc>

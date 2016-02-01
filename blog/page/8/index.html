@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Good developers are very careful about the proper use of
-whitespace in their files - there should be no empty lines at the
-beginning of a file, no &hellip;">
+  <meta name="description" content="One of the files Emacs users often edit is init.el(especially if they
+are having all of their configuration inside of it). It might be
+sensible then &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,71 @@ beginning of a file, no &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/18/instant-access-to-init-dot-el/">Instant Access to init.el</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T19:00:00+03:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/18/instant-access-to-init-dot-el/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of the files Emacs users often edit is <code>init.el</code>(especially if they
+are having all of their configuration inside of it). It might be
+sensible then to develop a faster way to access <code>init.el</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">find-user-init-file</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Edit the `user-init-file&#39;, in another window.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">find-file-other-window</span> <span class="nv">user-init-file</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>user-init-file</code> holds the path to your <code>init.el</code>. For mine its value
+is <code>/Users/bozhidar/.emacs.d/init.el</code>. <code>find-file-other-window</code> will
+open the file in a window adjacent to the one you&#8217;re currently in.</p>
+
+<p>Short and sweet! You might want to bind it to some keycombo:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c I&quot;</span><span class="p">)</span> <span class="ss">&#39;find-user-init-file</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>P.S.</strong> Thanks to <a href="https://github.com/lunaryorn">Sebastian Wiesner</a> for
+bringing this tip to my attention!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -877,77 +942,6 @@ editor.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/21/camelcase-aware-editing/">CamelCase Aware Editing</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-21T12:52:00+03:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/21/camelcase-aware-editing/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One common hurdle Emacs users experience when hacking in Emacs is that
-many programming languages use <code>CamelCase</code> for class names, method
-names, identifiers, etc, but Emacs (unlike most IDEs) doesn&#8217;t treat
-CamelCase words the same special way it treats <code>lisp-case</code> and <code>snake_case</code>
-words. Let me illustrate this with an example.</p>
-
-<p>If you invoke <code>kill-word</code>(<code>M-d</code>) when your cursor is before
-<code>lisp-case</code> this would kill just <code>lisp</code> and leave you with <code>-case</code>. If
-you do the same with <code>CamelCase</code> the entire &#8220;word&#8221; CamelCase will be
-killed. Same goes for navigation-by-word commands like <code>forward-word</code>,
-<code>backward-word</code>, etc - they are aware of the subwords that comprise a
-<code>lisp-case</code> or a <code>snake_case</code> word, but are oblivious to
-<code>CamelCase</code>. So, what can we do? The answer is surprisingly simple -
-just use the built-in minor mode <code>subword-mode</code> (formerly known as
-<code>c-subword-mode</code>).</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; enable just in ruby-mode</span>
-</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;ruby-mode-hook</span> <span class="ss">&#39;subword-mode</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">;; enable for all programming modes</span>
-</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;subword-mode</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>At this point you can try again <code>kill-word</code> before <code>CamelCase</code>. Only
-<code>Camel</code> is killed now. Sweet!</p>
-
-<p><a href="https://github.com/bbatsov/prelude">Prelude</a> enables <code>subword-mode</code>
-out of the box for programming modes that make use of <code>CamelCase</code>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -971,6 +965,10 @@ out of the box for programming modes that make use of <code>CamelCase</code>.</p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a>
       </li>
     
@@ -984,10 +982,6 @@ out of the box for programming modes that make use of <code>CamelCase</code>.</p
     
       <li class="post">
         <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/crux/">crux</a>
       </li>
     
   </ul>

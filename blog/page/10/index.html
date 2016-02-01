@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="While programming(at least in some languages) I often find myself
-wishing to drag the current line a couple lines up or down. Emacs does
-have the &hellip;">
+  <meta name="description" content="From time to time(most often when I refactor code) I need to
+quickly(this removes dired from the equation) delete a file and kill
+the buffer &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,88 @@ have the &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/03/delete-file-and-buffer/">Delete File and Buffer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-03T12:24:00+03:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/03/delete-file-and-buffer/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>From time to time(most often when I refactor code) I need to
+quickly(this removes <code>dired</code> from the equation) delete a file and kill
+the buffer associated with it. Since most of the files I work with
+are under version control I can just use the tried and true <code>M-x
+vc-delete-file</code>. Unfortunately the command does not act on the current
+file and will prompt you for a file to delete. Looks like we need to
+create a simple wrapper around it to get the job done:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">delete-file-and-buffer</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Kill the current buffer and deletes the file it is visiting.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">filename</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="nv">filename</span>
+</span><span class='line'>      <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">vc-backend</span> <span class="nv">filename</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nv">vc-delete-file</span> <span class="nv">filename</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="k">progn</span>
+</span><span class='line'>          <span class="p">(</span><span class="nb">delete-file</span> <span class="nv">filename</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Deleted file %s&quot;</span> <span class="nv">filename</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nv">kill-buffer</span><span class="p">))))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The wrapper is extra smart and will work on files that are not under
+version control as well! I&#8217;m pretty fond of commands that do what you
+mean instead of throwing errors. Now that we have this neat little
+command we should probably bind it to some each to press keys, like <code>C-c D</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c D&quot;</span><span class="p">)</span>  <span class="ss">&#39;delete-file-and-buffer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As usual both the command and its keybinding are available in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -760,56 +842,6 @@ add this line to your Emacs config to get to enjoy
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/28/network-utilities/">Network Utilities</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-28T18:56:00+02:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/28/network-utilities/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A little known feature of Emacs is that it provides basic wrappers
-from various command-line network utilities. Here&#8217;s a few Emacs
-commands for you to try out:</p>
-
-<ul>
-<li><code>M-x ping</code></li>
-<li><code>M-x telnet</code></li>
-<li><code>M-x dig</code></li>
-<li><code>M-x ifconfig</code></li>
-</ul>
-
-
-<p>Try to find as many related commands as you can!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -833,6 +865,10 @@ commands for you to try out:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a>
       </li>
     
@@ -846,10 +882,6 @@ commands for you to try out:</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/crux/">crux</a>
       </li>
     
   </ul>

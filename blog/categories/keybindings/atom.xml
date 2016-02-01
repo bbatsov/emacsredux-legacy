@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: keybindings | Emacs Redux]]></title>
+  <link href="http://emacsredux.com/blog/categories/keybindings/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2016-02-01T08:34:04+02:00</updated>
+  <id>http://emacsredux.com/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Display the Keybinding for a Command with substitute-command-keys]]></title>
+    <link href="http://emacsredux.com/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/"/>
+    <updated>2016-02-01T08:23:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys</id>
+    <content type="html"><![CDATA[<p>If you ever need to show the keybinding for a particular command to
+the users of your package (e.g. you're adding some tips
+functionality), you should avoid resisting the urge to write something like
+this:</p>
+
+<p><code>cl
+(message "Press &lt;C-c p p&gt; to switch between projects.")
+</code></p>
+
+<p>Why is this a bad idea? Because you might change the keybinding of the
+command in question (e.g. <code>projectile-switch-project</code>, but you might
+forget to update messages like this. Is there a better way?
+<code>substitute-command-keys</code> to the rescue:</p>
+
+<p><code>cl
+(message (substitute-command-keys "Press &lt;\\[projectile-switch-project]&gt; to switch between projects"))
+</code></p>
+
+<p>This will produce exactly the same message as before and you're
+guaranteed the keybinding will always be in sync with the command.</p>
+
+<p>Neat!</p>
+
+<p>P.S. If you want to check interactively the keybinding of some command use <code>C-h f</code> (<code>describe-function</code>). Here's
+an example - <code>C-h f RET projectile-switch-project RET</code> will produce this:</p>
+
+<p>```
+projectile-switch-project is an interactive compiled Lisp function.</p>
+
+<p>It is bound to C-c p p, s-p p, <menu-bar> <tools> <Projectile> <Switch
+to project>.</p>
+
+<p>(projectile-switch-project &amp;optional ARG1)</p>
+
+<p>...
+```</p>
+
+<p>You can also check which command is bound to some key with <code>C-h k</code>.</p>
+]]></content>
+  </entry>
+  
+</feed>
