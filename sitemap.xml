@@ -491,16 +491,22 @@
         <lastmod>2016-02-01T08:33:46+02:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://emacsredux.com/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/
+        </loc>
+        <lastmod>2016-02-07T11:44:45+02:00</lastmod>
+    </url>
+    <url>
         <loc>http://emacsredux.com/about/</loc>
         <lastmod>2016-01-31T09:52:57+02:00</lastmod>
     </url>
     <url>
         <loc>http://emacsredux.com/blog/archives/</loc>
-        <lastmod>2016-02-01T08:33:46+02:00</lastmod>
+        <lastmod>2016-02-07T11:44:45+02:00</lastmod>
     </url>
     <url>
         <loc>http://emacsredux.com/</loc>
-        <lastmod>2016-02-01T08:33:46+02:00</lastmod>
+        <lastmod>2016-02-07T11:44:45+02:00</lastmod>
     </url>
     <url>
         <loc>http://emacsredux.com/robots.txt</loc>

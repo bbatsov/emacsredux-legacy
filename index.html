@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="If you ever need to show the keybinding for a particular command to
-the users of your package (e.g. you&#8217;re adding some tips
-functionality), you &hellip;">
+  <meta name="description" content="One of the things I hate the most while programming, is having to
+manually adjust the indentation of some code, after I&#8217;ve moved or
+renamed &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,90 @@ functionality), you &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent Your Code With Aggressive-indent-mode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-02-07T11:28:00+02:00" pubdate data-updated="true">Feb 7<span>th</span>, 2016</time>
+        
+         | <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of the things I hate the most while programming, is having to
+manually adjust the indentation of some code, after I&#8217;ve moved or
+renamed something in it. While it&#8217;s pretty easy to do such re-indent
+operations using commands like <code>crux-indent-defun</code> or
+advices like <code>crux-with-region-or-buffer</code> (you remember,
+<a href="https://github.com/bbatsov/crux">crux</a>, right?), there&#8217;s an even more
+efficient way to tackle the issue at hand. Enter
+<a href="https://github.com/Malabarba/aggressive-indent-mode">aggressive-indent-mode</a>.</p>
+
+<p><code>aggressive-indent-mode</code>&#8217;s name is a bit of a misnomer - it should
+probably have been named <code>auto-indent-mode</code>, as this is what it
+does. When you edit your code it will adjust the indentation
+automatically. It&#8217;s easier to show this than to explain it.</p>
+
+<p>Here&#8217;s one example showing <code>agressive-indent-mode</code> enabled in <code>emacs-lisp-mode</code>:</p>
+
+<p><img src="https://raw.githubusercontent.com/Malabarba/aggressive-indent-mode/master/lisp-example.gif"></p>
+
+<p>And another example using <code>cc-mode</code>:</p>
+
+<p>{ %img https://raw.githubusercontent.com/Malabarba/aggressive-indent-mode/master/c-example.gif }</p>
+
+<p>Provided you&#8217;ve installed the mode, enabling it for particular major modes is a piece of cake:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-lisp-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">aggressive-indent-mode</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;clojure-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">aggressive-indent-mode</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;ruby-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">aggressive-indent-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to enable it in all major modes you can do this as well:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-aggressive-indent-mode</span> <span class="mi">1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that this is not going to work well with modes like <code>python-mode</code>
+and <code>haml-mode</code> where the proper indentation can&#8217;t be reliably
+determined.  When <code>global-aggressive-indent-mode</code> is enabled it will
+not affect major modes listed in <code>aggressive-indent-excluded-modes</code>.</p>
+
+<p>For more info - head over to the
+<a href="https://github.com/Malabarba/aggressive-indent-mode/blob/master/README.md">project&#8217;s readme</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -734,58 +818,6 @@ this party started!</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/">Mastering Emacs (the First Emacs Book in Over a Decade) Is Out</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-23T15:19:00+03:00" pubdate data-updated="true">May 23<span>rd</span>, 2015</time>
-        
-         | <a href="/blog/2015/05/23/mastering-emacs-the-first-emacs-book-in-over-a-decade-is-out/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://www.masteringemacs.org/about">Mickey Petersen</a> just released
-<a href="https://www.masteringemacs.org/book">Mastering Emacs</a>, the first new
-book about our beloved editor, since
-<a href="http://shop.oreilly.com/product/9780596006488.do">Learning GNU Emacs</a>(released
-way back in 2004).</p>
-
-<p><img src="/images/articles/mastering_emacs_cover.png"></p>
-
-<p>I haven&#8217;t had the time to read the book yet, but being familiar with
-Mickey&#8217;s work I have no doubt it&#8217;s outstanding.  That&#8217;s all from me
-for now - go buy the book and start mastering Emacs.</p>
-
-<p><strong>P.S.</strong></p>
-
-<p>I hope we won&#8217;t have to wait another decade for the next great Emacs book.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -807,6 +839,10 @@ for now - go buy the book and start mastering Emacs.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
       </li>
     
@@ -820,10 +856,6 @@ for now - go buy the book and start mastering Emacs.</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
       </li>
     
   </ul>

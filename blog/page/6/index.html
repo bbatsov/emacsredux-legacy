@@ -9,7 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="The popular flet macro was deprecated in Emacs 24.3 and replaced with two similar macros - cl-flet and cl-letf. flet was used to temporarily override &hellip;">
+  <meta name="description" content="Most Emacs users know that they can start dired (Emacs&#8217;s file
+browser) with M-x dired or C-x d. That would display a prompt in
+the minibuffer &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +81,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/24/dired-jump/">Dired Jump</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-24T17:53:00+03:00" pubdate data-updated="true">Sep 24<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/24/dired-jump/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Most Emacs users know that they can start <code>dired</code> (Emacs&#8217;s file
+browser) with <code>M-x dired</code> or <code>C-x d</code>. That would display a prompt in
+the minibuffer asking which directory to open with <code>dired</code> (the
+current directory will be suggested as a default).</p>
+
+<p>More often than not you&#8217;ll probably want <code>dired</code> to display the
+directory of file you&#8217;re currently editing. You might even want to
+have the cursor positioned over that very same file in the <code>dired</code>
+buffer. There&#8217;s a cool command that does exactly that -
+<code>dired-jump</code>. To use it you have to first load the built-in library
+<code>dired-x</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;dired-x</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can run the command with <code>C-x C-j</code> (<code>M-x dired-jump</code>). No prompts,
+no wasted time. You&#8217;re instantly teleported to the currently edited
+file&#8217;s position in a <code>dired</code> buffer.</p>
+
+<p>This command works out-of-the-box in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -940,65 +1002,6 @@ the command to get around that limitation:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/05/locate/">Locate</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-05T18:58:00+03:00" pubdate data-updated="true">Jul 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/05/locate/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><code>locate</code> is one extremely popular Unix command that allows you to
-search for files in a pre-built database.</p>
-
-<p>One little know fact is that Emacs provides a wrapper around the
-command you can invoke with <code>M-x locate</code>. You&#8217;ll be prompted to enter
-a search string and you&#8217;ll be presented with a list of matching
-filenames from <code>locate</code>&#8217;s database. Many of <code>dired</code> keybindings are
-available in the results buffer (which will be using <code>locate-mode</code> major mode).</p>
-
-<p>If you&#8217;d like you may change the command invoked by Emacs to supply the
-results by altering the <code>locate-command</code> variable. Here&#8217;s how you can
-start using OSX&#8217;s <code>mdfind</code> (the command-line interface to <code>Spotlight</code>)
-instead of <code>locate</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">locate-command</span> <span class="s">&quot;mdfind&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Obviously any command that takes a string argument and returns a list
-of files would do here. In all likelihood you&#8217;ll never want to use
-anything other than the default <code>locate</code> command, though.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -1022,6 +1025,10 @@ anything other than the default <code>locate</code> command, though.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
       </li>
     
@@ -1035,10 +1042,6 @@ anything other than the default <code>locate</code> command, though.</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
       </li>
     
   </ul>

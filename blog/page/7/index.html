@@ -9,9 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Emacs&#8217;s Lisp interpreter is able to interpret two kinds of code:
-humanly readable code (stored in files with .el extension) and
-machine &hellip;">
+  <meta name="description" content="locate is one extremely popular Unix command that allows you to
+search for files in a pre-built database. One little know fact is that Emacs provides &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,65 @@ machine &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/05/locate/">Locate</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-05T18:58:00+03:00" pubdate data-updated="true">Jul 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/05/locate/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><code>locate</code> is one extremely popular Unix command that allows you to
+search for files in a pre-built database.</p>
+
+<p>One little know fact is that Emacs provides a wrapper around the
+command you can invoke with <code>M-x locate</code>. You&#8217;ll be prompted to enter
+a search string and you&#8217;ll be presented with a list of matching
+filenames from <code>locate</code>&#8217;s database. Many of <code>dired</code> keybindings are
+available in the results buffer (which will be using <code>locate-mode</code> major mode).</p>
+
+<p>If you&#8217;d like you may change the command invoked by Emacs to supply the
+results by altering the <code>locate-command</code> variable. Here&#8217;s how you can
+start using OSX&#8217;s <code>mdfind</code> (the command-line interface to <code>Spotlight</code>)
+instead of <code>locate</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">locate-command</span> <span class="s">&quot;mdfind&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously any command that takes a string argument and returns a list
+of files would do here. In all likelihood you&#8217;ll never want to use
+anything other than the default <code>locate</code> command, though.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -914,71 +972,6 @@ and the beginning of the line when invoked.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/19/delete-whitespace-around-point/">Delete Whitespace Around Point</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-19T12:08:00+03:00" pubdate data-updated="true">May 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/05/19/delete-whitespace-around-point/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One task that often pops when editing text or code is the need to
-remove some extra whitespace around the point(the cursor). Emacs has your back!</p>
-
-<p>First, we have the command <code>delete-horizontal-space</code>(bound to <code>M-\</code>) -
-it deletes all spaces and tabs around the point. With a prefix
-argument(<code>C-u M-\</code>) the command deletes only the whitespace before the point.</p>
-
-<p>One similar, although a bit less known, command is
-<code>just-one-space</code>(bound to <code>M-SPC</code>) - it deletes all spaces and tabs
-around the point, leaving just one space (or <code>N</code> spaces if you supply <code>N</code> as a
-prefix argument like <code>C-4 M-SPC</code>). If <code>N</code> is negative, the command
-deletes newlines as well, leaving <code>-N</code> spaces.</p>
-
-<p>One minor snafu with <code>just-one-space</code> is that <code>M-SPC</code> is a no-go on
-OSX since just about everyone uses it for quick access to Spotlight or
-switching between languages. You might want to use a different
-keybinding like this one:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c j&quot;</span><span class="p">)</span> <span class="ss">&#39;just-one-space</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Personally, of the two commands I find <code>just-one-space</code> the more useful.</p>
-
-<p>In <a href="https://github.com/bbatsov/prelude">Prelude</a> <code>just-one-space</code> is
-additionally bound to the <code>kk</code>
-<a href="/blog/2013/04/28/execute-commands-ninja-style-with-key-chord-mode/">keychord</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -1002,6 +995,10 @@ additionally bound to the <code>kk</code>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
       </li>
     
@@ -1015,10 +1012,6 @@ additionally bound to the <code>kk</code>
     
       <li class="post">
         <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
       </li>
     
   </ul>

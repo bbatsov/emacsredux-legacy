@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-02-01T08:34:04+02:00</updated>
+  <updated>2016-02-07T11:45:28+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Auto-indent your code with aggressive-indent-mode]]></title>
+    <link href="http://emacsredux.com/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/"/>
+    <updated>2016-02-07T11:28:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode</id>
+    <content type="html"><![CDATA[<p>One of the things I hate the most while programming, is having to
+manually adjust the indentation of some code, after I&#8217;ve moved or
+renamed something in it. While it&#8217;s pretty easy to do such re-indent
+operations using commands like <code>crux-indent-defun</code> or
+advices like <code>crux-with-region-or-buffer</code> (you remember,
+<a href="https://github.com/bbatsov/crux">crux</a>, right?), there&#8217;s an even more
+efficient way to tackle the issue at hand. Enter
+<a href="https://github.com/Malabarba/aggressive-indent-mode">aggressive-indent-mode</a>.</p>
+
+<p><code>aggressive-indent-mode</code>&#8217;s name is a bit of a misnomer - it should
+probably have been named <code>auto-indent-mode</code>, as this is what it
+does. When you edit your code it will adjust the indentation
+automatically. It&#8217;s easier to show this than to explain it.</p>
+
+<p>Here&#8217;s one example showing <code>agressive-indent-mode</code> enabled in <code>emacs-lisp-mode</code>:</p>
+
+<p><img src="https://raw.githubusercontent.com/Malabarba/aggressive-indent-mode/master/lisp-example.gif"></p>
+
+<p>And another example using <code>cc-mode</code>:</p>
+
+<p>{ %img https://raw.githubusercontent.com/Malabarba/aggressive-indent-mode/master/c-example.gif }</p>
+
+<p>Provided you&#8217;ve installed the mode, enabling it for particular major modes is a piece of cake:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-lisp-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">aggressive-indent-mode</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;clojure-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">aggressive-indent-mode</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;ruby-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">aggressive-indent-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to enable it in all major modes you can do this as well:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-aggressive-indent-mode</span> <span class="mi">1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that this is not going to work well with modes like <code>python-mode</code>
+and <code>haml-mode</code> where the proper indentation can&#8217;t be reliably
+determined.  When <code>global-aggressive-indent-mode</code> is enabled it will
+not affect major modes listed in <code>aggressive-indent-excluded-modes</code>.</p>
+
+<p>For more info - head over to the
+<a href="https://github.com/Malabarba/aggressive-indent-mode/blob/master/README.md">project&#8217;s readme</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Display the Keybinding for a Command with substitute-command-keys]]></title>
@@ -854,49 +909,6 @@ Do not despair! Such functions do actually exist, although their names are likel
 </span><span class='line'><span class="p">(</span><span class="nb">intern</span> <span class="s">&quot;some-symbol&quot;</span><span class="p">)</span>
 </span><span class='line'><span class="c1">; =&gt; some-symbol</span>
 </span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Quickly Open an Info Manual]]></title>
-    <link href="http://emacsredux.com/blog/2014/11/13/quickly-open-an-info-manual/"/>
-    <updated>2014-11-13T15:25:00+02:00</updated>
-    <id>http://emacsredux.com/blog/2014/11/13/quickly-open-an-info-manual</id>
-    <content type="html"><![CDATA[<p>Every Emacs user knows that Emacs ships with plenty of built-in
-documentation in the <code>GNU info</code> format (they don&#8217;t call it a
-self-documenting editor for no reason). Most Emacs users know how to
-access that built-in documentation with <code>C-h i</code> (<code>M-x info</code>) and some
-Emacs users even know that the Emacs manual can be opened directly
-with <code>C-h r</code> (<code>M-x info-emacs-manual</code>).</p>
-
-<p>If you know the name of the manual you&#8217;re looking for, however,
-there&#8217;s a nice little-known alternative to using <code>C-h i</code> - the
-<code>info-display-manual</code> command. When you run it you&#8217;ll be prompted in
-the minibuffer for the name of the manual you&#8217;d like to view (manual
-name completion is available).</p>
-
-<p>To give you a more concrete example of the command&#8217;s advantage over
-<code>info</code> let&#8217;s try to open the Emacs Lisp manual with both
-commands. With <code>info</code> you&#8217;ll have to type the following:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>M-x info RET m elisp RET</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And the alternative would be:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>M-x info-emacs-manual RET elisp RET</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you like the command I&#8217;d suggest binding it to some keybinding:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="ss">&#39;help-command</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-i&quot;</span><span class="p">)</span> <span class="ss">&#39;info-display-manual</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
 
 ]]></content>
   </entry>

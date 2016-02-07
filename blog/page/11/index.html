@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="A little known feature of Emacs is that it provides basic wrappers
-from various command-line network utilities. Here&#8217;s a few Emacs
-commands for &hellip;">
+  <meta name="description" content="Many newcomers dislike Emacs&#8217;s default behavior of not indenting
+automatically new lines in programming major modes. Usually one has to
+press &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,68 @@ commands for &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/29/automatic-electric-indentation/">Automatic(electric) Indentation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-29T12:09:00+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/29/automatic-electric-indentation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Many newcomers dislike Emacs&#8217;s default behavior of not indenting
+automatically new lines in programming major modes. Usually one has to
+press <code>Return</code>, followed by <code>Tab</code> to open a new line and indent it
+according to its context.</p>
+
+<p>Of course Emacs has a command named <code>newline-and-indent</code>, that&#8217;s bound
+to <code>C-j</code> and many people are into the habit of using it instead of the
+pressing <code>Return+Tab</code>. Some even rebind <code>Return</code> to
+<code>newline-and-indent</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;RET&quot;</span><span class="p">)</span> <span class="ss">&#39;newline-and-indent</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What&#8217;s little known is that Emacs 24.1 introduced a new global minor
+mode called <code>electric-indent-mode</code>.  When enabled, typing certain
+characters(like newlines) triggers reindentation. So you can simply
+add this line to your Emacs config to get to enjoy
+<code>electric-ident-mode</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">electric-indent-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -726,79 +788,6 @@ time.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/26/smarter-open-line/">Smarter Open-line</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-26T15:47:00+02:00" pubdate data-updated="true">Mar 26<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/26/smarter-open-line/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Often when editing code one wishes to open a line just under the
-current one, which is properly indented relative to the existing code,
-and position the cursor at its beginning.  Such a feature is present
-in most IDEs, such as IntelliJ IDEA, Eclipse and NetBeans. It’s
-usually bound to <code>Shift+Enter</code>. Emacs has a command <code>open-line</code>, which
-sadly behave nothing like I&#8217;d want it to - it just breaks the current
-line and inserts one (or more) empty line afterwards. Luckily in the
-land of Emacs any shortfall is correctable with a bit of
-Emacs Lisp. Just add this snippet to your <code>.emacs</code> (or <code>.emacs.d/init.el</code> or
-whatever):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">smart-open-line</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Insert an empty line after the current line.</span>
-</span><span class='line'><span class="s">Position the cursor at its beginning, according to the current mode.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">move-end-of-line</span> <span class="no">nil</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">newline-and-indent</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">shift</span> <span class="nb">return</span><span class="p">)</span><span class="nv">]</span> <span class="ss">&#39;smart-open-line</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Evaluate the code (or restart Emacs) and you&#8217;ll be able to use
-<code>M-x smart-open-line</code> or <code>Shift+Enter</code> (aka <code>S-return</code>).</p>
-
-<p>This command is part of
-<a href="https://github.com/bbatsov/prelude">Prelude</a>(it&#8217;s named
-<code>prelude-smart-open-line</code> there).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -822,6 +811,10 @@ whatever):</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
       </li>
     
@@ -835,10 +828,6 @@ whatever):</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a>
       </li>
     
   </ul>
