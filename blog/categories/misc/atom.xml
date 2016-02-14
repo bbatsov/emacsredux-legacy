@@ -4,7 +4,7 @@
   <title><![CDATA[Category: misc | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/misc/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-02-07T11:46:09+02:00</updated>
+  <updated>2016-02-14T12:14:36+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Disable annoying audio notifications]]></title>
+    <link href="http://emacsredux.com/blog/2016/02/14/disable-annoying-audio-notifications/"/>
+    <updated>2016-02-14T12:09:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/02/14/disable-annoying-audio-notifications</id>
+    <content type="html"><![CDATA[<p>By default Emacs has some pretty annoying audio notifications for
+certain events (e.g. trying to move past the end of a buffer). You've
+got two options to get rid of them. Option 1 is to replace them with visual
+notifications (the Emacs frame will flash):</p>
+
+<p><code>cl
+(setq visible-bell t)
+</code></p>
+
+<p>This doesn't work well on OS X and is just as annoying (if not even
+more), so I'd suggest going with option 2 instead - disable those
+notifications completely:</p>
+
+<p><code>cl
+(setq ring-bell-function 'ignore)
+</code></p>
+
+<p>At last - some peace and quiet!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Use Tab to Indent or Complete]]></title>
@@ -168,44 +194,6 @@ config:</p>
 <p>So, this is <code>crux</code> for you - simple and neat! I'd love it if you
 contributed more useful commands to it, so we can make it even more
 versatile!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[super-save]]></title>
-    <link href="http://emacsredux.com/blog/2016/01/30/super-save/"/>
-    <updated>2016-01-30T11:26:00+02:00</updated>
-    <id>http://emacsredux.com/blog/2016/01/30/super-save</id>
-    <content type="html"><![CDATA[<p>A while back I wrote
-<a href="http://batsov.com/articles/2012/03/08/emacs-tip-number-5-save-buffers-automatically-on-buffer-or-window-switch/">an article on saving buffers when they lose focus</a>.</p>
-
-<p>Recently I've packaged (an improved version of) this functionality
-into a tiny global minor mode called
-<a href="https://github.com/bbatsov/super-save">super-save</a>.</p>
-
-<p>The package is available on MELPA and MELPA Stable and enabling it is trivial:</p>
-
-<p><code>cl
-(super-save-mode +1)
-</code></p>
-
-<p>If you want to enable the additional feature of auto-saving buffers
-when Emacs is idle, add the following as well:</p>
-
-<p><code>cl
-(setq super-save-auto-save-when-idle t)
-</code></p>
-
-<p>If you're like me and don't care about the backups created by the
-built-in <code>auto-save-mode</code>, you can disable it aftewards:</p>
-
-<p><code>cl
-(setq auto-save-default nil)
-</code></p>
-
-<p>I've been using Emacs for over 10 years
-now and I've never needed the auto-created backups - I'm either very
-lucky or this is less useful than it's supposed to be.</p>
 ]]></content>
   </entry>
   

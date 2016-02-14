@@ -9,9 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Every Emacs user knows that Emacs ships with plenty of built-in
-documentation in the GNU info format (they don&#8217;t call it a
-self-documenting &hellip;">
+  <meta name="description" content="Sometimes you might need to convert a symbol to string (or vice versa) in Emacs Lisp. You start
+looking for functions like symbol-to-string and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,57 @@ self-documenting &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/05/converting-between-symbols-and-strings/">Converting Between Symbols and Strings</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-05T17:28:00+02:00" pubdate data-updated="true">Dec 5<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/12/05/converting-between-symbols-and-strings/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sometimes you might need to convert a symbol to string (or vice versa) in Emacs Lisp. You start
+looking for functions like <code>symbol-to-string</code> and <code>string-to-symbol</code> but, alas, they do not seem exist.
+Do not despair! Such functions do actually exist, although their names are likely to surprise you:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">symbol-name</span> <span class="ss">&#39;some-symbol</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; &quot;some-symbol&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="nb">intern</span> <span class="s">&quot;some-symbol&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; some-symbol</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -804,67 +854,6 @@ open-source projects more than your regular schedule might permit.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/07/22/new-emacs-blogs/">New Emacs Blogs</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-22T17:43:00+03:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2014</time>
-        
-         | <a href="/blog/2014/07/22/new-emacs-blogs/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The problem with Emacs blogs is one can never have enough of them (especially the good ones).</p>
-
-<p>I&#8217;d like to draw my readers attention to two new blogs:</p>
-
-<h3>lunarsite</h3>
-
-<p><a href="http://www.lunaryorn.com/">lunarsite</a> is not exactly new (it was
-started in March 2014), but I don&#8217;t think enough people have come
-across it, so I&#8217;m mentioning it here anyway. It&#8217;s operated by one of
-the most prolific members of the Emacs community in recent years - the
-great <a href="http://www.lunaryorn.com/pages/about.html">Sebastian Wiesner</a>
-(of <code>flycheck</code> and <code>cask</code> fame).</p>
-
-<p>If you&#8217;re thinking of writing your first major mode - you&#8217;ll find some
-great advice there.</p>
-
-<h3>Endless Parentheses</h3>
-
-<p><a href="http://endlessparentheses.com/">Endless Parentheses</a> is a brand new blog started by
-<a href="https://github.com/Bruce-Connor">Arthur Malabarba</a>. It&#8217;s dedicated to
-concise posts on improving your Emacs productivity.</p>
-
-<p>The content so far is similar to the articles I write here, so if you like <code>Emacs Redux</code>
-you&#8217;ll likely enjoy <code>Endless Parentheses</code> as well.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -888,6 +877,10 @@ you&#8217;ll likely enjoy <code>Endless Parentheses</code> as well.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
       </li>
     
@@ -901,10 +894,6 @@ you&#8217;ll likely enjoy <code>Endless Parentheses</code> as well.</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
       </li>
     
   </ul>

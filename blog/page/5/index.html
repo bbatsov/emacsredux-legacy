@@ -9,10 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="I&#8217;ve written in the past about
-electric-indent-mode,
-which was added in Emacs 24.1. In Emacs 24.4 one of the most prominent
-user visible &hellip;">
+  <meta name="description" content="Emacs has often been criticized for failing to provide a more
+extensive string manipulation API (compared to that of programming
+languages like Ruby &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +81,140 @@ user visible &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/02/a-peek-at-emacs-24-dot-4-new-string-manipulation-functions/">A Peek at Emacs 24.4: New String Manipulation Functions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-02T09:29:00+02:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2014</time>
+        
+         | <a href="/blog/2014/02/02/a-peek-at-emacs-24-dot-4-new-string-manipulation-functions/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs has often been criticized for failing to provide a more
+extensive string manipulation API (compared to that of programming
+languages like Ruby and Perl, for instance).  As many programs
+(extensions) running on top of it are doing quite a lot of string
+manipulation, having a good string API is important. To compensate the
+lack of certain primitives in Emacs itself a lot of package authors
+are using these days packages like
+<a href="https://github.com/magnars/s.el">s.el</a> or simply adding the string
+functions they need directly to their packages (to reduce the number
+of third-party deps).</p>
+
+<p>In Emacs 24.4 finally the situation is improving. Finally, we&#8217;re getting
+<code>string-suffix-p</code>, which was mysteriously missing even though <code>string-prefix-p</code>
+has been part of Emacs for years:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">string-suffix-p</span> <span class="s">&quot;test&quot;</span> <span class="s">&quot;my_test&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; t</span>
+</span><span class='line'><span class="p">(</span><span class="nv">string-suffix-p</span> <span class="s">&quot;tester&quot;</span> <span class="s">&quot;my_test&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; nil</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>More importantly, Emacs 24.4 ships with a new built-in library called <code>subr-x</code>, which features
+a bunch of other string manipulation functions:</p>
+
+<ul>
+<li><code>string-blank-p</code></li>
+<li><code>string-empty-p</code></li>
+<li><code>string-join</code></li>
+<li><code>string-reverse</code></li>
+<li><code>string-trim-left</code></li>
+<li><code>string-trim-right</code></li>
+<li><code>string-trim</code></li>
+<li><code>string-remove-prefix</code></li>
+<li><code>string-remove-suffix</code></li>
+</ul>
+
+
+<p>Here&#8217;s a brief demo of them in action:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; all functions in the library are defined as inline, so you don&#39;t</span>
+</span><span class='line'><span class="c1">;; need to require the library at runtime</span>
+</span><span class='line'><span class="p">(</span><span class="nv">eval-when-compile</span> <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;subr-x</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">string-empty-p</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; t</span>
+</span><span class='line'><span class="p">(</span><span class="nv">string-empty-p</span> <span class="s">&quot;  &quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; nil</span>
+</span><span class='line'><span class="p">(</span><span class="nv">string-blank-p</span> <span class="s">&quot;  &quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; 0 (#o0, #x0, ?\C-@)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">string-reverse</span> <span class="s">&quot;Batman&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; &quot;namtaB&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="nv">string-join</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;one&quot;</span> <span class="s">&quot;two&quot;</span> <span class="s">&quot;three&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="c1">; =&gt; &quot;onetwothree&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="nv">string-join</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;one&quot;</span> <span class="s">&quot;two&quot;</span> <span class="s">&quot;three&quot;</span><span class="p">)</span> <span class="s">&quot;,&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; &quot;one,two,three&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="nb">string-trim</span> <span class="s">&quot;   Peter Parker &quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; &quot;Peter Parker&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="nv">string-remove-prefix</span> <span class="s">&quot;Mr. &quot;</span> <span class="s">&quot;Mr. Smith&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; &quot;Smith&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="nv">string-remove-suffix</span> <span class="s">&quot;Smith&quot;</span> <span class="s">&quot;Mr. Smith&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; =&gt; &quot;Mr. &quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Sure, <code>subr-x</code> is not as extensive as <code>s.el</code> (and will never be), but
+I think that it&#8217;s a big step in the right direction. It&#8217;s likely that
+<code>subr-x</code> will be extended in subsequent Emacs versions and some of the
+functions from it will be promoted to <code>built-in</code>.</p>
+
+<p>That&#8217;s all I have for now. Until next time!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -692,6 +825,8 @@ in Emacs 24.4 you might have a look at
   <!-- categories if -->
 
   <!-- categories if -->
+
+  <!-- categories if -->
  <!-- posts for -->
 </ul>
 
@@ -922,106 +1057,6 @@ prefix).</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/">Removing/Altering Key Bindings From Minor Mode Keymaps</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-25T12:26:00+03:00" pubdate data-updated="true">Sep 25<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Often minor modes don&#8217;t respect standard keybinding conventions and
-use some user reserved keys (like <code>C-c a</code>). Occasionally two minor
-modes would have conflicting keybindings or a minor mode would
-keybindings conflicting with a major mode. I guess you can imagine
-similar problems. Dealing with them is fairly straight-forward - we
-have to either unbind or rebind the offending binding:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; remove keybinding</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minor-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c c&quot;</span><span class="p">)</span> <span class="no">nil</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">;; change keybinding</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minor-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c c&quot;</span><span class="p">)</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c C-c&quot;</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Generally speaking you can use <code>define-key</code> to alter the keymap of a
-major mode as well, but those are rarely offenders when it comes to
-picking appropriate keybindings for their keymaps.</p>
-
-<p>Normally you&#8217;d want to invoke the above code right after the related
-minor (or major) mode is loaded:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">eval-after-load</span> <span class="s">&quot;minor-mode&quot;</span>
-</span><span class='line'>  <span class="o">&#39;</span><span class="p">(</span><span class="nv">define-key</span> <span class="nv">minor-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c c&quot;</span><span class="p">)</span> <span class="no">nil</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Making a minor mode have different keymaps in different major modes is
-tricky, but possible. Here&#8217;s an example that disables some keybindings
-in the minor <code>prelude-mode</code>, that are conflicting with the major
-<code>org-mode</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-org-mode-hook</span> <span class="p">()</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">oldmap</span> <span class="p">(</span><span class="nb">cdr</span> <span class="p">(</span><span class="nb">assoc</span> <span class="ss">&#39;prelude-mode</span> <span class="nv">minor-mode-map-alist</span><span class="p">)))</span>
-</span><span class='line'>        <span class="p">(</span><span class="nv">newmap</span> <span class="p">(</span><span class="nv">make-sparse-keymap</span><span class="p">)))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">set-keymap-parent</span> <span class="nv">newmap</span> <span class="nv">oldmap</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">define-key</span> <span class="nv">newmap</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c +&quot;</span><span class="p">)</span> <span class="no">nil</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">define-key</span> <span class="nv">newmap</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c -&quot;</span><span class="p">)</span> <span class="no">nil</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">make-local-variable</span> <span class="ss">&#39;minor-mode-overriding-map-alist</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">push</span> <span class="o">`</span><span class="p">(</span><span class="nv">prelude-mode</span> <span class="o">.</span> <span class="o">,</span><span class="nv">newmap</span><span class="p">)</span> <span class="nv">minor-mode-overriding-map-alist</span><span class="p">))</span>
-</span><span class='line'><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;org-mode-hook</span> <span class="ss">&#39;my-org-mode-hook</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -1045,6 +1080,10 @@ in the minor <code>prelude-mode</code>, that are conflicting with the major
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
       </li>
     
@@ -1058,10 +1097,6 @@ in the minor <code>prelude-mode</code>, that are conflicting with the major
     
       <li class="post">
         <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
       </li>
     
   </ul>

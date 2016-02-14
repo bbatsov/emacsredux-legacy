@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="One of the things I hate the most while programming, is having to
-manually adjust the indentation of some code, after I&#8217;ve moved or
-renamed &hellip;">
+  <meta name="description" content="By default Emacs has some pretty annoying audio notifications for
+certain events (e.g. trying to move past the end of a buffer). You&#8217;ve
+got two &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,63 @@ renamed &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable Annoying Audio Notifications</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-02-14T12:09:00+02:00" pubdate data-updated="true">Feb 14<span>th</span>, 2016</time>
+        
+         | <a href="/blog/2016/02/14/disable-annoying-audio-notifications/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>By default Emacs has some pretty annoying audio notifications for
+certain events (e.g. trying to move past the end of a buffer). You&#8217;ve
+got two options to get rid of them. Option 1 is to replace them with visual
+notifications (the Emacs frame will flash):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">visible-bell</span> <span class="no">t</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This doesn&#8217;t work well on OS X and is just as annoying (if not even
+more), so I&#8217;d suggest going with option 2 instead - disable those
+notifications completely:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">ring-bell-function</span> <span class="ss">&#39;ignore</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At last - some peace and quiet!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -759,65 +816,6 @@ third-party repositories (which you&#8217;ll probably need sooner or later).</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-07-19T11:37:00+03:00" pubdate data-updated="true">Jul 19<span>th</span>, 2015</time>
-        
-         | <a href="/blog/2015/07/19/jdee-reborn/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/jdee-emacs/jdee">JDEE</a> (Java Development
-Environment for Emacs) used to be best way to develop Java apps in
-Emacs a while back. It offered a ton of
-<a href="http://emacswiki.org/emacs/JavaDevelopmentEnvironment">cool features</a>,
-like smart auto-completion and a debugger. Unfortunately at some point
-the development slowed down significantly and the project went in a
-catatonic state. There was pretty much no activity for years in the
-official SourceForge repo and there was also no support for features
-introduced in Java 5+.</p>
-
-<p>Recently, however, the project migrated to
-<a href="https://github.com/jdee-emacs/jdee">GitHub</a> and it&#8217;s now way easier
-to get involved. Seems that some people have already started work on
-updating JDEE to support modern JDKs and modern Emacs functionality.</p>
-
-<p>That&#8217;s a really exciting project, as Java support has traditionally
-been a weakness of Emacs and I&#8217;m writing this post with the hope that
-more people will help make JDEE great again.</p>
-
-<p>So what are you waiting for? If you&#8217;re into Java and friends (Scala,
-Clojure, Groovy, etc), check out the new official repo and let&#8217;s get
-this party started!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -839,6 +837,10 @@ this party started!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
       </li>
     
@@ -852,10 +854,6 @@ this party started!</p>
     
       <li class="post">
         <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
       </li>
     
   </ul>

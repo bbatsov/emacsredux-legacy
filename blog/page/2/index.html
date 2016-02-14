@@ -9,11 +9,11 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Mickey Petersen just released
-Mastering Emacs, the first new
-book about our beloved editor, since
-Learning GNU Emacs(released
-way back in 2004). I &hellip;">
+  <meta name="description" content="JDEE (Java Development
+Environment for Emacs) used to be best way to develop Java apps in
+Emacs a while back. It offered a ton of
+cool features,
+like &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,65 @@ way back in 2004). I &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/19/jdee-reborn/">JDEE Reborn</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-19T11:37:00+03:00" pubdate data-updated="true">Jul 19<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/07/19/jdee-reborn/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/jdee-emacs/jdee">JDEE</a> (Java Development
+Environment for Emacs) used to be best way to develop Java apps in
+Emacs a while back. It offered a ton of
+<a href="http://emacswiki.org/emacs/JavaDevelopmentEnvironment">cool features</a>,
+like smart auto-completion and a debugger. Unfortunately at some point
+the development slowed down significantly and the project went in a
+catatonic state. There was pretty much no activity for years in the
+official SourceForge repo and there was also no support for features
+introduced in Java 5+.</p>
+
+<p>Recently, however, the project migrated to
+<a href="https://github.com/jdee-emacs/jdee">GitHub</a> and it&#8217;s now way easier
+to get involved. Seems that some people have already started work on
+updating JDEE to support modern JDKs and modern Emacs functionality.</p>
+
+<p>That&#8217;s a really exciting project, as Java support has traditionally
+been a weakness of Emacs and I&#8217;m writing this post with the hope that
+more people will help make JDEE great again.</p>
+
+<p>So what are you waiting for? If you&#8217;re into Java and friends (Scala,
+Clojure, Groovy, etc), check out the new official repo and let&#8217;s get
+this party started!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -777,57 +836,6 @@ there&#8217;s a built-in command for that:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/12/05/converting-between-symbols-and-strings/">Converting Between Symbols and Strings</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-05T17:28:00+02:00" pubdate data-updated="true">Dec 5<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/12/05/converting-between-symbols-and-strings/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Sometimes you might need to convert a symbol to string (or vice versa) in Emacs Lisp. You start
-looking for functions like <code>symbol-to-string</code> and <code>string-to-symbol</code> but, alas, they do not seem exist.
-Do not despair! Such functions do actually exist, although their names are likely to surprise you:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">symbol-name</span> <span class="ss">&#39;some-symbol</span><span class="p">)</span>
-</span><span class='line'><span class="c1">; =&gt; &quot;some-symbol&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nb">intern</span> <span class="s">&quot;some-symbol&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="c1">; =&gt; some-symbol</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -851,6 +859,10 @@ Do not despair! Such functions do actually exist, although their names are likel
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
       </li>
     
@@ -864,10 +876,6 @@ Do not despair! Such functions do actually exist, although their names are likel
     
       <li class="post">
         <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
       </li>
     
   </ul>

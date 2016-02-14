@@ -9,8 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Emacs is packed with an insane amount of cool stuff. With Easter fast
-approaching (I&#8217;m an Orthodox Christian and ours is in the beginning of &hellip;">
+  <meta name="description" content="You probably know that major modes in Emacs can derive(inherit)
+functionality from a parent major mode. Emacs 24.1 introduced prog-mode - a new major &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,60 @@ approaching (I&#8217;m an Orthodox Christian and ours is in the beginning of &he
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/05/prog-mode-the-parent-of-all-programming-modes/">Prog-mode: The Parent of All Programming Modes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-05T12:04:00+03:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/05/prog-mode-the-parent-of-all-programming-modes/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>You probably know that major modes in Emacs can derive(inherit)
+functionality from a parent major mode.</p>
+
+<p>Emacs 24.1 introduced <code>prog-mode</code> - a new major mode from which all
+programming modes should be derived. All of the programming modes that
+come bundled with Emacs already inherit it(as do most
+actively maintained third-party modes). Having a common parent for all
+the programming modes allows us to do some pretty neat stuff - like
+setting common behavior for all of them. Here&#8217;s how we can enable
+spell-checking in comments:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;flyspell-prog-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s all for now. We&#8217;ll discuss <code>flyspell</code> in more detail down the road.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -771,83 +825,6 @@ prefix).</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/29/automatic-electric-character-pairing/">Automatic(electric) Character Pairing</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-29T12:38:00+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/29/automatic-electric-character-pairing/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When editing text (and source code in particular) we often have to
-deal with characters that are usually paired (like <code>()</code>, <code>[]</code>, <code>{}</code>,
-etc). By default Emacs doesn&#8217;t treat such characters in any special
-manner and that kind of sucks, since it&#8217;s quite easy to misplace a
-closing parenthesis for instance.</p>
-
-<p>While there are several modes that target that particular problem, in
-this post I&#8217;ll showcase just one of them - the built-in(since
-Emacs 24.1) global minor mode <code>electric-pair-mode</code>. Enabling it is trivial:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">electric-pair-mode</span> <span class="mi">+1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>At this point typing an open parenthesis automatically inserts the
-corresponding closing parenthesis. (Likewise for brackets, etc.)  As
-an added bonus, consider the following scenario(the bar(<code>|</code>)
-represents your cursor):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">some_fun</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="o">|</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Typing a closing parenthesis a this point will not insert a second
-parenthesis, but will simple move the cursor over the existing one,
-keeping the expression correct.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">some_fun</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">)</span><span class="o">|</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Simple, but effective. A little bit down the road we might take a
-looks at some of the (more powerful) alternatives to
-<code>electric-pair-mode</code>.</p>
-
-<p><code>electric-pair-mode</code> is enabled by default in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -871,6 +848,10 @@ looks at some of the (more powerful) alternatives to
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
       </li>
     
@@ -884,10 +865,6 @@ looks at some of the (more powerful) alternatives to
     
       <li class="post">
         <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a>
       </li>
     
   </ul>
