@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-02-14T12:14:36+02:00</updated>
+  <updated>2016-02-14T18:44:27+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Look up the keybindings for some command]]></title>
+    <link href="http://emacsredux.com/blog/2016/02/14/look-up-the-keybindings-for-some-command/"/>
+    <updated>2016-02-14T18:10:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/02/14/look-up-the-keybindings-for-some-command</id>
+    <content type="html"><![CDATA[<p>If you know the name of some command, but you&#8217;ve forgotten its
+keybinding(s) there are 3 common options to look the keybinding(s) up.</p>
+
+<ul>
+<li><code>C-h f command-name</code></li>
+</ul>
+
+
+<p>This will display some information about the command in question in a help buffer.
+Important bits of this information include where is the command defined, what are its
+keybindingings if any, and its documentation.</p>
+
+<ul>
+<li><code>C-h w command-name</code></li>
+</ul>
+
+
+<p>This will display the keybindings of the command in the minibuffer. If you&#8217;re interested only
+in the keybindings you should prefer this option over <code>C-h f</code>.</p>
+
+<ul>
+<li><code>M-x command-name</code></li>
+</ul>
+
+
+<p>After you invoke some command using <code>M-x</code> you&#8217;ll see a suggestion to use
+its keybinding instead in the minibuffer.</p>
+
+<p>That&#8217;s all for now, folks!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Disable annoying audio notifications]]></title>
@@ -899,23 +936,6 @@ the last 300 keystrokes and its output looks like this:</p>
 
 
 <p>Inspecting it can be super enlightening! I do this all the time.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Uptime]]></title>
-    <link href="http://emacsredux.com/blog/2014/12/23/uptime/"/>
-    <updated>2014-12-23T17:28:00+02:00</updated>
-    <id>http://emacsredux.com/blog/2014/12/23/uptime</id>
-    <content type="html"><![CDATA[<p>Many Emacs users keep a single Emacs instance running for quite a while.
-I&#8217;ve had instances running for over a month. How do I know this? Unsurprisingly,
-there&#8217;s a built-in command for that:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>M-x emacs-uptime</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now it&#8217;s time to start bragging to your vim-using friends!</p>
 ]]></content>
   </entry>
   

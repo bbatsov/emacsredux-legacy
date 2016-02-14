@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: help | Emacs Redux]]></title>
+  <link href="http://emacsredux.com/blog/categories/help/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2016-02-14T18:44:27+02:00</updated>
+  <id>http://emacsredux.com/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Look up the keybindings for some command]]></title>
+    <link href="http://emacsredux.com/blog/2016/02/14/look-up-the-keybindings-for-some-command/"/>
+    <updated>2016-02-14T18:10:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/02/14/look-up-the-keybindings-for-some-command</id>
+    <content type="html"><![CDATA[<p>If you know the name of some command, but you've forgotten its
+keybinding(s) there are 3 common options to look the keybinding(s) up.</p>
+
+<ul>
+<li><code>C-h f command-name</code></li>
+</ul>
+
+
+<p>This will display some information about the command in question in a help buffer.
+Important bits of this information include where is the command defined, what are its
+keybindingings if any, and its documentation.</p>
+
+<ul>
+<li><code>C-h w command-name</code></li>
+</ul>
+
+
+<p>This will display the keybindings of the command in the minibuffer. If you're interested only
+in the keybindings you should prefer this option over <code>C-h f</code>.</p>
+
+<ul>
+<li><code>M-x command-name</code></li>
+</ul>
+
+
+<p>After you invoke some command using <code>M-x</code> you'll see a suggestion to use
+its keybinding instead in the minibuffer.</p>
+
+<p>That's all for now, folks!</p>
+]]></content>
+  </entry>
+  
+</feed>

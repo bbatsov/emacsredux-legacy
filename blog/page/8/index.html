@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="In Emacs there are two essential commands when you have to go the
-beginning of a line - move-beginning-of-line(bound to C-a) and
-back-to-indentation( &hellip;">
+  <meta name="description" content="Often, while editing, you&#8217;ll want to compress a few lines into
+one. Here&#8217;s a simple example to illustrate the problem at hand. We
+want to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,98 @@ back-to-indentation( &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/30/joining-lines/">Joining Lines</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-30T16:27:00+03:00" pubdate data-updated="true">May 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/30/joining-lines/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Often, while editing, you&#8217;ll want to compress a few lines into
+one. Here&#8217;s a simple example to illustrate the problem at hand. We
+want to convert this bit of Ruby code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">some_method</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">arg2</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">arg3</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>into:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">some_method</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">arg3</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Doing so is extremely easy. Just go to the last line in the first code
+block and press 3 times <code>M-^</code> (<code>delete-indentation</code>, aliased
+also to <code>join-line</code>).</p>
+
+<p>If you&#8217;re like me and like to join lines from top to bottom - go to
+the first line and press <code>C-u M-^</code> three times. This works, but it is
+kind of hard to press <code>C-u M-^</code> repeatedly, compared to just
+<code>M-^</code>. Let&#8217;s simplify this a bit:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">top-join-line</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Join the current line with the line beneath it.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">delete-indentation</span> <span class="mi">1</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Isn&#8217;t this a top way to join lines or what?</p>
+
+<p>Since <code>delete-indentation</code> is bound both to <code>M-^</code> it makes
+sense to use something like <code>C-^</code> for the new command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-^&quot;</span><span class="p">)</span> <span class="ss">&#39;top-join-line</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s mostly a personal preference I guess - feel free to use any other keycombo.</p>
+
+<p>This command is part of
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(it&#8217;s named
+<code>prelude-top-join-line</code> there) and it&#8217;s bound to <code>C-^</code> there.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -924,94 +1016,6 @@ hack Emacs Lisp (yet) you probably can do without it.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/28/execute-commands-ninja-style-with-key-chord-mode/">Execute Commands Ninja-style With Key-chord-mode</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-28T08:45:00+03:00" pubdate data-updated="true">Apr 28<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/28/execute-commands-ninja-style-with-key-chord-mode/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One of my bigger problems as an Emacs user is that there <strong>only so
-many good keybindings</strong> available. At some point you&#8217;re out of good
-options, but there are still plenty of commands you&#8217;d rather be able
-to execute faster than you&#8217;d be able to do with <code>M-x command-name</code>.</p>
-
-<p><a href="http://www.emacswiki.org/emacs/key-chord.el">key-chord-mode</a> to the
-rescue! It&#8217;s a pretty handy minor mode which allows you to bind
-commands to keys that should be pressed together or consecutively(with
-little time between the keystrokes - by default 0.3 seconds). This
-gives you some pretty good opportunities to increase your
-productivity. Assuming you&#8217;ve installed the mode somehow, you can start
-playing with it:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; key chords</span>
-</span><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;key-chord</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nv">key-chord-define-global</span> <span class="s">&quot;BB&quot;</span> <span class="ss">&#39;iswitchb</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">key-chord-define-global</span> <span class="s">&quot;FF&quot;</span> <span class="ss">&#39;find-file</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">key-chord-define-global</span> <span class="s">&quot;jk&quot;</span> <span class="ss">&#39;beginning-of-buffer</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nv">key-chord-mode</span> <span class="mi">+1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The examples above illustrate global key-chords. Major mode specific
-key chords are also available.</p>
-
-<p>One should be careful about the key-chord he chooses - it should
-definitely be something you&#8217;re unlikely to type normally. This also
-means that if you&#8217;re writing in Emacs in several languages with common
-letters, key chords that make sense in say English, might not make
-sense in French (for instance). Luckily for me - I write almost
-exclusively in English or some programming language (and Bulgarian and
-English are nothing alike).</p>
-
-<p>One other note - key chords don&#8217;t play very well with
-<code>evil-mode</code>(Emacs&#8217;s vim emulation layer) for obvious reasons. vim is
-kind of key-chord-mode&#8217;s principle inspiration. If you&#8217;re an <code>evil-mode</code> user you
-probably don&#8217;t need key-chord-mode anyways.</p>
-
-<p><a href="https://github.com/bbatsov/prelude">Prelude</a> enables <code>key-chord-mode</code>
-out of the box and makes some creative use of it with <code>jj</code> and <code>JJ</code>
-(which I&#8217;d advise you try out if you didn&#8217;t know about them).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -1035,6 +1039,10 @@ out of the box and makes some creative use of it with <code>jj</code> and <code>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/02/14/look-up-the-keybindings-for-some-command/">Look up the keybindings for some command</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
       </li>
     
@@ -1048,10 +1056,6 @@ out of the box and makes some creative use of it with <code>jj</code> and <code>
     
       <li class="post">
         <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/imenu-anywhere/">imenu-anywhere</a>
       </li>
     
   </ul>

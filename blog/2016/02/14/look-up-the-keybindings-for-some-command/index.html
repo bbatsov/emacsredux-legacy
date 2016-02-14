@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: config - Emacs Redux</title>
+  <title>Look up the keybindings for some command - Emacs Redux</title>
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Category: config">
+  <meta name="description" content="If you know the name of some command, but you&#8217;ve forgotten its
+keybinding(s) there are 3 common options to look the keybinding(s) up. C-h f &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://emacsredux.comblog/categories/config">
+  <link rel="canonical" href="http://emacsredux.com/blog/2016/02/14/look-up-the-keybindings-for-some-command">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
@@ -78,36 +79,123 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Config</h1>
+    
+      <h1 class="entry-title">Look Up the Keybindings for Some Command</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-02-14T18:10:00+02:00" pubdate data-updated="true">Feb 14<span>th</span>, 2016</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>If you know the name of some command, but you&#8217;ve forgotten its
+keybinding(s) there are 3 common options to look the keybinding(s) up.</p>
 
-  
-  <h2>2014</h2>
-
-<article>
-  
-<h1><a href="/blog/2014/05/16/opening-large-files/">Opening Large Files</a></h1>
-<time datetime="2014-05-16T12:37:00+03:00" pubdate><span class='month'>May</span> <span class='day'>16</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/config/'>config</a></span>
-</footer>
+<ul>
+<li><code>C-h f command-name</code></li>
+</ul>
 
 
-</article>
+<p>This will display some information about the command in question in a help buffer.
+Important bits of this information include where is the command defined, what are its
+keybindingings if any, and its documentation.</p>
 
+<ul>
+<li><code>C-h w command-name</code></li>
+</ul>
+
+
+<p>This will display the keybindings of the command in the minibuffer. If you&#8217;re interested only
+in the keybindings you should prefer this option over <code>C-h f</code>.</p>
+
+<ul>
+<li><code>M-x command-name</code></li>
+</ul>
+
+
+<p>After you invoke some command using <code>M-x</code> you&#8217;ll see a suggestion to use
+its keybinding instead in the minibuffer.</p>
+
+<p>That&#8217;s all for now, folks!</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Bozhidar Batsov</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-02-14T18:10:00+02:00" pubdate data-updated="true">Feb 14<span>th</span>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/help/'>help</a>, <a class='category' href='/blog/categories/misc/'>misc</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://emacsredux.com/blog/2016/02/14/look-up-the-keybindings-for-some-command/" data-via="bbatsov" data-counturl="http://emacsredux.com/blog/2016/02/14/look-up-the-keybindings-for-some-command/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/02/14/disable-annoying-audio-notifications/" title="Previous Post: Disable annoying audio notifications">&laquo; Disable annoying audio notifications</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -202,7 +290,10 @@
       var disqus_shortname = 'emacsredux';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://emacsredux.com/blog/2016/02/14/look-up-the-keybindings-for-some-command/';
+        var disqus_url = 'http://emacsredux.com/blog/2016/02/14/look-up-the-keybindings-for-some-command/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
