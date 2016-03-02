@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-02-14T18:44:27+02:00</updated>
+  <updated>2016-03-02T20:09:46+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Pimp My Minibuffer Evaluation]]></title>
+    <link href="http://emacsredux.com/blog/2016/03/02/pimp-my-minibuffer/"/>
+    <updated>2016-03-02T18:57:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/03/02/pimp-my-minibuffer</id>
+    <content type="html"><![CDATA[<p>In Emacs you can evaluate Emacs Lisp pretty much anywhere - even
+<a href="http://emacsredux.com/blog/2013/04/18/evaluate-emacs-lisp-in-the-minibuffer/">in the minibuffer</a>. Writing
+Emacs Lisp in the minibuffer, however, is not exactly fantastic
+experience out-of-the-box - there&#8217;s <code>TAB</code> completion, but what about
+<code>eldoc</code> and <code>paredit</code> for instance?</p>
+
+<p>If only there was a way to enable them&#8230; I suggested one trick in my
+original post on <code>eval-expression</code>, but Emacs 24.4 made things even
+easier by adding <code>eval-expression-minibuffer-setup-hook</code>. To enable
+<code>eldoc</code> for minibuffer evaluations use this snippet:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;eval-expression-minibuffer-setup-hook</span> <span class="nf">#&#39;</span><span class="nv">eldoc-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For paredit you can use this one:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;eval-expression-minibuffer-setup-hook</span> <span class="nf">#&#39;</span><span class="nv">paredit-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously you can do the same for any other minor mode you might need.</p>
+
+<p>The best thing about this setup is that it will work with tools like
+CIDER and SLIME as well (they have similar commands which allow you to
+evaluate Clojure &amp; Common Lisp code and those command trigger
+<code>eval-expression-minibuffer-setup-hook</code>).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Look up the keybindings for some command]]></title>
@@ -875,67 +912,6 @@ in the <code>fringe-styles</code> list:</p>
 
 <p>Be careful when playing with the fringe size. Certain info doesn&#8217;t
 look very good when the fringe is too small (e.g. less than 4 pixels).</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Lossage]]></title>
-    <link href="http://emacsredux.com/blog/2014/12/23/lossage/"/>
-    <updated>2014-12-23T17:35:00+02:00</updated>
-    <id>http://emacsredux.com/blog/2014/12/23/lossage</id>
-    <content type="html"><![CDATA[<p>Are you sure you&#8217;re using Emacs in an efficient way? Perhaps you&#8217;re
-overusing commands like <code>C-f</code> and <code>C-b</code> to navigate around when you
-can be using more efficient alternatives like <code>M-f</code> and <code>M-b</code> (or a
-third-party package like
-<a href="http://emacsrocks.com/e10.html">ace-jump-mode</a>).  Gaining such
-insight is somewhat hard, as we generally don&#8217;t pay attention to our
-sub-optimal usage patterns. If we could only see what were the last
-few hundred keystrokes we entered in our current Emacs
-session&#8230; Turns out we can do this with the aptly-named command
-<code>view-lossage</code> (<code>C-h l</code>) (<code>lossage</code> means <code>malfunction</code>). It displays
-the last 300 keystrokes and its output looks like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>n e r a l l y SPC d o n ' t SPC n o t i c e SPC o u
-</span><span class='line'>r SPC s u b o p t i m a l SPC s u a g &lt;backspace&gt; &lt;backspace&gt;
-</span><span class='line'>&lt;backspace&gt; &lt;backspace&gt; u s a g e SPC p a t e &lt;backspace&gt;
-</span><span class='line'>t e r n s . SPC I f SPC w e SPC c o u l d SPC o n l
-</span><span class='line'>y &lt;return&gt; s e e SPC w h a t SPC w e r e SPC t h e
-</span><span class='line'>SPC l a s t SPC f &lt;backspace&gt; h e w SPC &lt;backspace&gt;
-</span><span class='line'>&lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt; f e w SPC h u n
-</span><span class='line'>d r e d SPC k e y s t r o k e s SPC w e SPC i &lt;backspace&gt;
-</span><span class='line'>e n t e r e d SPC i n SPC o u r SPC c u r r e n t SPC
-</span><span class='line'>E m a c s SPC s e s s i o n . . . SPC T u r n s SPC
-</span><span class='line'>o u t SPC &lt;backspace&gt; SPC w e SPC c a n SPC d o SPC
-</span><span class='line'>t h i s &lt;company-dummy-event&gt; . &lt;backspace&gt; SPC w i
-</span><span class='line'>t h SPC t h e SPC m a c &lt;backspace&gt; g i c a l &lt;backspace&gt;
-</span><span class='line'>&lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt;
-</span><span class='line'>&lt;backspace&gt; &lt;backspace&gt; SPC c o m m a n d &lt;return&gt;
-</span><span class='line'>` v i e w - l o s s a g e ` SPC ( b o u n &lt;backspace&gt;
-</span><span class='line'>&lt;backspace&gt; &lt;backspace&gt; &lt;backspace&gt; ` C - h SPC l `
-</span><span class='line'>) . C-p C-p M-q C-n C-n C-n C-e C-x b l o s s &lt;return&gt;
-</span><span class='line'>C-x b l o s C-g C-h l</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Inspecting it can be super enlightening! I do this all the time.</p>
 ]]></content>
   </entry>
   

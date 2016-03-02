@@ -9,9 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Often, while editing, you&#8217;ll want to compress a few lines into
-one. Here&#8217;s a simple example to illustrate the problem at hand. We
-want to &hellip;">
+  <meta name="description" content="When you&#8217;re writing code you usually have to take into account the
+programming language&#8217;s convention for maximum line length. Most &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,91 @@ want to &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/">Highlight Lines That Exceed a Certain Length Limit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-31T15:18:00+03:00" pubdate data-updated="true">May 31<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When you&#8217;re writing code you usually have to take into account the
+programming language&#8217;s convention for maximum line length. Most
+programming languages urge hackers to keep line length under 80
+characters(although in recent years it has often been argued that such
+rules should be relaxed to 100-120 characters, given the state of
+current computer displays).</p>
+
+<p>There are many ways to highlight lines that exceed a certain length in
+Emacs, but I find one to be particularly elegant - the use of the
+built-in <code>whitespace-mode</code>. Most people use <code>whitespace-mode</code> to
+visualize spaces, tabs and trailing whitespace, but it can actually do
+a bit more that that. Here&#8217;s the magic config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;whitespace</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">whitespace-line-column</span> <span class="mi">80</span><span class="p">)</span> <span class="c1">;; limit line length</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">whitespace-style</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">face</span> <span class="nv">lines-tail</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;whitespace-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above snippet will enable <code>whitespace-mode</code> only in major modes
+for programming. If you want to enable <code>whitespace-mode</code> everywhere
+you might want to do this instead:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-whitespace-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>whitespace-line-count</code> determines that maximum line length; feel free
+to set this to whatever value suits you. <code>whitespace-style</code> determines
+what kind of stuff <code>whitespace-mode</code> is going to highlight. At this
+example we want to highlight only the part of lines exceeding the line
+length limit. Take a look at <code>whitespace-style</code>&#8217;s documentation for
+more details(<code>C-h v RET whitespace-style</code>).</p>
+
+<p>Here&#8217;s the result:</p>
+
+<p><img src="/images/articles/long-lines.png"></p>
+
+<p>It will probably come as no surprise that this functionality is
+enabled out-of-the-box in <a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -866,156 +950,6 @@ user. Unfortunately <code>proced</code> does not work on OSX(but perhaps surpris
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/29/start-command-or-switch-to-its-buffer/">Start Command or Switch to Its Buffer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-29T17:14:00+03:00" pubdate data-updated="true">Apr 29<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/29/start-command-or-switch-to-its-buffer/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Few weeks ago I showed you a
-<a href="/blog/2013/03/29/terminal-at-your-fingertips/">handy way to run <code>term-mode</code></a>. You
-might have noticed that it makes sense for many commands to be run in
-a similar manner. Here&#8217;s a quick example - I often like to jump
-between an Emacs Lisp source buffer and an <code>ielm</code> (interactive Emacs
-Lisp shell - <code>M-x ielm</code>) buffer to try out stuff. I could reuse the
-code I showed you for <code>ansi-term</code> to create a similar command called <code>visit-ielm</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">visit-ielm</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Create or visit a `ielm&#39; buffer.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nv">get-buffer</span> <span class="s">&quot;*ielm*&quot;</span><span class="p">))</span>
-</span><span class='line'>      <span class="p">(</span><span class="k">progn</span>
-</span><span class='line'>        <span class="p">(</span><span class="nv">split-window-sensibly</span> <span class="p">(</span><span class="nv">selected-window</span><span class="p">))</span>
-</span><span class='line'>        <span class="p">(</span><span class="nv">other-window</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">(</span><span class="nv">ielm</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">switch-to-buffer-other-window</span> <span class="s">&quot;*ielm*&quot;</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You might want to bind this to <code>C-c C-z</code> (a-la SLIME):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">emacs-lisp-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c C-z&quot;</span><span class="p">)</span> <span class="ss">&#39;visit-ielm</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I don&#8217;t know about you, but I hate code repetition. Having that in
-mind we can factor out the duplication like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">start-or-switch-to</span> <span class="p">(</span><span class="k">function</span> <span class="nv">buffer-name</span><span class="p">)</span>
-</span><span class='line'>  <span class="s">&quot;Invoke FUNCTION if there is no buffer with BUFFER-NAME.</span>
-</span><span class='line'><span class="s">Otherwise switch to the buffer named BUFFER-NAME.  Don&#39;t clobber</span>
-</span><span class='line'><span class="s">the current buffer.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nv">get-buffer</span> <span class="nv">buffer-name</span><span class="p">))</span>
-</span><span class='line'>      <span class="p">(</span><span class="k">progn</span>
-</span><span class='line'>        <span class="p">(</span><span class="nv">split-window-sensibly</span> <span class="p">(</span><span class="nv">selected-window</span><span class="p">))</span>
-</span><span class='line'>        <span class="p">(</span><span class="nv">other-window</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">(</span><span class="nb">funcall</span> <span class="k">function</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">switch-to-buffer-other-window</span> <span class="nv">buffer-name</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">visit-term-buffer</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Create or visit a terminal buffer.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">start-or-switch-to</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
-</span><span class='line'>                         <span class="p">(</span><span class="nv">ansi-term</span> <span class="p">(</span><span class="nv">getenv</span> <span class="s">&quot;SHELL&quot;</span><span class="p">)))</span>
-</span><span class='line'>                      <span class="s">&quot;*ansi-term*&quot;</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">visit-ielm</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Switch to default `ielm&#39; buffer.</span>
-</span><span class='line'><span class="s">Start `ielm&#39; if it&#39;s not already running.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">prelude-start-or-switch-to</span> <span class="ss">&#39;ielm</span> <span class="s">&quot;*ielm*&quot;</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Much better! We can now use <code>start-or-switch-to</code> to build any number of similar commands!</p>
-
-<p><code>start-or-switch-to</code> and <code>visit-ielm</code> are available in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
-prefix).</p>
-
-<p><strong>P.S.</strong> If you&#8217;d like some nice SLIME-like code navigation command in
-<code>emacs-lisp-mode</code> you might check out
-<a href="https://github.com/purcell/elisp-slime-nav">elisp-slime-nav</a>.</p>
-
-<p>SLIME allows very convenient navigation to the symbol at point (using
-<code>M-.</code>), and the ability to pop back to previous marks (using <code>M-,</code>).</p>
-
-<p>This plugin provides similar navigation for Emacs Lisp, supporting
-navigation to the definitions of variables, functions, libraries and
-faces.</p>
-
-<p>Additionally, <code>elisp-slime-nav</code> provides a way to describe the symbol at
-point, whatever its type. As with <code>slime-describe-symbol</code>, this
-functionality is bound both to <code>C-c C-d d</code> and <code>C-c C-d C-d</code> by default.</p>
-
-<p>It&#8217;s pretty useful if you hack Emacs Lisp yourselves. If you don&#8217;t
-hack Emacs Lisp (yet) you probably can do without it.</p>
-
-<p><code>elisp-slime-nav</code> comes bundled with Prelude.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -1039,6 +973,10 @@ hack Emacs Lisp (yet) you probably can do without it.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/03/02/pimp-my-minibuffer/">Pimp My Minibuffer Evaluation</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/14/look-up-the-keybindings-for-some-command/">Look up the keybindings for some command</a>
       </li>
     
@@ -1052,10 +990,6 @@ hack Emacs Lisp (yet) you probably can do without it.</p>
     
       <li class="post">
         <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a>
       </li>
     
   </ul>

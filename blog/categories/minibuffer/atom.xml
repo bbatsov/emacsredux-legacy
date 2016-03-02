@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: minibuffer | Emacs Redux]]></title>
+  <link href="http://emacsredux.com/blog/categories/minibuffer/atom.xml" rel="self"/>
+  <link href="http://emacsredux.com/"/>
+  <updated>2016-03-02T20:09:46+02:00</updated>
+  <id>http://emacsredux.com/</id>
+  <author>
+    <name><![CDATA[Bozhidar Batsov]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Pimp My Minibuffer Evaluation]]></title>
+    <link href="http://emacsredux.com/blog/2016/03/02/pimp-my-minibuffer/"/>
+    <updated>2016-03-02T18:57:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2016/03/02/pimp-my-minibuffer</id>
+    <content type="html"><![CDATA[<p>In Emacs you can evaluate Emacs Lisp pretty much anywhere - even
+<a href="http://emacsredux.com/blog/2013/04/18/evaluate-emacs-lisp-in-the-minibuffer/">in the minibuffer</a>. Writing
+Emacs Lisp in the minibuffer, however, is not exactly fantastic
+experience out-of-the-box - there's <code>TAB</code> completion, but what about
+<code>eldoc</code> and <code>paredit</code> for instance?</p>
+
+<p>If only there was a way to enable them... I suggested one trick in my
+original post on <code>eval-expression</code>, but Emacs 24.4 made things even
+easier by adding <code>eval-expression-minibuffer-setup-hook</code>. To enable
+<code>eldoc</code> for minibuffer evaluations use this snippet:</p>
+
+<p><code>cl
+(add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)
+</code></p>
+
+<p>For paredit you can use this one:</p>
+
+<p><code>cl
+(add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode)
+</code></p>
+
+<p>Obviously you can do the same for any other minor mode you might need.</p>
+
+<p>The best thing about this setup is that it will work with tools like
+CIDER and SLIME as well (they have similar commands which allow you to
+evaluate Clojure &amp; Common Lisp code and those command trigger
+<code>eval-expression-minibuffer-setup-hook</code>).</p>
+]]></content>
+  </entry>
+  
+</feed>

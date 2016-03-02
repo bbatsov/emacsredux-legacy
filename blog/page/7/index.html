@@ -9,10 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="One of the well known features of
-Prelude is that it saves buffers
-with changes in them automatically when you jump between
-windows. This is achieved &hellip;">
+  <meta name="description" content="Emacs users have a lot of power at their disposal, but in one
+department they are always short - the number of available
+non-complex keybindings that &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +81,95 @@ windows. This is achieved &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/17/make-use-of-the-super-key/">Make Use of the Super Key</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-17T16:16:00+03:00" pubdate data-updated="true">Jul 17<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/17/make-use-of-the-super-key/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs users have a lot of power at their disposal, but in one
+department they are always short - the number of available
+non-complex keybindings that they can leverage.</p>
+
+<p>Obviously nobody likes pressing keybindings like <code>C-p C-v k</code> (or
+something like that). One way to get your hands on some extra
+keybindings is to utilize the <code>Super</code> key (it&#8217;s the <code>Windows</code> key on
+Win keyboards and the <code>Command</code> key on Mac keyboards (although most
+people remap <code>Command</code> to <code>Meta</code> and <code>Option</code> to <code>Super</code>)). One great
+thing about <code>Super</code> is that you generally have two of them, which
+makes them touch-typing friend. Since almost no packages use those
+keys you&#8217;re left with plenty of options.</p>
+
+<p><a href="https://github.com/bbatsov/prelude">Prelude</a> defines a bunch of
+global keybindings that use the <code>Super</code> key.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; make some use of the Super key</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-d]</span> <span class="ss">&#39;projectile-find-dir</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-e]</span> <span class="ss">&#39;er/expand-region</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-f]</span> <span class="ss">&#39;projectile-find-file</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-g]</span> <span class="ss">&#39;projectile-grep</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-j]</span> <span class="ss">&#39;prelude-top-join-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-k]</span> <span class="ss">&#39;prelude-kill-whole-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-l]</span> <span class="ss">&#39;goto-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-m]</span> <span class="ss">&#39;magit-status</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-o]</span> <span class="ss">&#39;prelude-open-line-above</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-w]</span> <span class="ss">&#39;delete-frame</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-x]</span> <span class="ss">&#39;exchange-point-and-mark</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">global-map</span> <span class="nv">[?\s-p]</span> <span class="ss">&#39;projectile-switch-project</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you find pressing <code>Super</code> comfortable obviously you have the
+potential to add quite a lot more keybindings to this list.</p>
+
+<p><strong>P.S.</strong> Some keyboards (notably laptop ones) have a <code>Fn</code> key as well
+  that&#8217;s also usable in Emacs keybindings. Somewhat funny that key is
+  known in Emacs as <code>Hyper</code> (<code>Star Wars</code> fans are undoubtedly adding a
+  <strong>Hyper-Space</strong> keybinding to their setups right about now).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -890,91 +978,6 @@ several lines, use <code>C-j</code> (<code>newline-and-indent</code>).</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/">Highlight Lines That Exceed a Certain Length Limit</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-31T15:18:00+03:00" pubdate data-updated="true">May 31<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When you&#8217;re writing code you usually have to take into account the
-programming language&#8217;s convention for maximum line length. Most
-programming languages urge hackers to keep line length under 80
-characters(although in recent years it has often been argued that such
-rules should be relaxed to 100-120 characters, given the state of
-current computer displays).</p>
-
-<p>There are many ways to highlight lines that exceed a certain length in
-Emacs, but I find one to be particularly elegant - the use of the
-built-in <code>whitespace-mode</code>. Most people use <code>whitespace-mode</code> to
-visualize spaces, tabs and trailing whitespace, but it can actually do
-a bit more that that. Here&#8217;s the magic config:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;whitespace</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">whitespace-line-column</span> <span class="mi">80</span><span class="p">)</span> <span class="c1">;; limit line length</span>
-</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">whitespace-style</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">face</span> <span class="nv">lines-tail</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;prog-mode-hook</span> <span class="ss">&#39;whitespace-mode</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The above snippet will enable <code>whitespace-mode</code> only in major modes
-for programming. If you want to enable <code>whitespace-mode</code> everywhere
-you might want to do this instead:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-whitespace-mode</span> <span class="mi">+1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>whitespace-line-count</code> determines that maximum line length; feel free
-to set this to whatever value suits you. <code>whitespace-style</code> determines
-what kind of stuff <code>whitespace-mode</code> is going to highlight. At this
-example we want to highlight only the part of lines exceeding the line
-length limit. Take a look at <code>whitespace-style</code>&#8217;s documentation for
-more details(<code>C-h v RET whitespace-style</code>).</p>
-
-<p>Here&#8217;s the result:</p>
-
-<p><img src="/images/articles/long-lines.png"></p>
-
-<p>It will probably come as no surprise that this functionality is
-enabled out-of-the-box in <a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -998,6 +1001,10 @@ enabled out-of-the-box in <a href="https://github.com/bbatsov/prelude">Prelude</
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/03/02/pimp-my-minibuffer/">Pimp My Minibuffer Evaluation</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/14/look-up-the-keybindings-for-some-command/">Look up the keybindings for some command</a>
       </li>
     
@@ -1011,10 +1018,6 @@ enabled out-of-the-box in <a href="https://github.com/bbatsov/prelude">Prelude</
     
       <li class="post">
         <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/31/use-tab-to-indent-or-complete/">Use Tab to Indent or Complete</a>
       </li>
     
   </ul>
