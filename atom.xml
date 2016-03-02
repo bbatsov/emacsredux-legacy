@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2016-03-02T20:09:46+02:00</updated>
+  <updated>2016-03-02T20:11:46+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -34,7 +34,7 @@ easier by adding <code>eval-expression-minibuffer-setup-hook</code>. To enable
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>For paredit you can use this one:</p>
+<p>For <code>paredit</code> you can use this one:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;eval-expression-minibuffer-setup-hook</span> <span class="nf">#&#39;</span><span class="nv">paredit-mode</span><span class="p">)</span>
@@ -44,9 +44,10 @@ easier by adding <code>eval-expression-minibuffer-setup-hook</code>. To enable
 <p>Obviously you can do the same for any other minor mode you might need.</p>
 
 <p>The best thing about this setup is that it will work with tools like
-CIDER and SLIME as well (they have similar commands which allow you to
-evaluate Clojure &amp; Common Lisp code and those command trigger
-<code>eval-expression-minibuffer-setup-hook</code>).</p>
+<a href="https://github.com/clojure-emacs/cider">CIDER</a> and
+<a href="https://github.com/slime/slime">SLIME</a> as well (they have similar
+commands which allow you to evaluate Clojure &amp; Common Lisp code and
+those command trigger <code>eval-expression-minibuffer-setup-hook</code>).</p>
 ]]></content>
   </entry>
   
