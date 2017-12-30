@@ -27,10 +27,10 @@ I happen to maintain a few Emacs related projects:
 
 I was also the original maintainer of [WikEmacs](http://wikemacs.org) - a community documentation portal for Emacs.
 
-If you like my projects you can support their development via [gratipay](https://www.gratipay.com/bbatsov) or PayPal.
+If you like my projects you can support their development via Patreon, Liberapay or PayPal.
 
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png)](https://gratipay.com/bbatsov)
-
+[![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/bbatsov)
+[![Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/bbatsov/donate)
 [![Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3J4QE5QBJU84Q)
 
 Why does **Emacs Redux** exist?
