@@ -5,15 +5,15 @@ sharing: true
 footer: true
 ---
 
-My name is [Bozhidar](http://batsov.com). I'm an Emacs buff (and a
+My name is [Bozhidar](http://batsov.com). I'm an Emacs zealot (and a
 software engineer) from Bulgaria.
 
-I happen to maintain a few Emacs related projects:
+I happen to maintain a few Emacs-related projects:
 
-* [Prelude](https://github.com/bbatsov/prelude) - An Emacs distribution built on top of GNU Emacs 24
+* [Prelude](https://github.com/bbatsov/prelude) - An Emacs distribution built on top of GNU Emacs
 * [Projectile](https://github.com/bbatsov/projectile) - Project Interaction Library for Emacs, that stays out of your way
 * [clojure-mode](https://github.com/clojure-emacs/clojure-mode) - A major mode for programming in Clojure
-* [cider](https://github.com/clojure-emacs/cider) - A Clojure programming environment for Emacs
+* [CIDER](https://github.com/clojure-emacs/cider) - A Clojure programming environment for Emacs
 * [inf-clojure](https://github.com/clojure-emacs/inf-clojure) - Basic interaction with a Clojure subprocess
 * [guru-mode](https://github.com/bbatsov/guru-mode) - An annoying companion on your journey to Emacs mastery
 * [rubocop-emacs](https://github.com/bbatsov/projectile) - Emacs integration for [RuboCop](https://github.com/bbatsov/rubocop)
@@ -35,14 +35,14 @@ If you like my projects you can support their development via Patreon, Liberapay
 
 Why does **Emacs Redux** exist?
 
-While many people consider Emacs(and vim for that matter) a remnant of
-the Dark Ages of computing, we (the crazy Emacs devotees) know better!
-It's time to bring Emacs under the spotlight once more and showcase
-its unique advantages over the more "traditional" (conventional) text
-editors and integrated development environments.
+While many people consider Emacs (and *vim* for that matter) a remnant
+of the Dark Ages of computing, we (the crazy Emacs devotees) know
+better!  It's time to bring Emacs under the spotlight once more and
+showcase its unique advantages over the more "traditional"
+(conventional) text editors and integrated development environments.
 
-In this blog dedicated to the One True
-Editor I'll be sharing with you useful tips and tricks to make your
+In this blog, dedicated to the One True
+Editor, I'll be sharing with you useful tips and tricks to make your
 experience with Emacs more productive and more enjoyable.
 
 Don't hesitate to contact me with questions, feedback and suggestions
