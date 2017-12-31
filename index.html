@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="In Emacs you can evaluate Emacs Lisp pretty much anywhere - even
-in the minibuffer. Writing
-Emacs Lisp in the minibuffer, however, is not exactly &hellip;">
+  <meta name="description" content="CIDER is a popular Clojure
+programming environment for Emacs. In a nutshell - CIDER extends Emacs with support for interactive
+programming in Clojure &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,90 @@ Emacs Lisp in the minibuffer, however, is not exactly &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/12/31/into-to-cider/">Into to CIDER</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-12-31T10:57:00+02:00" pubdate data-updated="true">Dec 31<span>st</span>, 2017</time>
+        
+         | <a href="/blog/2017/12/31/into-to-cider/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/clojure-emacs/cider">CIDER</a> is a popular Clojure
+programming environment for Emacs.</p>
+
+<p>In a nutshell - CIDER extends Emacs with support for interactive
+programming in Clojure. The features are centered around <code>cider-mode</code>,
+an Emacs minor-mode that complements <code>clojure-mode</code>. While <code>clojure-mode</code>
+supports editing Clojure source files, <code>cider-mode</code> adds support for
+interacting with a running Clojure process for compilation, debugging,
+definition and documentation lookup, running tests and so on.</p>
+
+<p>You can safely think of CIDER as SLIME (a legendary Common Lisp programming
+environment) for Clojure - after all SLIME was the principle
+inspiration for CIDER to begin with. If you&#8217;re interested in some
+historical background you can check out my talk on the subject <a href="https://www.youtube.com/watch?v=4X-1fJm25Ww&amp;list=PLZdCLR02grLoc322bYirANEso3mmzvCiI&amp;index=6">The
+Evolution of the Emacs tooling for
+Clojure</a>.</p>
+
+<p>Many people who are new to Lisps (and Emacs) really struggle with the concept of
+&#8220;interactive programming&#8221; and are often asking what&#8217;s the easiest (and
+fastest) way to &#8220;grok&#8221; (understand) it.</p>
+
+<p>While CIDER has an extensive <a href="https://cider.readthedocs.io/">manual</a> and a section
+on <a href="https://cider.readthedocs.io/en/latest/interactive_programming/">interactive programming</a> there,
+it seems for most people that&#8217;s not enough to get a clear understanding
+of interactive programming fundamentals and appreciate its advantages.</p>
+
+<p>I always felt what CIDER needed were more video tutorials on the
+subject, but for one reason or another I never found the time to
+produce any. In the past this <a href="https://www.youtube.com/watch?v=_B_4vhsmRRI">amazing intro to
+SLIME</a> really changed my
+perception of SLIME and got me from 0 to 80 in like one hour. I wanted
+to do the same for CIDER users! And I accidentally did this in a way
+last year - at a FP conference I was attending to present CIDER, one
+of the speakers dropped out, and I was invited to fill in for them
+with a hands-on session on CIDER. It was officially named <a href="https://www.youtube.com/watch?v=aYA4AAjLfT0">Deep Dive
+into CIDER</a>, but probably
+&#8220;Intro to CIDER&#8221; would have been a more appropriate name, and it&#8217;s
+likely the best video introduction to CIDER around today. It&#8217;s
+certainly not my finest piece of work, and I definitely have to
+revisit the idea for proper high-quality tutorials in the future, but
+it&#8217;s better than nothing. I hope at least some of you would find it useful!</p>
+
+<p>You might also find some of the <a href="https://cider.readthedocs.io/en/latest/additional_resources/">additional CIDER
+resources</a>
+mentioned in the manual helpful.</p>
+
+<p>Enjoy!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -697,91 +781,6 @@ its own.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/30/crux/">Crux</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-01-30T11:37:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
-        
-         | <a href="/blog/2016/01/30/crux/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;d often blog about some useful utility functions here. Pretty much
-all of them get included in
-<a href="https://github.com/bbatsov/prelude">Emacs Prelude</a>, but I&#8217;ve decided I can do one better and extract those of
-them which are most useful/universal into a separate package.</p>
-
-<p>This package is <a href="https://github.com/bbatsov/crux">crux</a> - a
-<strong>C</strong>ollection of <strong>R</strong>idiculously <strong>U</strong>seful e<strong>X</strong>tensions for
-Emacs.</p>
-
-<p>You can install it from MELPA and MELPA Stable. Once this is done you
-just have to pick keybindings for the commands shipped with
-<code>crux</code>. I&#8217;ve suggested some keybindings
-<a href="https://github.com/bbatsov/crux#keybindings">here</a>. And here&#8217;s a
-small configuration snippet showing how to actually bind keys to some
-of <code>crux</code>&#8217;s commands:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">move-beginning-of-line]</span> <span class="nf">#&#39;</span><span class="nv">crux-move-beginning-of-line</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c o&quot;</span><span class="p">)</span> <span class="nf">#&#39;</span><span class="nv">crux-open-with</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">shift</span> <span class="nb">return</span><span class="p">)</span><span class="nv">]</span> <span class="nf">#&#39;</span><span class="nv">crux-smart-open-line</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;s-r&quot;</span><span class="p">)</span> <span class="nf">#&#39;</span><span class="nv">crux-recentf-ido-find-file</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-&lt;backspace&gt;&quot;</span> <span class="nf">#&#39;</span><span class="nv">crux-kill-line-backwards</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">kill-whole-line]</span> <span class="nf">#&#39;</span><span class="nv">crux-kill-whole-line</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>crux</code> also ships with some handy advises that can enhance the operation of existing commands.</p>
-
-<p>For instance - you can use <code>crux-with-region-or-buffer</code> to make a
-command acting normally on a region to operate on the entire buffer in
-the absense of a region. Here are a few examples you can stuff in your
-config:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">crux-with-region-or-buffer</span> <span class="nv">indent-region</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">crux-with-region-or-buffer</span> <span class="nv">untabify</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So, this is <code>crux</code> for you - simple and neat! I&#8217;d love it if you
-contributed more useful commands to it, so we can make it even more
-versatile!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -804,6 +803,10 @@ versatile!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/12/31/into-to-cider/">Into to CIDER</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/03/02/pimp-my-minibuffer/">Pimp My Minibuffer Evaluation</a>
       </li>
     
@@ -817,10 +820,6 @@ versatile!</p>
     
       <li class="post">
         <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
       </li>
     
   </ul>

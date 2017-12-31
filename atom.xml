@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2017-12-31T00:02:49+02:00</updated>
+  <updated>2017-12-31T11:17:48+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Into to CIDER]]></title>
+    <link href="http://emacsredux.com/blog/2017/12/31/into-to-cider/"/>
+    <updated>2017-12-31T10:57:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2017/12/31/into-to-cider</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/clojure-emacs/cider">CIDER</a> is a popular Clojure
+programming environment for Emacs.</p>
+
+<p>In a nutshell - CIDER extends Emacs with support for interactive
+programming in Clojure. The features are centered around <code>cider-mode</code>,
+an Emacs minor-mode that complements <code>clojure-mode</code>. While <code>clojure-mode</code>
+supports editing Clojure source files, <code>cider-mode</code> adds support for
+interacting with a running Clojure process for compilation, debugging,
+definition and documentation lookup, running tests and so on.</p>
+
+<p>You can safely think of CIDER as SLIME (a legendary Common Lisp programming
+environment) for Clojure - after all SLIME was the principle
+inspiration for CIDER to begin with. If you&#8217;re interested in some
+historical background you can check out my talk on the subject <a href="https://www.youtube.com/watch?v=4X-1fJm25Ww&amp;list=PLZdCLR02grLoc322bYirANEso3mmzvCiI&amp;index=6">The
+Evolution of the Emacs tooling for
+Clojure</a>.</p>
+
+<p>Many people who are new to Lisps (and Emacs) really struggle with the concept of
+&#8220;interactive programming&#8221; and are often asking what&#8217;s the easiest (and
+fastest) way to &#8220;grok&#8221; (understand) it.</p>
+
+<p>While CIDER has an extensive <a href="https://cider.readthedocs.io/">manual</a> and a section
+on <a href="https://cider.readthedocs.io/en/latest/interactive_programming/">interactive programming</a> there,
+it seems for most people that&#8217;s not enough to get a clear understanding
+of interactive programming fundamentals and appreciate its advantages.</p>
+
+<p>I always felt what CIDER needed were more video tutorials on the
+subject, but for one reason or another I never found the time to
+produce any. In the past this <a href="https://www.youtube.com/watch?v=_B_4vhsmRRI">amazing intro to
+SLIME</a> really changed my
+perception of SLIME and got me from 0 to 80 in like one hour. I wanted
+to do the same for CIDER users! And I accidentally did this in a way
+last year - at a FP conference I was attending to present CIDER, one
+of the speakers dropped out, and I was invited to fill in for them
+with a hands-on session on CIDER. It was officially named <a href="https://www.youtube.com/watch?v=aYA4AAjLfT0">Deep Dive
+into CIDER</a>, but probably
+&#8220;Intro to CIDER&#8221; would have been a more appropriate name, and it&#8217;s
+likely the best video introduction to CIDER around today. It&#8217;s
+certainly not my finest piece of work, and I definitely have to
+revisit the idea for proper high-quality tutorials in the future, but
+it&#8217;s better than nothing. I hope at least some of you would find it useful!</p>
+
+<p>You might also find some of the <a href="https://cider.readthedocs.io/en/latest/additional_resources/">additional CIDER
+resources</a>
+mentioned in the manual helpful.</p>
+
+<p>Enjoy!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Pimp My Minibuffer Evaluation]]></title>
@@ -819,100 +874,6 @@ functionality):</p>
 <p></p>
 
 <p>Simple and elegant, right? One day it might even end up being part of <code>comint</code> itself.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Customizing the Fringes]]></title>
-    <link href="http://emacsredux.com/blog/2015/01/18/customizing-the-fringes/"/>
-    <updated>2015-01-18T09:41:00+02:00</updated>
-    <id>http://emacsredux.com/blog/2015/01/18/customizing-the-fringes</id>
-    <content type="html"><![CDATA[<p>On graphical displays, each Emacs window normally has narrow <strong>fringes</strong> (gutters/margins)
-on the left and right edges. The fringes are used to display symbols
-that provide information about the text in the window. You can type
-<code>M-x fringe-mode</code> to disable the fringes, or modify their width. This
-command affects fringes in all frames; to modify fringes on the
-selected frame only, use <code>M-x set-fringe-style</code>. You can make your
-changes to the fringes permanent by customizing the variable
-<code>fringe-mode</code>.</p>
-
-<p>Out-of-the-box the most common use of the fringes is to indicate a continuation
-line. When one line of text is split into multiple screen lines, the
-left fringe shows a curving arrow for each screen line except the
-first, indicating that “this is not the real beginning”. The right
-fringe shows a curving arrow for each screen line except the last,
-indicating that “this is not the real end”. If the line&#8217;s direction is
-right-to-left, the meanings of the curving
-arrows in the fringes are swapped.</p>
-
-<p>Third-party modes like
-<a href="https://github.com/flycheck/flycheck">flycheck</a> and
-<a href="https://github.com/dgutov/diff-hl">diff-hl</a> also make use of the fringe to
-display valuable information there (e.g. lint and VC information).</p>
-
-<p>By default both fringes have width 8 pixels, but we can easily adjust this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; make both fringes 4 pixels wide</span>
-</span><span class='line'><span class="p">(</span><span class="nv">fringe-mode</span> <span class="mi">4</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">;; make the left fringe 4 pixels wide and the right disappear</span>
-</span><span class='line'><span class="p">(</span><span class="nv">fringe-mode</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">4</span> <span class="o">.</span> <span class="mi">0</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">;; restore the default sizes</span>
-</span><span class='line'><span class="p">(</span><span class="nv">fringe-mode</span> <span class="no">nil</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As mentioned before, you can also invoke this command interactively and
-determine the optimal fringe size for you, before making it permanent in
-your config. The options presented by the <code>fring-mode</code> command are defined
-in the <code>fringe-styles</code> list:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">defconst</span> <span class="nv">fringe-styles</span>
-</span><span class='line'>  <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;default&quot;</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&quot;no-fringes&quot;</span> <span class="o">.</span> <span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&quot;right-only&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="mi">0</span> <span class="o">.</span> <span class="no">nil</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&quot;left-only&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="no">nil</span> <span class="o">.</span> <span class="mi">0</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&quot;half-width&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="mi">4</span> <span class="o">.</span> <span class="mi">4</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&quot;minimal&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="mi">1</span> <span class="o">.</span> <span class="mi">1</span><span class="p">)))</span>
-</span><span class='line'>  <span class="s">&quot;Alist mapping fringe mode names to fringe widths.</span>
-</span><span class='line'><span class="s">Each list element has the form (NAME . WIDTH), where NAME is a</span>
-</span><span class='line'><span class="s">mnemonic fringe mode name and WIDTH is one of the following:</span>
-</span><span class='line'><span class="s">- nil, which means the default width (8 pixels).</span>
-</span><span class='line'><span class="s">- a cons cell (LEFT . RIGHT), where LEFT and RIGHT are</span>
-</span><span class='line'><span class="s">  respectively the left and right fringe widths in pixels, or</span>
-</span><span class='line'><span class="s">  nil (meaning the default width).</span>
-</span><span class='line'><span class="s">- a single integer, which specifies the pixel widths of both</span>
-</span><span class='line'><span class="s">fringes.&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Be careful when playing with the fringe size. Certain info doesn&#8217;t
-look very good when the fringe is too small (e.g. less than 4 pixels).</p>
 ]]></content>
   </entry>
   

@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="A while back I wrote
-an article on saving buffers when they lose focus. Recently I&#8217;ve packaged (an improved version of) this functionality
-into &hellip;">
+  <meta name="description" content="I&#8217;d often blog about some useful utility functions here. Pretty much
+all of them get included in
+Emacs Prelude, but I&#8217;ve decided I can do &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,91 @@ into &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/30/crux/">Crux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-30T11:37:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
+        
+         | <a href="/blog/2016/01/30/crux/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;d often blog about some useful utility functions here. Pretty much
+all of them get included in
+<a href="https://github.com/bbatsov/prelude">Emacs Prelude</a>, but I&#8217;ve decided I can do one better and extract those of
+them which are most useful/universal into a separate package.</p>
+
+<p>This package is <a href="https://github.com/bbatsov/crux">crux</a> - a
+<strong>C</strong>ollection of <strong>R</strong>idiculously <strong>U</strong>seful e<strong>X</strong>tensions for
+Emacs.</p>
+
+<p>You can install it from MELPA and MELPA Stable. Once this is done you
+just have to pick keybindings for the commands shipped with
+<code>crux</code>. I&#8217;ve suggested some keybindings
+<a href="https://github.com/bbatsov/crux#keybindings">here</a>. And here&#8217;s a
+small configuration snippet showing how to actually bind keys to some
+of <code>crux</code>&#8217;s commands:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">move-beginning-of-line]</span> <span class="nf">#&#39;</span><span class="nv">crux-move-beginning-of-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c o&quot;</span><span class="p">)</span> <span class="nf">#&#39;</span><span class="nv">crux-open-with</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">shift</span> <span class="nb">return</span><span class="p">)</span><span class="nv">]</span> <span class="nf">#&#39;</span><span class="nv">crux-smart-open-line</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;s-r&quot;</span><span class="p">)</span> <span class="nf">#&#39;</span><span class="nv">crux-recentf-ido-find-file</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-&lt;backspace&gt;&quot;</span> <span class="nf">#&#39;</span><span class="nv">crux-kill-line-backwards</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">kill-whole-line]</span> <span class="nf">#&#39;</span><span class="nv">crux-kill-whole-line</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>crux</code> also ships with some handy advises that can enhance the operation of existing commands.</p>
+
+<p>For instance - you can use <code>crux-with-region-or-buffer</code> to make a
+command acting normally on a region to operate on the entire buffer in
+the absense of a region. Here are a few examples you can stuff in your
+config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">crux-with-region-or-buffer</span> <span class="nv">indent-region</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nv">crux-with-region-or-buffer</span> <span class="nv">untabify</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, this is <code>crux</code> for you - simple and neat! I&#8217;d love it if you
+contributed more useful commands to it, so we can make it even more
+versatile!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -742,129 +827,6 @@ functionality):</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/18/customizing-the-fringes/">Customizing the Fringes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-18T09:41:00+02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2015</time>
-        
-         | <a href="/blog/2015/01/18/customizing-the-fringes/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>On graphical displays, each Emacs window normally has narrow <strong>fringes</strong> (gutters/margins)
-on the left and right edges. The fringes are used to display symbols
-that provide information about the text in the window. You can type
-<code>M-x fringe-mode</code> to disable the fringes, or modify their width. This
-command affects fringes in all frames; to modify fringes on the
-selected frame only, use <code>M-x set-fringe-style</code>. You can make your
-changes to the fringes permanent by customizing the variable
-<code>fringe-mode</code>.</p>
-
-<p>Out-of-the-box the most common use of the fringes is to indicate a continuation
-line. When one line of text is split into multiple screen lines, the
-left fringe shows a curving arrow for each screen line except the
-first, indicating that “this is not the real beginning”. The right
-fringe shows a curving arrow for each screen line except the last,
-indicating that “this is not the real end”. If the line&#8217;s direction is
-right-to-left, the meanings of the curving
-arrows in the fringes are swapped.</p>
-
-<p>Third-party modes like
-<a href="https://github.com/flycheck/flycheck">flycheck</a> and
-<a href="https://github.com/dgutov/diff-hl">diff-hl</a> also make use of the fringe to
-display valuable information there (e.g. lint and VC information).</p>
-
-<p>By default both fringes have width 8 pixels, but we can easily adjust this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; make both fringes 4 pixels wide</span>
-</span><span class='line'><span class="p">(</span><span class="nv">fringe-mode</span> <span class="mi">4</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">;; make the left fringe 4 pixels wide and the right disappear</span>
-</span><span class='line'><span class="p">(</span><span class="nv">fringe-mode</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">4</span> <span class="o">.</span> <span class="mi">0</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">;; restore the default sizes</span>
-</span><span class='line'><span class="p">(</span><span class="nv">fringe-mode</span> <span class="no">nil</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As mentioned before, you can also invoke this command interactively and
-determine the optimal fringe size for you, before making it permanent in
-your config. The options presented by the <code>fring-mode</code> command are defined
-in the <code>fringe-styles</code> list:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">defconst</span> <span class="nv">fringe-styles</span>
-</span><span class='line'>  <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;default&quot;</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&quot;no-fringes&quot;</span> <span class="o">.</span> <span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&quot;right-only&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="mi">0</span> <span class="o">.</span> <span class="no">nil</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&quot;left-only&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="no">nil</span> <span class="o">.</span> <span class="mi">0</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&quot;half-width&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="mi">4</span> <span class="o">.</span> <span class="mi">4</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="s">&quot;minimal&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="mi">1</span> <span class="o">.</span> <span class="mi">1</span><span class="p">)))</span>
-</span><span class='line'>  <span class="s">&quot;Alist mapping fringe mode names to fringe widths.</span>
-</span><span class='line'><span class="s">Each list element has the form (NAME . WIDTH), where NAME is a</span>
-</span><span class='line'><span class="s">mnemonic fringe mode name and WIDTH is one of the following:</span>
-</span><span class='line'><span class="s">- nil, which means the default width (8 pixels).</span>
-</span><span class='line'><span class="s">- a cons cell (LEFT . RIGHT), where LEFT and RIGHT are</span>
-</span><span class='line'><span class="s">  respectively the left and right fringe widths in pixels, or</span>
-</span><span class='line'><span class="s">  nil (meaning the default width).</span>
-</span><span class='line'><span class="s">- a single integer, which specifies the pixel widths of both</span>
-</span><span class='line'><span class="s">fringes.&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Be careful when playing with the fringe size. Certain info doesn&#8217;t
-look very good when the fringe is too small (e.g. less than 4 pixels).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -889,6 +851,10 @@ look very good when the fringe is too small (e.g. less than 4 pixels).</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/12/31/into-to-cider/">Into to CIDER</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/03/02/pimp-my-minibuffer/">Pimp My Minibuffer Evaluation</a>
       </li>
     
@@ -902,10 +868,6 @@ look very good when the fringe is too small (e.g. less than 4 pixels).</p>
     
       <li class="post">
         <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
       </li>
     
   </ul>

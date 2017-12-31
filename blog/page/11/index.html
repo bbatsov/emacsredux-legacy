@@ -9,8 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Many text editors and IDEs offer the ability to close all open files
-with the exception of the one you&#8217;re currently in. Emacs does not. At &hellip;">
+  <meta name="description" content="Every Emacs user knows what C-x o(other-window) does - it moves
+your cursor to the next window. When you&#8217;re out of windows - the
+command will &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,80 @@ with the exception of the one you&#8217;re currently in. Emacs does not. At &hel
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/30/go-back-to-previous-window/">Go Back to Previous Window</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-30T18:11:00+02:00" pubdate data-updated="true">Mar 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/30/go-back-to-previous-window/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Every Emacs user knows what <code>C-x o</code>(<code>other-window</code>) does - it moves
+your cursor to the next window. When you&#8217;re out of windows - the
+command will take you back to the first one.</p>
+
+<p>Relatively few people are aware that the command takes a prefix
+argument which allows you to move several windows forward or
+backward. That&#8217;s obviously pretty useful when you&#8217;re a heavy window user
+and like to split your frames into many windows.</p>
+
+<p>To move 3 windows forward you&#8217;d do <code>C-u 3 C-x o</code>. To move 2 windows
+backwards you&#8217;d do <code>C-u -2 C-x o</code>.</p>
+
+<p>If you&#8217;re mostly working with only two windows you probably don&#8217;t need
+to know that much about <code>other-window</code> - after all invoking the
+command one time will take you to the other window and invoking it a
+second time will take you back to the window you were originally
+in. I, however, often employ 3 or windows (blessed be the people who
+made huge LCD displays so cheap) and I really dislike having to type
+<code>C-u -1 C-x o</code> (or <code>C-- C-x o</code>, <code>M--1 C-x o</code> or <code>M-- C-x o</code> for that
+matter) to go back to the previous window. To alleviate that
+particular nuisance I utilize the following little trick:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-x O&quot;</span><span class="p">)</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+</span><span class='line'>                                <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>                                <span class="p">(</span><span class="nv">other-window</span> <span class="mi">-1</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now pressing <code>C-x O</code> (that&#8217;s not a zero, it&#8217;s a capital <code>o</code>) will
+always take me to the previous window, no matter how many windows are
+currently present.</p>
+
+<p>The <code>C-x O</code> keybinding is available out-of-the-box in
+<a href="https://github.com/bbatsov/prelude">Prelude</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -793,75 +868,6 @@ With a prefix argument you&#8217;ll always be prompted for the name of the progr
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/27/copy-filename-to-the-clipboard/">Copy Filename to the Clipboard</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-27T12:17:00+02:00" pubdate data-updated="true">Mar 27<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/27/copy-filename-to-the-clipboard/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Sometimes I need to copy the name of the currently visited file to the
-clipboard.  Emacs does not have a built-in command for that, but
-cooking one is pretty straightforward:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">copy-file-name-to-clipboard</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Copy the current buffer file name to the clipboard.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">filename</span> <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">equal</span> <span class="nv">major-mode</span> <span class="ss">&#39;dired-mode</span><span class="p">)</span>
-</span><span class='line'>                      <span class="nv">default-directory</span>
-</span><span class='line'>                    <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">))))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="nv">filename</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">kill-new</span> <span class="nv">filename</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Copied buffer file name &#39;%s&#39; to the clipboard.&quot;</span> <span class="nv">filename</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Evaluate the new bit of code in Emacs (maybe by using <code>C-M-x</code>
-somewhere in the body of the function definition) and invoke the
-command with <code>M-x copy-file-name-to-clipboard</code>.</p>
-
-<p>This command is part of
-<a href="https://github.com/bbatsov/prelude">Prelude</a>(it&#8217;s named
-<code>prelude-copy-file-name-to-clipboard</code> there).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -886,6 +892,10 @@ command with <code>M-x copy-file-name-to-clipboard</code>.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/12/31/into-to-cider/">Into to CIDER</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/03/02/pimp-my-minibuffer/">Pimp My Minibuffer Evaluation</a>
       </li>
     
@@ -899,10 +909,6 @@ command with <code>M-x copy-file-name-to-clipboard</code>.</p>
     
       <li class="post">
         <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
       </li>
     
   </ul>

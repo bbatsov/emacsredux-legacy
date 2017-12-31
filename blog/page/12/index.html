@@ -9,8 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Sometimes you&#8217;ll want to quickly repeat an Emacs command several times and
-more often than not it won&#8217;t have a convenient keybinding you &hellip;">
+  <meta name="description" content="Sometimes I need to copy the name of the currently visited file to the
+clipboard. Emacs does not have a built-in command for that, but
+cooking one is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,75 @@ more often than not it won&#8217;t have a convenient keybinding you &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/27/copy-filename-to-the-clipboard/">Copy Filename to the Clipboard</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-27T12:17:00+02:00" pubdate data-updated="true">Mar 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/27/copy-filename-to-the-clipboard/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sometimes I need to copy the name of the currently visited file to the
+clipboard.  Emacs does not have a built-in command for that, but
+cooking one is pretty straightforward:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">copy-file-name-to-clipboard</span> <span class="p">()</span>
+</span><span class='line'>  <span class="s">&quot;Copy the current buffer file name to the clipboard.&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">filename</span> <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">equal</span> <span class="nv">major-mode</span> <span class="ss">&#39;dired-mode</span><span class="p">)</span>
+</span><span class='line'>                      <span class="nv">default-directory</span>
+</span><span class='line'>                    <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">))))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="nv">filename</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">kill-new</span> <span class="nv">filename</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Copied buffer file name &#39;%s&#39; to the clipboard.&quot;</span> <span class="nv">filename</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Evaluate the new bit of code in Emacs (maybe by using <code>C-M-x</code>
+somewhere in the body of the function definition) and invoke the
+command with <code>M-x copy-file-name-to-clipboard</code>.</p>
+
+<p>This command is part of
+<a href="https://github.com/bbatsov/prelude">Prelude</a>(it&#8217;s named
+<code>prelude-copy-file-name-to-clipboard</code> there).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -417,6 +487,10 @@ that I&#8217;ve uncovered many interesting things to share with you.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/12/31/into-to-cider/">Into to CIDER</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/03/02/pimp-my-minibuffer/">Pimp My Minibuffer Evaluation</a>
       </li>
     
@@ -430,10 +504,6 @@ that I&#8217;ve uncovered many interesting things to share with you.</p>
     
       <li class="post">
         <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/01/display-the-keybinding-for-a-command-with-substitute-command-keys/">Display the Keybinding for a Command with substitute-command-keys</a>
       </li>
     
   </ul>
