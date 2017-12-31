@@ -9,9 +9,10 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="CIDER is a popular Clojure
-programming environment for Emacs. In a nutshell - CIDER extends Emacs with support for interactive
-programming in Clojure &hellip;">
+  <meta name="description" content="Back in 2013 I wrote about my favourite productivity boost in Emacs,
+namely remapping Return to
+Control,
+which in combination with the classic &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +82,75 @@ programming in Clojure &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/">A Crazy Productivity Boost: Remapping Return to Control (2017 Edition)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-12-31T11:22:00+02:00" pubdate data-updated="true">Dec 31<span>st</span>, 2017</time>
+        
+         | <a href="/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Back in 2013 I wrote about my favourite productivity boost in Emacs,
+namely <a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">remapping Return to
+Control</a>,
+which in combination with the classic remapping of <code>CapsLock</code> to
+<code>Control</code> makes it really easy to get a grip on Emacs&#8217;s obsession with
+the Control key.</p>
+
+<p>In the original article I suggested to OS X (now macOS) users the tool
+<code>KeyRemap4MacBook</code>, which was eventually renamed to
+<a href="https://pqrs.org/osx/karabiner/">Karabiner</a>. Unfortunately this tool
+stopped working in macOS Sierra, due to some internal kernel
+architecture changes.</p>
+
+<p>That was pretty painful for me as it meant that on my old MacBook
+I couldn&#8217;t upgrade to the newest macOS editions and on my new
+MacBook I couldn&#8217;t type properly in Emacs (as it came with Sierra pre-installed)&#8230;
+Bummer!</p>
+
+<p>Fortunately 2 years later this is finally solved - the Karabiner team
+rewrote Karabiner from scratch for newer macOS releases and recently
+added my dream feature to the new <code>Karabiner Elements</code>. Unlike in the
+past though, this remapping is not actually bundled with Karabiner by
+default, so you have to download and enable it manually from
+<a href="https://pqrs.org/osx/karabiner/complex_modifications/#caps_and_return_to_ctrl">here</a>.</p>
+
+<p>That&#8217;s actually even better than what I had originally suggested, as
+here it&#8217;s also suggested to use <code>CapsLock</code> with a dual purpose as
+well - <code>Control</code> when held down and <code>Escape</code> otherwise.  I have no
+idea how this never came to my mind, but it&#8217;s truly epic! A crazy
+productivity boost just got even crazier!</p>
+
+<p>Enjoy!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -698,89 +768,6 @@ find something useful there.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/">Remap Return to Control in GNU/Linux</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-01-30T11:48:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
-        
-         | <a href="/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A long time ago I wrote about
-<a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">remapping Return to Control in OS X</a>.
-This was the best productivity boost for my Emacs experience ever!</p>
-
-<p>Recently I&#8217;ve bought a Windows ultrabook (wanted something as light as
-MacBook Air, but more powerful and versatile) and I&#8217;m doing most of my
-work there in a Xubuntu VM. The first thing I did while setting up Xubuntu
-was to figure out how to do the aforementioned remapping.</p>
-
-<p>In my original post some people suggested the tool
-<a href="https://github.com/alols/xcape">xcape</a>, so I took a look at it.  The
-tool can certainly use some documentation improvements (and pre-built
-packages), but it gets the job done. After you&#8217;ve installed it you
-just need to add the following to your login shell&#8217;s init file
-(e.g. <code>.bash_profile</code>) and you&#8217;re in business:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>xmodmap -e "remove Control = Control_R"
-</span><span class='line'>xmodmap -e "keycode 0x69 = Return"
-</span><span class='line'>xmodmap -e "keycode 0x24 = Control_R"
-</span><span class='line'>xmodmap -e "add Control = Control_R"
-</span><span class='line'>
-</span><span class='line'>xcape -t 10000 -e "Control_R=Return"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Obviously the first time around you should source <code>.bash_profile</code>
-after updating it:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ . .bash_profile</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is definitely a lot more work than just clicking in the GUI of
-the wonderful <a href="https://pqrs.org/osx/karabiner/">Karabiner</a>, but it yields
-the desired results and that&#8217;s what&#8217;s important at the end of the day.</p>
-
-<p>Now if only there was a way to achieve the same result in Windows&#8230;</p>
-
-<p>P.S. <code>vim</code> users will love <code>xcape</code>. Its default behaviour is to
-generate the <code>Escape</code> key when <code>Left Control</code> is pressed and released on
-its own.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -803,6 +790,10 @@ its own.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/">A Crazy Productivity Boost: Remapping Return to Control (2017 Edition)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/12/31/into-to-cider/">Into to CIDER</a>
       </li>
     
@@ -816,10 +807,6 @@ its own.</p>
     
       <li class="post">
         <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
       </li>
     
   </ul>

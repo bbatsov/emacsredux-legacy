@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Productivity | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/productivity/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2017-12-31T11:17:48+02:00</updated>
+  <updated>2017-12-31T11:39:16+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Crazy Productivity Boost: Remapping Return to Control (2017 Edition)]]></title>
+    <link href="http://emacsredux.com/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/"/>
+    <updated>2017-12-31T11:22:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition</id>
+    <content type="html"><![CDATA[<p>Back in 2013 I wrote about my favourite productivity boost in Emacs,
+namely <a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">remapping Return to
+Control</a>,
+which in combination with the classic remapping of <code>CapsLock</code> to
+<code>Control</code> makes it really easy to get a grip on Emacs's obsession with
+the Control key.</p>
+
+<p>In the original article I suggested to OS X (now macOS) users the tool
+<code>KeyRemap4MacBook</code>, which was eventually renamed to
+<a href="https://pqrs.org/osx/karabiner/">Karabiner</a>. Unfortunately this tool
+stopped working in macOS Sierra, due to some internal kernel
+architecture changes.</p>
+
+<p>That was pretty painful for me as it meant that on my old MacBook
+I couldn't upgrade to the newest macOS editions and on my new
+MacBook I couldn't type properly in Emacs (as it came with Sierra pre-installed)...
+Bummer!</p>
+
+<p>Fortunately 2 years later this is finally solved - the Karabiner team
+rewrote Karabiner from scratch for newer macOS releases and recently
+added my dream feature to the new <code>Karabiner Elements</code>. Unlike in the
+past though, this remapping is not actually bundled with Karabiner by
+default, so you have to download and enable it manually from
+<a href="https://pqrs.org/osx/karabiner/complex_modifications/#caps_and_return_to_ctrl">here</a>.</p>
+
+<p>That's actually even better than what I had originally suggested, as
+here it's also suggested to use <code>CapsLock</code> with a dual purpose as
+well - <code>Control</code> when held down and <code>Escape</code> otherwise.  I have no
+idea how this never came to my mind, but it's truly epic! A crazy
+productivity boost just got even crazier!</p>
+
+<p>Enjoy!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A crazy productivity boost: Remap Return to Control]]></title>

@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="People have always complained about the awkward positioning of
-the two Control keys on modern keyboards. That&#8217;s a fact! Effective Emacs
-usage &hellip;">
+  <meta name="description" content="Emacs 24.4 is now feature frozen and its release is (probably) just a
+few months away at this point. This makes it a good time to start
+talking about &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,326 @@ usage &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/31/a-peek-at-emacs-24-dot-4/">A Peek at Emacs 24.4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-31T11:07:00+02:00" pubdate data-updated="true">Dec 31<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/12/31/a-peek-at-emacs-24-dot-4/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs 24.4 is now feature frozen and its release is (probably) just a
+few months away at this point. This makes it a good time to start
+talking about some of the exciting and not so exciting changes that
+will be introduced in it.</p>
+
+<p>Emacs 24.4 is a special for me, since it&#8217;s the first Emacs release to
+which I contributed code. On a related note - I&#8217;ve tracked its development
+much closer than I used to in previous years and I feel I have lots of interesting
+things to share with you.</p>
+
+<p>In a series of smallish posts I&#8217;ll highlight some of the many new features that are
+coming in 24.4. Keep in mind that since we&#8217;re talking about unreleased code, there&#8217;s
+the chance of changes in the final version of 24.4.</p>
+
+<p>By the way, if you&#8217;re looking for a brief overview of what to expect
+in Emacs 24.4 you might have a look at
+<a href="http://www.masteringemacs.org/articles/2013/12/29/whats-new-in-emacs-24-4/">Mickey Petersen&#8217;s article on the subject</a>.</p>
+
+<p>The first article in the series will be arriving momentarily!</p>
+
+<h2>Articles in the Series</h2>
+
+<ul>
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+
+<li><a href="/blog/2013/12/31/a-peek-at-emacs-24-dot-4-smarter-show-paren-mode/">A peek at Emacs 24.4: Smarter show-paren-mode</a></li>
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/01/01/a-peek-at-emacs-24-dot-4-rectangular-selection/">A peek at Emacs 24.4: Rectangular selection</a></li>
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/01/11/a-peek-at-emacs-24-dot-4-srgb-colours-on-os-x/">A peek at Emacs 24.4: sRGB colours on OS X</a></li>
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/01/19/a-peek-at-emacs-24-dot-4-auto-indentation-by-default/">A peek at Emacs 24.4: auto-indentation by default</a></li>
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/03/01/a-peek-at-emacs-24-dot-4-delete-duplicate-lines/">A peek at Emacs 24.4: delete-duplicate-lines</a></li>
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/03/22/a-peek-at-emacs-24-dot-4-focus-hooks/">A peek at Emacs 24.4: Focus Hooks</a></li>
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/03/22/a-peek-at-emacs-24-dot-4-variadic-comparison-functions/">A peek at Emacs 24.4: Variadic Numeric Comparison Functions</a></li>
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/">A peek at Emacs 24.4: prettify-symbols-mode</a></li>
+  <!-- categories if -->
+
+
+<li><a href="/blog/2014/08/27/a-peek-at-emacs-24-dot-4-superword-mode/">A peek at Emacs 24.4: superword-mode</a></li>
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+
+  <!-- categories if -->
+ <!-- posts for -->
+</ul>
+
+
+<p><strong>P.S.</strong> Emacs 24.4 is fairly stable at this point, so can start using
+it today. I&#8217;ve been using it exclusively for about half an year now
+and I&#8217;ve rarely come across any issues whatsoever.  If you&#8217;re a Prelude
+user - it is 24.4 compatible.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -725,200 +1045,6 @@ distribution.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/25/increment-and-decrement-integer-at-point/">Increment and Decrement Integer at Point</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-25T18:49:00+03:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/25/increment-and-decrement-integer-at-point/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>While editing you often have to increment or decrement some number
-(usually an integer) by some step. Obviously this is trivial when the
-number is something like <code>10</code>, but not pretty pleasant when the number
-is <code>2343566</code> and you want to increment it by <code>943</code>. Most of the time,
-however, you&#8217;ll probably be incrementing or decrementing by 1.</p>
-
-<p>A long time ago I found a bit of code by
-<a href="https://github.com/DarwinAwardWinner">Ryan Thompson</a> to help us deal
-with such tasks. Here&#8217;s a slightly modified version of the original code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;thingatpt</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">thing-at-point-goto-end-of-integer</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Go to end of integer at point.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">inhibit-changing-match-data</span> <span class="no">t</span><span class="p">))</span>
-</span><span class='line'>    <span class="c1">;; Skip over optional sign</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">looking-at</span> <span class="s">&quot;[+-]&quot;</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">forward-char</span> <span class="mi">1</span><span class="p">))</span>
-</span><span class='line'>    <span class="c1">;; Skip over digits</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">skip-chars-forward</span> <span class="s">&quot;[[:digit:]]&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="c1">;; Check for at least one digit</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">looking-back</span> <span class="s">&quot;[[:digit:]]&quot;</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">error</span> <span class="s">&quot;No integer here&quot;</span><span class="p">))))</span>
-</span><span class='line'><span class="p">(</span><span class="nv">put</span> <span class="ss">&#39;integer</span> <span class="ss">&#39;beginning-op</span> <span class="ss">&#39;thing-at-point-goto-end-of-integer</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">thing-at-point-goto-beginning-of-integer</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Go to end of integer at point.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">inhibit-changing-match-data</span> <span class="no">t</span><span class="p">))</span>
-</span><span class='line'>    <span class="c1">;; Skip backward over digits</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">skip-chars-backward</span> <span class="s">&quot;[[:digit:]]&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="c1">;; Check for digits and optional sign</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">looking-at</span> <span class="s">&quot;[+-]?[[:digit:]]&quot;</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">error</span> <span class="s">&quot;No integer here&quot;</span><span class="p">))</span>
-</span><span class='line'>    <span class="c1">;; Skip backward over optional sign</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">looking-back</span> <span class="s">&quot;[+-]&quot;</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">(</span><span class="nv">backward-char</span> <span class="mi">1</span><span class="p">))))</span>
-</span><span class='line'><span class="p">(</span><span class="nv">put</span> <span class="ss">&#39;integer</span> <span class="ss">&#39;beginning-op</span> <span class="ss">&#39;thing-at-point-goto-beginning-of-integer</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">thing-at-point-bounds-of-integer-at-point</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Get boundaries of integer at point.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">save-excursion</span>
-</span><span class='line'>    <span class="p">(</span><span class="k">let</span> <span class="p">(</span><span class="nv">beg</span> <span class="nv">end</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">thing-at-point-goto-beginning-of-integer</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="k">setq</span> <span class="nv">beg</span> <span class="p">(</span><span class="nv">point</span><span class="p">))</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">thing-at-point-goto-end-of-integer</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="k">setq</span> <span class="nv">end</span> <span class="p">(</span><span class="nv">point</span><span class="p">))</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">cons</span> <span class="nv">beg</span> <span class="nv">end</span><span class="p">))))</span>
-</span><span class='line'><span class="p">(</span><span class="nv">put</span> <span class="ss">&#39;integer</span> <span class="ss">&#39;bounds-of-thing-at-point</span> <span class="ss">&#39;thing-at-point-bounds-of-integer-at-point</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">thing-at-point-integer-at-point</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Get integer at point.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">bounds</span> <span class="p">(</span><span class="nv">bounds-of-thing-at-point</span> <span class="ss">&#39;integer</span><span class="p">)))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">string-to-number</span> <span class="p">(</span><span class="nv">buffer-substring</span> <span class="p">(</span><span class="nb">car</span> <span class="nv">bounds</span><span class="p">)</span> <span class="p">(</span><span class="nb">cdr</span> <span class="nv">bounds</span><span class="p">)))))</span>
-</span><span class='line'><span class="p">(</span><span class="nv">put</span> <span class="ss">&#39;integer</span> <span class="ss">&#39;thing-at-point</span> <span class="ss">&#39;thing-at-point-integer-at-point</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">increment-integer-at-point</span> <span class="p">(</span><span class="k">&amp;optional</span> <span class="nv">inc</span><span class="p">)</span>
-</span><span class='line'>  <span class="s">&quot;Increment integer at point by one.</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">With numeric prefix arg INC, increment the integer by INC amount.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;p&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">inc</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">inc</span> <span class="mi">1</span><span class="p">))</span>
-</span><span class='line'>        <span class="p">(</span><span class="nv">n</span> <span class="p">(</span><span class="nv">thing-at-point</span> <span class="ss">&#39;integer</span><span class="p">))</span>
-</span><span class='line'>        <span class="p">(</span><span class="nv">bounds</span> <span class="p">(</span><span class="nv">bounds-of-thing-at-point</span> <span class="ss">&#39;integer</span><span class="p">)))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">delete-region</span> <span class="p">(</span><span class="nb">car</span> <span class="nv">bounds</span><span class="p">)</span> <span class="p">(</span><span class="nb">cdr</span> <span class="nv">bounds</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nv">int-to-string</span> <span class="p">(</span><span class="nb">+</span> <span class="nv">n</span> <span class="nv">inc</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">decrement-integer-at-point</span> <span class="p">(</span><span class="k">&amp;optional</span> <span class="nv">dec</span><span class="p">)</span>
-</span><span class='line'>  <span class="s">&quot;Decrement integer at point by one.</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">With numeric prefix arg DEC, decrement the integer by DEC amount.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span> <span class="s">&quot;p&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">increment-integer-at-point</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">dec</span> <span class="mi">1</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The code is based on the popular built-in library <code>thing-at-point</code> and
-extends it to make it aware of integer numbers.  The commands
-<code>increment-integer-at-point</code> and <code>decrement-integer-at-point</code> operate
-with a step of 1 by default, but with a prefix argument you can select
-any step you desire. Unlike other similar commands floating in the
-Internet, these two handle correctly numbers like <code>-3434</code> and
-<code>+343</code>.</p>
-
-<p>I&#8217;d suggest binding these commands to <code>C-c +</code> and <code>C-c -</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c +&quot;</span><span class="p">)</span> <span class="ss">&#39;increment-integer-at-point</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c -&quot;</span><span class="p">)</span> <span class="ss">&#39;decrement-integer-at-point</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Both commands are available in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
-prefix).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -943,6 +1069,10 @@ prefix).</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/">A Crazy Productivity Boost: Remapping Return to Control (2017 Edition)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/12/31/into-to-cider/">Into to CIDER</a>
       </li>
     
@@ -956,10 +1086,6 @@ prefix).</p>
     
       <li class="post">
         <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
       </li>
     
   </ul>

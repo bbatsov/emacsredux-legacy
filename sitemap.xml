@@ -513,16 +513,22 @@
         <lastmod>2017-12-31T11:17:33+02:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://emacsredux.com/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/
+        </loc>
+        <lastmod>2017-12-31T11:39:09+02:00</lastmod>
+    </url>
+    <url>
         <loc>http://emacsredux.com/about/</loc>
         <lastmod>2017-12-31T00:02:00+02:00</lastmod>
     </url>
     <url>
         <loc>http://emacsredux.com/blog/archives/</loc>
-        <lastmod>2017-12-31T11:17:33+02:00</lastmod>
+        <lastmod>2017-12-31T11:39:09+02:00</lastmod>
     </url>
     <url>
         <loc>http://emacsredux.com/</loc>
-        <lastmod>2017-12-31T11:17:33+02:00</lastmod>
+        <lastmod>2017-12-31T11:39:09+02:00</lastmod>
     </url>
     <url>
         <loc>http://emacsredux.com/robots.txt</loc>

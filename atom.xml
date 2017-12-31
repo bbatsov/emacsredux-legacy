@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2017-12-31T11:17:48+02:00</updated>
+  <updated>2017-12-31T11:39:16+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Crazy Productivity Boost: Remapping Return to Control (2017 Edition)]]></title>
+    <link href="http://emacsredux.com/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/"/>
+    <updated>2017-12-31T11:22:00+02:00</updated>
+    <id>http://emacsredux.com/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition</id>
+    <content type="html"><![CDATA[<p>Back in 2013 I wrote about my favourite productivity boost in Emacs,
+namely <a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">remapping Return to
+Control</a>,
+which in combination with the classic remapping of <code>CapsLock</code> to
+<code>Control</code> makes it really easy to get a grip on Emacs&#8217;s obsession with
+the Control key.</p>
+
+<p>In the original article I suggested to OS X (now macOS) users the tool
+<code>KeyRemap4MacBook</code>, which was eventually renamed to
+<a href="https://pqrs.org/osx/karabiner/">Karabiner</a>. Unfortunately this tool
+stopped working in macOS Sierra, due to some internal kernel
+architecture changes.</p>
+
+<p>That was pretty painful for me as it meant that on my old MacBook
+I couldn&#8217;t upgrade to the newest macOS editions and on my new
+MacBook I couldn&#8217;t type properly in Emacs (as it came with Sierra pre-installed)&#8230;
+Bummer!</p>
+
+<p>Fortunately 2 years later this is finally solved - the Karabiner team
+rewrote Karabiner from scratch for newer macOS releases and recently
+added my dream feature to the new <code>Karabiner Elements</code>. Unlike in the
+past though, this remapping is not actually bundled with Karabiner by
+default, so you have to download and enable it manually from
+<a href="https://pqrs.org/osx/karabiner/complex_modifications/#caps_and_return_to_ctrl">here</a>.</p>
+
+<p>That&#8217;s actually even better than what I had originally suggested, as
+here it&#8217;s also suggested to use <code>CapsLock</code> with a dual purpose as
+well - <code>Control</code> when held down and <code>Escape</code> otherwise.  I have no
+idea how this never came to my mind, but it&#8217;s truly epic! A crazy
+productivity boost just got even crazier!</p>
+
+<p>Enjoy!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Into to CIDER]]></title>
@@ -834,46 +874,6 @@ your experience with Emacs both more pleasant and more powerful.</p>
 
 <p><strong>P.S.</strong> I&#8217;d like to hear your tips &amp; suggestions about making the
 Emacs experience on OS X nicer and more powerful!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clear Comint Buffers]]></title>
-    <link href="http://emacsredux.com/blog/2015/01/18/clear-comint-buffers/"/>
-    <updated>2015-01-18T21:57:00+02:00</updated>
-    <id>http://emacsredux.com/blog/2015/01/18/clear-comint-buffers</id>
-    <content type="html"><![CDATA[<p><code>comint</code> provides Emacs infrastructure for building command
-interpreters. It&#8217;s backing a lot of popular shell/REPL modes - like <code>eshell</code>,
-<code>inferior-lisp</code>, <code>inf-ruby</code>, <code>inf-clojure</code>, etc.</p>
-
-<p><code>comint</code> provides a myriad of built-in commands, but somewhat surprisingly
-it doesn&#8217;t feature a command to clear the contents of a <code>comint</code> buffer.
-Let&#8217;s write one such command ourselves!</p>
-
-<p>While there are several way to tackle it, I feel this is the simplest
-(and the one that makes the best use of <code>comint</code>&#8217;s existing
-functionality):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">comint-clear-buffer</span> <span class="p">()</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">comint-buffer-maximum-size</span> <span class="mi">0</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">comint-truncate-buffer</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">;; let&#39;s bind the new command to a keycombo</span>
-</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">comint-mode-map</span> <span class="s">&quot;\C-c\M-o&quot;</span> <span class="nf">#&#39;</span><span class="nv">comint-clear-buffer</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Simple and elegant, right? One day it might even end up being part of <code>comint</code> itself.</p>
 ]]></content>
   </entry>
   

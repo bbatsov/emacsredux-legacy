@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A Crazy Productivity Boost: Remapping Return to Control (2017 Edition) - Emacs Redux</title>
+  <meta name="author" content="Bozhidar Batsov">
+
+  
+  <meta name="description" content="Back in 2013 I wrote about my favourite productivity boost in Emacs,
+namely remapping Return to
+Control,
+which in combination with the classic &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://emacsredux.com/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39624961-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Emacs Redux</a></h1>
+  
+    <h2>Return to the Essence of Text Editing</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:emacsredux.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="https://github.com/bbatsov/prelude">Prelude</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">A Crazy Productivity Boost: Remapping Return to Control (2017 Edition)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-12-31T11:22:00+02:00" pubdate data-updated="true">Dec 31<span>st</span>, 2017</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Back in 2013 I wrote about my favourite productivity boost in Emacs,
+namely <a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">remapping Return to
+Control</a>,
+which in combination with the classic remapping of <code>CapsLock</code> to
+<code>Control</code> makes it really easy to get a grip on Emacs&#8217;s obsession with
+the Control key.</p>
+
+<p>In the original article I suggested to OS X (now macOS) users the tool
+<code>KeyRemap4MacBook</code>, which was eventually renamed to
+<a href="https://pqrs.org/osx/karabiner/">Karabiner</a>. Unfortunately this tool
+stopped working in macOS Sierra, due to some internal kernel
+architecture changes.</p>
+
+<p>That was pretty painful for me as it meant that on my old MacBook
+I couldn&#8217;t upgrade to the newest macOS editions and on my new
+MacBook I couldn&#8217;t type properly in Emacs (as it came with Sierra pre-installed)&#8230;
+Bummer!</p>
+
+<p>Fortunately 2 years later this is finally solved - the Karabiner team
+rewrote Karabiner from scratch for newer macOS releases and recently
+added my dream feature to the new <code>Karabiner Elements</code>. Unlike in the
+past though, this remapping is not actually bundled with Karabiner by
+default, so you have to download and enable it manually from
+<a href="https://pqrs.org/osx/karabiner/complex_modifications/#caps_and_return_to_ctrl">here</a>.</p>
+
+<p>That&#8217;s actually even better than what I had originally suggested, as
+here it&#8217;s also suggested to use <code>CapsLock</code> with a dual purpose as
+well - <code>Control</code> when held down and <code>Escape</code> otherwise.  I have no
+idea how this never came to my mind, but it&#8217;s truly epic! A crazy
+productivity boost just got even crazier!</p>
+
+<p>Enjoy!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Bozhidar Batsov</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-12-31T11:22:00+02:00" pubdate data-updated="true">Dec 31<span>st</span>, 2017</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/productivity/'>Productivity</a>, <a class='category' href='/blog/categories/macos/'>macOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://emacsredux.com/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/" data-via="bbatsov" data-counturl="http://emacsredux.com/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2017/12/31/into-to-cider/" title="Previous Post: Into to CIDER">&laquo; Into to CIDER</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Emacs Redux</h1>
+  <p>Emacs Redux's mission is to hone your Emacs skills and increase your appreciation for Emacs's might and magic.
+    You can show your love for Emacs Redux via Patreon and Liberapay:</p>
+  <a href="https://www.patreon.com/bbatsov"><img src="https://img.shields.io/badge/patreon-donate-orange.svg"></img></a>
+  <a href="https://liberapay.com/bbatsov/donate"><img src="https://liberapay.com/assets/widgets/donate.svg"></img></a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/">A Crazy Productivity Boost: Remapping Return to Control (2017 Edition)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/31/into-to-cider/">Into to CIDER</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/02/pimp-my-minibuffer/">Pimp My Minibuffer Evaluation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/02/14/look-up-the-keybindings-for-some-command/">Look up the keybindings for some command</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+     <h1>Twitter</h1>
+     <!-- PASTE THE WIDGET CODE HERE -->
+     <a class="twitter-timeline" href="https://twitter.com/bbatsov" data-widget-id="382536919663386624">Tweets by @bbatsov</a>
+     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ </section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/bbatsov">@bbatsov</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'bbatsov',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - Bozhidar Batsov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'emacsredux';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://emacsredux.com/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/';
+        var disqus_url = 'http://emacsredux.com/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

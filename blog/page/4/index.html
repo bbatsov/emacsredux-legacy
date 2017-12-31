@@ -9,8 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Pretty much every Emacs user knows of the *scratch* buffer - after
-all it&#8217;s always present when you start your Emacs. If you&#8217;ve set &hellip;">
+  <meta name="description" content="Emacs 24.4 ships with a new minor mode called
+prettify-symbols-mode. Its purpose is to replace the standard text
+representation of various &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,115 @@ all it&#8217;s always present when you start your Emacs. If you&#8217;ve set &he
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/">A Peek at Emacs 24.4: Prettify-symbols-mode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-25T16:30:00+03:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs 24.4 ships with a new minor mode called
+<code>prettify-symbols-mode</code>. Its purpose is to replace the standard text
+representation of various identifiers/symbols with a (arguably) more
+aesthetically pleasing representation (often a single unicode
+character would replace several ascii characters).</p>
+
+<p>A classic example would be <code>lambda</code> from various Lisp dialects that many people
+prefer to replace with the greek letter <code>λ</code> (small lambda). <code>prettify-symbols-mode</code> allows you
+to achieve this by relying on a simple mapping expressed in the form of an <code>alist</code> that
+each major mode must initialize (<code>prettify-symbols-alist</code>).
+Simply put - major modes have to provide the configuration for <code>prettify-symbols-mode</code>.</p>
+
+<p>Lisp modes do this via <code>lisp--prettify-symbols-alist</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">defconst</span> <span class="nv">lisp--prettify-symbols-alist</span>
+</span><span class='line'>  <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;lambda&quot;</span>  <span class="o">.</span> <span class="nv">?</span><span class="err">λ</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This means that out of the box only <code>lambda</code> will get replaced.
+You can, of course, add more mappings for different major modes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-lisp-mode-hook</span>
+</span><span class='line'>            <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+</span><span class='line'>              <span class="p">(</span><span class="nb">push</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;&gt;=&quot;</span> <span class="o">.</span> <span class="nv">?</span><span class="err">≥</span><span class="p">)</span> <span class="nv">prettify-symbols-alist</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s see the mode in action. Consider this bit of Emacs Lisp code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&gt;=</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">something</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">something-else</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After you do <code>M-x prettify-symbols-mode</code> you&#8217;ll end up with:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="err">λ</span> <span class="p">(</span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="err">≥</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nv">something</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">something-else</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To enable this for a particular mode use <code>(add-hook 'some-mode-hook 'prettify-symbols-mode)</code>.
+If you&#8217;d like to enable it globally just add the following to your config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-prettify-symbols-mode</span> <span class="mi">+1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By the way, sky is the limit for symbol prettification. One fairly extreme example would be
+vim&#8217;s plugin <a href="https://github.com/enomsg/vim-haskellConcealPlus">haskell-conceal+</a> that goes to great
+lengths to bring proper mathematical notation to Haskell code. We can achieve more or less the same effect
+with <code>prettify-symbols-mode</code>, but one have to ask themselves where should we draw the border between
+tasteful and distasteful prettifications.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -812,71 +922,6 @@ of code:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/22/a-peek-at-emacs-24-dot-4-variadic-comparison-functions/">A Peek at Emacs 24.4: Variadic Numeric Comparison Functions</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-22T16:48:00+02:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2014</time>
-        
-         | <a href="/blog/2014/03/22/a-peek-at-emacs-24-dot-4-variadic-comparison-functions/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In most Lisps numeric comparison functions like <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>
-and <code>&gt;=</code> are variadic - meaning they accept variable number of arguments (as do functions like <code>+</code>, <code>-</code>, <code>*</code>, etc).
-Here&#8217;s an example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; let&#39;s assume that all those are numeric variables</span>
-</span><span class='line'><span class="p">(</span><span class="nb">=</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nb">&lt;</span> <span class="nv">a</span> <span class="nv">b</span> <span class="nv">c</span> <span class="nv">d</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is pretty cool and save you from writing code like:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nb">=</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span> <span class="p">(</span><span class="nb">=</span> <span class="nv">y</span> <span class="nv">z</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="nv">a</span> <span class="nv">b</span><span class="p">)</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="nv">b</span> <span class="nv">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="nv">c</span> <span class="nv">d</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Prefix function position for the win!</p>
-
-<p>In Emacs Lisp, however, all these comparison functions (unlike <code>+</code>, <code>-</code>, etc)
-accept just two arguments, which is somewhat unlispy. Luckily this is
-one of the things that&#8217;s going to change with Emacs 24.4.
-Emacs Lisp takes another small step to becoming a good Lisp dialect!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -901,6 +946,10 @@ Emacs Lisp takes another small step to becoming a good Lisp dialect!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/">A Crazy Productivity Boost: Remapping Return to Control (2017 Edition)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/12/31/into-to-cider/">Into to CIDER</a>
       </li>
     
@@ -914,10 +963,6 @@ Emacs Lisp takes another small step to becoming a good Lisp dialect!</p>
     
       <li class="post">
         <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
       </li>
     
   </ul>

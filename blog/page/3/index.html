@@ -9,8 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="On graphical displays, each Emacs window normally has narrow fringes (gutters/margins)
-on the left and right edges. The fringes are used to display &hellip;">
+  <meta name="description" content="comint provides Emacs infrastructure for building command
+interpreters. It&#8217;s backing a lot of popular shell/REPL modes - like eshell,
+inferior- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,75 @@ on the left and right edges. The fringes are used to display &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/18/clear-comint-buffers/">Clear Comint Buffers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-18T21:57:00+02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/01/18/clear-comint-buffers/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><code>comint</code> provides Emacs infrastructure for building command
+interpreters. It&#8217;s backing a lot of popular shell/REPL modes - like <code>eshell</code>,
+<code>inferior-lisp</code>, <code>inf-ruby</code>, <code>inf-clojure</code>, etc.</p>
+
+<p><code>comint</code> provides a myriad of built-in commands, but somewhat surprisingly
+it doesn&#8217;t feature a command to clear the contents of a <code>comint</code> buffer.
+Let&#8217;s write one such command ourselves!</p>
+
+<p>While there are several way to tackle it, I feel this is the simplest
+(and the one that makes the best use of <code>comint</code>&#8217;s existing
+functionality):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">comint-clear-buffer</span> <span class="p">()</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">comint-buffer-maximum-size</span> <span class="mi">0</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">comint-truncate-buffer</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; let&#39;s bind the new command to a keycombo</span>
+</span><span class='line'><span class="p">(</span><span class="nv">define-key</span> <span class="nv">comint-mode-map</span> <span class="s">&quot;\C-c\M-o&quot;</span> <span class="nf">#&#39;</span><span class="nv">comint-clear-buffer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Simple and elegant, right? One day it might even end up being part of <code>comint</code> itself.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -779,115 +849,6 @@ scenarios in which I&#8217;d enable it briefly to do some focused editing.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/">A Peek at Emacs 24.4: Prettify-symbols-mode</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-25T16:30:00+03:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/08/25/a-peek-at-emacs-24-dot-4-prettify-symbols-mode/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Emacs 24.4 ships with a new minor mode called
-<code>prettify-symbols-mode</code>. Its purpose is to replace the standard text
-representation of various identifiers/symbols with a (arguably) more
-aesthetically pleasing representation (often a single unicode
-character would replace several ascii characters).</p>
-
-<p>A classic example would be <code>lambda</code> from various Lisp dialects that many people
-prefer to replace with the greek letter <code>λ</code> (small lambda). <code>prettify-symbols-mode</code> allows you
-to achieve this by relying on a simple mapping expressed in the form of an <code>alist</code> that
-each major mode must initialize (<code>prettify-symbols-alist</code>).
-Simply put - major modes have to provide the configuration for <code>prettify-symbols-mode</code>.</p>
-
-<p>Lisp modes do this via <code>lisp--prettify-symbols-alist</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">defconst</span> <span class="nv">lisp--prettify-symbols-alist</span>
-</span><span class='line'>  <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;lambda&quot;</span>  <span class="o">.</span> <span class="nv">?</span><span class="err">λ</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This means that out of the box only <code>lambda</code> will get replaced.
-You can, of course, add more mappings for different major modes:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-lisp-mode-hook</span>
-</span><span class='line'>            <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
-</span><span class='line'>              <span class="p">(</span><span class="nb">push</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;&gt;=&quot;</span> <span class="o">.</span> <span class="nv">?</span><span class="err">≥</span><span class="p">)</span> <span class="nv">prettify-symbols-alist</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Let&#8217;s see the mode in action. Consider this bit of Emacs Lisp code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&gt;=</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">something</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">something-else</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After you do <code>M-x prettify-symbols-mode</code> you&#8217;ll end up with:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="err">λ</span> <span class="p">(</span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="err">≥</span> <span class="nv">x</span> <span class="nv">y</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">something</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">something-else</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To enable this for a particular mode use <code>(add-hook 'some-mode-hook 'prettify-symbols-mode)</code>.
-If you&#8217;d like to enable it globally just add the following to your config:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-prettify-symbols-mode</span> <span class="mi">+1</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>By the way, sky is the limit for symbol prettification. One fairly extreme example would be
-vim&#8217;s plugin <a href="https://github.com/enomsg/vim-haskellConcealPlus">haskell-conceal+</a> that goes to great
-lengths to bring proper mathematical notation to Haskell code. We can achieve more or less the same effect
-with <code>prettify-symbols-mode</code>, but one have to ask themselves where should we draw the border between
-tasteful and distasteful prettifications.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -912,6 +873,10 @@ tasteful and distasteful prettifications.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/">A Crazy Productivity Boost: Remapping Return to Control (2017 Edition)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/12/31/into-to-cider/">Into to CIDER</a>
       </li>
     
@@ -925,10 +890,6 @@ tasteful and distasteful prettifications.</p>
     
       <li class="post">
         <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/">Auto-indent your code with aggressive-indent-mode</a>
       </li>
     
   </ul>
