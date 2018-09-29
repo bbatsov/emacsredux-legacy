@@ -4,7 +4,7 @@
   <title><![CDATA[Category: UI | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/ui/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2018-09-29T20:21:19+03:00</updated>
+  <updated>2018-09-29T20:31:09+03:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -112,7 +112,7 @@ to <code>custom-theme-load-path</code> by Prelude, so all you have to do is drop
 there the themes you'd want to try out. Prelude also uses the
 <strong>Zenburn</strong> theme by default.</p>
 
-<p><img src="/images/articles/zenburn_real.png"></p>
+<p>{% img /images/articles/zenburn_real.png %}</p>
 
 <p>You may find the
 <a href="http://julien.danjou.info/software/rainbow-mode">rainbow-mode</a> useful
@@ -122,7 +122,7 @@ addition to css-mode, but I find it very helpful with color theme
 development as well. It's also included (and enabled) in Prelude by
 default. Here you can see it in action.</p>
 
-<p><img src="/images/articles/rainbow-mode.png"></p>
+<p>{% img /images/articles/rainbow-mode.png %}</p>
 
 <p>I'd also advise you follow the proper naming convention
 <code>name-theme.el</code> so that it's apparent that your theme is <code>deftheme</code>
@@ -187,11 +187,11 @@ built without it and I would not recommend you using it.</p>
 
 <p>Here's how Zenburn looks with <code>srgb</code> support.</p>
 
-<p><img src="/images/articles/zenburn_real.png"></p>
+<p>{% img /images/articles/zenburn_real.png %}</p>
 
 <p>And this is how it looks without it.</p>
 
-<p><img src="/images/articles/zenburn.png"></p>
+<p>{% img /images/articles/zenburn.png %}</p>
 
 <p>Some colors look lighter and a bit washed out without <code>srgb</code>.</p>
 

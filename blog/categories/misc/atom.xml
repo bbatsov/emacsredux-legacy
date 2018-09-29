@@ -4,7 +4,7 @@
   <title><![CDATA[Category: misc | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/misc/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2018-09-29T20:21:19+03:00</updated>
+  <updated>2018-09-29T20:31:09+03:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[super-save 0.3]]></title>
+    <link href="http://emacsredux.com/blog/2018/09/29/super-save-0-dot-3/"/>
+    <updated>2018-09-29T20:22:00+03:00</updated>
+    <id>http://emacsredux.com/blog/2018/09/29/super-save-0-dot-3</id>
+    <content type="html"><![CDATA[<p>After a long period of no development activity (mostly because it was
+perfect from the start),
+<a href="https://github.com/bbatsov/super-save/">super-save</a> gets an update
+today!</p>
+
+<p>The latest 0.3 version of your favourite auto-saving library makes it
+easier to customize the hook triggers (see <code>super-save-hook-triggers</code>)
+and adds an option to ignore remote (TRAMP) files (see
+<code>super-save-remote-files</code>).</p>
+
+<p>As a refresher - <code>super-save</code> will save modified files automatically
+on certain command (e.g. <code>switch-to-buffer</code>) and hook triggers
+(e.g. <code>focus-out-hook</code>).</p>
+
+<p>Both of those are configurable via <code>super-save-triggers</code> and (starting
+with 0.3) <code>super-save-hook-triggers</code>. Here are a couple of examples:</p>
+
+<p>```el
+;; add integration with ace-window
+(add-to-list 'super-save-triggers 'ace-window)</p>
+
+<p>;; save on find-file
+(add-to-list 'super-save-hook-triggers 'find-file-hook)
+```</p>
+
+<p>You can now turn off <code>super-save</code> for remote files like this:</p>
+
+<p><code>el
+(setq super-save-remote-files nil)
+</code></p>
+
+<p>It seems that now <code>super-save</code> is beyond perfect, so don't expect the
+next release any time soon! ;-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Look up the keybindings for some command]]></title>
@@ -134,55 +175,6 @@ experimenting with ideas for the future. Stay tuned for the results!</p>
 <p>The config is available
 <a href="https://github.com/bbatsov/emacs.d">here</a>. Perhaps some of you will
 find something useful there.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Remap Return to Control in GNU/Linux]]></title>
-    <link href="http://emacsredux.com/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux/"/>
-    <updated>2016-01-30T11:48:00+02:00</updated>
-    <id>http://emacsredux.com/blog/2016/01/30/remap-return-to-control-in-gnu-slash-linux</id>
-    <content type="html"><![CDATA[<p>A long time ago I wrote about
-<a href="http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/">remapping Return to Control in OS X</a>.
-This was the best productivity boost for my Emacs experience ever!</p>
-
-<p>Recently I've bought a Windows ultrabook (wanted something as light as
-MacBook Air, but more powerful and versatile) and I'm doing most of my
-work there in a Xubuntu VM. The first thing I did while setting up Xubuntu
-was to figure out how to do the aforementioned remapping.</p>
-
-<p>In my original post some people suggested the tool
-<a href="https://github.com/alols/xcape">xcape</a>, so I took a look at it.  The
-tool can certainly use some documentation improvements (and pre-built
-packages), but it gets the job done. After you've installed it you
-just need to add the following to your login shell's init file
-(e.g. <code>.bash_profile</code>) and you're in business:</p>
-
-<p>```
-xmodmap -e "remove Control = Control_R"
-xmodmap -e "keycode 0x69 = Return"
-xmodmap -e "keycode 0x24 = Control_R"
-xmodmap -e "add Control = Control_R"</p>
-
-<p>xcape -t 10000 -e "Control_R=Return"
-```</p>
-
-<p>Obviously the first time around you should source <code>.bash_profile</code>
-after updating it:</p>
-
-<p><code>
-$ . .bash_profile
-</code></p>
-
-<p>This is definitely a lot more work than just clicking in the GUI of
-the wonderful <a href="https://pqrs.org/osx/karabiner/">Karabiner</a>, but it yields
-the desired results and that's what's important at the end of the day.</p>
-
-<p>Now if only there was a way to achieve the same result in Windows...</p>
-
-<p>P.S. <code>vim</code> users will love <code>xcape</code>. Its default behaviour is to
-generate the <code>Escape</code> key when <code>Left Control</code> is pressed and released on
-its own.</p>
 ]]></content>
   </entry>
   
