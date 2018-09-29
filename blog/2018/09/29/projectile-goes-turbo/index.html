@@ -128,7 +128,14 @@ method going forward (starting with Projectile 1.1 which should be released pret
 <p>You can read a bit more about it in Projectile&#8217;s
 <a href="https://www.projectile.mx/en/latest/configuration/#project-indexing-method">manual</a>.</p>
 
-<p>Enjoy!</p>
+<p>If you find yourself missing Projectile&#8217;s old behaviour just add the following to your config:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">projectile-indexing-method</span> <span class="ss">&#39;alien</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The old tried and true <code>alien</code> method is still around, it&#8217;s just no longer the default.</p>
 
 <p><strong>P.S.</strong> I encourage all of you to help out with some of the <a href="https://github.com/bbatsov/projectile/issues">open tickets</a>
 marked with &#8220;Help Wanted&#8221; or &#8220;Good First Issue&#8221; here. I&#8217;m trying to

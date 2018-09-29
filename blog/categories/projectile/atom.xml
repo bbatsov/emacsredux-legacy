@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Projectile | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/projectile/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2018-09-29T20:33:27+03:00</updated>
+  <updated>2018-09-29T20:36:04+03:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -37,7 +37,13 @@ method going forward (starting with Projectile 1.1 which should be released pret
 <p>You can read a bit more about it in Projectile's
 <a href="https://www.projectile.mx/en/latest/configuration/#project-indexing-method">manual</a>.</p>
 
-<p>Enjoy!</p>
+<p>If you find yourself missing Projectile's old behaviour just add the following to your config:</p>
+
+<p><code>cl
+(setq projectile-indexing-method 'alien)
+</code></p>
+
+<p>The old tried and true <code>alien</code> method is still around, it's just no longer the default.</p>
 
 <p><strong>P.S.</strong> I encourage all of you to help out with some of the <a href="https://github.com/bbatsov/projectile/issues">open tickets</a>
 marked with "Help Wanted" or "Good First Issue" here. I'm trying to
