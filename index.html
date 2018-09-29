@@ -9,10 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Back in 2013 I wrote about my favourite productivity boost in Emacs,
-namely remapping Return to
-Control,
-which in combination with the classic &hellip;">
+  <meta name="description" content="For a while one of the biggest complaints people had about
+Projectile was that the
+alien indexing wasn&#8217;t fast enough (especially on big &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +81,71 @@ which in combination with the classic &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/09/29/projectile-goes-turbo/">Projectile Goes Turbo</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-09-29T20:14:00+03:00" pubdate data-updated="true">Sep 29<span>th</span>, 2018</time>
+        
+         | <a href="/blog/2018/09/29/projectile-goes-turbo/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For a while one of the biggest complaints people had about
+<a href="https://github.com/bbatsov/projectile">Projectile</a> was that the
+<code>alien</code> indexing wasn&#8217;t fast enough (especially on big projects). The
+reason for the (relatively) bad performance was pretty simple - even
+though Projectile would normally obtain the list of project files
+pretty fast (e.g. by using <code>git ls-files</code>) it always did some
+post-processing of the results (e.g. filtering, sorting, etc), which
+is a very slow operation in Elisp on a big dataset.</p>
+
+<p>Today I&#8217;ve added <a href="https://github.com/bbatsov/projectile/commit/e3007ae0324fb6679a6b3dac5c63191ce907115e">a new indexing
+method</a>
+that simply dispenses with all of the post-processing and gives you
+the raw power you always craved for. It&#8217;s called <code>turbo-alien</code> (yeah,
+yeah - naming is hard!) and it&#8217;s going to be the default indexing
+method going forward (starting with Projectile 1.1 which should be released pretty soon).</p>
+
+<p>You can read a bit more about it in Projectile&#8217;s
+<a href="https://www.projectile.mx/en/latest/configuration/#project-indexing-method">manual</a>.</p>
+
+<p>Enjoy!</p>
+
+<p><strong>P.S.</strong> I encourage all of you to help out with some of the <a href="https://github.com/bbatsov/projectile/issues">open tickets</a>
+marked with &#8220;Help Wanted&#8221; or &#8220;Good First Issue&#8221; here. I&#8217;m trying to
+clean-up shop after a long period of stagnation and I can certainly
+use some help! :-)</p>
+
+<p><strong>P.P.S.</strong> The recent 1.0 release was just a precursor to some bigger changes I
+had planned to do for quite a while. Stay tuned for more updates!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -705,69 +769,6 @@ Prelude (it already uses it).</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/30/my-personal-emacs-configuration/">My Personal Emacs Configuration</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-01-30T12:31:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
-        
-         | <a href="/blog/2016/01/30/my-personal-emacs-configuration/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>From time to time people ask me about my personal Emacs
-configuration. Other just assume that I use
-<a href="https://github.com/bbatsov/prelude">Prelude</a>. For a very long time my
-personal configuration was pretty similar to Prelude - in a way it was
-a staging ground for things to go into Prelude eventually (although
-changes would travel both ways when Prelude users suggest some cool
-things).</p>
-
-<p>Recently I&#8217;ve decided that in the future I want to do a few things with Prelude:</p>
-
-<ul>
-<li>extract as much functionality from it as possible into reusable
-packages (e.g. <a href="https://github.com/bbatsov/super-save">super-save</a>
-and <a href="https://github.com/bbatsov/crux">crux</a>)</li>
-<li>adopt there <a href="https://github.com/jwiegley/use-package">use-package</a></li>
-<li>improve the support for Windows (because now I have Windows computer)</li>
-</ul>
-
-
-<p>As part of these efforts I reworked my personal config into something
-pretty simple (it&#8217;s a single <code>init.el</code> file) and I&#8217;ve started
-experimenting with ideas for the future. Stay tuned for the results!</p>
-
-<p>The config is available
-<a href="https://github.com/bbatsov/emacs.d">here</a>. Perhaps some of you will
-find something useful there.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -790,6 +791,10 @@ find something useful there.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/29/projectile-goes-turbo/">Projectile goes Turbo</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/">A Crazy Productivity Boost: Remapping Return to Control (2017 Edition)</a>
       </li>
     
@@ -803,10 +808,6 @@ find something useful there.</p>
     
       <li class="post">
         <a href="/blog/2016/02/14/look-up-the-keybindings-for-some-command/">Look up the keybindings for some command</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
       </li>
     
   </ul>
@@ -856,7 +857,7 @@ find something useful there.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2017 - Bozhidar Batsov -
+  Copyright &copy; 2018 - Bozhidar Batsov -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

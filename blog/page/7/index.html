@@ -9,9 +9,7 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="While editing you often have to increment or decrement some number
-(usually an integer) by some step. Obviously this is trivial when the
-number is &hellip;">
+  <meta name="description" content="Prelude This is a slightly refreshed version of an article originally published on my personal blog. If there is something that people love as much &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +79,66 @@ number is &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/21/color-themes-redux/">Color Themes: Redux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-21T12:36:00+03:00" pubdate data-updated="true">Aug 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/21/color-themes-redux/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Prelude</h2>
+
+<p><em>This is a slightly refreshed version of an
+ <a href="http://batsov.com/articles/2012/02/19/color-theming-in-emacs-reloaded/">article originally published on my personal blog</a></em>.</p>
+
+<p>If there is something that people love as much as tweaking their
+editing configurations it&#8217;s probably the selection of color themes. A
+good color theme can make your work much more pleasant and a bad one
+that literally impair your vision. It&#8217;s a fact of life that I&#8217;m a firm
+supporter of low-contrast color themes with dark backgrounds - I find
+them easy on the eyes and I feel that they don&#8217;t strain the eyes as
+much as most themes. I&#8217;ve even ported a couple of popular themes to
+Emacs - <a href="https://github.com/bbatsov/zenburn-emacs">Zenburn</a> and
+<a href="https://github.com/bbatsov/solarized-emacs">Solarized</a>.</p>
+
+<p>In this short article we&#8217;ll see how color theming has changed in Emacs
+24 and I&#8217;ll share with you a few tips on theme creation and
+distribution.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/21/color-themes-redux/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -1009,101 +1067,6 @@ content if the window existing beforehand and was reused by the help command.</p
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/15/open-line-above/">Open Line Above</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-15T09:04:00+03:00" pubdate data-updated="true">Jun 15<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/15/open-line-above/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post continues a topic that was introduced in
-<a href="/blog/2013/03/26/smarter-open-line/">smarter open-line</a> few months
-back.</p>
-
-<p>Often when editing code one wishes to open a line just above the
-current one, which is properly indented relative to the existing code,
-and position the cursor at its beginning.  Such a feature is present
-in most IDEs, such as IntelliJ IDEA, Eclipse and NetBeans. It’s
-sometimes bound to <code>Control+Shift+Enter</code>. Last time I showed you how
-to implement a similar function called <code>smart-open-line</code>, this time
-will implement <code>smart-open-line-above</code>. Just add this snippet to your
-<code>.emacs</code> (or <code>.emacs.d/init.el</code> or whatever):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">smart-open-line-above</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Insert an empty line above the current line.</span>
-</span><span class='line'><span class="s">Position the cursor at it&#39;s beginning, according to the current mode.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">move-beginning-of-line</span> <span class="no">nil</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">newline-and-indent</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">forward-line</span> <span class="mi">-1</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">indent-according-to-mode</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">control</span> <span class="nv">shift</span> <span class="nb">return</span><span class="p">)</span><span class="nv">]</span> <span class="ss">&#39;smart-open-line-above</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Evaluate the code (or restart Emacs) and you&#8217;ll be able to use
-<code>M-x smart-open-line-above</code> or <code>Control+Shift+Enter</code> (aka <code>C-S-return</code>).</p>
-
-<p>Admittedly this keybinding kind of sucks, so here&#8217;s another option for
-you - <code>M-o</code> (used by default as the prefix for some font setting
-commands nobody ever uses) for <code>smart-open-line</code> and <code>M-O</code> for
-<code>smart-open-line-above</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-o&quot;</span><span class="p">)</span> <span class="ss">&#39;smart-open-line</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;M-O&quot;</span><span class="p">)</span> <span class="ss">&#39;smart-open-line-above</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Another good option would be to fold the two commands into one and use a
-prefix argument to trigger the opening a new line above the current
-one.</p>
-
-<p>This command is part of
-<a href="https://github.com/bbatsov/prelude">Prelude</a>(it&#8217;s named
-<code>prelude-smart-open-line-above</code> there).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -1128,6 +1091,10 @@ one.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/29/projectile-goes-turbo/">Projectile goes Turbo</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/12/31/a-crazy-productivity-boost-remapping-return-to-control-2017-edition/">A Crazy Productivity Boost: Remapping Return to Control (2017 Edition)</a>
       </li>
     
@@ -1141,10 +1108,6 @@ one.</p>
     
       <li class="post">
         <a href="/blog/2016/02/14/look-up-the-keybindings-for-some-command/">Look up the keybindings for some command</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/14/disable-annoying-audio-notifications/">Disable annoying audio notifications</a>
       </li>
     
   </ul>
@@ -1194,7 +1157,7 @@ one.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2017 - Bozhidar Batsov -
+  Copyright &copy; 2018 - Bozhidar Batsov -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
