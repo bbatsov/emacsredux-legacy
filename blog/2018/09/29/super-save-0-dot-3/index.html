@@ -5,12 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Google - Emacs Redux</title>
+  <title>super-save 0.3 - Emacs Redux</title>
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Wouldn&#8217;t it be cool to be able to invoke a Google search from the
-comfort of your beloved text editor? Here&#8217;s a couple of use-cases. You &hellip;">
+  <meta name="description" content="After a long period of no development activity (mostly because it was
+perfect from the start),
+super-save gets an update
+today! The latest 0.3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +21,7 @@ comfort of your beloved text editor? Here&#8217;s a couple of use-cases. You &he
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://emacsredux.com/blog/2013/03/28/google">
+  <link rel="canonical" href="http://emacsredux.com/blog/2018/09/29/super-save-0-dot-3">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Emacs Redux" type="application/atom+xml">
@@ -83,7 +85,7 @@ comfort of your beloved text editor? Here&#8217;s a couple of use-cases. You &he
   
   <header>
     
-      <h1 class="entry-title">Google</h1>
+      <h1 class="entry-title">Super-save 0.3</h1>
     
     
       <p class="meta">
@@ -99,7 +101,7 @@ comfort of your beloved text editor? Here&#8217;s a couple of use-cases. You &he
   
 
 
-<time datetime="2013-03-28T14:32:00+02:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
+<time datetime="2018-09-29T20:22:00+03:00" pubdate data-updated="true">Sep 29<span>th</span>, 2018</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -108,45 +110,49 @@ comfort of your beloved text editor? Here&#8217;s a couple of use-cases. You &he
   </header>
 
 
-<div class="entry-content"><p>Wouldn&#8217;t it be cool to be able to invoke a Google search from the
-comfort of your beloved text editor? Here&#8217;s a couple of use-cases. You
-may wish to Google the selected region or to be prompted to enter a
-query manually. Apart from cool it&#8217;s also pretty simple to add such a
-feature to Emacs.</p>
+<div class="entry-content"><p>After a long period of no development activity (mostly because it was
+perfect from the start),
+<a href="https://github.com/bbatsov/super-save/">super-save</a> gets an update
+today!</p>
+
+<p>The latest 0.3 version of your favourite auto-saving library makes it
+easier to customize the hook triggers (see <code>super-save-hook-triggers</code>)
+and adds an option to ignore remote (TRAMP) files (see
+<code>super-save-remote-files</code>).</p>
+
+<p>As a refresher - <code>super-save</code> will save modified files automatically
+on certain command (e.g. <code>switch-to-buffer</code>) and hook triggers
+(e.g. <code>focus-out-hook</code>).</p>
+
+<p>Both of those are configurable via <code>super-save-triggers</code> and (starting
+with 0.3) <code>super-save-hook-triggers</code>. Here are a couple of examples:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">google</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Google the selected region if any, display a query prompt otherwise.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">browse-url</span>
-</span><span class='line'>   <span class="p">(</span><span class="nv">concat</span>
-</span><span class='line'>    <span class="s">&quot;http://www.google.com/search?ie=utf-8&amp;oe=utf-8&amp;q=&quot;</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">url-hexify-string</span> <span class="p">(</span><span class="k">if</span> <span class="nv">mark-active</span>
-</span><span class='line'>         <span class="p">(</span><span class="nv">buffer-substring</span> <span class="p">(</span><span class="nv">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nv">region-end</span><span class="p">))</span>
-</span><span class='line'>       <span class="p">(</span><span class="nv">read-string</span> <span class="s">&quot;Google: &quot;</span><span class="p">))))))</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; add integration with ace-window</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;super-save-triggers</span> <span class="ss">&#39;ace-window</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; save on find-file</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;super-save-hook-triggers</span> <span class="ss">&#39;find-file-hook</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This command will display the query results in your default browser.</p>
-
-<p>I&#8217;d suggest binding the command to <code>C-c g</code> if you plan to use it regularly.</p>
+<p>You can now turn off <code>super-save</code> for remote files like this:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&quot;C-c g&quot;</span><span class="p">)</span> <span class="ss">&#39;google</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">super-save-remote-files</span> <span class="no">nil</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>google</code> is available in
-<a href="https://github.com/bbatsov/prelude">Prelude</a>(but with a <code>prelude-</code>
-prefix).</p>
+<p>It seems that now <code>super-save</code> is beyond perfect, so don&#8217;t expect the
+next release any time soon! ;-)</p>
+
+<p><strong>P.S.</strong> <code>super-save</code> was extracted from
+<a href="https://github.com/bbatsov/prelude">Prelude</a>, but for some reason I
+actually forgot to add it to Prelude. Today that changes as well! :-)</p>
 </div>
 
 
@@ -169,12 +175,12 @@ prefix).</p>
   
 
 
-<time datetime="2013-03-28T14:32:00+02:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
+<time datetime="2018-09-29T20:22:00+03:00" pubdate data-updated="true">Sep 29<span>th</span>, 2018</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/utilities/'>Utilities</a>
+    <a class='category' href='/blog/categories/misc/'>misc</a>, <a class='category' href='/blog/categories/super-save/'>super-save</a>
   
 </span>
 
@@ -183,7 +189,7 @@ prefix).</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://emacsredux.com/blog/2013/03/28/google/" data-via="bbatsov" data-counturl="http://emacsredux.com/blog/2013/03/28/google/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://emacsredux.com/blog/2018/09/29/super-save-0-dot-3/" data-via="bbatsov" data-counturl="http://emacsredux.com/blog/2018/09/29/super-save-0-dot-3/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -194,10 +200,8 @@ prefix).</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/03/28/indent-defun/" title="Previous Post: Indent defun">&laquo; Indent defun</a>
+        <a class="basic-alignment left" href="/blog/2018/09/29/projectile-goes-turbo/" title="Previous Post: Projectile goes Turbo">&laquo; Projectile goes Turbo</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/03/28/network-utilities/" title="Next Post: Network utilities">Network utilities &raquo;</a>
       
     </p>
   </footer>
@@ -304,8 +308,8 @@ prefix).</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://emacsredux.com/blog/2013/03/28/google/';
-        var disqus_url = 'http://emacsredux.com/blog/2013/03/28/google/';
+        var disqus_identifier = 'http://emacsredux.com/blog/2018/09/29/super-save-0-dot-3/';
+        var disqus_url = 'http://emacsredux.com/blog/2018/09/29/super-save-0-dot-3/';
         var disqus_script = 'embed.js';
       
     (function () {

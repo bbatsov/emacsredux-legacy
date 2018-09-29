@@ -9,9 +9,9 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="This post continues a topic that was introduced in
-smarter open-line few months
-back. Often when editing code one wishes to open a line just above &hellip;">
+  <meta name="description" content="Every Emacs user knows that he can split the current window
+horizontally (with C-x 2) and vertically (with C-x 3) as much as
+he desires to. However, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,75 @@ back. Often when editing code one wishes to open a line just above &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/15/deleting-windows/">Deleting Windows</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-15T10:28:00+03:00" pubdate data-updated="true">Jun 15<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/15/deleting-windows/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Every Emacs user knows that he can split the current window
+horizontally (with <code>C-x 2</code>) and vertically (with <code>C-x 3</code>) as much as
+he desires to. However, some Emacs users don&#8217;t know what to do with
+the extra windows they&#8217;ve created when they do not them.</p>
+
+<p>To delete the selected window, type <code>C-x 0</code> (<code>delete-window</code>).
+Once a window is deleted, the space that it occupied
+is given to an adjacent window (but not the minibuffer window, even if
+that is the active window at the time). Deleting the window has no effect on the
+buffer it used to display; the buffer continues to exist, and you can
+still switch to with <code>C-x b</code> or any other buffer navigation command.</p>
+
+<p><code>C-x 4 0</code> (<code>kill-buffer-and-window</code>) is a stronger (and fairly
+unknown) command; it kills the current buffer and then deletes the
+selected window (basically it combines <code>C-x k</code> and <code>C-x 0</code>). Obviously
+it&#8217;s a good idea to use it on windows displaying buffers you&#8217;re no
+longer needing.</p>
+
+<p><code>C-x 1</code> (<code>delete-other-windows</code>) deletes all the windows, <em>except</em> the
+selected one; the selected window expands to use the whole frame.
+(This command cannot be used while the minibuffer window is active;
+attempting to do so signals an error.) In the era of narrow screens I
+used that command fairly often when I needed to focus on a particular
+task. Now I keep my screen split in half vertically 99% of the time,
+but I still use <code>C-x 1</code> from time to time when I&#8217;m about to resplit my
+screen in some uncommon way.</p>
+
+<p>Windows displaying help buffers (generally created with commands like
+<code>C-h ...</code>) warrant a special mention. They can be deleted with a
+single keystroke - <code>q</code>. That would delete the help window altogether
+if it was created by the help command, or restore its original
+content if the window existing beforehand and was reused by the help command.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -880,93 +949,6 @@ enable <code>indent-tabs-mode</code> (as noted above). Here&#8217;s an example f
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/">Keep Backup and Auto-save Files Out of the Way</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-09T16:51:00+03:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Emacs has two helpful features, called <code>auto-backup</code> and
-<code>auto-save</code>(or at least I call them this way).</p>
-
-<p>Auto-backup is triggered when you save a file - it will keep the old
-version of the file around, adding a <code>~</code> to its name. So if you saved the
-file <code>foo</code>, you&#8217;d get <code>foo~</code> as well.</p>
-
-<p><code>auto-save-mode</code> auto-saves a file every few seconds or every few
-characters(both settings are configurable - <code>auto-save-interval</code> is
-set to 300 characters by default and <code>auto-save-timeout</code> is set to 30
-seconds). The auto-save files have names like <code>#foo#</code> and are deleted
-automatically when you manually save a file.</p>
-
-<p>Although the modes are definitely useful, many Emacs users find the
-extra files they create quite annoying(especially since they rarely
-resort to using them) and disable both feature to get rid of the pesky unwanted files:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; disable auto-save and auto-backup</span>
-</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">auto-save-default</span> <span class="no">nil</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">make-backup-files</span> <span class="no">nil</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Even though I&#8217;ve never actually had any use of those backups, I still
-think it&#8217;s a bad idea to disable them(most backups are eventually
-useful). I find it much more prudent to simply get them out of sight
-by storing them in the OS&#8217;s <code>tmp</code> directory instead.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; store all backup and autosave files in the tmp dir</span>
-</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">backup-directory-alist</span>
-</span><span class='line'>      <span class="o">`</span><span class="p">((</span><span class="s">&quot;.*&quot;</span> <span class="o">.</span> <span class="o">,</span><span class="nv">temporary-file-directory</span><span class="p">)))</span>
-</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">auto-save-file-name-transforms</span>
-</span><span class='line'>      <span class="o">`</span><span class="p">((</span><span class="s">&quot;.*&quot;</span> <span class="o">,</span><span class="nv">temporary-file-directory</span> <span class="no">t</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now they won&#8217;t annoy you constantly, but they will still be around if
-you need them. Some OSes delete everything in their <code>tmp</code> directories
-on restart, so if this worries you - consider using another directory.</p>
-
-<p><a href="http://github.com/bbatsov/prelude">Prelude</a> keeps auto-backup and
-auto-save files in <code>tmp</code> by default.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -991,6 +973,10 @@ auto-save files in <code>tmp</code> by default.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/29/super-save-0-dot-3/">super-save 0.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/09/29/projectile-goes-turbo/">Projectile goes Turbo</a>
       </li>
     
@@ -1004,10 +990,6 @@ auto-save files in <code>tmp</code> by default.</p>
     
       <li class="post">
         <a href="/blog/2016/03/02/pimp-my-minibuffer/">Pimp My Minibuffer Evaluation</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/14/look-up-the-keybindings-for-some-command/">Look up the keybindings for some command</a>
       </li>
     
   </ul>

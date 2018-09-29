@@ -9,9 +9,10 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="For a while one of the biggest complaints people had about
-Projectile was that the
-alien indexing wasn&#8217;t fast enough (especially on big &hellip;">
+  <meta name="description" content="After a long period of no development activity (mostly because it was
+perfect from the start),
+super-save gets an update
+today! The latest 0.3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +82,86 @@ alien indexing wasn&#8217;t fast enough (especially on big &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/09/29/super-save-0-dot-3/">Super-save 0.3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-09-29T20:22:00+03:00" pubdate data-updated="true">Sep 29<span>th</span>, 2018</time>
+        
+         | <a href="/blog/2018/09/29/super-save-0-dot-3/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After a long period of no development activity (mostly because it was
+perfect from the start),
+<a href="https://github.com/bbatsov/super-save/">super-save</a> gets an update
+today!</p>
+
+<p>The latest 0.3 version of your favourite auto-saving library makes it
+easier to customize the hook triggers (see <code>super-save-hook-triggers</code>)
+and adds an option to ignore remote (TRAMP) files (see
+<code>super-save-remote-files</code>).</p>
+
+<p>As a refresher - <code>super-save</code> will save modified files automatically
+on certain command (e.g. <code>switch-to-buffer</code>) and hook triggers
+(e.g. <code>focus-out-hook</code>).</p>
+
+<p>Both of those are configurable via <code>super-save-triggers</code> and (starting
+with 0.3) <code>super-save-hook-triggers</code>. Here are a couple of examples:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; add integration with ace-window</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;super-save-triggers</span> <span class="ss">&#39;ace-window</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; save on find-file</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;super-save-hook-triggers</span> <span class="ss">&#39;find-file-hook</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can now turn off <code>super-save</code> for remote files like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">super-save-remote-files</span> <span class="no">nil</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It seems that now <code>super-save</code> is beyond perfect, so don&#8217;t expect the
+next release any time soon! ;-)</p>
+
+<p><strong>P.S.</strong> <code>super-save</code> was extracted from
+<a href="https://github.com/bbatsov/prelude">Prelude</a>, but for some reason I
+actually forgot to add it to Prelude. Today that changes as well! :-)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -716,59 +797,6 @@ behavior.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/01/30/imenu-anywhere/">Imenu-anywhere</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-01-30T12:45:00+02:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
-        
-         | <a href="/blog/2016/01/30/imenu-anywhere/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>For the longest time <a href="https://github.com/bbatsov/prelude">Prelude</a>
-included the function <code>prelude-goto-symbol</code> (bound to <code>C-c i</code>).
-It basically allowed you to jump to any definition in the current source file
-using <code>imenu</code> behind the curtains.</p>
-
-<p>Recently I&#8217;ve found an even better option - the package
-<a href="https://github.com/vspinu/imenu-anywhere">imenu-anywhere</a>. It works in a pretty similar
-manner but gives you the ability to jump to any definition in any currently open buffer.
-That&#8217;s quite handy and it greatly reduces the need to use something like <code>etags</code>.</p>
-
-<p>As an added bonus - <code>imenu-anywhere</code> features helm integration.</p>
-
-<p>This is a very handy package and I encourage you to give it a go!</p>
-
-<p>P.S. Prelude users should simply upgrade to the latest version of
-Prelude (it already uses it).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -791,6 +819,10 @@ Prelude (it already uses it).</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/29/super-save-0-dot-3/">super-save 0.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/09/29/projectile-goes-turbo/">Projectile goes Turbo</a>
       </li>
     
@@ -804,10 +836,6 @@ Prelude (it already uses it).</p>
     
       <li class="post">
         <a href="/blog/2016/03/02/pimp-my-minibuffer/">Pimp My Minibuffer Evaluation</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/14/look-up-the-keybindings-for-some-command/">Look up the keybindings for some command</a>
       </li>
     
   </ul>

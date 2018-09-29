@@ -4,7 +4,7 @@
   <title><![CDATA[Category: misc | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/misc/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2018-09-29T20:33:08+03:00</updated>
+  <updated>2018-09-29T20:33:27+03:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -45,7 +45,7 @@ with 0.3) <code>super-save-hook-triggers</code>. Here are a couple of examples:<
 
 <p>You can now turn off <code>super-save</code> for remote files like this:</p>
 
-<p><code>cp
+<p><code>cl
 (setq super-save-remote-files nil)
 </code></p>
 

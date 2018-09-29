@@ -9,9 +9,8 @@
   <meta name="author" content="Bozhidar Batsov">
 
   
-  <meta name="description" content="Some Emacs users find themselves wondering what&#8217;s the fastest way to
-erase the contents of a buffer. As you know, I&#8217;m fond of
-delete- &hellip;">
+  <meta name="description" content="Emacs has two helpful features, called auto-backup and
+auto-save(or at least I call them this way). Auto-backup is triggered when you save a file - &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,93 @@ delete- &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/">Keep Backup and Auto-save Files Out of the Way</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T16:51:00+03:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Emacs has two helpful features, called <code>auto-backup</code> and
+<code>auto-save</code>(or at least I call them this way).</p>
+
+<p>Auto-backup is triggered when you save a file - it will keep the old
+version of the file around, adding a <code>~</code> to its name. So if you saved the
+file <code>foo</code>, you&#8217;d get <code>foo~</code> as well.</p>
+
+<p><code>auto-save-mode</code> auto-saves a file every few seconds or every few
+characters(both settings are configurable - <code>auto-save-interval</code> is
+set to 300 characters by default and <code>auto-save-timeout</code> is set to 30
+seconds). The auto-save files have names like <code>#foo#</code> and are deleted
+automatically when you manually save a file.</p>
+
+<p>Although the modes are definitely useful, many Emacs users find the
+extra files they create quite annoying(especially since they rarely
+resort to using them) and disable both feature to get rid of the pesky unwanted files:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; disable auto-save and auto-backup</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">auto-save-default</span> <span class="no">nil</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">make-backup-files</span> <span class="no">nil</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Even though I&#8217;ve never actually had any use of those backups, I still
+think it&#8217;s a bad idea to disable them(most backups are eventually
+useful). I find it much more prudent to simply get them out of sight
+by storing them in the OS&#8217;s <code>tmp</code> directory instead.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; store all backup and autosave files in the tmp dir</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">backup-directory-alist</span>
+</span><span class='line'>      <span class="o">`</span><span class="p">((</span><span class="s">&quot;.*&quot;</span> <span class="o">.</span> <span class="o">,</span><span class="nv">temporary-file-directory</span><span class="p">)))</span>
+</span><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">auto-save-file-name-transforms</span>
+</span><span class='line'>      <span class="o">`</span><span class="p">((</span><span class="s">&quot;.*&quot;</span> <span class="o">,</span><span class="nv">temporary-file-directory</span> <span class="no">t</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now they won&#8217;t annoy you constantly, but they will still be around if
+you need them. Some OSes delete everything in their <code>tmp</code> directories
+on restart, so if this worries you - consider using another directory.</p>
+
+<p><a href="http://github.com/bbatsov/prelude">Prelude</a> keeps auto-backup and
+auto-save files in <code>tmp</code> by default.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -875,80 +961,6 @@ alias(I generally alias <code>e</code> to <code>emacsclient -t</code>):</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/18/evaluate-emacs-lisp-in-the-minibuffer/">Evaluate Emacs Lisp in the Minibuffer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-18T14:44:00+03:00" pubdate data-updated="true">Apr 18<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/18/evaluate-emacs-lisp-in-the-minibuffer/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The Emacs Lisp interpreter&#8217;s integration with Emacs is pervasive. One
-can evaluate Emacs Lisp just about everywhere in so many different
-ways. One way I find particularly handy(especially for short snippets of
-code) is evaluating Emacs Lisp directly in the minibuffer. This is
-done with <code>M-:</code>(bound to the command <code>eval-expression</code>).</p>
-
-<p>Upon typing this magic keycombo you&#8217;ll be presented with the prompt
-<code>Eval:</code> in the minibuffer and there you can enter any Lisp
-expression. Hitting <code>Return</code> will result in the expression&#8217;s
-evaluation.</p>
-
-<p>There is one minor snafu with this, though - I&#8217;m addicted to
-<a href="http://emacsrocks.com/e14.html">Paredit</a>(for editing Lisp code at
-least) and Paredit is not automatically enabled in the
-minibuffer. Let&#8217;s change that:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">conditionally-enable-paredit-mode</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Enable `paredit-mode&#39; in the minibuffer, during `eval-expression&#39;.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">eq</span> <span class="nv">this-command</span> <span class="ss">&#39;eval-expression</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nv">paredit-mode</span> <span class="mi">1</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;minibuffer-setup-hook</span> <span class="ss">&#39;conditionally-enable-paredit-mode</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Evaluate this snippet and try <code>M-:</code> again. If you&#8217;re like me - the
-results will please you.</p>
-
-<p>It should come as no surprise that
-<a href="https://github.com/bbatsov/prelude">Prelude</a> enables Paredit by
-default for <code>eval-expression</code>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -973,6 +985,10 @@ default for <code>eval-expression</code>.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/29/super-save-0-dot-3/">super-save 0.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/09/29/projectile-goes-turbo/">Projectile goes Turbo</a>
       </li>
     
@@ -986,10 +1002,6 @@ default for <code>eval-expression</code>.</p>
     
       <li class="post">
         <a href="/blog/2016/03/02/pimp-my-minibuffer/">Pimp My Minibuffer Evaluation</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/02/14/look-up-the-keybindings-for-some-command/">Look up the keybindings for some command</a>
       </li>
     
   </ul>

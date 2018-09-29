@@ -4,7 +4,7 @@
   <title><![CDATA[Emacs Redux]]></title>
   <link href="http://emacsredux.com/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2018-09-29T20:21:19+03:00</updated>
+  <updated>2018-09-29T20:33:27+03:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[super-save 0.3]]></title>
+    <link href="http://emacsredux.com/blog/2018/09/29/super-save-0-dot-3/"/>
+    <updated>2018-09-29T20:22:00+03:00</updated>
+    <id>http://emacsredux.com/blog/2018/09/29/super-save-0-dot-3</id>
+    <content type="html"><![CDATA[<p>After a long period of no development activity (mostly because it was
+perfect from the start),
+<a href="https://github.com/bbatsov/super-save/">super-save</a> gets an update
+today!</p>
+
+<p>The latest 0.3 version of your favourite auto-saving library makes it
+easier to customize the hook triggers (see <code>super-save-hook-triggers</code>)
+and adds an option to ignore remote (TRAMP) files (see
+<code>super-save-remote-files</code>).</p>
+
+<p>As a refresher - <code>super-save</code> will save modified files automatically
+on certain command (e.g. <code>switch-to-buffer</code>) and hook triggers
+(e.g. <code>focus-out-hook</code>).</p>
+
+<p>Both of those are configurable via <code>super-save-triggers</code> and (starting
+with 0.3) <code>super-save-hook-triggers</code>. Here are a couple of examples:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; add integration with ace-window</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;super-save-triggers</span> <span class="ss">&#39;ace-window</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; save on find-file</span>
+</span><span class='line'><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;super-save-hook-triggers</span> <span class="ss">&#39;find-file-hook</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can now turn off <code>super-save</code> for remote files like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">super-save-remote-files</span> <span class="no">nil</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It seems that now <code>super-save</code> is beyond perfect, so don&#8217;t expect the
+next release any time soon! ;-)</p>
+
+<p><strong>P.S.</strong> <code>super-save</code> was extracted from
+<a href="https://github.com/bbatsov/prelude">Prelude</a>, but for some reason I
+actually forgot to add it to Prelude. Today that changes as well! :-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Projectile goes Turbo]]></title>
@@ -761,25 +812,6 @@ Emacs users - <a href="http://pragmaticemacs.com/">Pragmatic Emacs</a> by
 <p>If you&#8217;re relatively new to Emacs you should definitely check it
 out. Knowing how vast the Emacs ecosystem is, I&#8217;m pretty sure that
 more experienced Emacs users will also learn a thing or two there.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Building MELPA packages locally]]></title>
-    <link href="http://emacsredux.com/blog/2015/05/10/building-melpa-packages-locally/"/>
-    <updated>2015-05-10T11:00:00+03:00</updated>
-    <id>http://emacsredux.com/blog/2015/05/10/building-melpa-packages-locally</id>
-    <content type="html"><![CDATA[<p>Don&#8217;t want to wait for the MELPA packages to be automatically rebuilt?
-Want to try out some package recipe before submitting it upstream? You can
-totally do this!</p>
-
-<p>Just clone the
-<a href="https://github.com/milkypostman/melpa">MELPA github repo</a>, open a
-recipe from it in Emacs and press <code>C-c C-c</code> (bound to the command
-<code>package-build-current-recipe</code>). Once the package is built you&#8217;ll be
-prompted to install it.</p>
-
-<p>Pretty neat, right?</p>
 ]]></content>
   </entry>
   
