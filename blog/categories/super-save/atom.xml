@@ -4,7 +4,7 @@
   <title><![CDATA[Category: super-save | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/super-save/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2018-09-29T20:31:09+03:00</updated>
+  <updated>2018-09-29T20:33:08+03:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -35,7 +35,7 @@ on certain command (e.g. <code>switch-to-buffer</code>) and hook triggers
 <p>Both of those are configurable via <code>super-save-triggers</code> and (starting
 with 0.3) <code>super-save-hook-triggers</code>. Here are a couple of examples:</p>
 
-<p>```el
+<p>``` cl
 ;; add integration with ace-window
 (add-to-list 'super-save-triggers 'ace-window)</p>
 
@@ -45,12 +45,16 @@ with 0.3) <code>super-save-hook-triggers</code>. Here are a couple of examples:<
 
 <p>You can now turn off <code>super-save</code> for remote files like this:</p>
 
-<p><code>el
+<p><code>cp
 (setq super-save-remote-files nil)
 </code></p>
 
 <p>It seems that now <code>super-save</code> is beyond perfect, so don't expect the
 next release any time soon! ;-)</p>
+
+<p><strong>P.S.</strong> <code>super-save</code> was extracted from
+<a href="https://github.com/bbatsov/prelude">Prelude</a>, but for some reason I
+actually forgot to add it to Prelude. Today that changes as well! :-)</p>
 ]]></content>
   </entry>
   
