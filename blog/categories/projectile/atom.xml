@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Projectile | Emacs Redux]]></title>
   <link href="http://emacsredux.com/blog/categories/projectile/atom.xml" rel="self"/>
   <link href="http://emacsredux.com/"/>
-  <updated>2018-09-29T20:36:04+03:00</updated>
+  <updated>2018-10-31T22:52:05+02:00</updated>
   <id>http://emacsredux.com/</id>
   <author>
     <name><![CDATA[Bozhidar Batsov]]></name>
@@ -52,6 +52,12 @@ use some help! :-)</p>
 
 <p><strong>P.P.S.</strong> The recent 1.0 release was just a precursor to some bigger changes I
 had planned to do for quite a while. Stay tuned for more updates!</p>
+
+<p><strong>Update</strong> Shortly after writing this post I've reconsidered the
+<code>turbo-alien</code> naming and I opted to rename the old <code>alien</code> method to
+<code>hybrid</code> (as it was truly a hybrid of <code>native</code> and <code>alien</code> indexing),
+and to change the name of <code>turbo-alien</code> to simply <code>alien</code>. Naming is
+hard! :-)</p>
 ]]></content>
   </entry>
   
